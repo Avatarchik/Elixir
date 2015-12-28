@@ -1,0 +1,17 @@
+Name,SkillName,TargetType,NumOfTarget,Power,Req.Turn,Effect,RemainTurn
+Hydrogen,skill1,Enemy,1,3,2,None,3
+Hydrogen,skill2,Enemy,4,0,0,Stun,3
+Hydrogen,skill3,Ally,1,10,1,Purify,3
+Hydrogen,skill4,Enemy,2,6,3,None,1
+Carbon,skill5,Enemy,1,7,1,Provoke,3
+Carbon,skill6,Ally,4,1,1,Purify,1
+Carbon,skill7,Ally,3,6,3,None,1
+Carbon,skill8,Enemy,1,1,3,None,2
+Silver,skill9,Enemy,4,10,2,Stun,0
+Silver,skill10,Ally,3,3,2,None,3
+Silver,skill11,Enemy,2,9,0,None,1
+Silver,skill12,Enemy,2,1,1,None,1
+Argon,skill13,Ally,4,8,3,None,2
+Argon,skill14,Enemy,4,1,3,Stun,3
+Argon,skill15,Ally,4,7,3,None,1
+Argon,skill16,Enemy,4,4,0,None,1
