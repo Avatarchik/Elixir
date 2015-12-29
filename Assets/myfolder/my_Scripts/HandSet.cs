@@ -8,9 +8,14 @@ public class HandSet : MonoBehaviour {
 	private int temp;
 	public GameObject cardPrefab;
 	void Start(){
-		CardSelect ();
-		for (int i=0; i<=3; i++) {
-			AddCards (number [i]);
+
+	}
+	void Update(){
+		Debug.Log (GetComponent<TurnBasedCombatStateMachine> ().CurrentState);
+		if (GetComponent<TurnBasedCombatStateMachine> ().CurrentState == TurnBasedCombatStateMachine.BattleStates.PLAYERCHOICE) {
+			GetComponent<TurnBasedCombatStateMachine> ().currentState=TurnBasedCombatStateMachine.BattleStates.PLAYERTURN;
+			CardSelect ();
+			CardDraw ();
 		}
 	}
 	void CardSelect(){
@@ -24,7 +29,7 @@ public class HandSet : MonoBehaviour {
 		for (int i=0; i<=3; i++) {
 			do {
 				count=0;
-				temp=Random.Range (0, 5);
+				temp=Random.Range (0, 19);
 				for(int x=0;x<i;x++){
 					if(number[x]==temp)
 						count++;
@@ -41,10 +46,13 @@ public class HandSet : MonoBehaviour {
 		
 		cardCopy.transform.SetParent(this.transform);
 		cardCopy.GetComponent<InfoCard> ().Card = GetComponent<CardLoad> ().cardDeck [cardIndex];
-		cardCopy.transform.FindChild ("CardName").GetComponent<Text> ().text = GetComponent<CardLoad> ().cardDeck [cardIndex].CardName;
-		cardCopy.transform.FindChild ("CardStatement").GetComponent<Text> ().text = GetComponent<CardLoad> ().cardDeck [cardIndex].CardStatement;
-
-		
+		cardCopy.transform.FindChild ("CardName").GetComponent<Text> ().text = GetComponent<CardLoad> ().cardDeck [cardIndex].Card_ExtName;
+		cardCopy.transform.FindChild ("CardStatement").GetComponent<Text> ().text = GetComponent<CardLoad> ().cardDeck [cardIndex].Card_Description;
+	}
+	void CardDraw(){
+		for (int i=0; i<=3; i++) {
+			AddCards (number [i]);
+		}
 	}
 
 }

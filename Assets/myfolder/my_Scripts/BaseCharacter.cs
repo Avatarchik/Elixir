@@ -3,13 +3,19 @@ using System.Collections;
 
 public class BaseCharacter : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
+	private string CharacterName;
+
+	//stats
+	public double MAX_HP=100.0f;
+	public double HP;
+
+	void Start(){
+		HP = MAX_HP;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	void dead(){
+		if (HP <= 0) {
+			gameObject.SetActive (false);
+		}
 	}
 }
