@@ -63,6 +63,12 @@ public class DialogueManager : MonoBehaviour {
     List<Dialogue> dialogues;
     bool isUpdated;
 
+    public void SkipDialogue()
+    {
+        currentIndex = dialogues.Count -1;
+        isUpdated = false;
+    }
+
     // temp method.
     void SetDialogue()
     {
@@ -95,7 +101,7 @@ public class DialogueManager : MonoBehaviour {
         newDialogue = new Dialogue("orchid", PortraitPosition.Left, "오키드", str);
         dialogues.Add(newDialogue);
     }
-
+    
     void ApplyDialogueImage(Dialogue currentDialogue)
     {
         if (currentDialogue.GetPortraitPosition() == PortraitPosition.Left)
