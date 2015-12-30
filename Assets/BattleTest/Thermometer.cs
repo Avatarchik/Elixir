@@ -7,6 +7,26 @@ public class Thermometer : MonoBehaviour {
     int currentTemperature;
     Text text;
 
+    public void SetTemperature(int newTemperature)
+    {
+        currentTemperature = newTemperature;
+    }
+    
+    public void Heating(int deltaTemperature)
+    {
+        currentTemperature += deltaTemperature;
+    }
+    
+    public void Cooling(int deltaTemperature)
+    {
+        currentTemperature -= deltaTemperature;
+    }
+    
+    public int GetTemperature()
+    {
+        return currentTemperature;
+    }
+
 	// Use this for initialization
 	void Start () {
         text = GameObject.Find("ThermometerText").GetComponent<Text>();
