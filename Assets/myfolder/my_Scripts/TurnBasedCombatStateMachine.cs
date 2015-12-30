@@ -34,7 +34,6 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
 			currentState=BattleStates.PLAYERCHOICE;
 			break;
 		case (BattleStates.PLAYERCHOICE):
-			StartCoroutine(
 			break;
 		case (BattleStates.ENEMYCHOICE):
 			break;
