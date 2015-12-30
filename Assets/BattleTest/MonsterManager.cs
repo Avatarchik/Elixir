@@ -8,11 +8,11 @@ public class MonsterManager : MonoBehaviour {
 
     public GameObject monsterPrefab;
 
-    List<Vector2> positions;
-    Vector2 firstPosition = new Vector2(2.6f, 0.8f);
-    Vector2 secondPosition = new Vector2(3.6f, -1.0f);
-    Vector2 thirdPosition = new Vector2(4.0f, 2.0f);
-    Vector2 fourthPosition = new Vector2(5.2f, 0.3f);
+    List<Vector3> positions;
+    Vector3 firstPosition = new Vector3(1.9f, 0.8f, -2);
+    Vector3 secondPosition = new Vector3(3.4f, -1.0f, -4);
+    Vector3 thirdPosition = new Vector3(3.4f, 2.0f, -1);
+    Vector3 fourthPosition = new Vector3(4.9f, 0.3f, -3);
     
     List<Monster> monsters;
 
@@ -24,7 +24,7 @@ public class MonsterManager : MonoBehaviour {
 
     void MakePositionList()
     {
-        positions = new List<Vector2>();
+        positions = new List<Vector3>();
 
         positions.Add(firstPosition);
         positions.Add(secondPosition);
@@ -45,7 +45,7 @@ public class MonsterManager : MonoBehaviour {
         for (int i = 0; i < num; i++)
         {
             GameObject monster = Instantiate(monsterPrefab) as GameObject;
-            monster.transform.position = new Vector3(positions[i].x, positions[i].y, -1);
+            monster.transform.position = positions[i];
             if (i%2 == 0)
             {
                 monster.GetComponent<Monster>().SetStat("MonsterImage/newWhite");
