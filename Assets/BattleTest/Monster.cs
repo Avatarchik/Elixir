@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using Enums;
+using EnumsAndClasses;
 
 public class Monster : MonoBehaviour {
 
@@ -67,10 +67,66 @@ public class Monster : MonoBehaviour {
         Debug.Log("Get " + damage + " damage by player");
     }
 
+    public void AddBuff(Buff buff)
+    {
+        buffs.Add(buff);
+        Debug.Log("Add buff to monster");
+        PrintAllBuffAndDebuff();
+    }
+    
+    public void AddDebuff(Debuff debuff)
+    {
+        debuffs.Add(debuff);
+        Debug.Log("Add debuff to monster");
+        PrintAllBuffAndDebuff();
+    }
+    
+    public void RemoveBuff()
+    {
+        // FIXME : Not implemented.
+    }
+    
+    public void RemoveAllBuff()
+    {
+        buffs = new List<Buff>();
+        Debug.Log("All buffs are removed");
+    }
+
+    public void RemoveDebuff()
+    {
+        // FIXME : Not implemented.
+    }
+    
+    public void RemoveAllDebuff()
+    {
+        debuffs = new List<Debuff>();
+        Debug.Log("All debuffs are removed");
+    }
+
     void InitializeBuffAndDebuff()
     {
         buffs = new List<Buff>();
         debuffs = new List<Debuff>();
+    }
+
+    // using test.
+    void PrintAllBuffAndDebuff()
+    {
+        string buffList = "Buff : ";
+        foreach (var buff in buffs)
+        {
+            buffList += buff.GetBuffname().ToString();
+            buffList += ", ";
+        }
+        Debug.Log(buffList);
+        
+        string debuffList = "Debuff : ";
+        foreach (var debuff in debuffs)
+        {
+            debuffList += debuff.GetDebuffname().ToString();
+            debuffList += ", ";
+        }
+        Debug.Log(debuffList);
     }
 
 	// Use this for initialization

@@ -2,6 +2,7 @@
 using UnityEngine.Assertions;
 using System.Collections;
 using System.Collections.Generic;
+using EnumsAndClasses;
 
 public class MonsterManager : MonoBehaviour {
 
@@ -65,8 +66,13 @@ public class MonsterManager : MonoBehaviour {
         MakePositionList();
         GenerateMonsters(4);
 
-        GetMonster(1).SetDamage(10);
-        GetMonster(3).SetDamage(35);
+        // Damage Test.
+        // GetMonster(1).SetDamage(10);
+        // GetMonster(3).SetDamage(35);
+        
+        // Debuff Test.
+        // Debuff stunDebuff = new Debuff(DebuffName.Stun, 3);
+        // GetMonster(1).AddDebuff(stunDebuff);
 	}
 	
 	// Update is called once per frame
