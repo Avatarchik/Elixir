@@ -6,14 +6,23 @@ public class MonsterManager : MonoBehaviour {
 
     public GameObject monsterPrefab;
 
-    List<Vector2> positions = new List<Vector2>();
+    List<Vector2> positions;
     Vector2 firstPosition = new Vector2(2.6f, 0.6f);
     Vector2 secondPosition = new Vector2(4.0f, -3.0f);
     Vector2 thirdPosition = new Vector2(5.6f, 2.0f);
     Vector2 fourthPosition = new Vector2(7.0f, -1.3f);
+    
+    List<Monster> monsters;
+
+    public Monster GetMonster(int index)
+    {
+        return monsters[index];
+    }
 
     void MakePositionList()
     {
+        positions = new List<Vector2>();
+
         positions.Add(firstPosition);
         positions.Add(secondPosition);
         positions.Add(thirdPosition);
@@ -22,10 +31,12 @@ public class MonsterManager : MonoBehaviour {
     
     void GenerateMonsters(int num)
     {
+        monsters = new List<Monster>();
+        
         if (num > 4)
         {
+            Debug.Log("Generate too many monsters. Input num : " + num);
             num = 4;
-            Debug.Log("Too many monsters");
         }
 
         for (int i = 0; i < num; i++)
@@ -42,6 +53,8 @@ public class MonsterManager : MonoBehaviour {
                 monster.GetComponent<Monster>().SetStat();
                 Debug.Log("Respawn red enemy");
             }
+            
+            monsters.Add(monster.GetComponent<Monster>());
         }
     }
 
@@ -49,10 +62,13 @@ public class MonsterManager : MonoBehaviour {
 	void Start () {
         MakePositionList();
         GenerateMonsters(4);
+
+        // GetMonster(1).GetDamage(10);
+        // GetMonster(3).GetDamage(35);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+
 	}
 }
