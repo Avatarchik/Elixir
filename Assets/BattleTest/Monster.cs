@@ -68,7 +68,7 @@ public class Monster : MonoBehaviour {
         SetStat(hp, attackDamage, type, boilingPoint, meltingPoint);
     }
     
-    public void GetDamage(int damage)
+    public void SetDamage(int damage)
     {
         hp -= damage;
         if (hp < 0)

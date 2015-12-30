@@ -8,10 +8,10 @@ public class MonsterManager : MonoBehaviour {
     public GameObject monsterPrefab;
 
     List<Vector2> positions;
-    Vector2 firstPosition = new Vector2(2.6f, 0.6f);
-    Vector2 secondPosition = new Vector2(4.0f, -3.0f);
-    Vector2 thirdPosition = new Vector2(5.6f, 2.0f);
-    Vector2 fourthPosition = new Vector2(7.0f, -1.3f);
+    Vector2 firstPosition = new Vector2(2.6f, 0.8f);
+    Vector2 secondPosition = new Vector2(3.6f, -1.0f);
+    Vector2 thirdPosition = new Vector2(4.0f, 2.0f);
+    Vector2 fourthPosition = new Vector2(5.2f, 0.3f);
     
     List<Monster> monsters;
 
@@ -65,8 +65,8 @@ public class MonsterManager : MonoBehaviour {
         MakePositionList();
         GenerateMonsters(4);
 
-        GetMonster(1).GetDamage(10);
-        GetMonster(3).GetDamage(35);
+        GetMonster(1).SetDamage(10);
+        GetMonster(3).SetDamage(35);
 	}
 	
 	// Update is called once per frame
