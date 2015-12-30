@@ -8,10 +8,8 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
 
 	public enum BattleStates{
 		START,
-		PLAYERTURN,
 		PLAYERCHOICE,
 		ENEMYCHOICE,
-		ENEMYTURN,
 		LOSE,
 		WIN
 	}
@@ -32,15 +30,13 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
 		//Debug.Log (CurrentState);
 		switch (currentState) {
 		case (BattleStates.START):
-			//setup battle function
+			GameObject.Find ("Hands").GetComponent<HandSet>().CardSet();
+			currentState=BattleStates.PLAYERCHOICE;
 			break;
 		case (BattleStates.PLAYERCHOICE):
-			break;
-		case (BattleStates.PLAYERTURN):
+			StartCoroutine(
 			break;
 		case (BattleStates.ENEMYCHOICE):
-			break;
-		case (BattleStates.ENEMYTURN):
 			break;
 		case (BattleStates.LOSE):
 			break;
@@ -52,32 +48,20 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
 	void OnGUI(){
 		if(GUILayout.Button ("NEXT STATE")){
 			if(currentState==BattleStates.START){
-				currentState=BattleStates.PLAYERTURN;
-			}else if( currentState==BattleStates.PLAYERTURN)
-			{
 				currentState=BattleStates.PLAYERCHOICE;
-			}
-			else if( currentState==BattleStates.PLAYERCHOICE)
-			{
-				currentState=BattleStates.ENEMYTURN;
-			}
-			else if( currentState==BattleStates.ENEMYTURN)
+			}else if( currentState==BattleStates.PLAYERCHOICE)
 			{
 				currentState=BattleStates.ENEMYCHOICE;
 			}
-			else if (currentState==BattleStates.ENEMYCHOICE)
+			else if( currentState==BattleStates.ENEMYCHOICE)
 			{
 				currentState=BattleStates.LOSE;
 			}
-			else if (currentState==BattleStates.LOSE)
+			else if( currentState==BattleStates.LOSE)
 			{
 				currentState=BattleStates.WIN;
 			}
 			else if (currentState==BattleStates.WIN)
-			{
-				currentState=BattleStates.START;
-			}
-			else if( currentState==BattleStates.WIN)
 			{
 				currentState=BattleStates.START;
 			}

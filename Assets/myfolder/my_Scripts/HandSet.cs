@@ -11,12 +11,11 @@ public class HandSet : MonoBehaviour {
 
 	}
 	void Update(){
-		Debug.Log (GetComponent<TurnBasedCombatStateMachine> ().CurrentState);
-		if (GetComponent<TurnBasedCombatStateMachine> ().CurrentState == TurnBasedCombatStateMachine.BattleStates.PLAYERCHOICE) {
-			GetComponent<TurnBasedCombatStateMachine> ().currentState=TurnBasedCombatStateMachine.BattleStates.PLAYERTURN;
-			CardSelect ();
-			CardDraw ();
-		}
+		Debug.Log (GameObject.Find ("GameManager").GetComponent<TurnBasedCombatStateMachine> ().currentState);
+	}
+	public void CardSet(){
+		CardSelect ();
+		CardDraw ();
 	}
 	void CardSelect(){
 		Debug.Log ("CardSelect");
