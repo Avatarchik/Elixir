@@ -1,22 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-
-public enum MonsterType
-{
-    None
-}
-
-public enum Buff
-{
-    None
-}
-
-public enum Debuff
-{
-    None,
-    Stun
-}
+using Enums;
 
 public class Monster : MonoBehaviour {
 
@@ -29,8 +14,10 @@ public class Monster : MonoBehaviour {
     public int meltingPoint;
     // List<Card> cards; // Current not used.
     
-    // List<Buff> buffs;
-    // List<Debuff> debuffs;
+    public Phase phase;
+    
+    List<Buff> buffs;
+    List<Debuff> debuffs;
     
     // Apply default stats.
     public void SetStat ()
@@ -41,6 +28,8 @@ public class Monster : MonoBehaviour {
         this.type = MonsterType.None;
         this.boilingPoint = 100;
         this.meltingPoint = 0;
+        
+        InitializeBuffAndDebuff();
     }
     
     // Only apply image.
@@ -60,6 +49,8 @@ public class Monster : MonoBehaviour {
         this.type = type;
         this.boilingPoint = boilingPoint;
         this.meltingPoint = meltingPoint;
+        
+        InitializeBuffAndDebuff();
         // this.cards = new List<Card>(); // Current not used.
     }
     public void SetStat (string imagePath, int hp, int attackDamage, MonsterType type, int boilingPoint, int meltingPoint)
@@ -74,6 +65,12 @@ public class Monster : MonoBehaviour {
         if (hp < 0)
             hp = 0;
         Debug.Log("Get " + damage + " damage by player");
+    }
+
+    void InitializeBuffAndDebuff()
+    {
+        buffs = new List<Buff>();
+        debuffs = new List<Debuff>();
     }
 
 	// Use this for initialization
