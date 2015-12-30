@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Assertions;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -16,6 +17,7 @@ public class MonsterManager : MonoBehaviour {
 
     public Monster GetMonster(int index)
     {
+        Assert.IsTrue(index < monsters.Count);
         return monsters[index];
     }
 
@@ -63,8 +65,8 @@ public class MonsterManager : MonoBehaviour {
         MakePositionList();
         GenerateMonsters(4);
 
-        // GetMonster(1).GetDamage(10);
-        // GetMonster(3).GetDamage(35);
+        GetMonster(1).GetDamage(10);
+        GetMonster(3).GetDamage(35);
 	}
 	
 	// Update is called once per frame
