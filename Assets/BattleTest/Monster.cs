@@ -17,18 +17,25 @@ public class Monster : MonoBehaviour {
     // List<Card> cards; // Current not used.
     
     // Apply default stats.
-    public Monster ()
+    public void SetStat ()
     {
         this.hp = 20;
         this.attackDamage = 5;
         this.type = MonsterType.None;
         this.boilingPoint = 100;
         this.meltingPoint = 0;
+    }
+    
+    // Only apply image.
+    public void SetStat (string imagePath)
+    {
+        this.renderer.sprite = Resources.Load(imagePath, typeof(Sprite)) as Sprite;
+        SetStat();
         // this.cards = new List<Card>(); // Current not used.
     }
     
     // Default image.
-    public Monster (int hp, int attackDamage, MonsterType type, int boilingPoint, int meltingPoint)
+    public void SetStat (int hp, int attackDamage, MonsterType type, int boilingPoint, int meltingPoint)
     {
         this.hp = hp;
         this.attackDamage = attackDamage;
@@ -37,15 +44,10 @@ public class Monster : MonoBehaviour {
         this.meltingPoint = meltingPoint;
         // this.cards = new List<Card>(); // Current not used.
     }
-    public Monster (string imagePath, int hp, int attackDamage, MonsterType type, int boilingPoint, int meltingPoint)
+    public void SetStat (string imagePath, int hp, int attackDamage, MonsterType type, int boilingPoint, int meltingPoint)
     {
         this.renderer.sprite = Resources.Load(imagePath, typeof(Sprite)) as Sprite;
-        this.hp = hp;
-        this.attackDamage = attackDamage;
-        this.type = type;
-        this.boilingPoint = boilingPoint;
-        this.meltingPoint = meltingPoint;
-        // this.cards = new List<Card>(); // Current not used.
+        SetStat(hp, attackDamage, type, boilingPoint, meltingPoint);
     }
 
 	// Use this for initialization
