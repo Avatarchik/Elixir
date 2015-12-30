@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace Enums
+namespace EnumsAndClasses
 {
     public enum MonsterType
     {
@@ -36,17 +36,27 @@ namespace Enums
             this.name = name;
             this.remainTurn = remainTurn;
         }
+        
+        public BuffName GetBuffname()
+        {
+            return name;
+        }
     }
 
     public class Debuff
     {
-        BuffName name;
+        DebuffName name;
         int remainTurn;
         
-        public Debuff (BuffName name, int remainTurn)
+        public Debuff (DebuffName name, int remainTurn)
         {
             this.name = name;
             this.remainTurn = remainTurn;
+        }
+        
+        public DebuffName GetDebuffname()
+        {
+            return name;
         }
     }
 }
