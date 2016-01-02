@@ -26,6 +26,8 @@ public class CardLoad:MonoBehaviour {
 			card.Card_Type=rowList[i].Type;
 			card.Card_Description=rowList[i].Description;
 			card.Card_Attack_Range=rowList[i].Attack_Range;
+			if(rowList[i].Target!="N/A")
+			card.Card_Target=System.Convert.ToInt32(rowList[i].Target);
 			if(rowList[i].Attack_Damage!="N/A")
 			card.Card_Attack_Damage=System.Convert.ToDouble (rowList[i].Attack_Damage);
 			if(rowList[i].HP_Damage!="N/A")
@@ -70,6 +72,7 @@ public class CardLoad:MonoBehaviour {
 	//여기까지 덱만들기
 	
 
+
 		public class Row
 		{
 			public string ID;
@@ -79,6 +82,7 @@ public class CardLoad:MonoBehaviour {
 			public string Type;
 			public string Description;
 			public string Attack_Range;
+			public string Target;
 			public string Attack_Damage;
 			public string HP_Damage;
 			public string Max_Damage;
@@ -122,19 +126,20 @@ public class CardLoad:MonoBehaviour {
 				row.Type = grid[i][4];
 				row.Description = grid[i][5];
 				row.Attack_Range = grid[i][6];
-				row.Attack_Damage = grid[i][7];
-				row.HP_Damage = grid[i][8];
-				row.Max_Damage = grid[i][9];
-				row.Dot_Damage_Turn = grid[i][10];
-				row.Heal = grid[i][11];
-				row.Condition = grid[i][12];
-				row.Additional_Card = grid[i][13];
-				row.Effect1_Name = grid[i][14];
-				row.Effect1_Rate = grid[i][15];
-				row.Effect1_Turn = grid[i][16];
-				row.Effect2_Name = grid[i][17];
-				row.Effect2_Rate = grid[i][18];
-				row.Effect2_Turn = grid[i][19];
+				row.Target = grid[i][7];
+				row.Attack_Damage = grid[i][8];
+				row.HP_Damage = grid[i][9];
+				row.Max_Damage = grid[i][10];
+				row.Dot_Damage_Turn = grid[i][11];
+				row.Heal = grid[i][12];
+				row.Condition = grid[i][13];
+				row.Additional_Card = grid[i][14];
+				row.Effect1_Name = grid[i][15];
+				row.Effect1_Rate = grid[i][16];
+				row.Effect1_Turn = grid[i][17];
+				row.Effect2_Name = grid[i][18];
+				row.Effect2_Rate = grid[i][19];
+				row.Effect2_Turn = grid[i][20];
 				
 				rowList.Add(row);
 			}
@@ -208,6 +213,14 @@ public class CardLoad:MonoBehaviour {
 		public List<Row> FindAll_Attack_Range(string find)
 		{
 			return rowList.FindAll(x => x.Attack_Range == find);
+		}
+		public Row Find_Target(string find)
+		{
+			return rowList.Find(x => x.Target == find);
+		}
+		public List<Row> FindAll_Target(string find)
+		{
+			return rowList.FindAll(x => x.Target == find);
 		}
 		public Row Find_Attack_Damage(string find)
 		{
@@ -315,4 +328,3 @@ public class CardLoad:MonoBehaviour {
 		}
 		
 	}
-	

@@ -11,7 +11,7 @@ public class HandSet : MonoBehaviour {
 
 	}
 	void Update(){
-		Debug.Log (GameObject.Find ("GameManager").GetComponent<TurnBasedCombatStateMachine> ().currentState);
+		//Debug.Log (GameObject.Find ("GameManager").GetComponent<TurnBasedCombatStateMachine> ().currentState);
 	}
 	public void CardSet(){
 		CardSelect ();

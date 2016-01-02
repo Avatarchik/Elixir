@@ -10,6 +10,7 @@ public class baseCard{
 	private string card_Type;
 	private string card_Description;
 	private string card_Attack_Range;
+	private int card_Target;
 	private double card_Attack_Damage;
 	private double card_HP_Damage;
 	private double card_Max_Damage;
@@ -60,6 +61,10 @@ public class baseCard{
 	public string Card_Attack_Range{
 		get{return card_Attack_Range;}
 		set{card_Attack_Range = value;}
+	}
+	public int Card_Target {
+		get{ return card_Target;}
+		set{ card_Target = value;}
 	}
 	public double Card_Attack_Damage{
 		get{return card_Attack_Damage;}

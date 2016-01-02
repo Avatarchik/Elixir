@@ -27,7 +27,6 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
 	}
 	
 	void Update () {
-		//Debug.Log (CurrentState);
 		switch (currentState) {
 		case (BattleStates.START):
 			GameObject.Find ("Hands").GetComponent<HandSet>().CardSet();
@@ -42,7 +41,6 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
 		case (BattleStates.WIN):
 			break;
 		}
-	
 	}
 	void OnGUI(){
 		if(GUILayout.Button ("NEXT STATE")){
