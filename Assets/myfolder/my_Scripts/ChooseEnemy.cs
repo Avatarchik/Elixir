@@ -4,14 +4,13 @@ using System.Collections;
 public class ChooseEnemy : MonoBehaviour {
 
 	public GameObject selectable;
-	public GameObject SelectedCard;
 	GameObject selectedEnemy;
 
 
 	public IEnumerator SelectEnemy(GameObject cardObject){
 		Debug.Log ("SelectEnemy");
 		selectedEnemy = null;
-		HighlightEnemy (cardObject);
+		HighlightEnemy ();
 		yield return StartCoroutine (WaitForEnemySelect (cardObject));
 		if(selectedEnemy!=null)
 		AttackEnemy (cardObject, selectedEnemy);
@@ -22,12 +21,10 @@ public class ChooseEnemy : MonoBehaviour {
 		while (true) {
 
 			if (Input.GetMouseButtonDown (0)) {
-				Debug.Log (Input.mousePosition);
-				Debug.Log (Camera.main.ScreenToWorldPoint(Input.mousePosition));
 				Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 			
 				RaycastHit2D hit = Physics2D.GetRayIntersection (ray, Mathf.Infinity);
-				if (hit.collider != null) {
+				if (hit.collider!=null&&hit.collider.gameObject.tag == "Monster") {
 					GameObject[] selectables = GameObject.FindGameObjectsWithTag ("selectable");
 					selectedEnemy=hit.collider.gameObject;
 					foreach (GameObject selectable in selectables) {
@@ -40,7 +37,7 @@ public class ChooseEnemy : MonoBehaviour {
 					Debug.Log ("Nothing");
 				}
 			}
-			if (SelectedCard!=cardObject) {
+			if (GetComponent<ChoosingManager>().SelectedCard!=cardObject) {
 				Debug.Log("changed");
 				GameObject[] Monsters = GameObject.FindGameObjectsWithTag ("Monster");
 				foreach (GameObject Monster in Monsters) {
@@ -53,7 +50,7 @@ public class ChooseEnemy : MonoBehaviour {
 		}
 	}
 
-	void HighlightEnemy(GameObject cardObject){
+	void HighlightEnemy(){
 		Debug.Log ("Hightlight");
 		GameObject[] Monsters=GameObject.FindGameObjectsWithTag ("Monster");
 		foreach (GameObject Monster in Monsters) {
@@ -78,7 +75,7 @@ public class ChooseEnemy : MonoBehaviour {
 					if((int)(cardObject.GetComponent<InfoCard>().Card.Card_HP_Damage)*Monster.GetComponent<Monster>().maxHp/100>=cardObject.GetComponent<InfoCard>().Card.Card_Max_Damage){
 						Monster.GetComponent<Monster> ().SetDamage ((int)cardObject.GetComponent<InfoCard> ().Card.Card_Max_Damage);
 					}else{
-						Monster.GetComponent<Monster> ().SetDamage ((int)cardObject.GetComponent<InfoCard> ().Card.Card_HP_Damage);
+						Monster.GetComponent<Monster> ().SetDamage ((int)(cardObject.GetComponent<InfoCard>().Card.Card_HP_Damage)*SelectedEnemy.GetComponent<Monster>().maxHp/100);
 					}
 				}
 			}
@@ -91,7 +88,7 @@ public class ChooseEnemy : MonoBehaviour {
 				{
 					SelectedEnemy.GetComponent<Monster>().SetDamage((int)cardObject.GetComponent<InfoCard>().Card.Card_Max_Damage);
 				}else{
-					SelectedEnemy.GetComponent<Monster>().SetDamage((int)cardObject.GetComponent<InfoCard>().Card.Card_HP_Damage);
+					SelectedEnemy.GetComponent<Monster>().SetDamage((int)(cardObject.GetComponent<InfoCard>().Card.Card_HP_Damage)*SelectedEnemy.GetComponent<Monster>().maxHp/100);
 				}
 			}
 		}

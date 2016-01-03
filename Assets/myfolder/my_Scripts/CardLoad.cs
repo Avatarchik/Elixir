@@ -55,7 +55,7 @@ public class CardLoad:MonoBehaviour {
 			card.Card_Description=card.Card_Description.Replace ("Attack_Damage",rowList[i].Attack_Damage);
 			card.Card_Description=card.Card_Description.Replace("HP_Damage",rowList[i].HP_Damage);
 			card.Card_Description=card.Card_Description.Replace("Max_Damage",rowList[i].Max_Damage);
-			card.Card_Description=card.Card_Description.Replace("Dot_Damage_Turn",rowList[i].Dot_Damage_Turn);
+			card.Card_Description=card.Card_Description.Replace("Dote_Damage_Turn",rowList[i].Dot_Damage_Turn);
 			card.Card_Description=card.Card_Description.Replace("Condition",rowList[i].Condition);
 			card.Card_Description=card.Card_Description.Replace("Heal",rowList[i].Heal);
 			card.Card_Description=card.Card_Description.Replace("Effect1_Rate",rowList[i].Effect1_Rate);
