@@ -4,7 +4,7 @@ using System.Collections;
 public class ChooseEnemy : MonoBehaviour {
 
 	public GameObject selectable;
-	public int SelectedCardIndex;
+	public GameObject SelectedCard;
 
 
 	public IEnumerator SelectEnemy(GameObject cardObject){
@@ -13,16 +13,15 @@ public class ChooseEnemy : MonoBehaviour {
 		yield return StartCoroutine (WaitForEnemySelect (cardObject));
 		AttackEnemy (cardObject);
 	}
+
 	IEnumerator WaitForEnemySelect(GameObject cardObject){
-
-
 		while (true) {
-			Debug.Log (SelectedCardIndex);
-			Debug.Log (cardObject.GetComponent<InfoCard>().Card.Card_ID);
 
 			if (Input.GetMouseButtonDown (0)) {
+				Debug.Log (Input.mousePosition);
+				Debug.Log (Camera.main.ScreenToWorldPoint(Input.mousePosition));
 				Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-				
+			
 				RaycastHit2D hit = Physics2D.GetRayIntersection (ray, Mathf.Infinity);
 				if (hit.collider != null) {
 					GameObject[] selectables = GameObject.FindGameObjectsWithTag ("selectable");
@@ -32,9 +31,11 @@ public class ChooseEnemy : MonoBehaviour {
 					Debug.Log (hit.collider.gameObject);
 					break;
 				
-				} 
+				}else{
+					Debug.Log ("Nothing");
+				}
 			}
-			if (SelectedCardIndex!=cardObject.GetComponent<InfoCard>().Card.Card_ID) {
+			if (SelectedCard!=cardObject) {
 				Debug.Log("changed");
 				GameObject[] Monsters = GameObject.FindGameObjectsWithTag ("Monster");
 				foreach (GameObject Monster in Monsters) {
@@ -58,6 +59,5 @@ public class ChooseEnemy : MonoBehaviour {
 		}
 
 	void AttackEnemy(GameObject cardObject){
-		Debug.Log ("제발");
 	}
 }

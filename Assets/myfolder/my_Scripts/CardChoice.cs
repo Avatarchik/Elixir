@@ -10,9 +10,10 @@ public class CardChoice : MonoBehaviour,IPointerDownHandler{
 		GetComponent<Image> ().sprite = sprUnselected;
 	}
 	public void OnPointerDown(PointerEventData eventData){
+
 		Debug.Log (GetComponent<InfoCard>().Card.Card_ExtName);
-		transform.parent.GetComponent<ChooseEnemy> ().SelectedCardIndex = GetComponent<InfoCard>().Card.Card_ID;
-		StartCoroutine (GameObject.Find ("Canvas").transform.FindChild ("Hands").GetComponent<ChooseEnemy> ().SelectEnemy (this.gameObject));
+		transform.parent.GetComponent<ChooseEnemy> ().SelectedCard = this.gameObject;
+		StartCoroutine (cardActivated());
 
 		/*switch (GetComponent<InfoCard> ().Card.Card_Target) {
 		case 1:
@@ -31,6 +32,11 @@ public class CardChoice : MonoBehaviour,IPointerDownHandler{
 		}*/
 
 		Debug.Log (GetComponent<InfoCard> ().Card.Card_Target);
+	}
+	IEnumerator cardActivated(){
+		GetComponent<Image> ().sprite = sprSelected;
+		yield return StartCoroutine (GameObject.Find ("Canvas").transform.FindChild ("Hands").GetComponent<ChooseEnemy> ().SelectEnemy (this.gameObject));
+		GetComponent<Image> ().sprite = sprUnselected;
 	}
 
 }
