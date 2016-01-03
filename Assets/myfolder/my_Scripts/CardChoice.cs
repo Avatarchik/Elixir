@@ -15,27 +15,28 @@ public class CardChoice : MonoBehaviour,IPointerDownHandler{
 		transform.parent.GetComponent<ChooseEnemy> ().SelectedCard = this.gameObject;
 		StartCoroutine (cardActivated());
 
-		/*switch (GetComponent<InfoCard> ().Card.Card_Target) {
+
+
+	}
+	IEnumerator cardActivated(){
+		GetComponent<Image> ().sprite = sprSelected;
+		switch (GetComponent<InfoCard> ().Card.Card_Target) {
 		case 1:
 			break;
 		case 2:
-			StartCoroutine(GameObject.Find ("Canvas").transform.FindChild ("Hands").GetComponent<ChooseEnemy>().SelectEnemy(this.gameObject));
+			yield return StartCoroutine (GameObject.Find ("Canvas").transform.FindChild ("Hands").GetComponent<ChooseEnemy> ().SelectEnemy (this.gameObject));
 			break;
 		case 3:
 			break;
 		case 4:
+			yield return StartCoroutine (GameObject.Find ("Canvas").transform.FindChild ("Hands").GetComponent<ChooseEnemy> ().SelectEnemy (this.gameObject));
 			break;
 		case 5:
 			break;
 		default:
 			break;
-		}*/
+		}
 
-		Debug.Log (GetComponent<InfoCard> ().Card.Card_Target);
-	}
-	IEnumerator cardActivated(){
-		GetComponent<Image> ().sprite = sprSelected;
-		yield return StartCoroutine (GameObject.Find ("Canvas").transform.FindChild ("Hands").GetComponent<ChooseEnemy> ().SelectEnemy (this.gameObject));
 		GetComponent<Image> ().sprite = sprUnselected;
 	}
 

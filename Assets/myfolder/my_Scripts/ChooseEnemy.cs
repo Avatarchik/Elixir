@@ -5,13 +5,16 @@ public class ChooseEnemy : MonoBehaviour {
 
 	public GameObject selectable;
 	public GameObject SelectedCard;
+	GameObject selectedEnemy;
 
 
 	public IEnumerator SelectEnemy(GameObject cardObject){
 		Debug.Log ("SelectEnemy");
+		selectedEnemy = null;
 		HighlightEnemy (cardObject);
 		yield return StartCoroutine (WaitForEnemySelect (cardObject));
-		AttackEnemy (cardObject);
+		AttackEnemy (cardObject, selectedEnemy);
+
 	}
 
 	IEnumerator WaitForEnemySelect(GameObject cardObject){
@@ -25,6 +28,7 @@ public class ChooseEnemy : MonoBehaviour {
 				RaycastHit2D hit = Physics2D.GetRayIntersection (ray, Mathf.Infinity);
 				if (hit.collider != null) {
 					GameObject[] selectables = GameObject.FindGameObjectsWithTag ("selectable");
+					selectedEnemy=hit.collider.gameObject;
 					foreach (GameObject selectable in selectables) {
 						Destroy (selectable);
 					}
@@ -58,6 +62,37 @@ public class ChooseEnemy : MonoBehaviour {
 		}
 		}
 
-	void AttackEnemy(GameObject cardObject){
-	}
+	void AttackEnemy(GameObject cardObject,GameObject SelectedEnemy){
+		if (cardObject.GetComponent<InfoCard> ().Card.Card_Target == 4) {
+
+			GameObject[] Monsters = GameObject.FindGameObjectsWithTag ("Monster");
+
+			if (cardObject.GetComponent<InfoCard> ().Card.Card_Attack_Damage > 0) {
+				foreach (GameObject Monster in Monsters) {
+					Monster.GetComponent<Monster> ().SetDamage ((int)cardObject.GetComponent<InfoCard> ().Card.Card_Attack_Damage);
+				}
+			} else if (cardObject.GetComponent<InfoCard> ().Card.Card_HP_Damage > 0) {
+
+				foreach (GameObject Monster in Monsters) {
+					if((int)(cardObject.GetComponent<InfoCard>().Card.Card_HP_Damage)*Monster.GetComponent<Monster>().maxHp/100>=cardObject.GetComponent<InfoCard>().Card.Card_Max_Damage){
+						Monster.GetComponent<Monster> ().SetDamage ((int)cardObject.GetComponent<InfoCard> ().Card.Card_Max_Damage);
+					}else{
+						Monster.GetComponent<Monster> ().SetDamage ((int)cardObject.GetComponent<InfoCard> ().Card.Card_HP_Damage);
+					}
+				}
+			}
+		}else if (cardObject.GetComponent<InfoCard> ().Card.Card_Target == 2)
+		{
+			if(cardObject.GetComponent<InfoCard>().Card.Card_Attack_Damage>0){
+				SelectedEnemy.GetComponent<Monster>().SetDamage((int)cardObject.GetComponent<InfoCard>().Card.Card_Attack_Damage);
+			}else if(cardObject.GetComponent<InfoCard>().Card.Card_HP_Damage>0){
+				if((int)(cardObject.GetComponent<InfoCard>().Card.Card_HP_Damage)*SelectedEnemy.GetComponent<Monster>().maxHp/100>=cardObject.GetComponent<InfoCard>().Card.Card_Max_Damage)
+				{
+					SelectedEnemy.GetComponent<Monster>().SetDamage((int)cardObject.GetComponent<InfoCard>().Card.Card_Max_Damage);
+				}else{
+					SelectedEnemy.GetComponent<Monster>().SetDamage((int)cardObject.GetComponent<InfoCard>().Card.Card_HP_Damage);
+				}
+			}
+		}
+}
 }
