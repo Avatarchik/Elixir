@@ -19,7 +19,7 @@ public class ChooseAlly : MonoBehaviour {
 	
 	IEnumerator WaitForAllySelect(GameObject cardObject){
 		while (true) {
-			
+
 			if (Input.GetMouseButtonDown (0)) {
 
 				Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
@@ -62,7 +62,8 @@ public class ChooseAlly : MonoBehaviour {
 		}
 	}
 	
-	void HealEnemy(GameObject cardObject,GameObject SelectedEnemy){
-		Debug.Log ("Heal");
+	void HealEnemy(GameObject cardObject,GameObject SelectedAlly){
+		SelectedAlly.GetComponent<BaseCharacter> ().SetHeal ((int)cardObject.GetComponent<InfoCard> ().Card.Card_Heal);
+		GetComponent<ChoosingManager>().SelectedCard = null;
 	}
 }

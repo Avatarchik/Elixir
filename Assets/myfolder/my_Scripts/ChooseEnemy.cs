@@ -19,7 +19,7 @@ public class ChooseEnemy : MonoBehaviour {
 
 	IEnumerator WaitForEnemySelect(GameObject cardObject){
 		while (true) {
-
+		
 			if (Input.GetMouseButtonDown (0)) {
 				Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 			
@@ -92,5 +92,6 @@ public class ChooseEnemy : MonoBehaviour {
 				}
 			}
 		}
+		GetComponent<ChoosingManager>().SelectedCard = null;
 }
 }
