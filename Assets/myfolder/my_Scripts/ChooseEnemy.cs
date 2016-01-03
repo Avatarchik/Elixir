@@ -13,6 +13,7 @@ public class ChooseEnemy : MonoBehaviour {
 		selectedEnemy = null;
 		HighlightEnemy (cardObject);
 		yield return StartCoroutine (WaitForEnemySelect (cardObject));
+		if(selectedEnemy!=null)
 		AttackEnemy (cardObject, selectedEnemy);
 
 	}
