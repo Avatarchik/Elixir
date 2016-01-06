@@ -10,6 +10,7 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
 		START,
 		PLAYERCHOICE,
 		ENEMYCHOICE,
+        IDLE,
 		LOSE,
 		WIN
 	}
@@ -22,24 +23,48 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
 
 	public BattleStates currentState;
 
+    private int turnCount = 0;
+    public void incrementTurn()
+    {
+        turnCount++;
+    }
+    public void resetTurn()
+    {
+        turnCount = 0;
+    }
+    public bool isTurnExhausted()
+    {
+        return (turnCount >= 2);
+    }
+
+
 	void Start () {
 		currentState = BattleStates.START;
 	}
 	
 	void Update () {
 		switch (currentState) {
-		case (BattleStates.START):
-			GameObject.Find ("Hands").GetComponent<HandSet>().CardSet();
-			currentState=BattleStates.PLAYERCHOICE;
-			break;
-		case (BattleStates.PLAYERCHOICE):
-			break;
-		case (BattleStates.ENEMYCHOICE):
-			break;
-		case (BattleStates.LOSE):
-			break;
-		case (BattleStates.WIN):
-			break;
+		    case (BattleStates.START):
+                //Start
+			    currentState=BattleStates.PLAYERCHOICE;
+			    break;
+		    case (BattleStates.PLAYERCHOICE):
+                GameObject.Find ("Hands").GetComponent<HandSet>().CardSet();
+                currentState = BattleStates.IDLE;
+                break;
+		    case (BattleStates.ENEMYCHOICE):
+                Debug.Log("Enemy Turn Reached");
+                //Functions that delete all cards in hand
+                int chCount = GameObject.Find("Hand").transform.childCount;
+                currentState = BattleStates.PLAYERCHOICE;
+                currentState = BattleStates.IDLE;
+                break;
+            case (BattleStates.IDLE):
+                break;
+		    case (BattleStates.LOSE):
+			    break;
+		    case (BattleStates.WIN):
+			    break;
 		}
 	}
 	void OnGUI(){

@@ -14,7 +14,6 @@ public class ChooseAlly : MonoBehaviour {
 		yield return StartCoroutine (WaitForAllySelect(cardObject));
 		if(selectedAlly!=null)
 			HealEnemy (cardObject, selectedAlly);
-		
 	}
 	
 	IEnumerator WaitForAllySelect(GameObject cardObject){
