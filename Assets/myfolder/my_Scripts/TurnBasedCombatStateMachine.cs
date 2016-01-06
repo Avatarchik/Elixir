@@ -5,7 +5,6 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
 
 	GameObject card1;
 
-
 	public enum BattleStates{
 		START,
 		PLAYERCHOICE,
@@ -54,7 +53,7 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
                 break;
 		    case (BattleStates.ENEMYCHOICE):
                 Debug.Log("Enemy Turn Reached");
-                //Functions that delete all cards in hand
+                //Functions that delete all cards in hand (temporary)
                 GameObject chCount = GameObject.Find("Canvas/Hands");
                 for(int i = 0; i < chCount.transform.childCount; i++)
                 {
@@ -72,7 +71,9 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
 		}
 	}
 	void OnGUI(){
-		if(GUILayout.Button ("NEXT STATE")){
+        GUI.Label(new Rect(10, 40, 100, 20), "" + (2 - turnCount));//Display attack turn count
+        if (GUILayout.Button ("NEXT STATE")){
+
 			if(currentState==BattleStates.START){
 				currentState=BattleStates.PLAYERCHOICE;
 			}else if( currentState==BattleStates.PLAYERCHOICE)
