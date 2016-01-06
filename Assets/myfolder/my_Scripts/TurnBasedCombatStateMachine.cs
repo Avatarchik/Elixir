@@ -55,9 +55,13 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
 		    case (BattleStates.ENEMYCHOICE):
                 Debug.Log("Enemy Turn Reached");
                 //Functions that delete all cards in hand
-                int chCount = GameObject.Find("Hand").transform.childCount;
+                GameObject chCount = GameObject.Find("Canvas/Hands");
+                for(int i = 0; i < chCount.transform.childCount; i++)
+                {
+                    Destroy(chCount.transform.GetChild(i).gameObject);
+                }
+                //
                 currentState = BattleStates.PLAYERCHOICE;
-                currentState = BattleStates.IDLE;
                 break;
             case (BattleStates.IDLE):
                 break;
