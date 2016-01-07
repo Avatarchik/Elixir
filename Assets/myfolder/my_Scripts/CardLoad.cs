@@ -68,7 +68,7 @@ public class CardLoad:MonoBehaviour {
 			card.Card_Description=card.Card_Description.Replace("BuffRate",rowList[i].BuffRate);
 			card.Card_Description=card.Card_Description.Replace("BuffTurn",rowList[i].BuffTurn);
 			card.Card_Description=card.Card_Description.Replace ("SummonedCreatureHP",rowList[i].SummonedCreatureHP);
-			card.Card_Description=card.Card_Description.Replace ("SummonedCreatureAttack",rowList[i].SummonedCreatureAttackDamage);
+			card.Card_Description=card.Card_Description.Replace ("SummonedCreatureAttackDamage",rowList[i].SummonedCreatureAttackDamage);
 
 
 			cardDeck.Add(card);
