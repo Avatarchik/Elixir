@@ -9,8 +9,17 @@ public class BaseCharacter : MonoBehaviour {
 	public float MAX_HP=100.0f;
 	public float HP;
 
+    public enum ChemicalStates
+    {
+        LIQUID,
+        GAS,
+        SOLID
+    }
+    public ChemicalStates chemicalState;
+
 	void Start(){
 		HP = 50;
+        chemicalState = ChemicalStates.SOLID;
 	}
 
 	void dead(){
