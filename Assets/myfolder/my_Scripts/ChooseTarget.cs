@@ -13,11 +13,10 @@ public class ChooseTarget : MonoBehaviour {
     {
         CardReselect:
         currentSelectedCard = GetComponent<ChoosingManager>().SelectedCard;
-        string targetType = currentSelectedCard.GetComponent<InfoCard>().Card.Card_Type; // Distinguish number of attacks
+        string targetType = currentSelectedCard.GetComponent<InfoCard>().Card.Card_Target; // Distinguish number of attacks
         string targetRange = currentSelectedCard.GetComponent<InfoCard>().Card.Card_Range;
 
-        //if (targetType == 2 || targetType == 1) countAttack = 1;
-        //if (targetType == 4) countAttack = 4;
+        Debug.Log("targetType: " + targetType + " targetRange: " + targetRange);
         if (targetType == "Ally") countAttack = 1;
         if(targetType == "Enemy" && targetRange == "Single") countAttack = 1;
         if (targetType == "Enemy" && targetRange == "Wide") countAttack = 4;
@@ -174,9 +173,9 @@ public class ChooseTarget : MonoBehaviour {
         for (int i = 0; i < countArray; i++) //Repeat procedure for every selected enemies listed in selectedEnemy array
         {
             //Normal damage
-            if (currentSelectedCard.GetComponent<InfoCard>().Card.Card_Attack_Damage > 0) 
+            if (currentSelectedCard.GetComponent<InfoCard>().Card.Card_AttackDamage > 0) 
             {
-                selectedEnemy[i].GetComponent<Monster>().SetDamage((int)currentSelectedCard.GetComponent<InfoCard>().Card.Card_Attack_Damage);
+                selectedEnemy[i].GetComponent<Monster>().SetDamage((int)currentSelectedCard.GetComponent<InfoCard>().Card.Card_AttackDamage);
             }
             //DotDamage
             //Stun
