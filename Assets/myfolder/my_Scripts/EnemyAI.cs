@@ -4,7 +4,8 @@ using System.Collections.Generic;
 
 public class EnemyAI : MonoBehaviour {
 
-	float EnemyBehaviourDelay = 8.0f;
+	float EnemyBehaviourBeforeDelay = 3.0f;
+	float EnemyBehaviourAfterDelay=5.0f;
 
 	public IEnumerator EnemyActChoice(List<Monster> monsters)
 	{
@@ -14,11 +15,17 @@ public class EnemyAI : MonoBehaviour {
 		foreach (Monster monster in monsters)
 		{
 			Debug.Log ("Monster Action");
-			AttackAlly();
-			yield return new WaitForSeconds(EnemyBehaviourDelay);
+			yield return new WaitForSeconds(EnemyBehaviourBeforeDelay);
+			AttackAlly(monster);
+			yield return new WaitForSeconds(EnemyBehaviourAfterDelay);
 		}
 	}
-	void AttackAlly(){
+	void AttackAlly(Monster monster){
 		Debug.Log ("Monster Attack");
+		Debug.Log (GameObject.Find ("Player"));
+		if(GameObject.Find ("Player")!=null)
+		{
+		GameObject.Find ("Player").GetComponent<BaseCharacter> ().SetDamage (monster.GetComponent<Monster> ().attackDamage);
+		}
 	}
 }
