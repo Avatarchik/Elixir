@@ -9,7 +9,7 @@ public class baseCard{
 	private string card_ChemicalSeries;
 	private string card_Type;
 	private string card_Description;
-	private int card_Target;
+	private string card_Target;
 	private string card_Range;
 	private double card_AttackDamage;
 	private double card_IncreaseDamage;

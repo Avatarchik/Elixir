@@ -33,7 +33,7 @@ public class CardChoice : MonoBehaviour,IPointerDownHandler{
 	IEnumerator cardActivated(){
 		transform.parent.GetComponent<ChoosingManager> ().SelectedCard = this.gameObject;
         GetComponent<Image> ().sprite = sprSelected;
-		switch (GetComponent<InfoCard> ().Card.Card_Target) {
+		switch (GetComponent<ChooseEnemy> ().tar) {
 		case 1:
 			yield return StartCoroutine (GameObject.Find ("Canvas").transform.FindChild ("Hands").GetComponent<ChooseAlly> ().SelectAlly(this.gameObject));
 			break;
