@@ -42,7 +42,11 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
 	}
 	
 	void Update () {
-		//Debug.Log (currentState);
+		//If there is no monsters in the field, Player wins
+        if(GameObject.FindGameObjectsWithTag("Monster").Length == 0)
+        {
+            currentState = BattleStates.WIN;
+        }
 		switch (currentState) {
 		    case (BattleStates.START):
                 //Start
@@ -54,21 +58,22 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
                 break;
 		    case (BattleStates.ENEMYCHOICE):
                 Debug.Log("Enemy Turn Reached");
-			StartCoroutine(GameObject.Find ("MonsterManager").GetComponent<EnemyAI>().EnemyActChoice(GameObject.Find("MonsterManager").GetComponent<MonsterManager>().Monsters));
+			    //StartCoroutine(GameObject.Find ("MonsterManager").GetComponent<EnemyAI>().EnemyActChoice(GameObject.Find("MonsterManager").GetComponent<MonsterManager>().Monsters));
                 //Functions that delete all cards in hand (temporary)
                 GameObject chCount = GameObject.Find("Canvas").transform.FindChild("Hands").gameObject;
                 for(int i = 0; i < chCount.transform.childCount; i++)
                 {
                     Destroy(chCount.transform.GetChild(i).gameObject);
                 }
-                //currentState = BattleStates.PLAYERCHOICE;
+                currentState = BattleStates.PLAYERCHOICE;
                 break;
             case (BattleStates.IDLE):
                 break;
 		    case (BattleStates.LOSE):
 			    break;
 		    case (BattleStates.WIN):
-			    break;
+                Debug.Log("Battle Won!");
+                break;
 		}
 	}
 	void OnGUI(){

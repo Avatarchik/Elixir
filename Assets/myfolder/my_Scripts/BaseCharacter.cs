@@ -6,8 +6,8 @@ public class BaseCharacter : MonoBehaviour {
 	private string CharacterName;
 
 	//stats
-	public double MAX_HP=100.0f;
-	public double HP;
+	public float MAX_HP=100.0f;
+	public float HP;
 
 	void Start(){
 		HP = 50;

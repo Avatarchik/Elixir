@@ -1,42 +1,45 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class HPBar : MonoBehaviour {
+public class PlayerHPBar : MonoBehaviour {
     public RectTransform healthTransform;
     private float minXValue;
     private float maxXValue;
-    private int currentHealth;
-    private int maxHealth;
+    private float currentHealth;
+    private float maxHealth;
     //private float currentXValue;
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         Debug.Log(this.gameObject);
-        maxHealth = this.GetComponent<Monster>().maxHp;
-        
+        maxHealth = this.GetComponent<BaseCharacter>().MAX_HP;
+
         maxXValue = healthTransform.localPosition.x;
-        Debug.Log("MaxHealth: " + maxXValue);
+        Debug.Log("MaxXValue: " + maxXValue);
         minXValue = healthTransform.localPosition.x - healthTransform.rect.width;
-        Debug.Log("MinHealth: " + minXValue);
+        Debug.Log("MinXValue: " + minXValue);
         Debug.Log("BarWidth: " + healthTransform.rect.width);
         currentHealth = maxHealth;
+        HandleHealth();
         //healthTransform.localPosition = new Vector2(minXValue, healthTransform.localPosition.y);
     }
-	
-	// Update is called once per frame
-	void Update () {
-        if(this.GetComponent<Monster>().hp != currentHealth)
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (this.GetComponent<BaseCharacter>().HP != currentHealth)
         {
-            Debug.Log("HealthBar Change!!");
-            currentHealth = this.GetComponent<Monster>().hp;
+            Debug.Log("HealthBar Change!! (Player)");
+            currentHealth = this.GetComponent<BaseCharacter>().HP;
             HandleHealth();
-            
+
         }
     }
     private void HandleHealth()
     {
         float currentXValue = MapValues(currentHealth, 0, maxHealth, minXValue, maxXValue);
         Debug.Log("Original XValue: " + healthTransform.localPosition.x + " Current XValue: " + currentXValue);
- 
+
         healthTransform.localPosition = new Vector2(currentXValue, healthTransform.localPosition.y);
     }
     private float MapValues(float x, float inMin, float inMax, float outMin, float outMax)
