@@ -40,7 +40,7 @@ public class HandSet : MonoBehaviour {
 	}
 	void AddCards(int cardIndex)
 	{
-		Debug.Log ("AddCards");
+		Debug.Log ("AddCard");
 		GameObject cardCopy = (GameObject)Instantiate(cardPrefab);
 		
 		cardCopy.transform.SetParent(this.transform);

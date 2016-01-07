@@ -22,46 +22,53 @@ public class CardLoad:MonoBehaviour {
 			card.Card_ID=System.Convert.ToInt32(rowList[i].ID);
 			card.Card_ExtName=rowList[i].ExtName;
 			card.Card_Name=rowList[i].Name;
-			card.Card_Chemical_Series=rowList[i].Chemical_Series;
+			card.Card_ChemicalSeries=rowList[i].ChemicalSeries;
 			card.Card_Type=rowList[i].Type;
 			card.Card_Description=rowList[i].Description;
-			card.Card_Attack_Range=rowList[i].Attack_Range;
-			if(rowList[i].Target!="N/A")
-			card.Card_Target=System.Convert.ToInt32(rowList[i].Target);
-			if(rowList[i].Attack_Damage!="N/A")
-			card.Card_Attack_Damage=System.Convert.ToDouble (rowList[i].Attack_Damage);
-			if(rowList[i].HP_Damage!="N/A")
-			card.Card_HP_Damage=System.Convert.ToDouble (rowList[i].HP_Damage);
-			if(rowList[i].Max_Damage!="N/A")
-			card.Card_Max_Damage=System.Convert.ToDouble (rowList[i].Max_Damage);
-			if(rowList[i].Dot_Damage_Turn!="N/A")
-			card.Card_Dot_Damage_Turn=System.Convert.ToDouble (rowList[i].Dot_Damage_Turn);
+			card.Card_Range=rowList[i].Range;
+			card.Card_Target=rowList[i].Target;
+			if(rowList[i].AttackDamage!="N/A")
+			card.Card_AttackDamage=System.Convert.ToDouble (rowList[i].AttackDamage);
+			if(rowList[i].IncreaseDamage!="N/A")
+			card.Card_IncreaseDamage=System.Convert.ToDouble (rowList[i].IncreaseDamage);
 			if(rowList[i].Heal!="N/A")
 			card.Card_Heal=System.Convert.ToDouble (rowList[i].Heal);
-			card.Card_Condition=rowList[i].Condition;
-			card.Card_Additional_Card=rowList[i].Additional_Card;
-			card.Card_Effect1_Name=rowList[i].Effect1_Name;
-			if(rowList[i].Effect1_Rate!="N/A")
-			card.Card_Effect1_Rate=System.Convert.ToDouble (rowList[i].Effect1_Rate);
-			if(rowList[i].Effect1_Turn!="N/A")
-			card.Card_Effect1_Turn=System.Convert.ToInt32 (rowList[i].Effect1_Turn);
-			card.Card_Effect2_Name=rowList[i].Effect2_Name;
-			if(rowList[i].Effect2_Rate!="N/A")
-			card.Card_Effect2_Rate=System.Convert.ToDouble (rowList[i].Effect2_Rate);
-			if(rowList[i].Effect2_Turn!="N/A")
-			card.Card_Effect2_Turn=System.Convert.ToInt32 (rowList[i].Effect2_Turn);
+			card.Card_ConditionCard=rowList[i].ConditionCard;
+			if(rowList[i].ConditionState1!="N/A")
+				card.Card_ConditionState1=System.Convert.ToInt32 (rowList[i].ConditionState1);
+			if(rowList[i].ConditionState2!="N/A")
+				card.Card_ConditionState2=System.Convert.ToInt32 (rowList[i].ConditionState2);
+			card.Card_AdditionalCard=rowList[i].AdditionalCard;
+			card.Card_DebuffName=rowList[i].DebuffName;
+			if(rowList[i].DebuffRate!="N/A")
+			card.Card_DebuffRate=System.Convert.ToDouble (rowList[i].DebuffRate);
+			if(rowList[i].DebuffTurn!="N/A")
+			card.Card_DebuffTurn=System.Convert.ToInt32 (rowList[i].DebuffTurn);
+			if(rowList[i].DotDamage!="N/A")
+			card.Card_DotDamage=System.Convert.ToDouble (rowList[i].DotDamage);
+			card.Card_BuffName=rowList[i].BuffName;
+			if(rowList[i].BuffRate!="N/A")
+			card.Card_BuffRate=System.Convert.ToDouble (rowList[i].BuffRate);
+			if(rowList[i].BuffTurn!="N/A")
+			card.Card_BuffTurn=System.Convert.ToInt32 (rowList[i].BuffTurn);
+			if(rowList[i].SummonedCreatureHP!="N/A")
+				card.Card_SummonedCreatureHP=System.Convert.ToDouble(rowList[i].SummonedCreatureHP);
+			if(rowList[i].SummonedCreatureAttackDamage!="N/A")
+				card.Card_SummonedCreatureAttackDamage=System.Convert.ToDouble(rowList[i].SummonedCreatureAttackDamage);
+			card.Card_EliminateBuff=rowList[i].EliminateBuff;
+			card.Card_EliminateDebuff=rowList[i].EliminateDebuff;
 
 			//cardDescription 치환하여 나타내기
-			card.Card_Description=card.Card_Description.Replace ("Attack_Damage",rowList[i].Attack_Damage);
-			card.Card_Description=card.Card_Description.Replace("HP_Damage",rowList[i].HP_Damage);
-			card.Card_Description=card.Card_Description.Replace("Max_Damage",rowList[i].Max_Damage);
-			card.Card_Description=card.Card_Description.Replace("Dote_Damage_Turn",rowList[i].Dot_Damage_Turn);
-			card.Card_Description=card.Card_Description.Replace("Condition",rowList[i].Condition);
+			card.Card_Description=card.Card_Description.Replace ("AttackDamage",rowList[i].AttackDamage);
+			card.Card_Description=card.Card_Description.Replace ("DotDamage",rowList[i].DotDamage);
+			card.Card_Description=card.Card_Description.Replace("ConditionCard",rowList[i].ConditionCard);
 			card.Card_Description=card.Card_Description.Replace("Heal",rowList[i].Heal);
-			card.Card_Description=card.Card_Description.Replace("Effect1_Rate",rowList[i].Effect1_Rate);
-			card.Card_Description=card.Card_Description.Replace("Effect1_Turn",rowList[i].Effect1_Turn);
-			card.Card_Description=card.Card_Description.Replace("Effect2_Rate",rowList[i].Effect2_Rate);
-			card.Card_Description=card.Card_Description.Replace("Effect2_Turn",rowList[i].Effect2_Turn);
+			card.Card_Description=card.Card_Description.Replace("DebuffRate",rowList[i].DebuffRate);
+			card.Card_Description=card.Card_Description.Replace("DebuffTurn",rowList[i].DebuffTurn);
+			card.Card_Description=card.Card_Description.Replace("BuffRate",rowList[i].BuffRate);
+			card.Card_Description=card.Card_Description.Replace("BuffTurn",rowList[i].BuffTurn);
+			card.Card_Description=card.Card_Description.Replace ("SummonedCreatureHP",rowList[i].SummonedCreatureHP);
+			card.Card_Description=card.Card_Description.Replace ("SummonedCreatureAttack",rowList[i].SummonedCreatureAttackDamage);
 
 
 			cardDeck.Add(card);
@@ -70,32 +77,37 @@ public class CardLoad:MonoBehaviour {
 	}
 
 	//여기까지 덱만들기
-	
-
 
 		public class Row
 		{
 			public string ID;
 			public string ExtName;
 			public string Name;
-			public string Chemical_Series;
+			public string ChemicalSeries;
 			public string Type;
 			public string Description;
-			public string Attack_Range;
 			public string Target;
-			public string Attack_Damage;
-			public string HP_Damage;
-			public string Max_Damage;
-			public string Dot_Damage_Turn;
+			public string Range;
+			public string AttackDamage;
+			public string IncreaseDamage;
+			public string AllyAdditionalDamageRate;
 			public string Heal;
-			public string Condition;
-			public string Additional_Card;
-			public string Effect1_Name;
-			public string Effect1_Rate;
-			public string Effect1_Turn;
-			public string Effect2_Name;
-			public string Effect2_Rate;
-			public string Effect2_Turn;
+			public string ConditionCard;
+			public string ConditionTurn;
+			public string ConditionState1;
+			public string ConditionState2;
+			public string AdditionalCard;
+			public string DebuffName;
+			public string DebuffRate;
+			public string DebuffTurn;
+			public string DotDamage;
+			public string BuffName;
+			public string BuffRate;
+			public string BuffTurn;
+			public string SummonedCreatureHP;
+			public string SummonedCreatureAttackDamage;
+			public string EliminateDebuff;
+			public string EliminateBuff;
 			
 		}
 		
@@ -122,24 +134,31 @@ public class CardLoad:MonoBehaviour {
 				row.ID = grid[i][0];
 				row.ExtName = grid[i][1];
 				row.Name = grid[i][2];
-				row.Chemical_Series = grid[i][3];
+				row.ChemicalSeries = grid[i][3];
 				row.Type = grid[i][4];
 				row.Description = grid[i][5];
-				row.Attack_Range = grid[i][6];
-				row.Target = grid[i][7];
-				row.Attack_Damage = grid[i][8];
-				row.HP_Damage = grid[i][9];
-				row.Max_Damage = grid[i][10];
-				row.Dot_Damage_Turn = grid[i][11];
-				row.Heal = grid[i][12];
-				row.Condition = grid[i][13];
-				row.Additional_Card = grid[i][14];
-				row.Effect1_Name = grid[i][15];
-				row.Effect1_Rate = grid[i][16];
-				row.Effect1_Turn = grid[i][17];
-				row.Effect2_Name = grid[i][18];
-				row.Effect2_Rate = grid[i][19];
-				row.Effect2_Turn = grid[i][20];
+				row.Target = grid[i][6];
+				row.Range = grid[i][7];
+				row.AttackDamage = grid[i][8];
+				row.IncreaseDamage = grid[i][9];
+				row.AllyAdditionalDamageRate = grid[i][10];
+				row.Heal = grid[i][11];
+				row.ConditionCard = grid[i][12];
+				row.ConditionTurn = grid[i][13];
+				row.ConditionState1 = grid[i][14];
+				row.ConditionState2 = grid[i][15];
+				row.AdditionalCard = grid[i][16];
+				row.DebuffName = grid[i][17];
+				row.DebuffRate = grid[i][18];
+				row.DebuffTurn = grid[i][19];
+				row.DotDamage = grid[i][20];
+				row.BuffName = grid[i][21];
+				row.BuffRate = grid[i][22];
+				row.BuffTurn = grid[i][23];
+				row.SummonedCreatureHP = grid[i][24];
+				row.SummonedCreatureAttackDamage = grid[i][25];
+				row.EliminateDebuff = grid[i][26];
+				row.EliminateBuff = grid[i][27];
 				
 				rowList.Add(row);
 			}
@@ -182,13 +201,13 @@ public class CardLoad:MonoBehaviour {
 		{
 			return rowList.FindAll(x => x.Name == find);
 		}
-		public Row Find_Chemical_Series(string find)
+		public Row Find_ChemicalSeries(string find)
 		{
-			return rowList.Find(x => x.Chemical_Series == find);
+			return rowList.Find(x => x.ChemicalSeries == find);
 		}
-		public List<Row> FindAll_Chemical_Series(string find)
+		public List<Row> FindAll_ChemicalSeries(string find)
 		{
-			return rowList.FindAll(x => x.Chemical_Series == find);
+			return rowList.FindAll(x => x.ChemicalSeries == find);
 		}
 		public Row Find_Type(string find)
 		{
@@ -206,14 +225,6 @@ public class CardLoad:MonoBehaviour {
 		{
 			return rowList.FindAll(x => x.Description == find);
 		}
-		public Row Find_Attack_Range(string find)
-		{
-			return rowList.Find(x => x.Attack_Range == find);
-		}
-		public List<Row> FindAll_Attack_Range(string find)
-		{
-			return rowList.FindAll(x => x.Attack_Range == find);
-		}
 		public Row Find_Target(string find)
 		{
 			return rowList.Find(x => x.Target == find);
@@ -222,37 +233,37 @@ public class CardLoad:MonoBehaviour {
 		{
 			return rowList.FindAll(x => x.Target == find);
 		}
-		public Row Find_Attack_Damage(string find)
+		public Row Find_Range(string find)
 		{
-			return rowList.Find(x => x.Attack_Damage == find);
+			return rowList.Find(x => x.Range == find);
 		}
-		public List<Row> FindAll_Attack_Damage(string find)
+		public List<Row> FindAll_Range(string find)
 		{
-			return rowList.FindAll(x => x.Attack_Damage == find);
+			return rowList.FindAll(x => x.Range == find);
 		}
-		public Row Find_HP_Damage(string find)
+		public Row Find_AttackDamage(string find)
 		{
-			return rowList.Find(x => x.HP_Damage == find);
+			return rowList.Find(x => x.AttackDamage == find);
 		}
-		public List<Row> FindAll_HP_Damage(string find)
+		public List<Row> FindAll_AttackDamage(string find)
 		{
-			return rowList.FindAll(x => x.HP_Damage == find);
+			return rowList.FindAll(x => x.AttackDamage == find);
 		}
-		public Row Find_Max_Damage(string find)
+		public Row Find_IncreaseDamage(string find)
 		{
-			return rowList.Find(x => x.Max_Damage == find);
+			return rowList.Find(x => x.IncreaseDamage == find);
 		}
-		public List<Row> FindAll_Max_Damage(string find)
+		public List<Row> FindAll_IncreaseDamage(string find)
 		{
-			return rowList.FindAll(x => x.Max_Damage == find);
+			return rowList.FindAll(x => x.IncreaseDamage == find);
 		}
-		public Row Find_Dot_Damage_Turn(string find)
+		public Row Find_AllyAdditionalDamageRate(string find)
 		{
-			return rowList.Find(x => x.Dot_Damage_Turn == find);
+			return rowList.Find(x => x.AllyAdditionalDamageRate == find);
 		}
-		public List<Row> FindAll_Dot_Damage_Turn(string find)
+		public List<Row> FindAll_AllyAdditionalDamageRate(string find)
 		{
-			return rowList.FindAll(x => x.Dot_Damage_Turn == find);
+			return rowList.FindAll(x => x.AllyAdditionalDamageRate == find);
 		}
 		public Row Find_Heal(string find)
 		{
@@ -262,69 +273,133 @@ public class CardLoad:MonoBehaviour {
 		{
 			return rowList.FindAll(x => x.Heal == find);
 		}
-		public Row Find_Condition(string find)
+		public Row Find_ConditionCard(string find)
 		{
-			return rowList.Find(x => x.Condition == find);
+			return rowList.Find(x => x.ConditionCard == find);
 		}
-		public List<Row> FindAll_Condition(string find)
+		public List<Row> FindAll_ConditionCard(string find)
 		{
-			return rowList.FindAll(x => x.Condition == find);
+			return rowList.FindAll(x => x.ConditionCard == find);
 		}
-		public Row Find_Additional_Card(string find)
+		public Row Find_ConditionTurn(string find)
 		{
-			return rowList.Find(x => x.Additional_Card == find);
+			return rowList.Find(x => x.ConditionTurn == find);
 		}
-		public List<Row> FindAll_Additional_Card(string find)
+		public List<Row> FindAll_ConditionTurn(string find)
 		{
-			return rowList.FindAll(x => x.Additional_Card == find);
+			return rowList.FindAll(x => x.ConditionTurn == find);
 		}
-		public Row Find_Effect1_Name(string find)
+		public Row Find_ConditionState1(string find)
 		{
-			return rowList.Find(x => x.Effect1_Name == find);
+			return rowList.Find(x => x.ConditionState1 == find);
 		}
-		public List<Row> FindAll_Effect1_Name(string find)
+		public List<Row> FindAll_ConditionState1(string find)
 		{
-			return rowList.FindAll(x => x.Effect1_Name == find);
+			return rowList.FindAll(x => x.ConditionState1 == find);
 		}
-		public Row Find_Effect1_Rate(string find)
+		public Row Find_ConditionState2(string find)
 		{
-			return rowList.Find(x => x.Effect1_Rate == find);
+			return rowList.Find(x => x.ConditionState2 == find);
 		}
-		public List<Row> FindAll_Effect1_Rate(string find)
+		public List<Row> FindAll_ConditionState2(string find)
 		{
-			return rowList.FindAll(x => x.Effect1_Rate == find);
+			return rowList.FindAll(x => x.ConditionState2 == find);
 		}
-		public Row Find_Effect1_Turn(string find)
+		public Row Find_AdditionalCard(string find)
 		{
-			return rowList.Find(x => x.Effect1_Turn == find);
+			return rowList.Find(x => x.AdditionalCard == find);
 		}
-		public List<Row> FindAll_Effect1_Turn(string find)
+		public List<Row> FindAll_AdditionalCard(string find)
 		{
-			return rowList.FindAll(x => x.Effect1_Turn == find);
+			return rowList.FindAll(x => x.AdditionalCard == find);
 		}
-		public Row Find_Effect2_Name(string find)
+		public Row Find_DebuffName(string find)
 		{
-			return rowList.Find(x => x.Effect2_Name == find);
+			return rowList.Find(x => x.DebuffName == find);
 		}
-		public List<Row> FindAll_Effect2_Name(string find)
+		public List<Row> FindAll_DebuffName(string find)
 		{
-			return rowList.FindAll(x => x.Effect2_Name == find);
+			return rowList.FindAll(x => x.DebuffName == find);
 		}
-		public Row Find_Effect2_Rate(string find)
+		public Row Find_DebuffRate(string find)
 		{
-			return rowList.Find(x => x.Effect2_Rate == find);
+			return rowList.Find(x => x.DebuffRate == find);
 		}
-		public List<Row> FindAll_Effect2_Rate(string find)
+		public List<Row> FindAll_DebuffRate(string find)
 		{
-			return rowList.FindAll(x => x.Effect2_Rate == find);
+			return rowList.FindAll(x => x.DebuffRate == find);
 		}
-		public Row Find_Effect2_Turn(string find)
+		public Row Find_DebuffTurn(string find)
 		{
-			return rowList.Find(x => x.Effect2_Turn == find);
+			return rowList.Find(x => x.DebuffTurn == find);
 		}
-		public List<Row> FindAll_Effect2_Turn(string find)
+		public List<Row> FindAll_DebuffTurn(string find)
 		{
-			return rowList.FindAll(x => x.Effect2_Turn == find);
+			return rowList.FindAll(x => x.DebuffTurn == find);
+		}
+		public Row Find_DotDamage(string find)
+		{
+			return rowList.Find(x => x.DotDamage == find);
+		}
+		public List<Row> FindAll_DotDamage(string find)
+		{
+			return rowList.FindAll(x => x.DotDamage == find);
+		}
+		public Row Find_BuffName(string find)
+		{
+			return rowList.Find(x => x.BuffName == find);
+		}
+		public List<Row> FindAll_BuffName(string find)
+		{
+			return rowList.FindAll(x => x.BuffName == find);
+		}
+		public Row Find_BuffRate(string find)
+		{
+			return rowList.Find(x => x.BuffRate == find);
+		}
+		public List<Row> FindAll_BuffRate(string find)
+		{
+			return rowList.FindAll(x => x.BuffRate == find);
+		}
+		public Row Find_BuffTurn(string find)
+		{
+			return rowList.Find(x => x.BuffTurn == find);
+		}
+		public List<Row> FindAll_BuffTurn(string find)
+		{
+			return rowList.FindAll(x => x.BuffTurn == find);
+		}
+		public Row Find_SummonedCreatureHP(string find)
+		{
+			return rowList.Find(x => x.SummonedCreatureHP == find);
+		}
+		public List<Row> FindAll_SummonedCreatureHP(string find)
+		{
+			return rowList.FindAll(x => x.SummonedCreatureHP == find);
+		}
+		public Row Find_SummonedCreatureAttackDamage(string find)
+		{
+			return rowList.Find(x => x.SummonedCreatureAttackDamage == find);
+		}
+		public List<Row> FindAll_SummonedCreatureAttackDamage(string find)
+		{
+			return rowList.FindAll(x => x.SummonedCreatureAttackDamage == find);
+		}
+		public Row Find_EliminateDebuff(string find)
+		{
+			return rowList.Find(x => x.EliminateDebuff == find);
+		}
+		public List<Row> FindAll_EliminateDebuff(string find)
+		{
+			return rowList.FindAll(x => x.EliminateDebuff == find);
+		}
+		public Row Find_EliminateBuff(string find)
+		{
+			return rowList.Find(x => x.EliminateBuff == find);
+		}
+		public List<Row> FindAll_EliminateBuff(string find)
+		{
+			return rowList.FindAll(x => x.EliminateBuff == find);
 		}
 		
 	}
