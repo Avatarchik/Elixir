@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using EnumsAndClasses;
 
 public class ChooseTarget : MonoBehaviour {
     GameObject selectedAlly;
@@ -179,6 +180,10 @@ public class ChooseTarget : MonoBehaviour {
             }
             //DotDamage
             //Stun
+			if(currentSelectedCard.GetComponent<InfoCard>().Card.Card_DebuffName=="Stun")
+			{
+				selectedEnemy[i].GetComponent<Monster>().AddDebuff (new Debuff(EnumsAndClasses.DebuffName.Stun,currentSelectedCard.GetComponent<InfoCard>().Card.Card_DebuffTurn));
+			}
         }
     }
     void HealAlly()
