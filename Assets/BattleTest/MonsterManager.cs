@@ -15,6 +15,10 @@ public class MonsterManager : MonoBehaviour {
     Vector3 fourthPosition = new Vector3(4.9f, 0.3f, -3);
     
     List<Monster> monsters;
+	public List<Monster> Monsters {
+		get{ return monsters;}
+		set{ monsters = value;}
+	}
 
     public Monster GetMonster(int index)
     {

@@ -26,4 +26,11 @@ public class BaseCharacter : MonoBehaviour {
 		}
 		Debug.Log ("Get " + heal + " heal by player");
 	}
+	public void SetDamage(int damage){
+		HP -= damage;
+		if (HP < 0) {
+			HP = 0;
+		}
+		Debug.Log ("Get " + damage + " damage by monster");
+	}
 }

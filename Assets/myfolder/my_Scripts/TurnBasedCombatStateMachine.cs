@@ -42,6 +42,7 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
 	}
 	
 	void Update () {
+		//Debug.Log (currentState);
 		switch (currentState) {
 		    case (BattleStates.START):
                 //Start
@@ -53,13 +54,14 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
                 break;
 		    case (BattleStates.ENEMYCHOICE):
                 Debug.Log("Enemy Turn Reached");
+			StartCoroutine(GameObject.Find ("MonsterManager").GetComponent<EnemyAI>().EnemyActChoice(GameObject.Find("MonsterManager").GetComponent<MonsterManager>().Monsters));
                 //Functions that delete all cards in hand (temporary)
-                GameObject chCount = GameObject.Find("Canvas/Hands");
+                GameObject chCount = GameObject.Find("Canvas").transform.FindChild("Hands").gameObject;
                 for(int i = 0; i < chCount.transform.childCount; i++)
                 {
                     Destroy(chCount.transform.GetChild(i).gameObject);
                 }
-                currentState = BattleStates.PLAYERCHOICE;
+                //currentState = BattleStates.PLAYERCHOICE;
                 break;
             case (BattleStates.IDLE):
                 break;
@@ -73,23 +75,8 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
         GUI.Label(new Rect(10, 40, 100, 20), "" + (2 - turnCount));//Display attack turn count
         if (GUILayout.Button ("NEXT STATE")){
 
-			if(currentState==BattleStates.START){
-				currentState=BattleStates.PLAYERCHOICE;
-			}else if( currentState==BattleStates.PLAYERCHOICE)
-			{
+			if(currentState==BattleStates.IDLE){
 				currentState=BattleStates.ENEMYCHOICE;
-			}
-			else if( currentState==BattleStates.ENEMYCHOICE)
-			{
-				currentState=BattleStates.LOSE;
-			}
-			else if( currentState==BattleStates.LOSE)
-			{
-				currentState=BattleStates.WIN;
-			}
-			else if (currentState==BattleStates.WIN)
-			{
-				currentState=BattleStates.START;
 			}
 		}
 	}
