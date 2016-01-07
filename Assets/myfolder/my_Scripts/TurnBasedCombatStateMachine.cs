@@ -59,7 +59,6 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
                 {
                     Destroy(chCount.transform.GetChild(i).gameObject);
                 }
-                //
                 currentState = BattleStates.PLAYERCHOICE;
                 break;
             case (BattleStates.IDLE):
