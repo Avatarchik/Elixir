@@ -15,7 +15,7 @@ public class ChooseEnemy : MonoBehaviour {
         GameObject cardObject = GetComponent<ChoosingManager>().SelectedCard;
         int targetType = cardObject.GetComponent<InfoCard>().Card.Card_Target; // Distinguish number of attacks
 
-        if (targetType == 2) countAttack = 1;
+        if (targetType == 2) countAttack = 2;
         if (targetType == 4) countAttack = 4;
         
         HighlightEnemy(targetType);
