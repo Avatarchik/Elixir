@@ -3,6 +3,7 @@ using System.Collections;
 
 public class ChooseEnemy : MonoBehaviour {
     public GameObject selectable;
+    
     GameObject[] selectedEnemy = new GameObject[4];
     int countArray = 0;
     int countAttack = 0;
@@ -16,9 +17,8 @@ public class ChooseEnemy : MonoBehaviour {
 
         if (targetType == 2) countAttack = 1;
         if (targetType == 4) countAttack = 4;
-
-        HighlightEnemy();
-
+        
+        HighlightEnemy(targetType);
         if (targetType == 2)//When target is Single
         {
             while(countAttack > 0)
@@ -33,7 +33,6 @@ public class ChooseEnemy : MonoBehaviour {
             }
             AttackEnemy(cardObject);
         }
-
         if(targetType == 4)//When target is Wide
         {
             yield return StartCoroutine(WaitForEnemySelect(cardObject));
@@ -53,7 +52,7 @@ public class ChooseEnemy : MonoBehaviour {
         yield return null;
     }
 
-    void HighlightEnemy()
+    void HighlightEnemy(int targetType)
     {
         Debug.Log("Hightlight");
         GameObject[] Monsters = GameObject.FindGameObjectsWithTag("Monster");
@@ -61,12 +60,21 @@ public class ChooseEnemy : MonoBehaviour {
         {
             if (Monster.GetComponent<Monster>().hp > 0)
             {
-                GameObject Selectable = (GameObject)Instantiate(selectable);
-                Selectable.transform.parent = Monster.transform;
-                Selectable.transform.position = Monster.transform.position;
+                //GameObject Selectable = (GameObject)Instantiate(selectable);
+                //Selectable.transform.parent = Monster.transform;
+                //Selectable.transform.position = Monster.transform.position;
+                if(targetType == 2)
+                {
+                    Monster.transform.Find("selectable").gameObject.SetActive(true);
+                }else if(targetType == 4)
+                {
+                    Monster.transform.Find("selected").gameObject.SetActive(true);
+                }
+                
             }
         }
     }
+
     IEnumerator WaitForEnemySelect(GameObject cardObject)
     {
         bool bRepeat = true;
@@ -86,9 +94,10 @@ public class ChooseEnemy : MonoBehaviour {
                     //Do it later
                     selectedEnemy[countArray] = hit.collider.gameObject;//Add the selected monster in the selectedEnemy array
                     countArray++;
-                    GameObject selectableToDestroy = hit.collider.gameObject.transform.Find("selectable(Clone)").gameObject; //Find the selectable of selected gameobject
-                    Destroy(selectableToDestroy); //Destroy that selectable
-
+                    //GameObject selectableToDestroy = hit.collider.gameObject.transform.Find("selectable(Clone)").gameObject; //Find the selectable of selected gameobject
+                    //Destroy(selectableToDestroy); //Destroy that selectable
+                    hit.collider.gameObject.transform.Find("selectable").gameObject.SetActive(false);
+                    hit.collider.gameObject.transform.Find("selected").gameObject.SetActive(true);
                     countAttack--;
                     bRepeat = false;
                 }
@@ -97,11 +106,18 @@ public class ChooseEnemy : MonoBehaviour {
             if (GetComponent<ChoosingManager>().SelectedCard != cardObject) //Other card is selected / PROBLEM!!
             {
                 Debug.Log("Card changed");
-                GameObject[] selectables = GameObject.FindGameObjectsWithTag("selectable");
-                foreach (GameObject selectable in selectables)
+                //GameObject[] selectables = GameObject.FindGameObjectsWithTag("selectable");
+                //foreach (GameObject selectable in selectables)
+                //{
+                //    Destroy(selectable);
+                //}
+                GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
+                foreach(GameObject monster in monsters)
                 {
-                    Destroy(selectable);
+                    monster.transform.Find("selectable").gameObject.SetActive(false);
+                    monster.transform.Find("selected").gameObject.SetActive(false);
                 }
+
                 //Reset variables of coroutine
                 countArray = 0;
                 cardChanged = true;
@@ -117,10 +133,16 @@ public class ChooseEnemy : MonoBehaviour {
     {
         Debug.Log("Attack Enemy");
 
-        GameObject[] selectables = GameObject.FindGameObjectsWithTag("selectable");
-        foreach (GameObject selectable in selectables)
+        //GameObject[] selectables = GameObject.FindGameObjectsWithTag("selectable");
+        //foreach (GameObject selectable in selectables)
+        //{
+        //    Destroy(selectable);
+        //}
+        GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
+        foreach (GameObject monster in monsters)
         {
-            Destroy(selectable);
+            monster.transform.Find("selectable").gameObject.SetActive(false);
+            monster.transform.Find("selected").gameObject.SetActive(false);
         }
 
         for (int i = 0; i < countArray; i++) //Repeat procedure for every selected enemies listed in selectedEnemy array
