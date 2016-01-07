@@ -8,50 +8,50 @@ public class ChooseEnemy : MonoBehaviour {
     int countAttack = 0;
     bool cardChanged = false;
 
-    public IEnumerator SelectEnemy()
-    {
-        CardReselect:
-        GameObject cardObject = GetComponent<ChoosingManager>().SelectedCard;
-        int targetType = cardObject.GetComponent<InfoCard>().Card.Card_Target; // Distinguish number of attacks
+    //public IEnumerator SelectEnemy()
+    //{
+    //    CardReselect:
+    //    GameObject cardObject = GetComponent<ChoosingManager>().SelectedCard;
+    //    string targetType = cardObject.GetComponent<InfoCard>().Card.Card_Target; // Distinguish number of attacks
 
-        if (targetType == 2) countAttack = 2;
-        if (targetType == 4) countAttack = 4;
+    //    if (targetType == 2) countAttack = 2;
+    //    if (targetType == 4) countAttack = 4;
 
-        HighlightEnemy();
+    //    HighlightEnemy();
 
-        if (targetType == 2)//When target is Single
-        {
-            while(countAttack > 0)
-            {
-                yield return StartCoroutine(WaitForEnemySelect(cardObject));
-                if(cardChanged == true) //Check if card is changed. If changed, restart the coroutine
-                {
-                    cardChanged = false;
-                    Debug.Log("Goto Activate");
-                    goto CardReselect;
-                }
-            }
-            AttackEnemy(cardObject);
-        }
+    //    if (targetType == 2)//When target is Single
+    //    {
+    //        while(countAttack > 0)
+    //        {
+    //            yield return StartCoroutine(WaitForEnemySelect(cardObject));
+    //            if(cardChanged == true) //Check if card is changed. If changed, restart the coroutine
+    //            {
+    //                cardChanged = false;
+    //                Debug.Log("Goto Activate");
+    //                goto CardReselect;
+    //            }
+    //        }
+    //        AttackEnemy(cardObject);
+    //    }
 
-        if(targetType == 4)//When target is Wide
-        {
-            yield return StartCoroutine(WaitForEnemySelect(cardObject));
-            if (cardChanged == true) //Check if card is changed. If changed, restart the coroutine
-            {
-                cardChanged = false;
-                Debug.Log("Goto Activate");
-                goto CardReselect;
-            }
-            selectedEnemy = GameObject.FindGameObjectsWithTag("Monster"); //Add all monsters in the selectedEnemy array
-            countArray = 4;
-            AttackEnemy(cardObject);
-        }
+    //    if(targetType == 4)//When target is Wide
+    //    {
+    //        yield return StartCoroutine(WaitForEnemySelect(cardObject));
+    //        if (cardChanged == true) //Check if card is changed. If changed, restart the coroutine
+    //        {
+    //            cardChanged = false;
+    //            Debug.Log("Goto Activate");
+    //            goto CardReselect;
+    //        }
+    //        selectedEnemy = GameObject.FindGameObjectsWithTag("Monster"); //Add all monsters in the selectedEnemy array
+    //        countArray = 4;
+    //        AttackEnemy(cardObject);
+    //    }
 
-        countArray = 0;// Reset the counter
-        GetComponent<ChoosingManager>().SelectedCard = null;// Reset ChoosingManager
-        yield return null;
-    }
+    //    countArray = 0;// Reset the counter
+    //    GetComponent<ChoosingManager>().SelectedCard = null;// Reset ChoosingManager
+    //    yield return null;
+    //}
 
     void HighlightEnemy()
     {

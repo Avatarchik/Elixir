@@ -13,14 +13,19 @@ public class ChooseTarget : MonoBehaviour {
     {
         CardReselect:
         currentSelectedCard = GetComponent<ChoosingManager>().SelectedCard;
-        int targetType = currentSelectedCard.GetComponent<InfoCard>().Card.Card_Target; // Distinguish number of attacks
+        string targetType = currentSelectedCard.GetComponent<InfoCard>().Card.Card_Type; // Distinguish number of attacks
+        string targetRange = currentSelectedCard.GetComponent<InfoCard>().Card.Card_Range;
 
-        if (targetType == 2 || targetType == 1) countAttack = 1;
-        if (targetType == 4) countAttack = 4;
+        //if (targetType == 2 || targetType == 1) countAttack = 1;
+        //if (targetType == 4) countAttack = 4;
+        if (targetType == "Ally") countAttack = 1;
+        if(targetType == "Enemy" && targetRange == "Single") countAttack = 1;
+        if (targetType == "Enemy" && targetRange == "Wide") countAttack = 4;
 
-        Highlight(targetType);//Highlight units according to targettype
 
-        if(targetType == 1)
+        Highlight(targetType, targetRange);//Highlight units according to targettype
+
+        if(targetType == "Ally")
         {
             yield return StartCoroutine(WaitForTargetSelect(targetType));
             if (cardChanged == true) //Check if card is changed. If changed, restart the coroutine
@@ -31,7 +36,7 @@ public class ChooseTarget : MonoBehaviour {
             }
             HealAlly();
         }
-        if (targetType == 2)//When target is Single
+        if (targetType == "Enemy" && targetRange == "Single")//When target is Single
         {
             while (countAttack > 0)
             {
@@ -45,7 +50,7 @@ public class ChooseTarget : MonoBehaviour {
             }
             AttackEnemy();
         }
-        if (targetType == 4)//When target is Wide
+        if (targetType == "Enemy" && targetRange == "Wide")//When target is Wide
         {
             yield return StartCoroutine(WaitForTargetSelect(targetType));
             if (cardChanged == true) //Check if card is changed. If changed, restart the coroutine
@@ -64,18 +69,18 @@ public class ChooseTarget : MonoBehaviour {
         yield return null;
     }
 
-    void Highlight(int targetType)
+    void Highlight(string targetType, string targetRange)
     {
         Debug.Log("Hightlight");
         GameObject[] Monsters = GameObject.FindGameObjectsWithTag("Monster");
         GameObject Ally = GameObject.Find("Player(Clone)");
 
-        if (targetType == 1)//Skill is ally heal
+        if (targetType == "Ally")//Skill is ally heal
         {
             Debug.Log(Ally);
             Ally.transform.Find("selectable").gameObject.SetActive(true);
         }
-        else if (targetType == 2)// Skill is Enemy Single attack
+        else if (targetType == "Enemy" && targetRange == "Single")// Skill is Enemy Single attack
         {
             foreach(GameObject Monster in Monsters)
             {
@@ -83,7 +88,7 @@ public class ChooseTarget : MonoBehaviour {
                     Monster.transform.Find("selectable").gameObject.SetActive(true);
             }
         }
-        else if (targetType == 4)// Skill is Enemy Wide attack
+        else if (targetType == "Enemy" && targetRange == "Wide")// Skill is Enemy Wide attack
         {
             foreach (GameObject Monster in Monsters)
             {
@@ -93,7 +98,7 @@ public class ChooseTarget : MonoBehaviour {
         }
     }
 
-    IEnumerator WaitForTargetSelect(int targetType)
+    IEnumerator WaitForTargetSelect(string targetType)
     {
         GameObject currentCard = currentSelectedCard;
         bool bRepeat = true;
@@ -106,7 +111,7 @@ public class ChooseTarget : MonoBehaviour {
 
                 RaycastHit2D hit = Physics2D.GetRayIntersection(ray, Mathf.Infinity);
 
-                if (hit.collider != null && targetType == 1 && hit.collider.gameObject.tag == "Ally") //When the skill targets Ally, and Ally is selected
+                if (hit.collider != null && targetType == "Ally" && hit.collider.gameObject.tag == "Ally") //When the skill targets Ally, and Ally is selected
                 {
                     selectedAlly = hit.collider.gameObject;
                     hit.collider.gameObject.transform.Find("selectable").gameObject.SetActive(false);
@@ -114,7 +119,7 @@ public class ChooseTarget : MonoBehaviour {
                     countAttack--;
                     bRepeat = false;
                 }
-                if (hit.collider != null && (targetType == 2 || targetType == 4) && hit.collider.gameObject.tag == "Monster") //When the skill targets Enemy, and Enemy is selected
+                if (hit.collider != null && (targetType == "Enemy") && hit.collider.gameObject.tag == "Monster") //When the skill targets Enemy, and Enemy is selected
                 {
 
                     //Need to verify if the selected monster is already in the array

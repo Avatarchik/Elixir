@@ -33,31 +33,10 @@ public class CardChoice : MonoBehaviour,IPointerDownHandler{
 	IEnumerator cardActivated(){
 		transform.parent.GetComponent<ChoosingManager> ().SelectedCard = this.gameObject;
         GetComponent<Image> ().sprite = sprSelected;
-<<<<<<< HEAD
 
         yield return StartCoroutine(GameObject.Find("Canvas").transform.FindChild("Hands").GetComponent<ChooseTarget>().SelectTarget());
 
         GetComponent<Image> ().sprite = sprUnselected;
-=======
-		switch (GetComponent<ChooseEnemy> ().tar) {
-		case 1:
-			yield return StartCoroutine (GameObject.Find ("Canvas").transform.FindChild ("Hands").GetComponent<ChooseAlly> ().SelectAlly(this.gameObject));
-			break;
-		case 2:
-			yield return StartCoroutine (GameObject.Find ("Canvas").transform.FindChild ("Hands").GetComponent<ChooseEnemy> ().SelectEnemy ());
-			break;
-		case 3:
-			break;
-		case 4:
-			yield return StartCoroutine (GameObject.Find ("Canvas").transform.FindChild ("Hands").GetComponent<ChooseEnemy> ().SelectEnemy ());
-			break;
-		case 5:
-			break;
-		default:
-			break;
-		}
-		GetComponent<Image> ().sprite = sprUnselected;
->>>>>>> origin/master
         //Increment counter
         //Check if all turns are exhausted
         //If exhausted, change the state of TurnBasedCombatStateMachine
