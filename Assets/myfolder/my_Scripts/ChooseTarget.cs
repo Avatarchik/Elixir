@@ -8,11 +8,14 @@ public class ChooseTarget : MonoBehaviour {
     GameObject currentSelectedCard;
     int countArray = 0;
     int countAttack = 0;
+    int enemyAlive;
     bool cardChanged = false;
 
     public IEnumerator SelectTarget()
     {
         CardReselect:
+
+        enemyAlive = GameObject.FindGameObjectsWithTag("Monster").Length;
         currentSelectedCard = GetComponent<ChoosingManager>().SelectedCard;
         string targetType = currentSelectedCard.GetComponent<InfoCard>().Card.Card_Target; // Distinguish number of attacks
         string targetRange = currentSelectedCard.GetComponent<InfoCard>().Card.Card_Range;
@@ -20,7 +23,7 @@ public class ChooseTarget : MonoBehaviour {
         Debug.Log("targetType: " + targetType + " targetRange: " + targetRange);
         if (targetType == "Ally") countAttack = 1;
         if(targetType == "Enemy" && targetRange == "Single") countAttack = 1;
-        if (targetType == "Enemy" && targetRange == "Wide") countAttack = 4;
+        if (targetType == "Enemy" && targetRange == "Wide") countAttack = enemyAlive;
 
 
         Highlight(targetType, targetRange);//Highlight units according to targettype
@@ -60,7 +63,7 @@ public class ChooseTarget : MonoBehaviour {
                 goto CardReselect;
             }
             selectedEnemy = GameObject.FindGameObjectsWithTag("Monster"); //Add all monsters in the selectedEnemy array
-            countArray = 4;
+            countArray = enemyAlive;
             AttackEnemy();
         }
 
@@ -184,6 +187,13 @@ public class ChooseTarget : MonoBehaviour {
 			{
 				selectedEnemy[i].GetComponent<Monster>().AddDebuff (new Debuff(EnumsAndClasses.DebuffName.Stun,currentSelectedCard.GetComponent<InfoCard>().Card.Card_DebuffTurn));
 			}
+
+            //Check if Enemy's hp = 0
+            //If so, KILL IT!
+            if (selectedEnemy[i].GetComponent<Monster>().hp == 0)
+            {
+                Destroy(selectedEnemy[i]);
+            }
         }
     }
     void HealAlly()

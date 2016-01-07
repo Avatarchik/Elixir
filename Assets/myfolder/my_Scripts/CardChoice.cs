@@ -49,7 +49,7 @@ public class CardChoice : MonoBehaviour,IPointerDownHandler{
             Debug.Log(GameObject.Find("GameManager").GetComponent<TurnBasedCombatStateMachine>().CurrentState);
             GameObject.Find("GameManager").GetComponent<TurnBasedCombatStateMachine>().resetTurn();
         }
-        
+        Destroy(this.gameObject);// After using the card, destroy it from hand
 
     }
 
