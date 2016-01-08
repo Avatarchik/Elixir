@@ -16,6 +16,7 @@ public class HPBar : MonoBehaviour {
         minXValue = healthTransform.localPosition.x - healthTransform.rect.width;
         currentHealth = maxHealth;
         //healthTransform.localPosition = new Vector2(minXValue, healthTransform.localPosition.y);
+        
     }
 	
 	// Update is called once per frame

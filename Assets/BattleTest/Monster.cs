@@ -35,7 +35,7 @@ public class Monster : MonoBehaviour {
         this.boilingPoint = 100;
         this.meltingPoint = 0;
         this.stunned = false;
-        this.chemicalState = ChemicalStates.SOLID;
+        this.chemicalState = ChemicalStates.LIQUID;
         this.chemicalStateValue = 1;
 
         InitializeBuffAndDebuff();

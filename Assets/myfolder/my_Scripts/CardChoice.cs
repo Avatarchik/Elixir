@@ -16,6 +16,7 @@ public class CardChoice : MonoBehaviour,IPointerDownHandler{
         Debug.Log(transform.parent.GetComponent<ChoosingManager>().SelectedCard);
         //if there's already instance in the ChoosingManager, just change the SelectedCard instead of activating a new coroutine
         //Make it a singleton (why use ChooseEnemy and ChooseAlly in a separate manner?)
+        
         if(transform.parent.GetComponent<ChoosingManager>().SelectedCard == null)
         {
             Debug.Log("Coroutine Activated");
@@ -25,7 +26,6 @@ public class CardChoice : MonoBehaviour,IPointerDownHandler{
             Debug.Log("Coroutine not Activated");
             transform.parent.GetComponent<ChoosingManager>().SelectedCard = this.gameObject;
         }
-
 
         //if (transform.parent.GetComponent<ChoosingManager>().SelectedCard != this.gameObject)
 		//StartCoroutine (cardActivated());

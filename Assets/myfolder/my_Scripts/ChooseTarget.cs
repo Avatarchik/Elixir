@@ -66,7 +66,7 @@ public class ChooseTarget : MonoBehaviour {
             countArray = enemyAlive;
             AttackEnemy();
         }
-
+        
         countArray = 0;// Reset the counter
         GetComponent<ChoosingManager>().SelectedCard = null;// Reset ChoosingManager
         yield return null;
@@ -126,7 +126,6 @@ public class ChooseTarget : MonoBehaviour {
                 {
 
                     //Need to verify if the selected monster is already in the array
-                    //Nedd to verify if the selected monster is already dead
                     //Do it later
                     selectedEnemy[countArray] = hit.collider.gameObject;//Add the selected monster in the selectedEnemy array
                     countArray++;
