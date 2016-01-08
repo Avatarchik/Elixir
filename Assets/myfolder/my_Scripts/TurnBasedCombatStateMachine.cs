@@ -72,14 +72,14 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
 
                 }
 
-			    //StartCoroutine(GameObject.Find ("MonsterManager").GetComponent<EnemyAI>().EnemyActChoice(GameObject.Find("MonsterManager").GetComponent<MonsterManager>().Monsters));
+			    StartCoroutine(GameObject.Find ("MonsterManager").GetComponent<EnemyAI>().EnemyActChoice(GameObject.Find("MonsterManager").GetComponent<MonsterManager>().Monsters));
                 //Functions that delete all cards in hand (temporary)
                 GameObject chCount = GameObject.Find("Canvas").transform.FindChild("Hands").gameObject;
                 for(int i = 0; i < chCount.transform.childCount; i++)
                 {
                     Destroy(chCount.transform.GetChild(i).gameObject);
                 }
-                currentState = BattleStates.PLAYERCHOICE;
+                //currentState = BattleStates.PLAYERCHOICE;
                 break;
             case (BattleStates.IDLE):
                 break;

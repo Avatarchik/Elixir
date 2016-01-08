@@ -21,11 +21,11 @@ public class EnemyAI : MonoBehaviour {
 		}
 	}
 	void AttackAlly(Monster monster){
-		Debug.Log ("Monster Attack");
-		Debug.Log (GameObject.Find ("Player"));
-		if(GameObject.Find ("Player")!=null)
+		Debug.Log (GameObject.Find ("Player(Clone)"));
+		if(GameObject.Find ("Player(Clone)")!=null)
 		{
-		GameObject.Find ("Player").GetComponent<BaseCharacter> ().SetDamage (monster.GetComponent<Monster> ().attackDamage);
+			Debug.Log ("Monster Attack");
+		GameObject.Find ("Player(Clone)").GetComponent<BaseCharacter> ().SetDamage (monster.GetComponent<Monster> ().attackDamage);
 		}
 	}
 }
