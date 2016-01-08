@@ -18,7 +18,6 @@ public class HandSet : MonoBehaviour {
 		CardDraw ();
 	}
 	void CardSelect(){
-		Debug.Log ("CardSelect");
 		int count;
 		number = new List<int> ();
 		for(int i = 0; i<=3; i++)
@@ -40,7 +39,7 @@ public class HandSet : MonoBehaviour {
 	}
 	void AddCards(int cardIndex)
 	{
-		Debug.Log ("AddCard");
+		//Debug.Log ("AddCard");
 		GameObject cardCopy = (GameObject)Instantiate(cardPrefab);
 		
 		cardCopy.transform.SetParent(this.transform);

@@ -27,6 +27,11 @@ namespace EnumsAndClasses
         Gas
     }
 
+    public enum AttackMode
+    {
+        Card,
+        Chemist
+    }
     public enum ChemicalStates
     {
         LIQUID,

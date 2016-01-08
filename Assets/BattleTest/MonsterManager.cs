@@ -53,12 +53,12 @@ public class MonsterManager : MonoBehaviour {
             if (i%2 == 0)
             {
                 monster.GetComponent<Monster>().SetStat("MonsterImage/newWhite");
-                Debug.Log("Respawn white enemy");
+                //Debug.Log("Respawn white enemy");
             }
             else
             {
                 monster.GetComponent<Monster>().SetStat();
-                Debug.Log("Respawn red enemy");
+                //Debug.Log("Respawn red enemy");
             }
             
             monsters.Add(monster.GetComponent<Monster>());

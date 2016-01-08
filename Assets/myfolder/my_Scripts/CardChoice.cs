@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using EnumsAndClasses;
 
 public class CardChoice : MonoBehaviour,IPointerDownHandler{
 	public Sprite sprSelected;
@@ -11,45 +12,42 @@ public class CardChoice : MonoBehaviour,IPointerDownHandler{
 		GetComponent<Image> ().sprite = sprUnselected;
 	}
 	public void OnPointerDown(PointerEventData eventData){
-
-		Debug.Log (GetComponent<InfoCard>().Card.Card_ExtName);
-        Debug.Log(transform.parent.GetComponent<ChoosingManager>().SelectedCard);
-        //if there's already instance in the ChoosingManager, just change the SelectedCard instead of activating a new coroutine
-        //Make it a singleton (why use ChooseEnemy and ChooseAlly in a separate manner?)
-        
-        if(transform.parent.GetComponent<ChoosingManager>().SelectedCard == null)
-        {
-            Debug.Log("Coroutine Activated");
-            StartCoroutine(cardActivated());
-        }else if(transform.parent.GetComponent<ChoosingManager>().SelectedCard != this.gameObject)
-        {
-            Debug.Log("Coroutine not Activated");
-            transform.parent.GetComponent<ChoosingManager>().SelectedCard = this.gameObject;
-        }
-
-        //if (transform.parent.GetComponent<ChoosingManager>().SelectedCard != this.gameObject)
-		//StartCoroutine (cardActivated());
-		}
+        Debug.Log("OnPointerDown");
+        GameObject.Find("GameManager").GetComponent<ChoosingManager>().AttackMode = AttackMode.Card;
+        GameObject.Find("GameManager").GetComponent<ChoosingManager>().SelectedCard = this.gameObject;
+        Debug.Log("Card Activate: " + this.gameObject.GetComponent<InfoCard>().Card.Card_Name);
+        StartCoroutine(cardActivated());
+        Debug.Log("OnPointerDown Exit");
+    }
 	IEnumerator cardActivated(){
-		transform.parent.GetComponent<ChoosingManager> ().SelectedCard = this.gameObject;
         GetComponent<Image> ().sprite = sprSelected;
 
         yield return StartCoroutine(GameObject.Find("Canvas").transform.FindChild("Hands").GetComponent<ChooseTarget>().SelectTarget());
-
         GetComponent<Image> ().sprite = sprUnselected;
+
+        Debug.Log("Before Coroutine Stopped");
+        //If Attack method is changed during the procedure, dismiss all actions
+        if (GameObject.Find("GameManager").GetComponent<ChoosingManager>().AttackMode != AttackMode.Card ||
+            GameObject.Find("GameManager").GetComponent<ChoosingManager>().SelectedCard != this.gameObject)
+        {
+            Debug.Log("Coroutine Stopped");
+        }
+        else
+        {
         //Increment counter
         //Check if all turns are exhausted
         //If exhausted, change the state of TurnBasedCombatStateMachine
         GameObject.Find("GameManager").GetComponent<TurnBasedCombatStateMachine>().incrementTurn();
-        Debug.Log(GameObject.Find("GameManager").GetComponent<TurnBasedCombatStateMachine>().isTurnExhausted());
+   
         if (GameObject.Find("GameManager").GetComponent<TurnBasedCombatStateMachine>().isTurnExhausted())
         {
-            Debug.Log("Turn Exhausted");
             GameObject.Find("GameManager").GetComponent<TurnBasedCombatStateMachine>().currentState = TurnBasedCombatStateMachine.BattleStates.ENEMYCHOICE;
-            Debug.Log(GameObject.Find("GameManager").GetComponent<TurnBasedCombatStateMachine>().CurrentState);
             GameObject.Find("GameManager").GetComponent<TurnBasedCombatStateMachine>().resetTurn();
         }
         Destroy(this.gameObject);// After using the card, destroy it from hand
+        }
+
+        
 
     }
 

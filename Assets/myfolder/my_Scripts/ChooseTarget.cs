@@ -13,14 +13,12 @@ public class ChooseTarget : MonoBehaviour {
 
     public IEnumerator SelectTarget()
     {
-        CardReselect:
-
+        Debug.Log("SelectTarget");
         enemyAlive = GameObject.FindGameObjectsWithTag("Monster").Length;
-        currentSelectedCard = GetComponent<ChoosingManager>().SelectedCard;
+        currentSelectedCard = GameObject.Find("GameManager").GetComponent<ChoosingManager>().SelectedCard;
         string targetType = currentSelectedCard.GetComponent<InfoCard>().Card.Card_Target; // Distinguish number of attacks
         string targetRange = currentSelectedCard.GetComponent<InfoCard>().Card.Card_Range;
 
-        Debug.Log("targetType: " + targetType + " targetRange: " + targetRange);
         if (targetType == "Ally") countAttack = 1;
         if(targetType == "Enemy" && targetRange == "Single") countAttack = 1;
         if (targetType == "Enemy" && targetRange == "Wide") countAttack = enemyAlive;
@@ -31,11 +29,10 @@ public class ChooseTarget : MonoBehaviour {
         if(targetType == "Ally")
         {
             yield return StartCoroutine(WaitForTargetSelect(targetType));
-            if (cardChanged == true) //Check if card is changed. If changed, restart the coroutine
+            if (cardChanged)
             {
                 cardChanged = false;
-                Debug.Log("Goto Activate");
-                goto CardReselect;
+                yield break;
             }
             HealAlly();
         }
@@ -44,11 +41,10 @@ public class ChooseTarget : MonoBehaviour {
             while (countAttack > 0)
             {
                 yield return StartCoroutine(WaitForTargetSelect(targetType));
-                if (cardChanged == true) //Check if card is changed. If changed, restart the coroutine
+                if (cardChanged)
                 {
                     cardChanged = false;
-                    Debug.Log("Goto Activate");
-                    goto CardReselect;
+                    yield break;
                 }
             }
             AttackEnemy();
@@ -56,11 +52,10 @@ public class ChooseTarget : MonoBehaviour {
         if (targetType == "Enemy" && targetRange == "Wide")//When target is Wide
         {
             yield return StartCoroutine(WaitForTargetSelect(targetType));
-            if (cardChanged == true) //Check if card is changed. If changed, restart the coroutine
+            if (cardChanged)
             {
                 cardChanged = false;
-                Debug.Log("Goto Activate");
-                goto CardReselect;
+                yield break;
             }
             selectedEnemy = GameObject.FindGameObjectsWithTag("Monster"); //Add all monsters in the selectedEnemy array
             countArray = enemyAlive;
@@ -68,19 +63,18 @@ public class ChooseTarget : MonoBehaviour {
         }
         
         countArray = 0;// Reset the counter
-        GetComponent<ChoosingManager>().SelectedCard = null;// Reset ChoosingManager
+        //GameObject.Find("GameManager").GetComponent<ChoosingManager>().SelectedCard = null;// Reset ChoosingManager
         yield return null;
     }
 
     void Highlight(string targetType, string targetRange)
     {
-        Debug.Log("Hightlight");
+        Debug.Log("Highlight");
         GameObject[] Monsters = GameObject.FindGameObjectsWithTag("Monster");
         GameObject Ally = GameObject.Find("Player(Clone)");
 
         if (targetType == "Ally")//Skill is ally heal
         {
-            Debug.Log(Ally);
             Ally.transform.Find("selectable").gameObject.SetActive(true);
         }
         else if (targetType == "Enemy" && targetRange == "Single")// Skill is Enemy Single attack
@@ -103,6 +97,7 @@ public class ChooseTarget : MonoBehaviour {
 
     IEnumerator WaitForTargetSelect(string targetType)
     {
+        Debug.Log("WaitForTargetSelect");
         GameObject currentCard = currentSelectedCard;
         bool bRepeat = true;
         while (bRepeat)
@@ -137,27 +132,13 @@ public class ChooseTarget : MonoBehaviour {
                 }
             }
 
-            if (GetComponent<ChoosingManager>().SelectedCard != currentCard) //Other card is selected / PROBLEM!!
+            if (GameObject.Find("GameManager").GetComponent<ChoosingManager>().AttackMode != AttackMode.Card ||
+                GameObject.Find("GameManager").GetComponent<ChoosingManager>().SelectedCard != currentCard) //Other card is selected / PROBLEM!!
             {
-                Debug.Log("Card changed");
-
-                GameObject ally = GameObject.Find("Player(Clone)");
-                GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
-                ally.transform.Find("selectable").gameObject.SetActive(false);
-                ally.transform.Find("selectable").gameObject.SetActive(false);
-                foreach (GameObject monster in monsters)
-                {
-                    monster.transform.Find("selectable").gameObject.SetActive(false);
-                    monster.transform.Find("selected").gameObject.SetActive(false);
-                }
-
-                //Reset variables of coroutine
-                countArray = 0;
+                Debug.Log("Coroutine stop");
                 cardChanged = true;
-                bRepeat = false;
-                break;
+                yield break;
             }
-
             yield return null;
         }
     }
@@ -165,7 +146,6 @@ public class ChooseTarget : MonoBehaviour {
     void AttackEnemy()
     {
         Debug.Log("Attack Enemy");
-
         GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");//Unactivate all selectable/selected logos
         foreach (GameObject monster in monsters)
         {
@@ -183,7 +163,6 @@ public class ChooseTarget : MonoBehaviour {
             //DotDamage
             if(currentSelectedCard.GetComponent<InfoCard>().Card.Card_DebuffName == "DoteDamage")
             {
-                Debug.Log("Dot Damage");
                 int debuffTurn = currentSelectedCard.GetComponent<InfoCard>().Card.Card_DebuffTurn;
                 int debuffDamage = currentSelectedCard.GetComponent<InfoCard>().Card.Card_DotDamage;
                 Debuff debuff = new Debuff(DebuffName.DoteDamage, debuffTurn, debuffDamage);

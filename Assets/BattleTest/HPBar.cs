@@ -10,7 +10,6 @@ public class HPBar : MonoBehaviour {
     //private float currentXValue;
 	// Use this for initialization
 	void Start () {
-        Debug.Log(this.gameObject);
         maxHealth = this.GetComponent<Monster>().maxHp;
         maxXValue = healthTransform.localPosition.x;
         minXValue = healthTransform.localPosition.x - healthTransform.rect.width;
