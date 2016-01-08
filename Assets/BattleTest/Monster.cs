@@ -12,9 +12,27 @@ public class Monster : MonoBehaviour {
     public MonsterType type;
     public int boilingPoint;
     public int meltingPoint;
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    public bool stunned;
+    private ChemicalStates chemicalState;
+    private int chemicalStateValue;
+>>>>>>> origin/master
+=======
+    public bool stunned;
+    private ChemicalStates chemicalState;
+    private int chemicalStateValue;
+>>>>>>> origin/master
+=======
+    public bool stunned;
+    private ChemicalStates chemicalState;
+    private int chemicalStateValue;
+>>>>>>> origin/master
 
     // List<Card> cards; // Current not used.
-    
+
     public Phase phase;
     
     List<Buff> buffs;
@@ -29,7 +47,10 @@ public class Monster : MonoBehaviour {
         this.type = MonsterType.None;
         this.boilingPoint = 100;
         this.meltingPoint = 0;
-        
+        this.stunned = false;
+        this.chemicalState = ChemicalStates.SOLID;
+        this.chemicalStateValue = 1;
+
         InitializeBuffAndDebuff();
     }
     
@@ -68,6 +89,17 @@ public class Monster : MonoBehaviour {
         Debug.Log("Get " + damage + " damage by player");
     }
 
+    public ChemicalStates ChemicalState
+    {
+        get { return chemicalState; }
+        set { chemicalState = value; }
+    }
+    public int ChemicalStateValue
+    {
+        get { return chemicalStateValue; }
+        set { chemicalStateValue = value; }
+    }
+
     public void AddBuff(Buff buff)
     {
         buffs.Add(buff);
@@ -95,11 +127,43 @@ public class Monster : MonoBehaviour {
     {
         foreach (Debuff debuff in debuffs)
         {
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
             if(debuff.GetDebuffname().Equals(DebuffName.DoteDamage))
+=======
+            if(debuff.GetDebuffname().Equals(DebuffName.DoteDamage))//Activate Dot Damage
+>>>>>>> origin/master
+=======
+            if(debuff.GetDebuffname().Equals(DebuffName.DoteDamage))//Activate Dot Damage
+>>>>>>> origin/master
+=======
+            if(debuff.GetDebuffname().Equals(DebuffName.DoteDamage))//Activate Dot Damage
+>>>>>>> origin/master
             {
                 Debug.Log("This Debuff is Dot Damage");
                 SetDamage(debuff.DebuffDamage);
             }
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> origin/master
+=======
+>>>>>>> origin/master
+            if (debuff.GetDebuffname().Equals(DebuffName.Stun))
+            {
+                //Stun Enemy
+                stunned = true;
+            }
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> origin/master
+=======
+>>>>>>> origin/master
+=======
+>>>>>>> origin/master
         }
     }
     

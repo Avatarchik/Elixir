@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using EnumsAndClasses;
 
 public class BaseCharacter : MonoBehaviour {
 
@@ -8,6 +9,10 @@ public class BaseCharacter : MonoBehaviour {
 	//stats
 	public float MAX_HP=100.0f;
 	public float HP;
+    private ChemicalStates chemicalState;
+    private int chemicalStateValue;
+<<<<<<< HEAD
+<<<<<<< HEAD
 
     public enum ChemicalStates
     {
@@ -19,10 +24,44 @@ public class BaseCharacter : MonoBehaviour {
 
 	void Start(){
 		HP = 50;
+<<<<<<< HEAD
         chemicalState = ChemicalStates.SOLID;
 	}
+=======
+=======
 
-	void dead(){
+	void Start(){
+		HP = 50;
+>>>>>>> origin/master
+=======
+
+	void Start(){
+		HP = 50;
+>>>>>>> origin/master
+        //Temporary inputs
+        chemicalState = ChemicalStates.SOLID;
+        chemicalStateValue = 0;
+    }
+
+    public ChemicalStates ChemicalState
+    {
+        get { return chemicalState; }
+        set { chemicalState = value; }
+    }
+    public int ChemicalStateValue
+    {
+        get { return chemicalStateValue; }
+        set { chemicalStateValue = value; }
+    }
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> origin/master
+=======
+>>>>>>> origin/master
+=======
+>>>>>>> origin/master
+
+    void dead(){
 		if (HP <= 0) {
 			gameObject.SetActive (false);
 		}
