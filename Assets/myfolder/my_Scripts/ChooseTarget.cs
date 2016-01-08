@@ -137,6 +137,14 @@ public class ChooseTarget : MonoBehaviour {
             {
                 Debug.Log("Coroutine stop");
                 cardChanged = true;
+                GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");//Unactivate all selectable/selected logos
+                foreach (GameObject monster in monsters)
+                {
+                    monster.transform.Find("selectable").gameObject.SetActive(false);
+                    monster.transform.Find("selected").gameObject.SetActive(false);
+                }
+                selectedAlly.transform.Find("selectable").gameObject.SetActive(false);//Unactivate all selectable/selected logos
+                selectedAlly.transform.Find("selected").gameObject.SetActive(false);
                 yield break;
             }
             yield return null;
