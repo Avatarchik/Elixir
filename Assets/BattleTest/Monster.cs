@@ -12,24 +12,11 @@ public class Monster : MonoBehaviour {
     public MonsterType type;
     public int boilingPoint;
     public int meltingPoint;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
+
     public bool stunned;
     private ChemicalStates chemicalState;
     private int chemicalStateValue;
->>>>>>> origin/master
-=======
-    public bool stunned;
-    private ChemicalStates chemicalState;
-    private int chemicalStateValue;
->>>>>>> origin/master
-=======
-    public bool stunned;
-    private ChemicalStates chemicalState;
-    private int chemicalStateValue;
->>>>>>> origin/master
+
 
     // List<Card> cards; // Current not used.
 
@@ -127,43 +114,19 @@ public class Monster : MonoBehaviour {
     {
         foreach (Debuff debuff in debuffs)
         {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-            if(debuff.GetDebuffname().Equals(DebuffName.DoteDamage))
-=======
+
             if(debuff.GetDebuffname().Equals(DebuffName.DoteDamage))//Activate Dot Damage
->>>>>>> origin/master
-=======
-            if(debuff.GetDebuffname().Equals(DebuffName.DoteDamage))//Activate Dot Damage
->>>>>>> origin/master
-=======
-            if(debuff.GetDebuffname().Equals(DebuffName.DoteDamage))//Activate Dot Damage
->>>>>>> origin/master
             {
                 Debug.Log("This Debuff is Dot Damage");
                 SetDamage(debuff.DebuffDamage);
             }
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> origin/master
-=======
->>>>>>> origin/master
+
             if (debuff.GetDebuffname().Equals(DebuffName.Stun))
             {
                 //Stun Enemy
                 stunned = true;
             }
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> origin/master
-=======
->>>>>>> origin/master
-=======
->>>>>>> origin/master
+
         }
     }
     

@@ -11,8 +11,6 @@ public class BaseCharacter : MonoBehaviour {
 	public float HP;
     private ChemicalStates chemicalState;
     private int chemicalStateValue;
-<<<<<<< HEAD
-<<<<<<< HEAD
 
     public enum ChemicalStates
     {
@@ -20,24 +18,11 @@ public class BaseCharacter : MonoBehaviour {
         GAS,
         SOLID
     }
-    public ChemicalStates chemicalState;
+
+
 
 	void Start(){
 		HP = 50;
-<<<<<<< HEAD
-        chemicalState = ChemicalStates.SOLID;
-	}
-=======
-=======
-
-	void Start(){
-		HP = 50;
->>>>>>> origin/master
-=======
-
-	void Start(){
-		HP = 50;
->>>>>>> origin/master
         //Temporary inputs
         chemicalState = ChemicalStates.SOLID;
         chemicalStateValue = 0;
@@ -53,13 +38,6 @@ public class BaseCharacter : MonoBehaviour {
         get { return chemicalStateValue; }
         set { chemicalStateValue = value; }
     }
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> origin/master
-=======
->>>>>>> origin/master
-=======
->>>>>>> origin/master
 
     void dead(){
 		if (HP <= 0) {
