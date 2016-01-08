@@ -182,6 +182,15 @@ public class ChooseTarget : MonoBehaviour {
                 selectedEnemy[i].GetComponent<Monster>().SetDamage((int)currentSelectedCard.GetComponent<InfoCard>().Card.Card_AttackDamage);
             }
             //DotDamage
+            if(currentSelectedCard.GetComponent<InfoCard>().Card.Card_DebuffName == "DoteDamage")
+            {
+                Debug.Log("Dot Damage");
+                int debuffTurn = currentSelectedCard.GetComponent<InfoCard>().Card.Card_DebuffTurn;
+                int debuffDamage = currentSelectedCard.GetComponent<InfoCard>().Card.Card_DotDamage;
+                Debuff debuff = new Debuff(DebuffName.DoteDamage, debuffTurn, debuffDamage);
+                selectedEnemy[i].GetComponent<Monster>().SetDamage(debuffDamage);//Inflict damage immediately in this turn
+                selectedEnemy[i].GetComponent<Monster>().AddDebuff(debuff);//Add debuff to monster
+            }
             //Stun
 			if(currentSelectedCard.GetComponent<InfoCard>().Card.Card_DebuffName=="Stun")
 			{

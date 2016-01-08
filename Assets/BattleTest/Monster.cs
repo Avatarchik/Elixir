@@ -12,6 +12,7 @@ public class Monster : MonoBehaviour {
     public MonsterType type;
     public int boilingPoint;
     public int meltingPoint;
+
     // List<Card> cards; // Current not used.
     
     public Phase phase;
@@ -80,10 +81,31 @@ public class Monster : MonoBehaviour {
         Debug.Log("Add debuff to monster");
         PrintAllBuffAndDebuff();
     }
+
+    public void ReduceDebuffTurn()
+    {
+        foreach(Debuff debuff in debuffs)
+        {
+            debuff.RemainTurn--;
+            Debug.Log("Debuff turn remaining: " + debuff.RemainTurn);
+        }
+    }
+
+    public void ActivateDebuff()
+    {
+        foreach (Debuff debuff in debuffs)
+        {
+            if(debuff.GetDebuffname().Equals(DebuffName.DoteDamage))
+            {
+                Debug.Log("This Debuff is Dot Damage");
+                SetDamage(debuff.DebuffDamage);
+            }
+        }
+    }
     
     public void RemoveBuff()
     {
-        // FIXME : Not implemented.
+        //NotImplemented
     }
     
     public void RemoveAllBuff()
@@ -95,6 +117,19 @@ public class Monster : MonoBehaviour {
     public void RemoveDebuff()
     {
         // FIXME : Not implemented.
+        List<Debuff> debuffsToDestroy = new List<Debuff>();
+        foreach (Debuff debuff in debuffs)
+        {
+            if (debuff.RemainTurn == 0)
+            {
+                debuffsToDestroy.Add(debuff);
+            }
+        }
+        foreach (Debuff debuffToDestroy in debuffsToDestroy)
+        {
+            debuffs.Remove(debuffToDestroy);
+        }
+        debuffsToDestroy.Clear();
     }
     
     public void RemoveAllDebuff()
