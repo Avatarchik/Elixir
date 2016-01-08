@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class EnemyAI : MonoBehaviour {
 
+
 	float EnemyBehaviourBeforeDelay = 3.0f;
 	float EnemyBehaviourAfterDelay=5.0f;
 
@@ -21,11 +22,13 @@ public class EnemyAI : MonoBehaviour {
 		}
 	}
 	void AttackAlly(Monster monster){
+		Animator animator=monster.GetComponent<Animator>();
 		Debug.Log (GameObject.Find ("Player(Clone)"));
 		if(GameObject.Find ("Player(Clone)")!=null)
 		{
 			Debug.Log ("Monster Attack");
 		GameObject.Find ("Player(Clone)").GetComponent<BaseCharacter> ().SetDamage (monster.GetComponent<Monster> ().attackDamage);
+			animator.SetTrigger("Attack");
 		}
 	}
 }
