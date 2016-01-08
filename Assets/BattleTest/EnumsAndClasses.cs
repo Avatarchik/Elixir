@@ -27,6 +27,13 @@ namespace EnumsAndClasses
         Gas
     }
 
+    public enum ChemicalStates
+    {
+        LIQUID,
+        GAS,
+        SOLID
+    }
+
     public class Buff
     {
         BuffName name;
