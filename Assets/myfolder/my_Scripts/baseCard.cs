@@ -24,7 +24,7 @@ public class baseCard{
 	private string card_DebuffName;
 	private double card_DebuffRate;
 	private int card_DebuffTurn;
-	private double card_DotDamage;
+	private int card_DotDamage;
 	private string card_BuffName;
 	private double card_BuffRate;
 	private int card_BuffTurn;
@@ -130,7 +130,7 @@ public class baseCard{
 		get{return card_DebuffTurn;}
 		set{card_DebuffTurn = value;}
 	}
-	public double Card_DotDamage {
+	public int Card_DotDamage {
 		get{ return card_DotDamage;}
 		set{ card_DotDamage = value;}
 	}

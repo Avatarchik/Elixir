@@ -45,7 +45,7 @@ public class CardLoad:MonoBehaviour {
 			if(rowList[i].DebuffTurn!="N/A")
 			card.Card_DebuffTurn=System.Convert.ToInt32 (rowList[i].DebuffTurn);
 			if(rowList[i].DotDamage!="N/A")
-			card.Card_DotDamage=System.Convert.ToDouble (rowList[i].DotDamage);
+			card.Card_DotDamage=System.Convert.ToInt32(rowList[i].DotDamage);
 			card.Card_BuffName=rowList[i].BuffName;
 			if(rowList[i].BuffRate!="N/A")
 			card.Card_BuffRate=System.Convert.ToDouble (rowList[i].BuffRate);

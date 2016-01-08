@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using EnumsAndClasses;
 
 public class TurnBasedCombatStateMachine : MonoBehaviour {
 
@@ -58,6 +59,19 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
                 break;
 		    case (BattleStates.ENEMYCHOICE):
                 Debug.Log("Enemy Turn Reached");
+
+                //Inflict Debuff(dot damage) in the beginning of Enemy turn
+                GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
+                foreach(GameObject monster in monsters)
+                {
+                    //Check Dot Damage
+                    Debug.Log("ReduceDebuffTurn");
+                    monster.GetComponent<Monster>().ActivateDebuff();
+                    monster.GetComponent<Monster>().ReduceDebuffTurn();//ReduceTurn after inflicting Dot Damage
+                    monster.GetComponent<Monster>().RemoveDebuff();
+
+                }
+
 			    //StartCoroutine(GameObject.Find ("MonsterManager").GetComponent<EnemyAI>().EnemyActChoice(GameObject.Find("MonsterManager").GetComponent<MonsterManager>().Monsters));
                 //Functions that delete all cards in hand (temporary)
                 GameObject chCount = GameObject.Find("Canvas").transform.FindChild("Hands").gameObject;

@@ -15,10 +15,7 @@ public class PlayerHPBar : MonoBehaviour {
         maxHealth = this.GetComponent<BaseCharacter>().MAX_HP;
 
         maxXValue = healthTransform.localPosition.x;
-        Debug.Log("MaxXValue: " + maxXValue);
         minXValue = healthTransform.localPosition.x - healthTransform.rect.width;
-        Debug.Log("MinXValue: " + minXValue);
-        Debug.Log("BarWidth: " + healthTransform.rect.width);
         currentHealth = maxHealth;
         HandleHealth();
         //healthTransform.localPosition = new Vector2(minXValue, healthTransform.localPosition.y);
@@ -29,17 +26,13 @@ public class PlayerHPBar : MonoBehaviour {
     {
         if (this.GetComponent<BaseCharacter>().HP != currentHealth)
         {
-            Debug.Log("HealthBar Change!! (Player)");
             currentHealth = this.GetComponent<BaseCharacter>().HP;
             HandleHealth();
-
         }
     }
     private void HandleHealth()
     {
         float currentXValue = MapValues(currentHealth, 0, maxHealth, minXValue, maxXValue);
-        Debug.Log("Original XValue: " + healthTransform.localPosition.x + " Current XValue: " + currentXValue);
-
         healthTransform.localPosition = new Vector2(currentXValue, healthTransform.localPosition.y);
     }
     private float MapValues(float x, float inMin, float inMax, float outMin, float outMax)
