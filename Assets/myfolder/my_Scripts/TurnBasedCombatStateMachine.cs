@@ -69,7 +69,6 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
                     monster.GetComponent<Monster>().ActivateDebuff();
                     monster.GetComponent<Monster>().ReduceDebuffTurn();//ReduceTurn after inflicting Dot Damage
                     monster.GetComponent<Monster>().RemoveDebuff();
-
                 }
 
 			    //StartCoroutine(GameObject.Find ("MonsterManager").GetComponent<EnemyAI>().EnemyActChoice(GameObject.Find("MonsterManager").GetComponent<MonsterManager>().Monsters));
