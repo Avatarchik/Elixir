@@ -109,6 +109,7 @@ public class BaseCharacter : MonoBehaviour {
 	}
 	public void SetDamage(int damage){
 		HP -= damage;
+		GameObject.Find ("GameManager").GetComponent<DamagePopup>().CreateDamagePopup (this.transform,damage);
 		if (HP < 0) {
 			HP = 0;
 		}
