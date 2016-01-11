@@ -10,20 +10,16 @@ public class Monster : MonoBehaviour {
     public int hp;
     public int attackDamage;
     public MonsterType type;
-    public int boilingPoint;
-    public int meltingPoint;
-
     public bool stunned;
-    public ChemicalState chemicalState;
-    private int chemicalStateValue;
 
+    public ChemicalStates currentChemicalState;
+    public int currentChemicalStateValue;
+    public int solidStateValue;
+    public int liquidStateValue;
+    public int gasStateValue;
 
-    // List<Card> cards; // Current not used.
-
-    public Phase phase;
-    
-    List<Buff> buffs;
-    List<Debuff> debuffs;
+    List<Buff> buffs = new List<Buff>();
+    List<Debuff> debuffs = new List<Debuff>();
     
 	void Update(){
 
@@ -39,13 +35,12 @@ public class Monster : MonoBehaviour {
         this.hp = maxHp;
         this.attackDamage = 5;
         this.type = MonsterType.None;
-        this.boilingPoint = 100;
-        this.meltingPoint = 0;
         this.stunned = false;
-        this.chemicalState = new ChemicalState(ChemicalStates.LIQUID,1,2,3);
-        this.chemicalStateValue = 1;
-
-        InitializeBuffAndDebuff();
+        this.currentChemicalState = ChemicalStates.LIQUID;
+        this.currentChemicalStateValue = 1;
+        this.solidStateValue = 1;
+        this.liquidStateValue = 2;
+        this.gasStateValue = 3;
     }
     
     // Only apply image.
@@ -53,7 +48,6 @@ public class Monster : MonoBehaviour {
     {
         this.renderer.sprite = Resources.Load(imagePath, typeof(Sprite)) as Sprite;
         SetStat();
-        // this.cards = new List<Card>(); // Current not used.
     }
     
     // Default image.
@@ -63,11 +57,6 @@ public class Monster : MonoBehaviour {
         this.hp = maxHp;
         this.attackDamage = attackDamage;
         this.type = type;
-        this.boilingPoint = boilingPoint;
-        this.meltingPoint = meltingPoint;
-        
-        InitializeBuffAndDebuff();
-        // this.cards = new List<Card>(); // Current not used.
     }
     public void SetStat (string imagePath, int hp, int attackDamage, MonsterType type, int boilingPoint, int meltingPoint)
     {
@@ -75,13 +64,6 @@ public class Monster : MonoBehaviour {
         SetStat(hp, attackDamage, type, boilingPoint, meltingPoint);
     }
     
-    public void IncrementChemicalState()
-    {
-        chemicalStateValue++;
-        //if the current value is greater than the value of the chemical state, change the chemical state and set the value to 1
-    }
-
-
     public void SetDamage(int damage)
     {
         hp -= damage;
@@ -90,24 +72,85 @@ public class Monster : MonoBehaviour {
         Debug.Log("Get " + damage + " damage by player");
     }
 
-    public int ChemicalStateValue
+    //Chemical State
+    public void IncrementCSVal()
     {
-        get { return chemicalStateValue; }
-        set { chemicalStateValue = value; }
+        switch (currentChemicalState)
+        {
+            case ChemicalStates.SOLID:
+                currentChemicalStateValue++;
+                if (currentChemicalStateValue > solidStateValue)
+                {
+                    currentChemicalState = ChemicalStates.LIQUID;
+                    currentChemicalStateValue = 1;
+                }
+                break;
+            case ChemicalStates.LIQUID:
+                currentChemicalStateValue++;
+                if (currentChemicalStateValue > liquidStateValue)
+                {
+                    currentChemicalState = ChemicalStates.GAS;
+                    currentChemicalStateValue = 1;
+                }
+                break;
+            case ChemicalStates.GAS:
+                if(currentChemicalStateValue >= gasStateValue)
+                {
+                    Debug.Log("Cannot increase chemical state value");
+                }
+                else
+                {
+                    currentChemicalStateValue++;
+                }
+                
+                break;
+        }
+    }
+    public void DecrementCSVal()
+    {
+        switch (currentChemicalState)
+        {
+            case ChemicalStates.SOLID:
+                if (currentChemicalStateValue == 1)
+                {
+                    Debug.Log("Cannot decrease chemical state value");
+                }
+                else
+                {
+                    currentChemicalStateValue--;
+                }
+                break;
+            case ChemicalStates.LIQUID:
+                currentChemicalStateValue--;
+                if (currentChemicalStateValue <= 0)
+                {
+                    currentChemicalState = ChemicalStates.SOLID;
+                    currentChemicalStateValue = solidStateValue;
+                }
+                break;
+            case ChemicalStates.GAS:
+                currentChemicalStateValue--;
+                if (currentChemicalStateValue <= 0)
+                {
+                    currentChemicalState = ChemicalStates.LIQUID;
+                    currentChemicalStateValue = liquidStateValue;
+                }
+                break;
+        }
     }
 
     public void AddBuff(Buff buff)
     {
         buffs.Add(buff);
         Debug.Log("Add buff to monster");
-        PrintAllBuffAndDebuff();
+        //PrintAllBuffAndDebuff();
     }
     
     public void AddDebuff(Debuff debuff)
     {
         debuffs.Add(debuff);
         Debug.Log("Add debuff to monster");
-        PrintAllBuffAndDebuff();
+        //PrintAllBuffAndDebuff();
     }
 
     public void ReduceDebuffTurn()
@@ -174,13 +217,8 @@ public class Monster : MonoBehaviour {
         Debug.Log("All debuffs are removed");
     }
 
-    void InitializeBuffAndDebuff()
-    {
-        buffs = new List<Buff>();
-        debuffs = new List<Debuff>();
-    }
-
     // using test.
+    /*
     void PrintAllBuffAndDebuff()
     {
         string buffList = "Buff : ";
@@ -199,10 +237,17 @@ public class Monster : MonoBehaviour {
         }
         Debug.Log(debuffList);
     }
+<<<<<<< HEAD
 
 	public void Dead(){
 		Destroy (this);
 		Debug.Log (this+" is Dead.");
+=======
+    */
+	// Use this for initialization
+	void Start () {
+	
+>>>>>>> origin/master
 	}
 
 }
