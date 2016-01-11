@@ -25,6 +25,13 @@ public class Monster : MonoBehaviour {
     List<Buff> buffs;
     List<Debuff> debuffs;
     
+	void Update(){
+
+		if (hp <= 0) {
+			Dead();
+		}
+	}
+
     // Apply default stats.
     public void SetStat ()
     {
@@ -193,15 +200,9 @@ public class Monster : MonoBehaviour {
         Debug.Log(debuffList);
     }
 
-	// Use this for initialization
-	void Start () {
-	
+	public void Dead(){
+		Destroy (this);
+		Debug.Log (this+" is Dead.");
 	}
-	
-	// Update is called once per frame
-	void Update () {
-
-	}
-
 
 }
