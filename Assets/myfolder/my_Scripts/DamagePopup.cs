@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.UI;
 
 public class DamagePopup : MonoBehaviour {
 
@@ -8,7 +7,7 @@ public class DamagePopup : MonoBehaviour {
 	public int sortinglayerID;
 
 	void Start(){
-		// sortinglayerID=SortingLayer.GetLayerValueFromName("Default");
+		sortinglayerID=SortingLayer.GetLayerValueFromName("Default");
 	}
 	public void CreateDamagePopup(Transform damageTransform, int damage){
 		GameObject damageGameObject = (GameObject)Instantiate(damagePrefab,
@@ -16,7 +15,7 @@ public class DamagePopup : MonoBehaviour {
 		                                                      damageTransform.rotation);
 		damageGameObject.transform.SetParent(damageTransform);
 		Renderer renderer = damagePrefab.GetComponent<Renderer> ();
-		// renderer.sortingLayerID = sortinglayerID;
+		renderer.sortingLayerID = sortinglayerID;
 		damageGameObject.GetComponentInChildren<TextMesh>().text = damage.ToString();
 	}
 
