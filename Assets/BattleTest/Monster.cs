@@ -238,11 +238,14 @@ public class Monster : MonoBehaviour {
         Debug.Log(debuffList);
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	public void Dead(){
 		Destroy (this);
 		Debug.Log (this+" is Dead.");
 =======
+=======
+>>>>>>> origin/master
     */
 	// Use this for initialization
 	void Start () {
