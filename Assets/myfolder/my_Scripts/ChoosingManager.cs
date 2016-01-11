@@ -6,5 +6,6 @@ public class ChoosingManager : MonoBehaviour {
 
     public AttackMode AttackMode;
 	public GameObject SelectedCard;
+    public GameObject SelectedChemistSkill;
 
 }

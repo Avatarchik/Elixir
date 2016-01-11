@@ -38,6 +38,38 @@ namespace EnumsAndClasses
         GAS,
         SOLID
     }
+    public class ChemicalState
+    {
+        ChemicalStates chemicalState;
+        int solidStateValue;
+        int liquidStateValue;
+        int gasStateValue;
+
+        public ChemicalState(ChemicalStates chemicalState, int solid, int liquid, int gas)
+        {
+            this.chemicalState = chemicalState;
+            this.solidStateValue = solid;
+            this.liquidStateValue = liquid;
+            this.gasStateValue = gas;
+        }
+        public ChemicalStates GetChemincalState()
+        {
+            return chemicalState;
+        }
+        public int GetSolidStateValue()
+        {
+            return solidStateValue;
+        }
+        public int GetLiquidStateValue()
+        {
+            return liquidStateValue;
+        }
+        public int GetGasStateValue()
+        {
+            return gasStateValue;
+        }
+
+    }
 
     public class Buff
     {

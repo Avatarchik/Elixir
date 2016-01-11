@@ -29,41 +29,42 @@ public class ChooseTarget : MonoBehaviour {
         if(targetType == "Ally")
         {
             yield return StartCoroutine(WaitForTargetSelect(targetType));
-            if (cardChanged)
-            {
-                cardChanged = false;
-                yield break;
-            }
-            HealAlly();
         }
         if (targetType == "Enemy" && targetRange == "Single")//When target is Single
         {
             while (countAttack > 0)
             {
                 yield return StartCoroutine(WaitForTargetSelect(targetType));
-                if (cardChanged)
-                {
-                    cardChanged = false;
-                    yield break;
-                }
             }
-            AttackEnemy();
         }
         if (targetType == "Enemy" && targetRange == "Wide")//When target is Wide
         {
             yield return StartCoroutine(WaitForTargetSelect(targetType));
-            if (cardChanged)
-            {
-                cardChanged = false;
-                yield break;
-            }
             selectedEnemy = GameObject.FindGameObjectsWithTag("Monster"); //Add all monsters in the selectedEnemy array
             countArray = enemyAlive;
+        }
+
+        if (cardChanged) //Check if the attack mode is changed in the middle of the process
+        {
+            cardChanged = false;
+            countArray = 0;
+            yield break;
+        }
+
+        if (targetType == "Ally")
+        {
+            HealAlly();
+        }
+        if (targetType == "Enemy" && targetRange == "Single")//When target is Single
+        {
             AttackEnemy();
         }
-        
+        if (targetType == "Enemy" && targetRange == "Wide")//When target is Wide
+        {
+            AttackEnemy();
+        }
+
         countArray = 0;// Reset the counter
-        //GameObject.Find("GameManager").GetComponent<ChoosingManager>().SelectedCard = null;// Reset ChoosingManager
         yield return null;
     }
 
@@ -72,6 +73,15 @@ public class ChooseTarget : MonoBehaviour {
         Debug.Log("Highlight");
         GameObject[] Monsters = GameObject.FindGameObjectsWithTag("Monster");
         GameObject Ally = GameObject.Find("Player(Clone)");
+
+        //Reset first
+        Ally.transform.Find("selectable").gameObject.SetActive(false);
+        Ally.transform.Find("selected").gameObject.SetActive(false);
+        foreach (GameObject Monster in Monsters)
+        {
+            Monster.transform.Find("selectable").gameObject.SetActive(false);
+            Monster.transform.Find("selected").gameObject.SetActive(false);
+        }
 
         if (targetType == "Ally")//Skill is ally heal
         {
@@ -122,6 +132,7 @@ public class ChooseTarget : MonoBehaviour {
 
                     //Need to verify if the selected monster is already in the array
                     //Do it later
+                    Debug.Log("countArray: " + countArray);
                     selectedEnemy[countArray] = hit.collider.gameObject;//Add the selected monster in the selectedEnemy array
                     countArray++;
 
@@ -137,14 +148,7 @@ public class ChooseTarget : MonoBehaviour {
             {
                 Debug.Log("Coroutine stop");
                 cardChanged = true;
-                GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");//Unactivate all selectable/selected logos
-                foreach (GameObject monster in monsters)
-                {
-                    monster.transform.Find("selectable").gameObject.SetActive(false);
-                    monster.transform.Find("selected").gameObject.SetActive(false);
-                }
-                selectedAlly.transform.Find("selectable").gameObject.SetActive(false);//Unactivate all selectable/selected logos
-                selectedAlly.transform.Find("selected").gameObject.SetActive(false);
+                countAttack = 0;
                 yield break;
             }
             yield return null;

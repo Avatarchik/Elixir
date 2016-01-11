@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using EnumsAndClasses;
 
 public class ChemistSkill : MonoBehaviour {
     private bool isActive;
+    GameObject currentChemistSkill;
+
 	// Use this for initialization
 	void Start () {
         isActive = false;
@@ -17,34 +20,15 @@ public class ChemistSkill : MonoBehaviour {
 
             RaycastHit2D hit = Physics2D.GetRayIntersection(ray, Mathf.Infinity);
 
-            if (hit.collider != null && hit.collider.gameObject.tag == "ChemistSkill") //When the skill targets Ally, and Ally is selected
+            if (hit.collider != null && hit.collider.gameObject.tag == "ChemistSkill")
             {
-                Debug.Log(hit.collider.gameObject);
-                Highlight();
+                Debug.Log("ChemistSkillActivated");
+                GameObject.Find("GameManager").GetComponent<ChoosingManager>().AttackMode = AttackMode.Chemist;
+                GameObject.Find("GameManager").GetComponent<ChoosingManager>().SelectedCard = null;
+                GameObject.Find("GameManager").GetComponent<ChoosingManager>().SelectedChemistSkill = hit.collider.gameObject;
+                currentChemistSkill = hit.collider.gameObject;
+                StartCoroutine(cardActivated());
             }
-        }
-        if (!isActive)
-        {
-            UnHighlight();
-        }
-    }
-
-    void Highlight()
-    {
-        GameObject[] Monsters = GameObject.FindGameObjectsWithTag("Monster");
-        foreach (GameObject Monster in Monsters)
-        {
-            if (Monster.GetComponent<Monster>().hp > 0)//If the monster is dead, do not activate selectable
-                Monster.transform.Find("selectable").gameObject.SetActive(true);
-        }
-    }
-    void UnHighlight()
-    {
-        GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");//Unactivate all selectable/selected logos
-        foreach (GameObject monster in monsters)
-        {
-            monster.transform.Find("selectable").gameObject.SetActive(false);
-            monster.transform.Find("selected").gameObject.SetActive(false);
         }
     }
 
@@ -60,8 +44,43 @@ public class ChemistSkill : MonoBehaviour {
         {
             gameObject.transform.Find("CoolIcon").gameObject.SetActive(false);
             gameObject.transform.Find("HeatIcon").gameObject.SetActive(false);
+            GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");//Unactivate all selectable/selected logos
+            foreach (GameObject monster in monsters)
+            {
+                monster.transform.Find("selectable").gameObject.SetActive(false);
+                monster.transform.Find("selected").gameObject.SetActive(false);
+            }
             isActive = false;
         }
-        
+    }
+
+    IEnumerator cardActivated()
+    {
+        yield return StartCoroutine(gameObject.GetComponent<ChooseTargetByChemist>().SelectTarget());
+
+        Debug.Log("Before Coroutine Stopped");
+        //If Attack method is changed during the procedure, dismiss all actions
+        if (GameObject.Find("GameManager").GetComponent<ChoosingManager>().AttackMode != AttackMode.Chemist ||
+            GameObject.Find("GameManager").GetComponent<ChoosingManager>().SelectedChemistSkill != currentChemistSkill)
+        {
+            Debug.Log("Coroutine Stopped(Chemist)");
+        }
+        else
+        {
+            //Increment counter
+            //Check if all turns are exhausted
+            //If exhausted, change the state of TurnBasedCombatStateMachine
+            GameObject.Find("GameManager").GetComponent<TurnBasedCombatStateMachine>().incrementTurn();
+
+            if (GameObject.Find("GameManager").GetComponent<TurnBasedCombatStateMachine>().isTurnExhausted())
+            {
+                GameObject.Find("GameManager").GetComponent<TurnBasedCombatStateMachine>().currentState = TurnBasedCombatStateMachine.BattleStates.ENEMYCHOICE;
+                GameObject.Find("GameManager").GetComponent<TurnBasedCombatStateMachine>().resetTurn();
+            }
+
+        }
+
+
+
     }
 }

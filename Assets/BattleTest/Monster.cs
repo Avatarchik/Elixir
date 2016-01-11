@@ -14,7 +14,7 @@ public class Monster : MonoBehaviour {
     public int meltingPoint;
 
     public bool stunned;
-    private ChemicalStates chemicalState;
+    public ChemicalState chemicalState;
     private int chemicalStateValue;
 
 
@@ -35,7 +35,7 @@ public class Monster : MonoBehaviour {
         this.boilingPoint = 100;
         this.meltingPoint = 0;
         this.stunned = false;
-        this.chemicalState = ChemicalStates.LIQUID;
+        this.chemicalState = new ChemicalState(ChemicalStates.LIQUID,1,2,3);
         this.chemicalStateValue = 1;
 
         InitializeBuffAndDebuff();
@@ -68,6 +68,13 @@ public class Monster : MonoBehaviour {
         SetStat(hp, attackDamage, type, boilingPoint, meltingPoint);
     }
     
+    public void IncrementChemicalState()
+    {
+        chemicalStateValue++;
+        //if the current value is greater than the value of the chemical state, change the chemical state and set the value to 1
+    }
+
+
     public void SetDamage(int damage)
     {
         hp -= damage;
@@ -76,11 +83,6 @@ public class Monster : MonoBehaviour {
         Debug.Log("Get " + damage + " damage by player");
     }
 
-    public ChemicalStates ChemicalState
-    {
-        get { return chemicalState; }
-        set { chemicalState = value; }
-    }
     public int ChemicalStateValue
     {
         get { return chemicalStateValue; }

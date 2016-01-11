@@ -21,15 +21,15 @@ public class ChemicalStateBar : MonoBehaviour {
 	
     void Start()
     {
-        currentCState = this.GetComponent<Monster>().ChemicalState;
+        currentCState = this.GetComponent<Monster>().chemicalState.GetChemincalState();
         currentCStateValue = this.GetComponent<Monster>().ChemicalStateValue;
         maxXValue = gasTransform.localPosition.x;
         minXValue = gasTransform.localPosition.x - gasTransform.rect.width;
 
         //temporary inputs
-        valSolid = 1;
-        valLiquid = 2;
-        valGas = 3;
+        valSolid = this.GetComponent<Monster>().chemicalState.GetSolidStateValue();
+        valLiquid = this.GetComponent<Monster>().chemicalState.GetLiquidStateValue();
+        valGas = this.GetComponent<Monster>().chemicalState.GetGasStateValue();
         barSolid = valSolid;
         barLiquid = valSolid + valLiquid;
         barGas = valSolid + valLiquid + valGas;
@@ -42,9 +42,9 @@ public class ChemicalStateBar : MonoBehaviour {
 
     void Update()
     {
-        if(this.GetComponent<Monster>().ChemicalState != currentCState || this.GetComponent<Monster>().ChemicalStateValue != currentCStateValue)
+        if(this.GetComponent<Monster>().chemicalState.GetChemincalState() != currentCState || this.GetComponent<Monster>().ChemicalStateValue != currentCStateValue)
         {
-            currentCState = this.GetComponent<Monster>().ChemicalState;
+            currentCState = this.GetComponent<Monster>().chemicalState.GetChemincalState();
             currentCStateValue = this.GetComponent<Monster>().ChemicalStateValue;
             MoveArrow();
         }
