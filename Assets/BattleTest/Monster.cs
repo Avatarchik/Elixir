@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using EnumsAndClasses;
@@ -21,6 +21,13 @@ public class Monster : MonoBehaviour {
     List<Buff> buffs = new List<Buff>();
     List<Debuff> debuffs = new List<Debuff>();
     
+	void Update(){
+
+		if (hp <= 0) {
+			Dead();
+		}
+	}
+
     // Apply default stats.
     public void SetStat ()
     {
@@ -211,7 +218,6 @@ public class Monster : MonoBehaviour {
     }
 
     // using test.
-    /*
     void PrintAllBuffAndDebuff()
     {
         string buffList = "Buff : ";
@@ -230,16 +236,14 @@ public class Monster : MonoBehaviour {
         }
         Debug.Log(debuffList);
     }
-    */
+
+	public void Dead(){
+		Destroy (this);
+		Debug.Log (this + " is Dead.");
+	}
 	// Use this for initialization
 	void Start () {
 	
 	}
-	
-	// Update is called once per frame
-	void Update () {
-
-	}
-
 
 }
