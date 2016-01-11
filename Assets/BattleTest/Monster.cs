@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using EnumsAndClasses;
@@ -218,7 +218,6 @@ public class Monster : MonoBehaviour {
     }
 
     // using test.
-    /*
     void PrintAllBuffAndDebuff()
     {
         string buffList = "Buff : ";
@@ -237,20 +236,14 @@ public class Monster : MonoBehaviour {
         }
         Debug.Log(debuffList);
     }
-<<<<<<< HEAD
-<<<<<<< HEAD
 
 	public void Dead(){
 		Destroy (this);
-		Debug.Log (this+" is Dead.");
-=======
-=======
->>>>>>> origin/master
-    */
+		Debug.Log (this + " is Dead.");
+	}
 	// Use this for initialization
 	void Start () {
 	
->>>>>>> origin/master
 	}
 
 }
