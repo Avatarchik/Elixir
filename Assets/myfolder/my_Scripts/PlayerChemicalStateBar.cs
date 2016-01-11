@@ -2,7 +2,7 @@
 using System.Collections;
 using EnumsAndClasses;
 
-public class ChemicalStateBar : MonoBehaviour {
+public class PlayerChemicalStateBar : MonoBehaviour {
     public RectTransform solidTransform;
     public RectTransform liquidTransform;
     public RectTransform gasTransform;
@@ -18,18 +18,18 @@ public class ChemicalStateBar : MonoBehaviour {
     private int barSolid;
     private int barLiquid;
     private int barGas;
-	
+
     void Start()
     {
-        currentCState = this.GetComponent<Monster>().currentChemicalState;
-        currentCStateValue = this.GetComponent<Monster>().currentChemicalStateValue;
+        currentCState = this.GetComponent<BaseCharacter>().currentChemicalState;
+        currentCStateValue = this.GetComponent<BaseCharacter>().currentChemicalStateValue;
         maxXValue = gasTransform.localPosition.x;
         minXValue = gasTransform.localPosition.x - gasTransform.rect.width;
 
         //temporary inputs
-        valSolid = this.GetComponent<Monster>().solidStateValue;
-        valLiquid = this.GetComponent<Monster>().liquidStateValue;
-        valGas = this.GetComponent<Monster>().gasStateValue;
+        valSolid = this.GetComponent<BaseCharacter>().solidStateValue;
+        valLiquid = this.GetComponent<BaseCharacter>().liquidStateValue;
+        valGas = this.GetComponent<BaseCharacter>().gasStateValue;
         barSolid = valSolid;
         barLiquid = valSolid + valLiquid;
         barGas = valSolid + valLiquid + valGas;
@@ -42,10 +42,10 @@ public class ChemicalStateBar : MonoBehaviour {
 
     void Update()
     {
-        if(this.GetComponent<Monster>().currentChemicalState != currentCState || this.GetComponent<Monster>().currentChemicalStateValue != currentCStateValue)
+        if (this.GetComponent<BaseCharacter>().currentChemicalState != currentCState || this.GetComponent<BaseCharacter>().currentChemicalStateValue != currentCStateValue)
         {
-            currentCState = this.GetComponent<Monster>().currentChemicalState;
-            currentCStateValue = this.GetComponent<Monster>().currentChemicalStateValue;
+            currentCState = this.GetComponent<BaseCharacter>().currentChemicalState;
+            currentCStateValue = this.GetComponent<BaseCharacter>().currentChemicalStateValue;
             MoveArrow();
         }
     }

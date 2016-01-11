@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using EnumsAndClasses;
+using System;
 
 public class ChooseTarget : MonoBehaviour {
     GameObject selectedAlly;
@@ -158,6 +159,12 @@ public class ChooseTarget : MonoBehaviour {
     void AttackEnemy()
     {
         Debug.Log("Attack Enemy");
+        GameObject Ally = GameObject.Find("Player(Clone)");
+        ChemicalStates criticalTarget = Ally.GetComponent<BaseCharacter>().criticalTarget;
+        System.Random rand = new System.Random();
+        double criticalRate;
+        double stunRate;
+
         GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");//Unactivate all selectable/selected logos
         foreach (GameObject monster in monsters)
         {
@@ -167,10 +174,19 @@ public class ChooseTarget : MonoBehaviour {
 
         for (int i = 0; i < countArray; i++) //Repeat procedure for every selected enemies listed in selectedEnemy array
         {
+            if(selectedEnemy[i].GetComponent<Monster>().currentChemicalState == criticalTarget)
+            {
+                criticalRate = 1.5f;
+            }
+            else
+            {
+                criticalRate = 1f;
+            }
+
             //Normal damage
             if (currentSelectedCard.GetComponent<InfoCard>().Card.Card_AttackDamage > 0) 
             {
-                selectedEnemy[i].GetComponent<Monster>().SetDamage((int)currentSelectedCard.GetComponent<InfoCard>().Card.Card_AttackDamage);
+                selectedEnemy[i].GetComponent<Monster>().SetDamage((int)(currentSelectedCard.GetComponent<InfoCard>().Card.Card_AttackDamage * criticalRate));
             }
             //DotDamage
             if(currentSelectedCard.GetComponent<InfoCard>().Card.Card_DebuffName == "DoteDamage")
@@ -184,7 +200,18 @@ public class ChooseTarget : MonoBehaviour {
             //Stun
 			if(currentSelectedCard.GetComponent<InfoCard>().Card.Card_DebuffName=="Stun")
 			{
-				selectedEnemy[i].GetComponent<Monster>().AddDebuff (new Debuff(EnumsAndClasses.DebuffName.Stun,currentSelectedCard.GetComponent<InfoCard>().Card.Card_DebuffTurn));
+                stunRate = currentSelectedCard.GetComponent<InfoCard>().Card.Card_DebuffRate;
+                if (selectedEnemy[i].GetComponent<Monster>().currentChemicalState == criticalTarget)
+                {
+                    stunRate += 10f;
+                }
+                int chance = rand.Next(1, 101);
+                Debug.Log("Stun Rate: " + stunRate + ", chance: " + chance);
+                if(chance <= stunRate)
+                {
+                    Debug.Log("Stun Success");
+                    selectedEnemy[i].GetComponent<Monster>().AddDebuff (new Debuff(EnumsAndClasses.DebuffName.Stun,currentSelectedCard.GetComponent<InfoCard>().Card.Card_DebuffTurn));
+                }
 			}
 
             //Check if Enemy's hp = 0
@@ -197,9 +224,21 @@ public class ChooseTarget : MonoBehaviour {
     }
     void HealAlly()
     {
+        float criticalRate;
+        GameObject Ally = GameObject.Find("Player(Clone)");
+        ChemicalStates criticalTarget = Ally.GetComponent<BaseCharacter>().criticalTarget;
+
         selectedAlly.transform.Find("selectable").gameObject.SetActive(false);//Unactivate all selectable/selected logos
         selectedAlly.transform.Find("selected").gameObject.SetActive(false);
 
-        selectedAlly.GetComponent<BaseCharacter>().SetHeal((int)currentSelectedCard.GetComponent<InfoCard>().Card.Card_Heal);
+        if (Ally.GetComponent<BaseCharacter>().currentChemicalState == criticalTarget)
+        {
+            criticalRate = 1.5f;
+        }
+        else
+        {
+            criticalRate = 1f;
+        }
+        selectedAlly.GetComponent<BaseCharacter>().SetHeal((int)(currentSelectedCard.GetComponent<InfoCard>().Card.Card_Heal * criticalRate));
     }
 }
