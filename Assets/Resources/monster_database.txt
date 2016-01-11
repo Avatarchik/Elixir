@@ -1,0 +1,5 @@
+ID,ExtName,Name,Group,ChemicalSeries,Type,Grade,Lev,AdventField,HP,AttackDamage,MonsterSkill1Name,MonsterSkill1Rate,MonsterSkill2Name,MonsterSkill2Rate,CriticalTarget,RoomTemperatureStatus,SolidGauge,LiquidGauge,GasGauge,RoomTemperaturePosition,MosterMaximumCount,NotAppartionCondition,GoldRate,MonsterCard1GainRate,MonsterCard2GainRate
+30001,¾ÏÈæ ¼ö¼Ò,MonsterH101,Wisp,H,H,1,1,1,20,15,AttackBan,20,Poison,15,Solid,Gas,1,2,4,3.5,2,N/A,2,3,2
+30002,¾ÏÈæ ¸®Æ¬,MonsterLi101,Wisp,AlkaliMetal,Li,1,1,1,25,20,Heal,20,Poison,15,Gas,Solid,2,2,3,1.5,2,N/A,2,3,2
+30003,¾ÏÈæ ¸®Æ¬,MonsterLi101,Wisp,AlkaliMetal,Li,1,1,1,25,20,Heal,20,Poison,15,Gas,Solid,2,2,3,1.5,2,N/A,2,3,2
+30004,¾ÏÈæ ¸®Æ¬,MonsterLi101,Wisp,AlkaliMetal,Li,1,1,1,25,20,Heal,20,Poison,15,Gas,Solid,2,2,3,1.5,2,N/A,2,3,2
