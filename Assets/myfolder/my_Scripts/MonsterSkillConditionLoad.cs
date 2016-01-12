@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using EnumsAndClasses;
 
 public class MonsterSkillConditionLoad:MonoBehaviour{
 
@@ -10,21 +11,9 @@ public class MonsterSkillConditionLoad:MonoBehaviour{
 		Load (file);
 	}
 
-	public class Row
-	{
-		public string no;
-		public string UseCondition;
-		public string Description;
-		public string TargetState;
-		public string HpBelowN;
-		public string HpMoreN;
-		public string Actionlimit;
-		public string TargetNumber;
-		public string RandomRate;
-		
-	}
+
 	
-	List<Row> rowList = new List<Row>();
+	List<MonsterSkillConditionRow> rowList = new List<MonsterSkillConditionRow>();
 	bool isLoaded = false;
 	
 	public bool IsLoaded()
@@ -32,7 +21,7 @@ public class MonsterSkillConditionLoad:MonoBehaviour{
 		return isLoaded;
 	}
 	
-	public List<Row> GetRowList()
+	public List<MonsterSkillConditionRow> GetRowList()
 	{
 		return rowList;
 	}
@@ -43,16 +32,21 @@ public class MonsterSkillConditionLoad:MonoBehaviour{
 		string[][] grid = CsvParser2.Parse(csv.text);
 		for(int i = 1 ; i < grid.Length ; i++)
 		{
-			Row row = new Row();
-			row.no = grid[i][0];
+			MonsterSkillConditionRow row = new MonsterSkillConditionRow();
+			if(grid[i][0]!="N/A")
+			row.no = System.Convert.ToInt32(grid[i][0]);
 			row.UseCondition = grid[i][1];
 			row.Description = grid[i][2];
 			row.TargetState = grid[i][3];
-			row.HpBelowN = grid[i][4];
-			row.HpMoreN = grid[i][5];
+			if(grid[i][4]!="N/A")
+			row.HpBelowN = System.Convert.ToInt32(grid[i][4]);
+			if(grid[i][5]!="N/A")
+			row.HpMoreN = System.Convert.ToInt32(grid[i][5]);
 			row.Actionlimit = grid[i][6];
-			row.TargetNumber = grid[i][7];
-			row.RandomRate = grid[i][8];
+			if(grid[i][7]!="N/A")
+			row.TargetNumber = System.Convert.ToInt32(grid[i][7]);
+			if(grid[i][8]!="N/A")
+			row.RandomRate = System.Convert.ToInt32(grid[i][8]);
 			
 			rowList.Add(row);
 		}
@@ -64,84 +58,21 @@ public class MonsterSkillConditionLoad:MonoBehaviour{
 		return rowList.Count;
 	}
 	
-	public Row GetAt(int i)
+	public MonsterSkillConditionRow GetAt(int i)
 	{
 		if(rowList.Count <= i)
 			return null;
 		return rowList[i];
 	}
 	
-	public Row Find_no(string find)
-	{
-		return rowList.Find(x => x.no == find);
-	}
-	public List<Row> FindAll_no(string find)
-	{
-		return rowList.FindAll(x => x.no == find);
-	}
-	public Row Find_UseCondition(string find)
+
+	public MonsterSkillConditionRow Find_UseCondition(string find)
 	{
 		return rowList.Find(x => x.UseCondition == find);
 	}
-	public List<Row> FindAll_UseCondition(string find)
+	public List<MonsterSkillConditionRow> FindAll_UseCondition(string find)
 	{
 		return rowList.FindAll(x => x.UseCondition == find);
-	}
-	public Row Find_Description(string find)
-	{
-		return rowList.Find(x => x.Description == find);
-	}
-	public List<Row> FindAll_Description(string find)
-	{
-		return rowList.FindAll(x => x.Description == find);
-	}
-	public Row Find_TargetState(string find)
-	{
-		return rowList.Find(x => x.TargetState == find);
-	}
-	public List<Row> FindAll_TargetState(string find)
-	{
-		return rowList.FindAll(x => x.TargetState == find);
-	}
-	public Row Find_HpBelowN(string find)
-	{
-		return rowList.Find(x => x.HpBelowN == find);
-	}
-	public List<Row> FindAll_HpBelowN(string find)
-	{
-		return rowList.FindAll(x => x.HpBelowN == find);
-	}
-	public Row Find_HpMoreN(string find)
-	{
-		return rowList.Find(x => x.HpMoreN == find);
-	}
-	public List<Row> FindAll_HpMoreN(string find)
-	{
-		return rowList.FindAll(x => x.HpMoreN == find);
-	}
-	public Row Find_Actionlimit(string find)
-	{
-		return rowList.Find(x => x.Actionlimit == find);
-	}
-	public List<Row> FindAll_Actionlimit(string find)
-	{
-		return rowList.FindAll(x => x.Actionlimit == find);
-	}
-	public Row Find_TargetNumber(string find)
-	{
-		return rowList.Find(x => x.TargetNumber == find);
-	}
-	public List<Row> FindAll_TargetNumber(string find)
-	{
-		return rowList.FindAll(x => x.TargetNumber == find);
-	}
-	public Row Find_RandomRate(string find)
-	{
-		return rowList.Find(x => x.RandomRate == find);
-	}
-	public List<Row> FindAll_RandomRate(string find)
-	{
-		return rowList.FindAll(x => x.RandomRate == find);
 	}
 	
 }

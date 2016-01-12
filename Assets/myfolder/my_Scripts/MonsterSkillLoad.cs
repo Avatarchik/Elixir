@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using EnumsAndClasses;
 
 public class MonsterSkillLoad:MonoBehaviour
 {
@@ -9,37 +10,9 @@ public class MonsterSkillLoad:MonoBehaviour
 	void Awake(){
 		Load (file);
 	}
-	public class Row
-	{
-		public string no;
-		public string MonsterSkillID;
-		public string MonsterSkillName;
-		public string Target;
-		public string Range;
-		public string DamageFactor;
-		public string Heal;
-		public string TargetTempChange;
-		public string UseCondition1_1;
-		public string UseCondition1_2;
-		public string UseCondition2_1;
-		public string UseCondition2_2;
-		public string UseCondition3_1;
-		public string UseCondition3_2;
-		public string TargetStateChange;
-		public string DebuffName;
-		public string DebuffRate;
-		public string DebuffTurn;
-		public string DebuffEffect;
-		public string DotDamage;
-		public string DotDamageTurn;
-		public string BuffName;
-		public string BuffRate;
-		public string BuffTurn;
-		public string BuffEffect;
-		
-	}
+
 	
-	List<Row> rowList = new List<Row>();
+	List<MonsterSkillRow> rowList = new List<MonsterSkillRow>();
 	bool isLoaded = false;
 	
 	public bool IsLoaded()
@@ -47,7 +20,7 @@ public class MonsterSkillLoad:MonoBehaviour
 		return isLoaded;
 	}
 	
-	public List<Row> GetRowList()
+	public List<MonsterSkillRow> GetRowList()
 	{
 		return rowList;
 	}
@@ -58,7 +31,7 @@ public class MonsterSkillLoad:MonoBehaviour
 		string[][] grid = CsvParser2.Parse(csv.text);
 		for(int i = 1 ; i < grid.Length ; i++)
 		{
-			Row row = new Row();
+			MonsterSkillRow row = new MonsterSkillRow();
 			row.no = grid[i][0];
 			row.MonsterSkillID = grid[i][1];
 			row.MonsterSkillName = grid[i][2];
@@ -95,210 +68,210 @@ public class MonsterSkillLoad:MonoBehaviour
 		return rowList.Count;
 	}
 	
-	public Row GetAt(int i)
+	public MonsterSkillRow GetAt(int i)
 	{
 		if(rowList.Count <= i)
 			return null;
 		return rowList[i];
 	}
 	
-	public Row Find_no(string find)
+	public MonsterSkillRow Find_no(string find)
 	{
 		return rowList.Find(x => x.no == find);
 	}
-	public List<Row> FindAll_no(string find)
+	public List<MonsterSkillRow> FindAll_no(string find)
 	{
 		return rowList.FindAll(x => x.no == find);
 	}
-	public Row Find_MonsterSkillID(string find)
+	public MonsterSkillRow Find_MonsterSkillID(string find)
 	{
 		return rowList.Find(x => x.MonsterSkillID == find);
 	}
-	public List<Row> FindAll_MonsterSkillID(string find)
+	public List<MonsterSkillRow> FindAll_MonsterSkillID(string find)
 	{
 		return rowList.FindAll(x => x.MonsterSkillID == find);
 	}
-	public Row Find_MonsterSkillName(string find)
+	public MonsterSkillRow Find_MonsterSkillName(string find)
 	{
 		return rowList.Find(x => x.MonsterSkillName == find);
 	}
-	public List<Row> FindAll_MonsterSkillName(string find)
+	public List<MonsterSkillRow> FindAll_MonsterSkillName(string find)
 	{
 		return rowList.FindAll(x => x.MonsterSkillName == find);
 	}
-	public Row Find_Target(string find)
+	public MonsterSkillRow Find_Target(string find)
 	{
 		return rowList.Find(x => x.Target == find);
 	}
-	public List<Row> FindAll_Target(string find)
+	public List<MonsterSkillRow> FindAll_Target(string find)
 	{
 		return rowList.FindAll(x => x.Target == find);
 	}
-	public Row Find_Range(string find)
+	public MonsterSkillRow Find_Range(string find)
 	{
 		return rowList.Find(x => x.Range == find);
 	}
-	public List<Row> FindAll_Range(string find)
+	public List<MonsterSkillRow> FindAll_Range(string find)
 	{
 		return rowList.FindAll(x => x.Range == find);
 	}
-	public Row Find_DamageFactor(string find)
+	public MonsterSkillRow Find_DamageFactor(string find)
 	{
 		return rowList.Find(x => x.DamageFactor == find);
 	}
-	public List<Row> FindAll_DamageFactor(string find)
+	public List<MonsterSkillRow> FindAll_DamageFactor(string find)
 	{
 		return rowList.FindAll(x => x.DamageFactor == find);
 	}
-	public Row Find_Heal(string find)
+	public MonsterSkillRow Find_Heal(string find)
 	{
 		return rowList.Find(x => x.Heal == find);
 	}
-	public List<Row> FindAll_Heal(string find)
+	public List<MonsterSkillRow> FindAll_Heal(string find)
 	{
 		return rowList.FindAll(x => x.Heal == find);
 	}
-	public Row Find_TargetTempChange(string find)
+	public MonsterSkillRow Find_TargetTempChange(string find)
 	{
 		return rowList.Find(x => x.TargetTempChange == find);
 	}
-	public List<Row> FindAll_TargetTempChange(string find)
+	public List<MonsterSkillRow> FindAll_TargetTempChange(string find)
 	{
 		return rowList.FindAll(x => x.TargetTempChange == find);
 	}
-	public Row Find_UseCondition1_1(string find)
+	public MonsterSkillRow Find_UseCondition1_1(string find)
 	{
 		return rowList.Find(x => x.UseCondition1_1 == find);
 	}
-	public List<Row> FindAll_UseCondition1_1(string find)
+	public List<MonsterSkillRow> FindAll_UseCondition1_1(string find)
 	{
 		return rowList.FindAll(x => x.UseCondition1_1 == find);
 	}
-	public Row Find_UseCondition1_2(string find)
+	public MonsterSkillRow Find_UseCondition1_2(string find)
 	{
 		return rowList.Find(x => x.UseCondition1_2 == find);
 	}
-	public List<Row> FindAll_UseCondition1_2(string find)
+	public List<MonsterSkillRow> FindAll_UseCondition1_2(string find)
 	{
 		return rowList.FindAll(x => x.UseCondition1_2 == find);
 	}
-	public Row Find_UseCondition2_1(string find)
+	public MonsterSkillRow Find_UseCondition2_1(string find)
 	{
 		return rowList.Find(x => x.UseCondition2_1 == find);
 	}
-	public List<Row> FindAll_UseCondition2_1(string find)
+	public List<MonsterSkillRow> FindAll_UseCondition2_1(string find)
 	{
 		return rowList.FindAll(x => x.UseCondition2_1 == find);
 	}
-	public Row Find_UseCondition2_2(string find)
+	public MonsterSkillRow Find_UseCondition2_2(string find)
 	{
 		return rowList.Find(x => x.UseCondition2_2 == find);
 	}
-	public List<Row> FindAll_UseCondition2_2(string find)
+	public List<MonsterSkillRow> FindAll_UseCondition2_2(string find)
 	{
 		return rowList.FindAll(x => x.UseCondition2_2 == find);
 	}
-	public Row Find_UseCondition3_1(string find)
+	public MonsterSkillRow Find_UseCondition3_1(string find)
 	{
 		return rowList.Find(x => x.UseCondition3_1 == find);
 	}
-	public List<Row> FindAll_UseCondition3_1(string find)
+	public List<MonsterSkillRow> FindAll_UseCondition3_1(string find)
 	{
 		return rowList.FindAll(x => x.UseCondition3_1 == find);
 	}
-	public Row Find_UseCondition3_2(string find)
+	public MonsterSkillRow Find_UseCondition3_2(string find)
 	{
 		return rowList.Find(x => x.UseCondition3_2 == find);
 	}
-	public List<Row> FindAll_UseCondition3_2(string find)
+	public List<MonsterSkillRow> FindAll_UseCondition3_2(string find)
 	{
 		return rowList.FindAll(x => x.UseCondition3_2 == find);
 	}
-	public Row Find_TargetStateChange(string find)
+	public MonsterSkillRow Find_TargetStateChange(string find)
 	{
 		return rowList.Find(x => x.TargetStateChange == find);
 	}
-	public List<Row> FindAll_TargetStateChange(string find)
+	public List<MonsterSkillRow> FindAll_TargetStateChange(string find)
 	{
 		return rowList.FindAll(x => x.TargetStateChange == find);
 	}
-	public Row Find_DebuffName(string find)
+	public MonsterSkillRow Find_DebuffName(string find)
 	{
 		return rowList.Find(x => x.DebuffName == find);
 	}
-	public List<Row> FindAll_DebuffName(string find)
+	public List<MonsterSkillRow> FindAll_DebuffName(string find)
 	{
 		return rowList.FindAll(x => x.DebuffName == find);
 	}
-	public Row Find_DebuffRate(string find)
+	public MonsterSkillRow Find_DebuffRate(string find)
 	{
 		return rowList.Find(x => x.DebuffRate == find);
 	}
-	public List<Row> FindAll_DebuffRate(string find)
+	public List<MonsterSkillRow> FindAll_DebuffRate(string find)
 	{
 		return rowList.FindAll(x => x.DebuffRate == find);
 	}
-	public Row Find_DebuffTurn(string find)
+	public MonsterSkillRow Find_DebuffTurn(string find)
 	{
 		return rowList.Find(x => x.DebuffTurn == find);
 	}
-	public List<Row> FindAll_DebuffTurn(string find)
+	public List<MonsterSkillRow> FindAll_DebuffTurn(string find)
 	{
 		return rowList.FindAll(x => x.DebuffTurn == find);
 	}
-	public Row Find_DebuffEffect(string find)
+	public MonsterSkillRow Find_DebuffEffect(string find)
 	{
 		return rowList.Find(x => x.DebuffEffect == find);
 	}
-	public List<Row> FindAll_DebuffEffect(string find)
+	public List<MonsterSkillRow> FindAll_DebuffEffect(string find)
 	{
 		return rowList.FindAll(x => x.DebuffEffect == find);
 	}
-	public Row Find_DotDamage(string find)
+	public MonsterSkillRow Find_DotDamage(string find)
 	{
 		return rowList.Find(x => x.DotDamage == find);
 	}
-	public List<Row> FindAll_DotDamage(string find)
+	public List<MonsterSkillRow> FindAll_DotDamage(string find)
 	{
 		return rowList.FindAll(x => x.DotDamage == find);
 	}
-	public Row Find_DotDamageTurn(string find)
+	public MonsterSkillRow Find_DotDamageTurn(string find)
 	{
 		return rowList.Find(x => x.DotDamageTurn == find);
 	}
-	public List<Row> FindAll_DotDamageTurn(string find)
+	public List<MonsterSkillRow> FindAll_DotDamageTurn(string find)
 	{
 		return rowList.FindAll(x => x.DotDamageTurn == find);
 	}
-	public Row Find_BuffName(string find)
+	public MonsterSkillRow Find_BuffName(string find)
 	{
 		return rowList.Find(x => x.BuffName == find);
 	}
-	public List<Row> FindAll_BuffName(string find)
+	public List<MonsterSkillRow> FindAll_BuffName(string find)
 	{
 		return rowList.FindAll(x => x.BuffName == find);
 	}
-	public Row Find_BuffRate(string find)
+	public MonsterSkillRow Find_BuffRate(string find)
 	{
 		return rowList.Find(x => x.BuffRate == find);
 	}
-	public List<Row> FindAll_BuffRate(string find)
+	public List<MonsterSkillRow> FindAll_BuffRate(string find)
 	{
 		return rowList.FindAll(x => x.BuffRate == find);
 	}
-	public Row Find_BuffTurn(string find)
+	public MonsterSkillRow Find_BuffTurn(string find)
 	{
 		return rowList.Find(x => x.BuffTurn == find);
 	}
-	public List<Row> FindAll_BuffTurn(string find)
+	public List<MonsterSkillRow> FindAll_BuffTurn(string find)
 	{
 		return rowList.FindAll(x => x.BuffTurn == find);
 	}
-	public Row Find_BuffEffect(string find)
+	public MonsterSkillRow Find_BuffEffect(string find)
 	{
 		return rowList.Find(x => x.BuffEffect == find);
 	}
-	public List<Row> FindAll_BuffEffect(string find)
+	public List<MonsterSkillRow> FindAll_BuffEffect(string find)
 	{
 		return rowList.FindAll(x => x.BuffEffect == find);
 	}
