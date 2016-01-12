@@ -4,6 +4,11 @@ using System.Collections.Generic;
 
 public class MonsterSkillLoad:MonoBehaviour
 {
+	public TextAsset file;
+	
+	void Awake(){
+		Load (file);
+	}
 	public class Row
 	{
 		public string no;

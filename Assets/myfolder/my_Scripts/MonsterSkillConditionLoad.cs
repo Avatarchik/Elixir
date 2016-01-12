@@ -3,6 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class MonsterSkillConditionLoad:MonoBehaviour{
+
+	public TextAsset file;
+	
+	void Awake(){
+		Load (file);
+	}
+
 	public class Row
 	{
 		public string no;

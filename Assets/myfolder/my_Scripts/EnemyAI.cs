@@ -22,7 +22,7 @@ public class EnemyAI : MonoBehaviour {
             else
             {
                 yield return new WaitForSeconds(EnemyBehaviourBeforeDelay);
-			    AttackAlly(monster.GetComponent<Monster>());
+			    SelectAct(monster.GetComponent<Monster>());
 			    yield return new WaitForSeconds(EnemyBehaviourAfterDelay);
             }
 			
@@ -63,7 +63,7 @@ public class EnemyAI : MonoBehaviour {
 	//not implemented
 	bool SkillCondition(string SkillName, int SkillNum)
 	{
-		GetComponent<MonsterSkillConditionLoad> ().Find_UseCondition (SkillName);
+		Debug.Log (GetComponent<MonsterSkillLoad> ().Find_UseCondition1_1 (SkillName).MonsterSkillName);
 
 
 
