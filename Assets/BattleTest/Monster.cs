@@ -165,6 +165,7 @@ public class Monster : MonoBehaviour {
     public void ActivateDebuff()
     {
         bool tempStun= false;
+        bool tempDotDamage = false;
         foreach (Debuff debuff in debuffs)
         {
 
@@ -172,6 +173,11 @@ public class Monster : MonoBehaviour {
             {
                 Debug.Log("This Debuff is Dot Damage");
                 SetDamage(debuff.DebuffDamage);
+                tempDotDamage = true;
+                if(hp <= 0)
+                {
+                    Destroy(this.gameObject);
+                }
             }
 
             if (debuff.GetDebuffname().Equals(DebuffName.Stun))
@@ -189,6 +195,14 @@ public class Monster : MonoBehaviour {
         {
             this.transform.Find("stun").gameObject.SetActive(false);
             stunned = false;
+        }
+        if (tempDotDamage)
+        {
+            this.transform.Find("dotDamageIcon").gameObject.SetActive(true);
+        }
+        else
+        {
+            this.transform.Find("dotDamageIcon").gameObject.SetActive(false);
         }
     }
     
