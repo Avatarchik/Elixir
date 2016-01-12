@@ -46,6 +46,20 @@ public class EnemyAI : MonoBehaviour {
 		double Skill2Rate = Monsterdata.Mon_Skill2_Rate;
 		Animator animator=monster.GetComponent<Animator>();
 
+		if (Random.Range (1, 100) <= Skill1Rate ) {
+			Debug.Log (Monsterdata.Mon_Skill1_Name);
+			
+		} else if (Random.Range (1, 100) <= Skill2Rate) {
+			Debug.Log (Monsterdata.Mon_Skill2_Name);
+			
+		} else {
+			if (GameObject.Find ("Player(Clone)") != null) {
+				Debug.Log ("Monster Attack");
+				GameObject.Find ("Player(Clone)").GetComponent<BaseCharacter> ().SetDamage (monster.GetComponent<Monster> ().attackDamage);
+				animator.SetTrigger ("Attack");
+			}
+		}
+		/*
 		if (Random.Range (1, 100) <= Skill1Rate && SkillCondition (Monsterdata.Mon_Skill1_Name, 1)) {
 			Debug.Log (Monsterdata.Mon_Skill1_Name);
 
@@ -58,7 +72,7 @@ public class EnemyAI : MonoBehaviour {
 				GameObject.Find ("Player(Clone)").GetComponent<BaseCharacter> ().SetDamage (monster.GetComponent<Monster> ().attackDamage);
 				animator.SetTrigger ("Attack");
 			}
-		}
+		}*/
 	}
 
 	//not implemented
@@ -104,19 +118,29 @@ public class EnemyAI : MonoBehaviour {
 		if (GetComponent<MonsterSkillConditionLoad> ().Find_UseCondition (ConditionName).TargetState != "N/A") {
 			//if player's state satisfy condition return true
 
-		} else if (GetComponent<MonsterSkillConditionLoad> ().Find_UseCondition (ConditionName).HpBelowN >0 ) {
+		} 
+		else if (GetComponent<MonsterSkillConditionLoad> ().Find_UseCondition (ConditionName).HpBelowN >0 ) 
+		{
 			return (GameObject.Find ("Player(Clone)").GetComponent<BaseCharacter> ().HP
 			        <=GetComponent<MonsterSkillConditionLoad> ().Find_UseCondition (ConditionName).HpBelowN);
-		} else if (GetComponent<MonsterSkillConditionLoad> ().Find_UseCondition (ConditionName).HpMoreN >0) {
+		} 
+		else if (GetComponent<MonsterSkillConditionLoad> ().Find_UseCondition (ConditionName).HpMoreN >0)
+		{
 			return(GameObject.Find ("Player(Clone)").GetComponent<BaseCharacter> ().HP
 			       >=GetComponent<MonsterSkillConditionLoad> ().Find_UseCondition (ConditionName).HpBelowN);
-		} else if (GetComponent<MonsterSkillConditionLoad> ().Find_UseCondition (ConditionName).Actionlimit != "N/A") {
+		} 
+		else if (GetComponent<MonsterSkillConditionLoad> ().Find_UseCondition (ConditionName).Actionlimit != "N/A") 
+		{
 			//if player's Action is limited return true
 
-		} else if (GetComponent<MonsterSkillConditionLoad> ().Find_UseCondition (ConditionName).TargetNumber >0) {
+		} 
+		else if (GetComponent<MonsterSkillConditionLoad> ().Find_UseCondition (ConditionName).TargetNumber >0)
+		{
 			//not implemented
 
-		} else if (GetComponent<MonsterSkillConditionLoad> ().Find_UseCondition (ConditionName).RandomRate >0) {
+		} 
+		else if (GetComponent<MonsterSkillConditionLoad> ().Find_UseCondition (ConditionName).RandomRate >0)
+		{
 			return(Random.Range (1,100)<=GetComponent<MonsterSkillConditionLoad> ().Find_UseCondition (ConditionName).RandomRate);
 
 		}
