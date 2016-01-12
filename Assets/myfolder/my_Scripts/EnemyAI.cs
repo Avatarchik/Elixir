@@ -32,7 +32,6 @@ public class EnemyAI : MonoBehaviour {
     }
 	void AttackAlly(Monster monster){
 		Animator animator=monster.GetComponent<Animator>();
-		Debug.Log (GameObject.Find ("Player(Clone)"));
 		if(GameObject.Find ("Player(Clone)")!=null)
 		{
 			Debug.Log ("Monster Attack");
@@ -40,7 +39,38 @@ public class EnemyAI : MonoBehaviour {
 			animator.SetTrigger("Attack");
 		}
 	}
-	void useSkill(){
+	void SelectAct(Monster monster){
+		int Skill1Rate=70;
+		int Skill2Rate=15;
+		Animator animator=monster.GetComponent<Animator>();
+
+		if (Random.Range (1, 100) <= Skill1Rate&&Skill1Condition(monster))
+		{
+			//skill1
+		}
+		else if(Random.Range (1,100)<=Skill2Rate&&Skill2Condition(monster))
+		{
+			//skill2
+		}
+		else
+		{
+			if(GameObject.Find ("Player(Clone)")!=null)
+			{
+				Debug.Log ("Monster Attack");
+				GameObject.Find ("Player(Clone)").GetComponent<BaseCharacter> ().SetDamage (monster.GetComponent<Monster> ().attackDamage);
+				animator.SetTrigger("Attack");
+			}
+		}
+	}
+
+	//not implemented
+	bool Skill1Condition(Monster monster)
+	{
+		return true;
+	}
+	bool Skill2Condition(Monster monster)
+	{
+		return true;
 	}
 
 }
