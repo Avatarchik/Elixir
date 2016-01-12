@@ -41,8 +41,11 @@ public class EnemyAI : MonoBehaviour {
 	}
 	void SelectAct(Monster monster){
 		baseMonster Monsterdata = monster.GetComponent<InfoMonster> ().MonsterInfo;
+		Debug.Log (Monsterdata);
 		double Skill1Rate = Monsterdata.Mon_Skill1_Rate;
+		Debug.Log (Skill1Rate);
 		double Skill2Rate = Monsterdata.Mon_Skill2_Rate;
+		Debug.Log (Skill2Rate);
 		Animator animator=monster.GetComponent<Animator>();
 
 		if (Random.Range (1, 100) <= Skill1Rate && SkillCondition (Monsterdata.Mon_Skill1_Name, 1)) {
@@ -63,7 +66,7 @@ public class EnemyAI : MonoBehaviour {
 	//not implemented
 	bool SkillCondition(string SkillName, int SkillNum)
 	{
-		Debug.Log (GetComponent<MonsterSkillLoad> ().Find_UseCondition1_1 (SkillName).MonsterSkillName);
+		Debug.Log (GetComponent<MonsterSkillLoad> ().Find_MonsterSkillID(SkillName));
 
 
 
