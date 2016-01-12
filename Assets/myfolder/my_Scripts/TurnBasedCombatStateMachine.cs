@@ -37,7 +37,6 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
         return (turnCount >= 2);
     }
 
-
 	void Start () {
 		currentState = BattleStates.START;
 	}
@@ -54,6 +53,10 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
 			    currentState=BattleStates.PLAYERCHOICE;
 			    break;
 		    case (BattleStates.PLAYERCHOICE):
+                GameObject.Find("Player(Clone)").GetComponent<BaseCharacter>().ActivateBuff();
+                GameObject.Find("Player(Clone)").GetComponent<BaseCharacter>().ReduceBuffTurn();
+                GameObject.Find("Player(Clone)").GetComponent<BaseCharacter>().RemoveBuff();
+
                 GameObject.Find ("Hands").GetComponent<HandSet>().CardSet();
                 currentState = BattleStates.IDLE;
                 break;

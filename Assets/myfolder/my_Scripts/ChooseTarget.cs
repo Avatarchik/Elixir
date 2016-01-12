@@ -54,7 +54,7 @@ public class ChooseTarget : MonoBehaviour {
 
         if (targetType == "Ally")
         {
-            HealAlly();
+            TargetAlly();
         }
         if (targetType == "Enemy" && targetRange == "Single")//When target is Single
         {
@@ -228,7 +228,7 @@ public class ChooseTarget : MonoBehaviour {
             
         }
     }
-    void HealAlly()
+    void TargetAlly()
     {
         float criticalRate;
         GameObject Ally = GameObject.Find("Player(Clone)");
@@ -245,6 +245,17 @@ public class ChooseTarget : MonoBehaviour {
         {
             criticalRate = 1f;
         }
-        selectedAlly.GetComponent<BaseCharacter>().SetHeal((int)(currentSelectedCard.GetComponent<InfoCard>().Card.Card_Heal * criticalRate));
+
+        if(currentSelectedCard.GetComponent<InfoCard>().Card.Card_BuffName == "Dodge")
+        {
+            Buff buff = new Buff(BuffName.Dodge, currentSelectedCard.GetComponent<InfoCard>().Card.Card_BuffTurn - 1);
+            selectedAlly.GetComponent<BaseCharacter>().dodgeRate = (int)currentSelectedCard.GetComponent<InfoCard>().Card.Card_BuffRate;
+            selectedAlly.GetComponent<BaseCharacter>().AddBuff(buff);
+        }
+        if(currentSelectedCard.GetComponent<InfoCard>().Card.Card_Heal > 0)
+        {
+            selectedAlly.GetComponent<BaseCharacter>().SetHeal((int)(currentSelectedCard.GetComponent<InfoCard>().Card.Card_Heal * criticalRate));
+        }
+        
     }
 }

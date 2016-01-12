@@ -10,7 +10,8 @@ namespace EnumsAndClasses
 
     public enum BuffName
     {
-        None
+        None,
+        Dodge
     }
 
     public enum DebuffName
@@ -54,7 +55,13 @@ namespace EnumsAndClasses
         public BuffName GetBuffname()
         {
             return name;
-        } 
+        }
+
+        public int RemainTurn
+        {
+            get { return remainTurn; }
+            set { remainTurn = value; }
+        }
     }
 
     public class Debuff
