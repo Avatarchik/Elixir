@@ -44,33 +44,27 @@ public class EnemyAI : MonoBehaviour {
 		int Skill2Rate=15;
 		Animator animator=monster.GetComponent<Animator>();
 
-		if (Random.Range (1, 100) <= Skill1Rate&&Skill1Condition(monster))
-		{
+		if (Random.Range (1, 100) <= Skill1Rate && SkillCondition (monster, 1)) {
 			//skill1
 
-		}
-		else if(Random.Range (1,100)<=Skill2Rate&&Skill2Condition(monster))
-		{
+		} else if (Random.Range (1, 100) <= Skill2Rate && SkillCondition (monster, 2)) {
 			//skill2
-		}
-		else
-		{
-			if(GameObject.Find ("Player(Clone)")!=null)
-			{
+
+		} else {
+			if (GameObject.Find ("Player(Clone)") != null) {
 				Debug.Log ("Monster Attack");
 				GameObject.Find ("Player(Clone)").GetComponent<BaseCharacter> ().SetDamage (monster.GetComponent<Monster> ().attackDamage);
-				animator.SetTrigger("Attack");
+				animator.SetTrigger ("Attack");
 			}
 		}
 	}
 
 	//not implemented
-	bool Skill1Condition(Monster monster)
+	bool SkillCondition(Monster monster, int num)
 	{
-		return true;
-	}
-	bool Skill2Condition(Monster monster)
-	{
+
+
+
 		return true;
 	}
 
