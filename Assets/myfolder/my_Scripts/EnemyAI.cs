@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -47,6 +47,7 @@ public class EnemyAI : MonoBehaviour {
 		if (Random.Range (1, 100) <= Skill1Rate&&Skill1Condition(monster))
 		{
 			//skill1
+
 		}
 		else if(Random.Range (1,100)<=Skill2Rate&&Skill2Condition(monster))
 		{
