@@ -18,6 +18,8 @@ public class Monster : MonoBehaviour {
     public int liquidStateValue;
     public int gasStateValue;
 
+	public baseMonster monsterInfo;
+
     List<Buff> buffs = new List<Buff>();
     List<Debuff> debuffs = new List<Debuff>();
 

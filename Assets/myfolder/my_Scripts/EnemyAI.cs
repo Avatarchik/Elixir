@@ -35,19 +35,20 @@ public class EnemyAI : MonoBehaviour {
 		if(GameObject.Find ("Player(Clone)")!=null)
 		{
 			Debug.Log ("Monster Attack");
-		GameObject.Find ("Player(Clone)").GetComponent<BaseCharacter> ().SetDamage (monster.GetComponent<Monster> ().attackDamage);
+			GameObject.Find ("Player(Clone)").GetComponent<BaseCharacter> ().SetDamage (monster.GetComponent<Monster> ().attackDamage);
 			animator.SetTrigger("Attack");
 		}
 	}
 	void SelectAct(Monster monster){
-		int Skill1Rate=70;
-		int Skill2Rate=15;
+		baseMonster Monsterdata = monster.GetComponent<InfoMonster> ().MonsterInfo;
+		double Skill1Rate = Monsterdata.Mon_Skill1_Rate;
+		double Skill2Rate = Monsterdata.Mon_Skill2_Rate;
 		Animator animator=monster.GetComponent<Animator>();
 
-		if (Random.Range (1, 100) <= Skill1Rate && SkillCondition (monster, 1)) {
+		if (Random.Range (1, 100) <= Skill1Rate && SkillCondition (Monsterdata.Mon_Skill1_Name, 1)) {
 			//skill1
 
-		} else if (Random.Range (1, 100) <= Skill2Rate && SkillCondition (monster, 2)) {
+		} else if (Random.Range (1, 100) <= Skill2Rate && SkillCondition (Monsterdata.Mon_Skill2_Name, 2)) {
 			//skill2
 
 		} else {
@@ -60,8 +61,9 @@ public class EnemyAI : MonoBehaviour {
 	}
 
 	//not implemented
-	bool SkillCondition(Monster monster, int num)
+	bool SkillCondition(string SkillName, int SkillNum)
 	{
+		GetComponent<MonsterSkillConditionLoad> ().Find_UseCondition (SkillName);
 
 
 
