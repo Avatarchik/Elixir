@@ -195,9 +195,10 @@ public class ChooseTarget : MonoBehaviour {
                 int debuffDamage = currentSelectedCard.GetComponent<InfoCard>().Card.Card_DotDamage;
                 Debuff debuff = new Debuff(DebuffName.DoteDamage, debuffTurn, debuffDamage);
                 selectedEnemy[i].GetComponent<Monster>().SetDamage(debuffDamage);//Inflict damage immediately in this turn
-                selectedEnemy[i].GetComponent<Monster>().AddDebuff(debuff);//Add debuff to monster
+                //selectedEnemy[i].GetComponent<Monster>().AddDebuff(debuff);//Add debuff to monster
+                selectedEnemy[i].GetComponent<Monster>().AddDotDamage(debuff);//Add debuff to monster
 
-                selectedEnemy[i].transform.Find("dotDamageIcon").gameObject.SetActive(true);//Activate dotDamageIcon
+                //selectedEnemy[i].transform.Find("dotDamageIcon").gameObject.SetActive(true);//Activate dotDamageIcon
             }
             //Stun
 			if(currentSelectedCard.GetComponent<InfoCard>().Card.Card_DebuffName=="Stun")
@@ -213,18 +214,20 @@ public class ChooseTarget : MonoBehaviour {
                 if(chance <= stunRate)
                 {
                     Debug.Log("Stun Success");
-                    selectedEnemy[i].transform.Find("stun").gameObject.SetActive(true);
-                    selectedEnemy[i].GetComponent<Monster>().AddDebuff (new Debuff(EnumsAndClasses.DebuffName.Stun,currentSelectedCard.GetComponent<InfoCard>().Card.Card_DebuffTurn));
+                    Debuff debuff = new Debuff(DebuffName.DoteDamage, currentSelectedCard.GetComponent<InfoCard>().Card.Card_DebuffTurn);
+                    selectedEnemy[i].GetComponent<Monster>().AddStun(debuff);
+                    //selectedEnemy[i].transform.Find("stun").gameObject.SetActive(true);
+                    //selectedEnemy[i].GetComponent<Monster>().AddDebuff (new Debuff(EnumsAndClasses.DebuffName.Stun,currentSelectedCard.GetComponent<InfoCard>().Card.Card_DebuffTurn));
                 }
 			}
 
             //Check if Enemy's hp = 0
             //If so, KILL IT!
             
-            if (selectedEnemy[i].GetComponent<Monster>().hp == 0)
-            {
-                Destroy(selectedEnemy[i]);
-            }
+            //if (selectedEnemy[i].GetComponent<Monster>().hp == 0)
+            //{
+            //    Destroy(selectedEnemy[i]);
+            //}
             
         }
     }

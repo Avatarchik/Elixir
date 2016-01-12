@@ -53,6 +53,15 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
 			    currentState=BattleStates.PLAYERCHOICE;
 			    break;
 		    case (BattleStates.PLAYERCHOICE):
+                //Reduce enemy stun counter after EnemyTurn
+                GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
+                foreach (GameObject monster in monsters)
+                {
+                    monster.GetComponent<Monster>().ReduceStunTurn();
+                    monster.GetComponent<Monster>().ActivateStun();
+                    monster.GetComponent<Monster>().ReduceDotDamageTurn();
+                }
+
                 GameObject.Find("Player(Clone)").GetComponent<BaseCharacter>().ActivateBuff();
                 GameObject.Find("Player(Clone)").GetComponent<BaseCharacter>().ReduceBuffTurn();
                 GameObject.Find("Player(Clone)").GetComponent<BaseCharacter>().RemoveBuff();
@@ -69,7 +78,12 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
                 {
                     Destroy(chCount.transform.GetChild(i).gameObject);
                 }
-
+                GameObject[] monsters2 = GameObject.FindGameObjectsWithTag("Monster");
+                foreach (GameObject monster in monsters2)
+                {
+                    monster.GetComponent<Monster>().ActivateDotDamage();
+                }
+                /*
                 //Inflict Debuff(dot damage) in the beginning of Enemy turn
                 GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
                 foreach(GameObject monster in monsters)
@@ -80,7 +94,7 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
                     monster.GetComponent<Monster>().ReduceDebuffTurn();//ReduceTurn after inflicting Dot Damage
                     monster.GetComponent<Monster>().RemoveDebuff();
                 }
-
+                */
                 StartCoroutine(GameObject.Find ("MonsterManager").GetComponent<EnemyAI>().EnemyActChoice(GameObject.FindGameObjectsWithTag("Monster")));
                 break;
             case (BattleStates.IDLE):
