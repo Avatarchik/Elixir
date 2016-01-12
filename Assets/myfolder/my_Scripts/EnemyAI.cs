@@ -4,26 +4,25 @@ using System.Collections.Generic;
 
 public class EnemyAI : MonoBehaviour {
 
-
 	float EnemyBehaviourBeforeDelay = 1.0f;
 	float EnemyBehaviourAfterDelay=1.0f;
 
-	public IEnumerator EnemyActChoice(List<Monster> monsters)
+	public IEnumerator EnemyActChoice(GameObject[] monsters)
 	{
-
+        Debug.Log("Enemy count: " + monsters.Length);
 		GameObject.Find ("GameManager").GetComponent<TurnBasedCombatStateMachine> ().currentState=TurnBasedCombatStateMachine.BattleStates.IDLE;
 		Debug.Log ("Coroutine is started");
-		foreach (Monster monster in monsters)
+		foreach (GameObject monster in monsters)
 		{
 			Debug.Log ("Monster Action");
-            if(monster.stunned == true)
+            if(monster.GetComponent<Monster>().stunned == true)
             {
                 Debug.Log("Monster is stunned. Does not attack.");
             }
             else
             {
                 yield return new WaitForSeconds(EnemyBehaviourBeforeDelay);
-			    AttackAlly(monster);
+			    AttackAlly(monster.GetComponent<Monster>());
 			    yield return new WaitForSeconds(EnemyBehaviourAfterDelay);
             }
 			

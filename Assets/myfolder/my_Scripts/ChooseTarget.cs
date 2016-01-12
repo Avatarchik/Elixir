@@ -205,8 +205,8 @@ public class ChooseTarget : MonoBehaviour {
                 {
                     stunRate += 10f;
                 }
-                //int chance = rand.Next(1, 101);
-                int chance = 20;
+                int chance = rand.Next(1, 101);
+                //int chance = 20;
                 Debug.Log("Stun Rate: " + stunRate + ", chance: " + chance);
                 if(chance <= stunRate)
                 {
