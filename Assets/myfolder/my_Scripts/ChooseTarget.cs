@@ -206,10 +206,12 @@ public class ChooseTarget : MonoBehaviour {
                     stunRate += 10f;
                 }
                 int chance = rand.Next(1, 101);
+                //int chance = 20;
                 Debug.Log("Stun Rate: " + stunRate + ", chance: " + chance);
                 if(chance <= stunRate)
                 {
                     Debug.Log("Stun Success");
+                    selectedEnemy[i].transform.Find("stun").gameObject.SetActive(true);
                     selectedEnemy[i].GetComponent<Monster>().AddDebuff (new Debuff(EnumsAndClasses.DebuffName.Stun,currentSelectedCard.GetComponent<InfoCard>().Card.Card_DebuffTurn));
                 }
 			}

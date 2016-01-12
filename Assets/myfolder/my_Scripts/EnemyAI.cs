@@ -4,23 +4,32 @@ using System.Collections.Generic;
 
 public class EnemyAI : MonoBehaviour {
 
+	float EnemyBehaviourBeforeDelay = 1.0f;
+	float EnemyBehaviourAfterDelay=1.0f;
 
-	float EnemyBehaviourBeforeDelay = 3.0f;
-	float EnemyBehaviourAfterDelay=5.0f;
-
-	public IEnumerator EnemyActChoice(List<Monster> monsters)
+	public IEnumerator EnemyActChoice(GameObject[] monsters)
 	{
-
+        Debug.Log("Enemy count: " + monsters.Length);
 		GameObject.Find ("GameManager").GetComponent<TurnBasedCombatStateMachine> ().currentState=TurnBasedCombatStateMachine.BattleStates.IDLE;
 		Debug.Log ("Coroutine is started");
-		foreach (Monster monster in monsters)
+		foreach (GameObject monster in monsters)
 		{
 			Debug.Log ("Monster Action");
-			yield return new WaitForSeconds(EnemyBehaviourBeforeDelay);
-			AttackAlly(monster);
-			yield return new WaitForSeconds(EnemyBehaviourAfterDelay);
+            if(monster.GetComponent<Monster>().stunned == true)
+            {
+                Debug.Log("Monster is stunned. Does not attack.");
+            }
+            else
+            {
+                yield return new WaitForSeconds(EnemyBehaviourBeforeDelay);
+			    AttackAlly(monster.GetComponent<Monster>());
+			    yield return new WaitForSeconds(EnemyBehaviourAfterDelay);
+            }
+			
 		}
-	}
+        GameObject.Find("GameManager").GetComponent<TurnBasedCombatStateMachine>().currentState = TurnBasedCombatStateMachine.BattleStates.PLAYERCHOICE;
+        yield break;
+    }
 	void AttackAlly(Monster monster){
 		Animator animator=monster.GetComponent<Animator>();
 		Debug.Log (GameObject.Find ("Player(Clone)"));
@@ -31,4 +40,7 @@ public class EnemyAI : MonoBehaviour {
 			animator.SetTrigger("Attack");
 		}
 	}
+	void useSkill(){
+	}
+
 }

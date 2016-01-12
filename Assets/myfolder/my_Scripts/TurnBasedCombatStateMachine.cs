@@ -60,6 +60,13 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
 		    case (BattleStates.ENEMYCHOICE):
                 Debug.Log("Enemy Turn Reached");
 
+                //Functions that delete all cards in hand (temporary)
+                GameObject chCount = GameObject.Find("Canvas").transform.FindChild("Hands").gameObject;
+                for(int i = 0; i < chCount.transform.childCount; i++)
+                {
+                    Destroy(chCount.transform.GetChild(i).gameObject);
+                }
+
                 //Inflict Debuff(dot damage) in the beginning of Enemy turn
                 GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
                 foreach(GameObject monster in monsters)
@@ -71,14 +78,7 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
                     monster.GetComponent<Monster>().RemoveDebuff();
                 }
 
-			    StartCoroutine(GameObject.Find ("MonsterManager").GetComponent<EnemyAI>().EnemyActChoice(GameObject.Find("MonsterManager").GetComponent<MonsterManager>().Monsters));
-                //Functions that delete all cards in hand (temporary)
-                GameObject chCount = GameObject.Find("Canvas").transform.FindChild("Hands").gameObject;
-                for(int i = 0; i < chCount.transform.childCount; i++)
-                {
-                    Destroy(chCount.transform.GetChild(i).gameObject);
-                }
-                //currentState = BattleStates.PLAYERCHOICE;
+                StartCoroutine(GameObject.Find ("MonsterManager").GetComponent<EnemyAI>().EnemyActChoice(GameObject.FindGameObjectsWithTag("Monster")));
                 break;
             case (BattleStates.IDLE):
                 break;

@@ -55,31 +55,15 @@ public class baseMonster {
         }
     }
 
-    public string Mon_Name
-    {
-        get
-        {
-            return mon_Name;
-        }
+    public string Mon_Name {
+		get {
+			return mon_Name;
+		}
 
-        set
-        {
-            mon_Name = value;
-        }
-    }
-
-    public string Mon_Group
-    {
-        get
-        {
-            return mon_Group;
-        }
-
-        set
-        {
-            mon_Group = value;
-        }
-    }
+		set {
+			mon_Name = value;
+		}
+	}
 
     public string Mon_ChemicalSeries
     {
