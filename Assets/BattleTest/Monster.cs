@@ -164,6 +164,7 @@ public class Monster : MonoBehaviour {
 
     public void ActivateDebuff()
     {
+        bool tempStun= false;
         foreach (Debuff debuff in debuffs)
         {
 
@@ -176,9 +177,18 @@ public class Monster : MonoBehaviour {
             if (debuff.GetDebuffname().Equals(DebuffName.Stun))
             {
                 //Stun Enemy
-                stunned = true;
+                tempStun = true;
             }
-
+        }
+        if (tempStun)
+        {
+            this.transform.Find("stun").gameObject.SetActive(true);
+            stunned = true;
+        }
+        else
+        {
+            this.transform.Find("stun").gameObject.SetActive(false);
+            stunned = false;
         }
     }
     
@@ -195,7 +205,6 @@ public class Monster : MonoBehaviour {
 
     public void RemoveDebuff()
     {
-        // FIXME : Not implemented.
         List<Debuff> debuffsToDestroy = new List<Debuff>();
         foreach (Debuff debuff in debuffs)
         {
