@@ -31,6 +31,7 @@ public class EnemyAI : MonoBehaviour {
         GameObject.Find("GameManager").GetComponent<TurnBasedCombatStateMachine>().currentState = TurnBasedCombatStateMachine.BattleStates.PLAYERCHOICE;
         yield break;
     }
+
 	void AttackAlly(Monster monster){
 		Animator animator=monster.GetComponent<Animator>();
 		if(GameObject.Find ("Player(Clone)")!=null)
@@ -40,6 +41,10 @@ public class EnemyAI : MonoBehaviour {
 			animator.SetTrigger("Attack");
 		}
 	}
+
+	void UseSkill(Monster monster,string SkillName){
+
+	}
 	void SelectAct(Monster monster){
 		baseMonster Monsterdata = monster.GetComponent<InfoMonster> ().MonsterInfo;
 		double Skill1Rate = Monsterdata.Mon_Skill1_Rate;
@@ -48,9 +53,14 @@ public class EnemyAI : MonoBehaviour {
 
 
 		if (Random.Range (1, 100) <= Skill1Rate && SkillCondition (Monsterdata.Mon_Skill1_Name, 1)) {
+
+			UseSkill(monster,Monsterdata.Mon_Skill1_Name);
 			Debug.Log (Monsterdata.Mon_Skill1_Name);
 
+
 		} else if (Random.Range (1, 100) <= Skill2Rate && SkillCondition (Monsterdata.Mon_Skill2_Name, 2)) {
+
+			UseSkill(monster,Monsterdata.Mon_Skill2_Name);
 			Debug.Log (Monsterdata.Mon_Skill2_Name);
 
 		} else {
@@ -105,7 +115,26 @@ public class EnemyAI : MonoBehaviour {
 
 		if (GetComponent<MonsterSkillConditionLoad> ().Find_UseCondition (ConditionName).TargetState != "N/A")
 		{
-			//if player's state satisfy condition return true
+			string targetState = GetComponent<MonsterSkillConditionLoad> ().Find_UseCondition (ConditionName).TargetState;
+
+			ChemicalStates currentState=GameObject.Find ("Player(Clone)").GetComponent<BaseCharacter>().currentChemicalState;
+
+			switch(targetState){
+
+			case "Solid":
+				return(currentState==ChemicalStates.SOLID);
+			case "Liquid":
+				return(currentState==ChemicalStates.LIQUID);
+			case "Gas":
+				return(currentState==ChemicalStates.GAS);
+			case "NoneSolid":
+				return(currentState!=ChemicalStates.SOLID);
+			case "NoneLiquid":
+				return(currentState!=ChemicalStates.LIQUID);
+			case "NoneGas":
+				return(currentState!=ChemicalStates.GAS);
+			}
+
 
 		} 
 		else if (GetComponent<MonsterSkillConditionLoad> ().Find_UseCondition (ConditionName).HpBelowN >0 ) 

@@ -9,6 +9,7 @@ public class MonsterSkillConditionLoad:MonoBehaviour{
 	
 	void Awake(){
 		Load (file);
+
 	}
 
 
