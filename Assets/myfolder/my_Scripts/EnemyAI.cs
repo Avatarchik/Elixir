@@ -46,20 +46,7 @@ public class EnemyAI : MonoBehaviour {
 		double Skill2Rate = Monsterdata.Mon_Skill2_Rate;
 		Animator animator=monster.GetComponent<Animator>();
 
-		if (Random.Range (1, 100) <= Skill1Rate ) {
-			Debug.Log (Monsterdata.Mon_Skill1_Name);
-			
-		} else if (Random.Range (1, 100) <= Skill2Rate) {
-			Debug.Log (Monsterdata.Mon_Skill2_Name);
-			
-		} else {
-			if (GameObject.Find ("Player(Clone)") != null) {
-				Debug.Log ("Monster Attack");
-				GameObject.Find ("Player(Clone)").GetComponent<BaseCharacter> ().SetDamage (monster.GetComponent<Monster> ().attackDamage);
-				animator.SetTrigger ("Attack");
-			}
-		}
-		/*
+
 		if (Random.Range (1, 100) <= Skill1Rate && SkillCondition (Monsterdata.Mon_Skill1_Name, 1)) {
 			Debug.Log (Monsterdata.Mon_Skill1_Name);
 
@@ -72,7 +59,7 @@ public class EnemyAI : MonoBehaviour {
 				GameObject.Find ("Player(Clone)").GetComponent<BaseCharacter> ().SetDamage (monster.GetComponent<Monster> ().attackDamage);
 				animator.SetTrigger ("Attack");
 			}
-		}*/
+		}
 	}
 
 	//not implemented
@@ -94,13 +81,15 @@ public class EnemyAI : MonoBehaviour {
 		ConditionName2_1 = GetComponent<MonsterSkillLoad> ().Find_MonsterSkillID(SkillName).UseCondition2_1;
 		ConditionName2_2 = GetComponent<MonsterSkillLoad> ().Find_MonsterSkillID(SkillName).UseCondition2_2;
 
-		if (((ConditionName2_1=="N/A")&&(ConditionName2_2=="N/A"))||IdentifyCondition (ConditionName2_1) && IdentifyCondition (ConditionName2_2))
+		Debug.Log (!((ConditionName2_1 == "N/A") && (ConditionName2_2 == "N/A")));
+
+		if ((!((ConditionName2_1=="N/A")&&(ConditionName2_2=="N/A")))&&IdentifyCondition (ConditionName2_1) && IdentifyCondition (ConditionName2_2))
 			return true;
 
 		ConditionName3_1 = GetComponent<MonsterSkillLoad> ().Find_MonsterSkillID(SkillName).UseCondition3_1;
 		ConditionName3_2 = GetComponent<MonsterSkillLoad> ().Find_MonsterSkillID(SkillName).UseCondition3_2;
 
-		if (((ConditionName2_1=="N/A")&&(ConditionName2_2=="N/A"))||IdentifyCondition (ConditionName2_1) && IdentifyCondition (ConditionName2_2)) 
+		if ((!((ConditionName3_1=="N/A")&&(ConditionName3_2=="N/A")))&&IdentifyCondition (ConditionName3_1) && IdentifyCondition (ConditionName3_2)) 
 			return true;
 		return false;
 	
@@ -109,25 +98,30 @@ public class EnemyAI : MonoBehaviour {
 	bool IdentifyCondition(string ConditionName){
 		Debug.Log (ConditionName);
 
-
 		if (ConditionName == "Always"||ConditionName=="N/A")
 			return true;
 
 
 
-		if (GetComponent<MonsterSkillConditionLoad> ().Find_UseCondition (ConditionName).TargetState != "N/A") {
+		if (GetComponent<MonsterSkillConditionLoad> ().Find_UseCondition (ConditionName).TargetState != "N/A")
+		{
 			//if player's state satisfy condition return true
 
 		} 
 		else if (GetComponent<MonsterSkillConditionLoad> ().Find_UseCondition (ConditionName).HpBelowN >0 ) 
 		{
-			return (GameObject.Find ("Player(Clone)").GetComponent<BaseCharacter> ().HP
-			        <=GetComponent<MonsterSkillConditionLoad> ().Find_UseCondition (ConditionName).HpBelowN);
+			float TargetHp=GameObject.Find ("Player(Clone)").GetComponent<BaseCharacter> ().HP;
+			float TargetMaxHp=GameObject.Find ("Player(Clone)").GetComponent<BaseCharacter>().MAX_HP;
+			int percenthp=GetComponent<MonsterSkillConditionLoad> ().Find_UseCondition (ConditionName).HpBelowN;
+			return (TargetHp<=TargetMaxHp*percenthp/100);
 		} 
 		else if (GetComponent<MonsterSkillConditionLoad> ().Find_UseCondition (ConditionName).HpMoreN >0)
 		{
-			return(GameObject.Find ("Player(Clone)").GetComponent<BaseCharacter> ().HP
-			       >=GetComponent<MonsterSkillConditionLoad> ().Find_UseCondition (ConditionName).HpBelowN);
+			float TargetHp=GameObject.Find ("Player(Clone)").GetComponent<BaseCharacter> ().HP;
+			float TargetMaxHp=GameObject.Find ("Player(Clone)").GetComponent<BaseCharacter>().MAX_HP;
+			int percenthp=GetComponent<MonsterSkillConditionLoad> ().Find_UseCondition (ConditionName).HpMoreN;
+			return (TargetHp>=TargetMaxHp*percenthp/100);
+
 		} 
 		else if (GetComponent<MonsterSkillConditionLoad> ().Find_UseCondition (ConditionName).Actionlimit != "N/A") 
 		{
