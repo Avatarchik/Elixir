@@ -69,7 +69,12 @@ public class ChooseTarget : MonoBehaviour {
         {
             GameObject.Find("GameManager").GetComponent<TurnBasedCombatStateMachine>().incrementTurn();
             Debug.Log("Turn incremented");
+            GameObject.Find("AddTurn").transform.Find("1More").gameObject.SetActive(true);
             attackedCritical = false;
+        }
+        else
+        {
+            GameObject.Find("AddTurn").transform.Find("1More").gameObject.SetActive(false);
         }
         
 
