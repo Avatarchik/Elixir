@@ -25,7 +25,7 @@ public class PopupManager : MonoBehaviour {
 	public void CreateMonsterSkillPopup(Transform monsterTransform, string skillname)
 	{
 		GameObject MonsterSkillGameObject = (GameObject)Instantiate(MonsterSkillPopupPrefab,
-		                                                      monsterTransform.position+new Vector3(-1f,1.5f,0),
+		                                                      monsterTransform.position+new Vector3(-1.5f,1.2f,0),
 		                                                      monsterTransform.rotation);
 		MonsterSkillGameObject.transform.SetParent(monsterTransform);
 		Renderer renderer = MonsterSkillGameObject.GetComponent<Renderer> ();

@@ -32,9 +32,9 @@ public class EnemyAI : MonoBehaviour {
         yield break;
     }
 
-	void UseSkill(GameObject monster,string SkillName){
+	void UseSkill(GameObject monster,string SkillName, string KoreanSkillName){
 		Debug.Log (monster + " use " + SkillName);
-		GameObject.Find ("GameManager").GetComponent<PopupManager>().CreateMonsterSkillPopup (monster.transform, SkillName);
+		GameObject.Find ("GameManager").GetComponent<PopupManager>().CreateMonsterSkillPopup (monster.transform,KoreanSkillName);
 	}
 	void UseAttack(GameObject monster){
 		Animator animator=monster.GetComponent<Animator>();
@@ -49,16 +49,17 @@ public class EnemyAI : MonoBehaviour {
 		baseMonster Monsterdata = monster.GetComponent<InfoMonster> ().MonsterInfo;
 		double Skill1Rate = Monsterdata.Mon_Skill1_Rate;
 		double Skill2Rate = Monsterdata.Mon_Skill2_Rate;
-
+		string koreanSkillName;
 
 		if (Random.Range (1, 100) <= Skill1Rate && SkillCondition (Monsterdata.Mon_Skill1_Name, 1)) {
 
-			UseSkill(monster,Monsterdata.Mon_Skill1_Name);
+			koreanSkillName=GetComponent<MonsterSkillLoad>().Find_MonsterSkillID(Monsterdata.Mon_Skill1_Name).MonsterSkillName;
+			UseSkill(monster,Monsterdata.Mon_Skill1_Name,koreanSkillName);
 
 
 		} else if (Random.Range (1, 100) <= Skill2Rate && SkillCondition (Monsterdata.Mon_Skill2_Name, 2)) {
-
-			UseSkill(monster,Monsterdata.Mon_Skill2_Name);
+			koreanSkillName=GetComponent<MonsterSkillLoad>().Find_MonsterSkillID(Monsterdata.Mon_Skill2_Name).MonsterSkillName;
+			UseSkill(monster,Monsterdata.Mon_Skill2_Name,koreanSkillName);
 
 		} else {
 
