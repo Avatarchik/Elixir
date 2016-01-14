@@ -15,7 +15,7 @@ public class HandSet : MonoBehaviour {
         
 	}
 	void Update(){
-		//Debug.Log (GameObject.Find ("GameManager").GetComponent<TurnBasedCombatStateMachine> ().currentState);
+
 	}
 	public void CardSet(){
 		CardSelect ();
@@ -51,16 +51,12 @@ public class HandSet : MonoBehaviour {
     
 	void CardDraw(){
         skillTextPanel.SetActive(true);
-		for (int i = 0; i < 4; i++)
+		skillTextPanel.GetComponentInChildren<Text>().text = "";
+        for (int i = 0; i < 4; i++)
         {
             cards[i].SetActive(true);
             cards[i].GetComponent<Button>().interactable = true;
             ApplyCardInfo(cards[i], indexesOfSelectedCard[i]);
         }
-        
-        // for (int i=0; i<=3; i++) {
-		// 	AddCards (number [i]);
-		// }
 	}
-
 }

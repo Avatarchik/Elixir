@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using EnumsAndClasses;
 
-public class CardChoice : MonoBehaviour{//, IPointerDownHandler{
+public class CardChoice : MonoBehaviour, IPointerEnterHandler{
 	public Sprite sprSelected;
 	public Sprite sprUnselected;
     
@@ -16,14 +16,11 @@ public class CardChoice : MonoBehaviour{//, IPointerDownHandler{
         turnBasedCombatStateMachine = GameObject.Find("GameManager").GetComponent<TurnBasedCombatStateMachine>();
 		GetComponent<Image> ().sprite = sprUnselected;
 	}
-	// public void OnPointerDown(PointerEventData eventData){
-    //     Debug.Log("OnPointerDown");
-    //     choosingManager.AttackMode = AttackMode.Card;
-    //     choosingManager.SelectedCard = this.gameObject;
-    //     Debug.Log("Card Activate: " + this.gameObject.GetComponent<InfoCard>().Card.Card_Name);
-    //     StartCoroutine(cardActivated());
-    //     Debug.Log("OnPointerDown Exit");
-    // }
+	public void OnPointerEnter(PointerEventData eventData){
+        string skillText = transform.FindChild("CardName").gameObject.GetComponent<Text>().text + "\n\n" +
+                           transform.FindChild("CardStatement").gameObject.GetComponent<Text>().text;
+        FindObjectOfType<HandSet>().skillTextPanel.GetComponentInChildren<Text>().text = skillText;
+    }
     
     public void ClickedCard(int indexInHand)
     {        
