@@ -9,7 +9,7 @@ public class Monster : MonoBehaviour {
     public int maxHp;
     public int hp;
     public int attackDamage;
-    public MonsterType type;
+    public string type;
     public bool stunned;
 
     public ChemicalStates currentChemicalState;
@@ -17,6 +17,7 @@ public class Monster : MonoBehaviour {
     public int solidStateValue;
     public int liquidStateValue;
     public int gasStateValue;
+    public ChemicalStates criticalTarget;
 
 	public baseMonster monsterInfo;
 
@@ -36,16 +37,17 @@ public class Monster : MonoBehaviour {
     // Apply default stats.
     public void SetStat ()
     {
-        this.maxHp = 20;
-        this.hp = maxHp;
-        this.attackDamage = 5;
-        this.type = MonsterType.None;
+        this.maxHp = this.GetComponent<InfoMonster>().MonsterInfo.Mon_HP;
+        this.hp = this.gameObject.GetComponent<InfoMonster>().MonsterInfo.Mon_HP;
+        this.attackDamage = (int)this.gameObject.GetComponent<InfoMonster>().MonsterInfo.Mon_AttackDamage;
+        this.type = this.gameObject.GetComponent<InfoMonster>().MonsterInfo.Mon_Type;
         this.stunned = false;
-        this.currentChemicalState = ChemicalStates.LIQUID;
+        this.currentChemicalState = this.gameObject.GetComponent<InfoMonster>().MonsterInfo.Mon_RoomTempStatus;
         this.currentChemicalStateValue = 1;
-        this.solidStateValue = 1;
-        this.liquidStateValue = 2;
-        this.gasStateValue = 3;
+        this.solidStateValue = this.gameObject.GetComponent<InfoMonster>().MonsterInfo.Mon_SolidGauge;
+        this.liquidStateValue = this.gameObject.GetComponent<InfoMonster>().MonsterInfo.Mon_LiquidGauge;
+        this.gasStateValue = this.gameObject.GetComponent<InfoMonster>().MonsterInfo.Mon_GasGauge;
+        this.criticalTarget = this.gameObject.GetComponent<InfoMonster>().MonsterInfo.Mon_CriticalTarget;
     }
     
     // Only apply image.
@@ -56,14 +58,14 @@ public class Monster : MonoBehaviour {
     }
     
     // Default image.
-    public void SetStat (int hp, int attackDamage, MonsterType type, int boilingPoint, int meltingPoint)
+    public void SetStat (int hp, int attackDamage, string type, int boilingPoint, int meltingPoint)
     {
         this.maxHp = hp;
         this.hp = maxHp;
         this.attackDamage = attackDamage;
         this.type = type;
     }
-    public void SetStat (string imagePath, int hp, int attackDamage, MonsterType type, int boilingPoint, int meltingPoint)
+    public void SetStat (string imagePath, int hp, int attackDamage, string type, int boilingPoint, int meltingPoint)
     {
         this.renderer.sprite = Resources.Load(imagePath, typeof(Sprite)) as Sprite;
         SetStat(hp, attackDamage, type, boilingPoint, meltingPoint);
@@ -379,7 +381,8 @@ public class Monster : MonoBehaviour {
     }
 
 	public void Dead(){
-		Destroy (this);
+        GameObject.Find("GameManager").GetComponent<TurnBasedCombatStateMachine>().dustCount += this.gameObject.GetComponent<InfoMonster>().MonsterInfo.Mon_GoldRate;
+		Destroy (this.gameObject);
 		Debug.Log (this + " is Dead.");
 	}
 	// Use this for initialization

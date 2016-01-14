@@ -1,0 +1,34 @@
+﻿ID,ExtName,Name,ChemicalSeries,Type,Description,Memo,Target,Range,CriticalTarget,AttackDamage,DamageIncrease,Heal,DebuffName,DebuffRate,DebuffRateIncrease,DebuffTurn,DotDamage,DotDamageTurn,BuffName,BuffRate,BuffTurn,BuffRateIncrease
+10001,가연성,CardH2101,H,H2,"수소에 불을 지피면 펑! 하고 AttackDamage만큼 피해를 주고, 물 카드를 랜덤으로 1장 즉시 사용한다.",단일공격+,Enemy,Single,Solid,10,2,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
+10002,닷지,CardH101,H,H,수소는 몹시 가벼워 BuffTurn턴 간 BuffRate 확률로 적의 공격을 피할 수 있다.,회피,Ally,N/A,Solid,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,Dodge,80,2,3
+10003,수소 폭탄,CardH102,H,H,"수소의 동위원소들이 핵융합반응을 하며 버섯구름을 만든다. 적 전체에게 AttackDamage만큼의 피해를 주지만, 낙진으로 아군도 15%의 피해를 입는다.",광역 공격,Enemy,Wide,Solid,8,1,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
+10004,다구리,CardH103,H,H,수소는 가장 흔한 원소다. 친구들과 함께 적 1명에게 AttackDamage만큼 피해를 준다.,단일 공격,Enemy,Single,Solid,15,3,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
+10005,산성비,CardH104,H,H,"비에 수소이온(H+)을 섞어 산성비로 만들어 적 전체에 뿌린다. 적은 AttackDamage만큼의 피해를 입고, DebuffTurn턴 간 DotDamage의 지속 피해를 입는다. ",광역 공격+,Enemy,Wide,Solid,5,1,N/A,DotDamage,N/A,N/A,N/A,2,2,N/A,N/A,N/A,N/A
+10006,쓰나미,CardH2O101,N/A,H2O,거대한 쓰나미를 일으켜 적 전체에 AttackDamage의 피해를 준다.,광역 공격,Enemy,Wide,Liquid,8,1,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
+10007,피카츄턴건,CardLi101,AlkaliMetal,Li,리튬 전지로 충전된 스턴건으로 AttackDamage의 피해를 주고 DebuffTurn간 기절시킨다.,단일 공격+,Enemy,Single,Liquid,6,1,N/A,Stun,50,2,1,N/A,N/A,N/A,N/A,N/A,N/A
+10008,피카챠,CardLi102,AlkaliMetal,Li,리튬 전지로 전기 자동차를 굴려 교통사고를 낸다. 적 전체에 AttackDamage의 피해를 준다.,광역 공격,Enemy,Wide,Liquid,6,1,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
+10009,정신 안정,CardLi103,AlkaliMetal,Li,조울증 치료제로 쓰이는 리튬은 마음을 안정시켜 회복을 돕는다. HP가 Heal만큼 회복된다.,치유,Ally,Single,Liquid,N/A,N/A,15,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
+10010,백만볼트,CardNa101,AlkaliMetal,Na,전기가 잘 통하는 전해질인 나트륨은 백만 볼트를 날려 AttackDamage의 데미지를 주고 DebuffRate의 확률로 DebuffTurn턴간 적을 기절시킨다.,단일 공격+,Enemy,Single,Gas,5,1,N/A,Stun,60,2,1,N/A,N/A,N/A,N/A,N/A,N/A
+10011,영양 보충,CardNa102,AlkaliMetal,Na,나트륨은 몸에 필수적이다. 영양을 보충하여 HP를 Heal만큼 회복한다.,치유,Ally,Single,Gas,N/A,N/A,15,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
+10012,포세이돈,CardNa103,AlkaliMetal,Na,바다에는 많은 나트륨이 포함되어 있다. 파도의 힘으로 부왁! 하고 모두를 쓸어버리고 AttackDamage의 피해를 준다. ,광역 공격,Enemy,Wide,Gas,6,1,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
+10013,공기 중에서 퍼엉!!,CardAlkaliMetal101,AlkaliMetal,N/A,적이나 내가 산소 카드를 사용하면 강렬하게 반응하여 적 전체에 AttackDamage의 광역 피해를 준다.,광역 공격,Enemy,Wide,Gas,6,1,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
+10014,물 속에서 퍼엉!!,CardAlkaliMetal101,AlkaliMetal,N/A,"적이나 내가 물 카드를 사용하면 강렬하게 반응하여 적 전체에 AttackDamage의 광역 피해를 주고, 랜덤 수소 카드 한 장을 즉시 사용한다. ",광역 공격,Enemy,Wide,Gas,10,1,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
+10015,고혈압,CardNaCl101,N/A,NaCl,소금을 과다섭취해서는 안된다. 고혈압이 2스택 쌓이면  AttackDamage만큼 급작스러운 피해를 입는다.,단일 공격,Enemy,Single,Solid,20,1,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
+10016,신경 마비,CardK101,AlkaliMetal,K,전해질인 칼륨은 몸 속의 신경 신호 전달에 필수적이다. 적의 전체 신경을 마비시켜 DebuffRate의 확률로 DebuffTurn턴간 마비시킨다.,마비,Enemy,Wide,Solid,N/A,N/A,N/A,Stun,80,2,1,N/A,N/A,N/A,N/A,N/A,N/A
+10017,영양 결핍,CardK102,AlkaliMetal,K,칼륨은 몸에 필수적이다. 적의 칼륨을 결핍시켜 DebuffTurn간 DotDamage만큼 지속 피해를 준다.,지속 피해,Enemy,Single,Solid,N/A,N/A,N/A,DotDamage,N/A,N/A,N/A,5,3,N/A,N/A,N/A,N/A
+10018,꽈당!,CardKOH101,N/A,KOH,수산화칼륨으로 만든 비누를 던져 적을 미끄러뜨려 AttackDamage의 피해를 입힌다.,단일 공격,Enemy,Single,Solid,15,1,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
+10019,똑딱똑딱,CardCs101,AlkaliMetal,Cs,1명의 적에게 세슘 원자시계를 단 시한폭탄을 설치한다. 정확히  Condition턴 후 폭발하여 AttackDamage만큼의 피해를 준다.,단일 공격,Enemy,Single,Solid,30,1,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
+10020,부드럽게,CardCs102,AlkaliMetal,Cs,"필드의 모든 유닛 온도를 상온으로 돌려 놓고, 고체인 모든 적에게 AttackDamage의 피해를 준다.",광역 공격,Enemy,N/A,Solid,8,1,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
+10021,물 속에서 펑!!,CardAlkaliEarthMetal101,AlkaliEarthMetal,N/A,"적이나 내가 물 카드를 사용하면 강하게 반응하여 1명의 적에게 AttackDamage의 피해를 주고, 랜덤 수소 카드 한 장을 즉시 사용한다. ",단일 공격,Enemy,Single,Solid,10,1,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
+10022,공기 속에서 펑!!,CardAlkaliEarthMetal101,AlkaliEarthMetal,N/A,적이나 내가 산소 카드를 사용하면 강하게 반응하여 1명의 적에게 AttackDamage의 피해를 준다.,단일 공격,Enemy,Single,Solid,10,1,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
+10023,단단하게,CardCa101,AlkaliEarthMetal,Ca,칼슘으로 골격을 강화하여 전투가 끝날때까지 최대 HP가 Heal만큼 상승한다.  ,치유,Ally,Single,Gas,N/A,N/A,5,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
+10024,대리석 벽,CardCaCO3101,N/A, CaCO3,대리석 벽을 세워 적 데미지의 ReflectPercent%만큼 반사한다.,실드,N/A,N/A,Gas,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
+10025,독성,CardHalogen101,Halogen,N/A,적을 할로겐 원소에 노출시키면 DebuffTurn턴 간 DotDamage의 피해를 입는다.,지속 피해,Enemy,Single,Solid,6,1,N/A,DotDamage,N/A,N/A,N/A,2,3,N/A,N/A,N/A,N/A
+10026,원소계의 일진,CardF2101,Halogen,F2,"반응성이 매우 높은 불소는 적 원소를 끌어다가 반응해버린다. AttackDamage의 피해를 주고, DebuffRate% 확률로 성질이 바뀌어 더 이상 암흑 원소가 아니게 된다.",단일 공격,Enemy,Single,Solid,5,1,N/A,Kill,10,1,N/A,N/A,N/A,N/A,N/A,N/A,N/A
+10027,흐물흐물,CardF2102,Halogen,F2,"적이나 내가 수소 카드를 사용하면, 불산이 되어 적을 녹이고 AttackDamage의 피해를 입힌다.",단일 공격,Enemy,Wide,Solid,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
+10028,악취,CardCl2101,Halogen,Cl2,자극적인 냄새로 적 전체의 의식을 DebuffRate%의 확률로 DebuffTurn턴 간 혼미하게 한다.,디버프,Enemy,Wide,Liquid,12,1,N/A,Stun,20,3,1,N/A,N/A,N/A,N/A,N/A,N/A
+10029,소독,CardCl2102,Halogen,Cl2,수돗물의 염소 소독은 전염병을 막아 준다. 아군의 디버프를 즉시 제거.,치유,Ally,Single,Liquid,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,PurfyDebuff,100,N/A,N/A
+10030,산화,CardCl2103,Halogen,Cl2,"전자친화도가 높은 염소는 적을 산화시켜버린다. AttackDamage의 피해를 주고, DebuffRate% 확률로 성질이 바뀌어 더 이상 암흑 원소가 아니게 된다.",단일 공격,Enemy,Single,Liquid,5,1,N/A,Kill,10,1,N/A,N/A,N/A,N/A,N/A,N/A,N/A
+10031,머스타드 가스,CardCl2104,Halogen,Cl2,"2차 대전 때 사용되었던 악명 높은 머스타드 가스를 살포하여, 적 전체에 AttackDamage의 피해를 주고 DebuffTurn턴 간 기절시킨다.",광역 공격+,Enemy,Wide,Liquid,5,1,N/A,Stun,20,3,1,N/A,N/A,N/A,N/A,N/A,N/A
+10032,갑상선종,Cardl104,Halogen,I,요오드 결핍으로 적을 갑상선종에 걸리게 하여 AttackDamage의 피해를 준다.,단일 공격,Enemy,Single,Gas,15,1,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
+10033,배제,CardNobleGas101,NobleGas,N/A,"적 전체를 Heat만큼 가열하고, CriticalTarget 상태인 모든 적에게 AttackDamage 만큼 피해를 준다.",광역 공격,Enemy,Wide,Liquid,5,1,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A

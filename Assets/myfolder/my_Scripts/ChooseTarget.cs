@@ -191,10 +191,10 @@ public class ChooseTarget : MonoBehaviour {
             //DotDamage
             if(currentSelectedCard.GetComponent<InfoCard>().Card.Card_DebuffName == "DoteDamage")
             {
-                int debuffTurn = currentSelectedCard.GetComponent<InfoCard>().Card.Card_DebuffTurn;
-                int debuffDamage = currentSelectedCard.GetComponent<InfoCard>().Card.Card_DotDamage;
-                Debuff debuff = new Debuff(DebuffName.DoteDamage, debuffTurn, debuffDamage);
-                selectedEnemy[i].GetComponent<Monster>().SetDamage(debuffDamage);//Inflict damage immediately in this turn
+                int DotDamageTurn = currentSelectedCard.GetComponent<InfoCard>().Card.Card_DotDamageTurn;
+                int DotDamage = currentSelectedCard.GetComponent<InfoCard>().Card.Card_DotDamage;
+                Debuff debuff = new Debuff(DebuffName.DoteDamage, DotDamageTurn, DotDamage);
+                selectedEnemy[i].GetComponent<Monster>().SetDamage(DotDamage);//Inflict damage immediately in this turn
                 //selectedEnemy[i].GetComponent<Monster>().AddDebuff(debuff);//Add debuff to monster
                 selectedEnemy[i].GetComponent<Monster>().AddDotDamage(debuff);//Add debuff to monster
 

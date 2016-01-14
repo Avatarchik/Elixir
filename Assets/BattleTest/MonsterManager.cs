@@ -52,15 +52,17 @@ public class MonsterManager : MonoBehaviour {
             monster.transform.position = positions[i];
             if (i%2 == 0)
             {
+                monster.GetComponent<InfoMonster>().MonsterInfo=GetComponent<MonsterLoad>().monsterList[0];
                 monster.GetComponent<Monster>().SetStat("MonsterImage/newWhite");
-				monster.GetComponent<InfoMonster>().MonsterInfo=GetComponent<MonsterLoad>().monsterList[0];
-                //Debug.Log("Respawn white enemy");
+				
+                Debug.Log("Respawn white enemy");
             }
             else
             {
+                monster.GetComponent<InfoMonster>().MonsterInfo=GetComponent<MonsterLoad>().monsterList[1];
                 monster.GetComponent<Monster>().SetStat();
-				monster.GetComponent<InfoMonster>().MonsterInfo=GetComponent<MonsterLoad>().monsterList[1];
-				//Debug.Log("Respawn red enemy");
+				
+				Debug.Log("Respawn red enemy");
             }
             
             monsters.Add(monster.GetComponent<Monster>());

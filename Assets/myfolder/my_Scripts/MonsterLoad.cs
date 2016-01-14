@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using EnumsAndClasses;
 
 public class MonsterLoad:MonoBehaviour
 {
@@ -34,9 +35,31 @@ public class MonsterLoad:MonoBehaviour
 			monster.Mon_Skill1_Rate = System.Convert.ToDouble(rowList[i].MonsterSkill1Rate);
 			monster.Mon_Skill2_Name = rowList[i].MonsterSkill2Name;
 			monster.Mon_Skill2_Rate = System.Convert.ToDouble(rowList[i].MonsterSkill2Rate);
-			monster.Mon_CriticalTarget = rowList[i].CriticalTarget;
-			monster.Mon_RoomTempStatus = rowList[i].RoomTemperatureStatus;
-			monster.Mon_SolidGauge = System.Convert.ToInt32(rowList[i].SolidGauge);
+            switch (rowList[i].CriticalTarget)
+            {
+                case "Solid":
+                    monster.Mon_CriticalTarget = ChemicalStates.SOLID;
+                    break;
+                case "Liquid":
+                    monster.Mon_CriticalTarget = ChemicalStates.LIQUID;
+                    break;
+                case "Gas":
+                    monster.Mon_CriticalTarget = ChemicalStates.GAS;
+                    break;
+            }
+            switch (rowList[i].RoomTemperatureStatus)
+            {
+                case "Solid":
+                    monster.Mon_RoomTempStatus = ChemicalStates.SOLID;
+                    break;
+                case "Liquid":
+                    monster.Mon_RoomTempStatus = ChemicalStates.LIQUID;
+                    break;
+                case "Gas":
+                    monster.Mon_RoomTempStatus = ChemicalStates.GAS;
+                    break;
+            }
+            monster.Mon_SolidGauge = System.Convert.ToInt32(rowList[i].SolidGauge);
 			monster.Mon_LiquidGauge = System.Convert.ToInt32(rowList[i].LiquidGauge);
 			monster.Mon_GasGauge = System.Convert.ToInt32(rowList[i].GasGauge);
 			monster.Mon_RoomTempPos = System.Convert.ToDouble(rowList[i].RoomTemperaturePosition);

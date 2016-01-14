@@ -5,6 +5,9 @@ using EnumsAndClasses;
 public class TurnBasedCombatStateMachine : MonoBehaviour {
 
 	GameObject card1;
+    public BattleStates currentState;
+    private int turnCount = 0;
+    public int dustCount = 0;
 
 	public enum BattleStates{
 		START,
@@ -20,10 +23,9 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
 		get{ return currentState; }
 		set{ value = currentState; }
 	}
+	
 
-	public BattleStates currentState;
 
-    private int turnCount = 0;
     public void incrementTurn()
     {
         turnCount++;
@@ -108,6 +110,7 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
 	}
 	void OnGUI(){
         GUI.Label(new Rect(10, 40, 100, 20), "" + (2 - turnCount));//Display attack turn count
+        GUI.Label(new Rect(10, 60, 100, 20), "빛가루: " + dustCount);
         if (GUILayout.Button ("NEXT STATE")){
 
 			if(currentState==BattleStates.IDLE){
