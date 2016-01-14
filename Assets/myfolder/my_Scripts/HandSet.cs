@@ -4,11 +4,13 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class HandSet : MonoBehaviour {
-	private List<int> number;
+	private List<int> indexesOfSelectedCard;
 	private int temp;
 	public GameObject cardPrefab;
+    
+    public GameObject[] cards;
 	void Start(){
-
+        
 	}
 	void Update(){
 		//Debug.Log (GameObject.Find ("GameManager").GetComponent<TurnBasedCombatStateMachine> ().currentState);
@@ -19,38 +21,53 @@ public class HandSet : MonoBehaviour {
 	}
 	void CardSelect(){
 		int count;
-		number = new List<int> ();
+		indexesOfSelectedCard = new List<int> ();
 		for(int i = 0; i<=3; i++)
 		{
-			number.Add(i);
+			indexesOfSelectedCard.Add(i);
 		}
 		for (int i=0; i<=3; i++) {
 			do {
 				count=0;
 				temp=Random.Range (0, 19);
 				for(int x=0;x<i;x++){
-					if(number[x]==temp)
+					if(indexesOfSelectedCard[x]==temp)
 						count++;
 				}
 			} while(count!=0);
-			number[i]=temp;
+			indexesOfSelectedCard[i]=temp;
 		}
 		
 	}
-	void AddCards(int cardIndex)
-	{
-		//Debug.Log ("AddCard");
-		GameObject cardCopy = (GameObject)Instantiate(cardPrefab);
+	// void AddCards(int cardIndex)
+	// {
+	// 	//Debug.Log ("AddCard");
+	// 	GameObject cardCopy = (GameObject)Instantiate(cardPrefab);
 		
-		cardCopy.transform.SetParent(this.transform);
-		cardCopy.GetComponent<InfoCard> ().Card = GetComponent<CardLoad> ().cardDeck [cardIndex];
-		cardCopy.transform.FindChild ("CardName").GetComponent<Text> ().text = GetComponent<CardLoad> ().cardDeck [cardIndex].Card_ExtName;
-		cardCopy.transform.FindChild ("CardStatement").GetComponent<Text> ().text = GetComponent<CardLoad> ().cardDeck [cardIndex].Card_Description;
-	}
+	// 	cardCopy.transform.SetParent(this.transform);
+	// 	cardCopy.GetComponent<InfoCard> ().Card = GetComponent<CardLoad> ().cardDeck [cardIndex];
+	// 	cardCopy.transform.FindChild ("CardName").GetComponent<Text> ().text = GetComponent<CardLoad> ().cardDeck [cardIndex].Card_ExtName;
+	// 	cardCopy.transform.FindChild ("CardStatement").GetComponent<Text> ().text = GetComponent<CardLoad> ().cardDeck [cardIndex].Card_Description;
+	// }
+    
+    void ApplyCardInfo(GameObject card, int cardIndex)
+    {
+        card.GetComponent<InfoCard> ().Card = GetComponent<CardLoad> ().cardDeck [cardIndex];
+        card.transform.FindChild ("CardName").GetComponent<Text> ().text = GetComponent<CardLoad> ().cardDeck [cardIndex].Card_ExtName;
+		card.transform.FindChild ("CardStatement").GetComponent<Text> ().text = GetComponent<CardLoad> ().cardDeck [cardIndex].Card_Description;
+    }
+    
 	void CardDraw(){
-		for (int i=0; i<=3; i++) {
-			AddCards (number [i]);
-		}
+		for (int i = 0; i < 4; i++)
+        {
+            cards[i].SetActive(true);
+            cards[i].GetComponent<Button>().interactable = true;
+            ApplyCardInfo(cards[i], indexesOfSelectedCard[i]);
+        }
+        
+        // for (int i=0; i<=3; i++) {
+		// 	AddCards (number [i]);
+		// }
 	}
 
 }
