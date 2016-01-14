@@ -37,7 +37,7 @@ public class CardChoice : MonoBehaviour,IPointerDownHandler{
         //Increment counter
         //Check if all turns are exhausted
         //If exhausted, change the state of TurnBasedCombatStateMachine
-        GameObject.Find("GameManager").GetComponent<TurnBasedCombatStateMachine>().incrementTurn();
+        GameObject.Find("GameManager").GetComponent<TurnBasedCombatStateMachine>().decrementTurn();
    
         if (GameObject.Find("GameManager").GetComponent<TurnBasedCombatStateMachine>().isTurnExhausted())
         {

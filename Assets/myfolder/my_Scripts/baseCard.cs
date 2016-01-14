@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using EnumsAndClasses;
 public class baseCard
 {
 
@@ -13,7 +13,7 @@ public class baseCard
     private string card_Memo;
     private string card_Target;
     private string card_Range;
-    private string card_CriticalTarget;
+    private ChemicalStates card_CriticalTarget;
     private double card_AttackDamage;
     private double card_IncreaseDamage;
     private double card_Heal;
@@ -145,7 +145,7 @@ public class baseCard
         }
     }
 
-    public string Card_CriticalTarget
+    public ChemicalStates Card_CriticalTarget
     {
         get
         {

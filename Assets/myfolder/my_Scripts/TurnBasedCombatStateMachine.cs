@@ -6,7 +6,7 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
 
 	GameObject card1;
     public BattleStates currentState;
-    private int turnCount = 0;
+    private int turnCount = 2;
     public int dustCount = 0;
 
 	public enum BattleStates{
@@ -23,20 +23,23 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
 		get{ return currentState; }
 		set{ value = currentState; }
 	}
-	
 
 
     public void incrementTurn()
     {
         turnCount++;
     }
+    public void decrementTurn()
+    {
+        turnCount--;
+    }
     public void resetTurn()
     {
-        turnCount = 0;
+        turnCount = 2;
     }
     public bool isTurnExhausted()
     {
-        return (turnCount >= 2);
+        return (turnCount == 0);
     }
 
 	void Start () {
@@ -109,7 +112,7 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
 		}
 	}
 	void OnGUI(){
-        GUI.Label(new Rect(10, 40, 100, 20), "" + (2 - turnCount));//Display attack turn count
+        GUI.Label(new Rect(10, 40, 100, 20), "" + turnCount);//Display attack turn count
         GUI.Label(new Rect(10, 60, 100, 20), "빛가루: " + dustCount);
         if (GUILayout.Button ("NEXT STATE")){
 

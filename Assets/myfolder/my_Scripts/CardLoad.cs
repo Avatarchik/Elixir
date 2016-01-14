@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using EnumsAndClasses;
 
 public class CardLoad:MonoBehaviour {
 	public TextAsset file;
@@ -28,8 +29,20 @@ public class CardLoad:MonoBehaviour {
             card.Card_Memo = rowList[i].Memo;
             card.Card_Target=rowList[i].Target;
             card.Card_Range=rowList[i].Range;
-            card.Card_CriticalTarget = rowList[i].CriticalTarget;
-			if(rowList[i].AttackDamage!="N/A")
+            switch (rowList[i].CriticalTarget)
+            {
+                case "Solid":
+                    card.Card_CriticalTarget = ChemicalStates.SOLID;
+                    break;
+                case "Liquid":
+                    card.Card_CriticalTarget = ChemicalStates.LIQUID;
+                    break;
+                case "Gas":
+                    card.Card_CriticalTarget = ChemicalStates.GAS;
+                    break;
+            }
+
+            if (rowList[i].AttackDamage!="N/A")
 			card.Card_AttackDamage=System.Convert.ToDouble (rowList[i].AttackDamage);
 			if(rowList[i].IncreaseDamage!="N/A")
 			card.Card_IncreaseDamage=System.Convert.ToDouble (rowList[i].IncreaseDamage);

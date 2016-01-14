@@ -5,8 +5,8 @@ using EnumsAndClasses;
 
 public class EnemyAI : MonoBehaviour {
 
-	float EnemyBehaviourBeforeDelay = 3.0f;
-	float EnemyBehaviourAfterDelay=3.0f;
+	float EnemyBehaviourBeforeDelay = 1.0f;
+	float EnemyBehaviourAfterDelay=1.0f;
 
 	public IEnumerator EnemyActChoice(GameObject[] monsters)
 	{
@@ -23,7 +23,8 @@ public class EnemyAI : MonoBehaviour {
             else
             {
                 yield return new WaitForSeconds(EnemyBehaviourBeforeDelay);
-			    SelectAct(monster);
+                //SelectAct(monster);
+                UseAttack(monster);
 			    yield return new WaitForSeconds(EnemyBehaviourAfterDelay);
             }
 			

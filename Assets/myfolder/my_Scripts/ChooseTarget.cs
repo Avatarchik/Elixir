@@ -11,6 +11,7 @@ public class ChooseTarget : MonoBehaviour {
     int countAttack = 0;
     int enemyAlive;
     bool cardChanged = false;
+    bool attackedCritical = false;
 
     public IEnumerator SelectTarget()
     {
@@ -64,6 +65,13 @@ public class ChooseTarget : MonoBehaviour {
         {
             AttackEnemy();
         }
+        if (attackedCritical)
+        {
+            GameObject.Find("GameManager").GetComponent<TurnBasedCombatStateMachine>().incrementTurn();
+            Debug.Log("Turn incremented");
+            attackedCritical = false;
+        }
+        
 
         countArray = 0;// Reset the counter
         yield return null;
@@ -160,7 +168,7 @@ public class ChooseTarget : MonoBehaviour {
     {
         Debug.Log("Attack Enemy");
         GameObject Ally = GameObject.Find("Player(Clone)");
-        ChemicalStates criticalTarget = Ally.GetComponent<BaseCharacter>().criticalTarget;
+        ChemicalStates criticalTarget = currentSelectedCard.GetComponent<InfoCard>().Card.Card_CriticalTarget;
         System.Random rand = new System.Random();
         double criticalRate;
         double stunRate;
@@ -177,6 +185,7 @@ public class ChooseTarget : MonoBehaviour {
             if(selectedEnemy[i].GetComponent<Monster>().currentChemicalState == criticalTarget)
             {
                 criticalRate = 1.5f;
+                attackedCritical = true;
             }
             else
             {
@@ -235,7 +244,7 @@ public class ChooseTarget : MonoBehaviour {
     {
         float criticalRate;
         GameObject Ally = GameObject.Find("Player(Clone)");
-        ChemicalStates criticalTarget = Ally.GetComponent<BaseCharacter>().criticalTarget;
+        ChemicalStates criticalTarget = currentSelectedCard.GetComponent<InfoCard>().Card.Card_CriticalTarget;
 
         selectedAlly.transform.Find("selectable").gameObject.SetActive(false);//Unactivate all selectable/selected logos
         selectedAlly.transform.Find("selected").gameObject.SetActive(false);
@@ -243,6 +252,7 @@ public class ChooseTarget : MonoBehaviour {
         if (Ally.GetComponent<BaseCharacter>().currentChemicalState == criticalTarget)
         {
             criticalRate = 1.5f;
+            attackedCritical = true;
         }
         else
         {
