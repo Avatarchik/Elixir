@@ -40,18 +40,7 @@ public class HandSet : MonoBehaviour {
 		}
 		
 	}
-<<<<<<< HEAD
-	void AddCards(int cardIndex)
-	{
-		//Debug.Log ("AddCard");
-		GameObject cardCopy = (GameObject)Instantiate(cardPrefab);
-        
-		cardCopy.transform.SetParent(this.transform);
-		cardCopy.GetComponent<InfoCard> ().Card = GetComponent<CardLoad> ().cardDeck [cardIndex];
-		cardCopy.transform.FindChild ("CardName").GetComponent<Text> ().text = GetComponent<CardLoad> ().cardDeck [cardIndex].Card_ExtName;
-		cardCopy.transform.FindChild ("CardStatement").GetComponent<Text> ().text = GetComponent<CardLoad>().cardDeck[cardIndex].Card_CriticalTarget + " / " + GetComponent<CardLoad> ().cardDeck [cardIndex].Card_Description;
-	}
-=======
+
 	// void AddCards(int cardIndex)
 	// {
 	// 	//Debug.Log ("AddCard");
@@ -70,7 +59,6 @@ public class HandSet : MonoBehaviour {
 		card.transform.FindChild ("CardStatement").GetComponent<Text> ().text = GetComponent<CardLoad> ().cardDeck [cardIndex].Card_Description;
     }
     
->>>>>>> origin/master
 	void CardDraw(){
 		for (int i = 0; i < 4; i++)
         {

@@ -78,11 +78,15 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
                 Debug.Log("Enemy Turn Reached");
 
                 //Functions that delete all cards in hand (temporary)
-                GameObject chCount = GameObject.Find("Canvas").transform.FindChild("Hands").gameObject;
-                for(int i = 0; i < chCount.transform.childCount; i++)
+                foreach (var card in FindObjectOfType<HandSet>().cards)
                 {
-                    Destroy(chCount.transform.GetChild(i).gameObject);
+                    card.SetActive(false);
                 }
+                // GameObject chCount = GameObject.Find("Canvas").transform.FindChild("Hands").gameObject;
+                // for(int i = 0; i < chCount.transform.childCount; i++)
+                // {
+                //     Destroy(chCount.transform.GetChild(i).gameObject);
+                // }
                 GameObject[] monsters2 = GameObject.FindGameObjectsWithTag("Monster");
                 foreach (GameObject monster in monsters2)
                 {

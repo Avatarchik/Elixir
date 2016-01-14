@@ -30,10 +30,10 @@ public class CardChoice : MonoBehaviour{//, IPointerDownHandler{
         choosingManager.AttackMode = AttackMode.Card;
         choosingManager.SelectedCard = this.gameObject;
         Debug.Log("Card Activate: " + transform.FindChild("CardName").GetComponent<Text> ().text);
-        StartCoroutine(cardActivated_new(indexInHand));
+        StartCoroutine(cardActivated(indexInHand));
     }
     
-    IEnumerator cardActivated_new(int indexInHand)
+    IEnumerator cardActivated(int indexInHand)
     {
         GameObject card = FindObjectOfType<HandSet>().cards[indexInHand-1];
         
@@ -65,41 +65,4 @@ public class CardChoice : MonoBehaviour{//, IPointerDownHandler{
         }
         yield return null;
     }
-    
-	IEnumerator cardActivated(){
-        GetComponent<Image> ().sprite = sprSelected;
-
-        yield return StartCoroutine(GameObject.Find("Canvas").transform.FindChild("Hands").GetComponent<ChooseTarget>().SelectTarget());
-        GetComponent<Image> ().sprite = sprUnselected;
-
-        Debug.Log("Before Coroutine Stopped");
-        //If Attack method is changed during the procedure, dismiss all actions
-        if (choosingManager.AttackMode != AttackMode.Card ||
-            choosingManager.SelectedCard != this.gameObject)
-        {
-            Debug.Log("Coroutine Stopped");
-        }
-        else
-        {
-        //Increment counter
-        //Check if all turns are exhausted
-        //If exhausted, change the state of TurnBasedCombatStateMachine
-<<<<<<< HEAD
-        GameObject.Find("GameManager").GetComponent<TurnBasedCombatStateMachine>().decrementTurn();
-=======
-        turnBasedCombatStateMachine.incrementTurn();
->>>>>>> origin/master
-   
-        if (turnBasedCombatStateMachine.isTurnExhausted())
-        {
-            turnBasedCombatStateMachine.currentState = TurnBasedCombatStateMachine.BattleStates.ENEMYCHOICE;
-            turnBasedCombatStateMachine.resetTurn();
-        }
-        Destroy(this.gameObject);// After using the card, destroy it from hand
-        }
-
-        
-
-    }
-
 }
