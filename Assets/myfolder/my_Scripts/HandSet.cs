@@ -10,6 +10,7 @@ public class HandSet : MonoBehaviour {
 	public GameObject cardPrefab;
     
     public GameObject[] cards;
+    public GameObject skillTextPanel;
 	void Start(){
         
 	}
@@ -41,17 +42,6 @@ public class HandSet : MonoBehaviour {
 		
 	}
 
-	// void AddCards(int cardIndex)
-	// {
-	// 	//Debug.Log ("AddCard");
-	// 	GameObject cardCopy = (GameObject)Instantiate(cardPrefab);
-		
-	// 	cardCopy.transform.SetParent(this.transform);
-	// 	cardCopy.GetComponent<InfoCard> ().Card = GetComponent<CardLoad> ().cardDeck [cardIndex];
-	// 	cardCopy.transform.FindChild ("CardName").GetComponent<Text> ().text = GetComponent<CardLoad> ().cardDeck [cardIndex].Card_ExtName;
-	// 	cardCopy.transform.FindChild ("CardStatement").GetComponent<Text> ().text = GetComponent<CardLoad> ().cardDeck [cardIndex].Card_Description;
-	// }
-    
     void ApplyCardInfo(GameObject card, int cardIndex)
     {
         card.GetComponent<InfoCard> ().Card = GetComponent<CardLoad> ().cardDeck [cardIndex];
@@ -60,6 +50,7 @@ public class HandSet : MonoBehaviour {
     }
     
 	void CardDraw(){
+        skillTextPanel.SetActive(true);
 		for (int i = 0; i < 4; i++)
         {
             cards[i].SetActive(true);

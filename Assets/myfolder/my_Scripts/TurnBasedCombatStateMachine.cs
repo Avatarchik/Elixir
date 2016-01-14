@@ -82,11 +82,8 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
                 {
                     card.SetActive(false);
                 }
-                // GameObject chCount = GameObject.Find("Canvas").transform.FindChild("Hands").gameObject;
-                // for(int i = 0; i < chCount.transform.childCount; i++)
-                // {
-                //     Destroy(chCount.transform.GetChild(i).gameObject);
-                // }
+                FindObjectOfType<HandSet>().skillTextPanel.SetActive(false);
+                
                 GameObject[] monsters2 = GameObject.FindGameObjectsWithTag("Monster");
                 foreach (GameObject monster in monsters2)
                 {
