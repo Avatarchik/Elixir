@@ -3,20 +3,21 @@ using System.Collections;
 
 public class DamagePopup : MonoBehaviour {
 
-	public GameObject damagePrefab;
-	public int sortinglayerID;
-
+	public Object myGameObjectOrComponent;
+	public float timer;
+	Animator animator;
+	int damagepopupHash;
+	
 	void Start(){
-		sortinglayerID=SortingLayer.GetLayerValueFromName("Default");
+		
+		animator = GetComponent<Animator> ();
+		damagepopupHash = Animator.StringToHash ("DamagePopup");
+		animator.Play (damagepopupHash);
+		// Default is the gameObject
+		if (myGameObjectOrComponent == null)
+			myGameObjectOrComponent = gameObject;
+		
+		// Destroy works with GameObjects and Components
+		Destroy (myGameObjectOrComponent, timer);
 	}
-	public void CreateDamagePopup(Transform damageTransform, int damage){
-		GameObject damageGameObject = (GameObject)Instantiate(damagePrefab,
-		                                                      damageTransform.position,
-		                                                      damageTransform.rotation);
-		damageGameObject.transform.SetParent(damageTransform);
-		Renderer renderer = damagePrefab.GetComponent<Renderer> ();
-		renderer.sortingLayerID = sortinglayerID;
-		damageGameObject.GetComponentInChildren<TextMesh>().text = damage.ToString();
-	}
-
 }

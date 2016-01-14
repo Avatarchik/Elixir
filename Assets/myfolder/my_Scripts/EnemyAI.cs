@@ -23,7 +23,7 @@ public class EnemyAI : MonoBehaviour {
             else
             {
                 yield return new WaitForSeconds(EnemyBehaviourBeforeDelay);
-			    SelectAct(monster.GetComponent<Monster>());
+			    SelectAct(monster);
 			    yield return new WaitForSeconds(EnemyBehaviourAfterDelay);
             }
 			
@@ -32,43 +32,37 @@ public class EnemyAI : MonoBehaviour {
         yield break;
     }
 
-	void AttackAlly(Monster monster){
+	void UseSkill(GameObject monster,string SkillName){
+		Debug.Log (monster + " use " + SkillName);
+		GameObject.Find ("GameManager").GetComponent<PopupManager>().CreateMonsterSkillPopup (monster.transform, SkillName);
+	}
+	void UseAttack(GameObject monster){
 		Animator animator=monster.GetComponent<Animator>();
-		if(GameObject.Find ("Player(Clone)")!=null)
-		{
+		if (GameObject.Find ("Player(Clone)") != null) {
 			Debug.Log ("Monster Attack");
 			GameObject.Find ("Player(Clone)").GetComponent<BaseCharacter> ().SetDamage (monster.GetComponent<Monster> ().attackDamage);
-			animator.SetTrigger("Attack");
+			animator.SetTrigger ("Attack");
 		}
-	}
-
-	void UseSkill(Monster monster,string SkillName){
 
 	}
-	void SelectAct(Monster monster){
+	void SelectAct(GameObject monster){
 		baseMonster Monsterdata = monster.GetComponent<InfoMonster> ().MonsterInfo;
 		double Skill1Rate = Monsterdata.Mon_Skill1_Rate;
 		double Skill2Rate = Monsterdata.Mon_Skill2_Rate;
-		Animator animator=monster.GetComponent<Animator>();
 
 
 		if (Random.Range (1, 100) <= Skill1Rate && SkillCondition (Monsterdata.Mon_Skill1_Name, 1)) {
 
 			UseSkill(monster,Monsterdata.Mon_Skill1_Name);
-			Debug.Log (Monsterdata.Mon_Skill1_Name);
 
 
 		} else if (Random.Range (1, 100) <= Skill2Rate && SkillCondition (Monsterdata.Mon_Skill2_Name, 2)) {
 
 			UseSkill(monster,Monsterdata.Mon_Skill2_Name);
-			Debug.Log (Monsterdata.Mon_Skill2_Name);
 
 		} else {
-			if (GameObject.Find ("Player(Clone)") != null) {
-				Debug.Log ("Monster Attack");
-				GameObject.Find ("Player(Clone)").GetComponent<BaseCharacter> ().SetDamage (monster.GetComponent<Monster> ().attackDamage);
-				animator.SetTrigger ("Attack");
-			}
+
+			UseAttack (monster);
 		}
 	}
 
@@ -134,8 +128,6 @@ public class EnemyAI : MonoBehaviour {
 			case "NoneGas":
 				return(currentState!=ChemicalStates.GAS);
 			}
-
-
 		} 
 		else if (GetComponent<MonsterSkillConditionLoad> ().Find_UseCondition (ConditionName).HpBelowN >0 ) 
 		{
@@ -155,6 +147,17 @@ public class EnemyAI : MonoBehaviour {
 		else if (GetComponent<MonsterSkillConditionLoad> ().Find_UseCondition (ConditionName).Actionlimit != "N/A") 
 		{
 			//if player's Action is limited return true
+			string actionlimit = GetComponent<MonsterSkillConditionLoad> ().Find_UseCondition (ConditionName).Actionlimit;
+			if(actionlimit=="N"){
+
+			}
+			else if(actionlimit=="Y"){
+
+
+			}
+
+
+
 
 		} 
 		else if (GetComponent<MonsterSkillConditionLoad> ().Find_UseCondition (ConditionName).TargetNumber >0)
