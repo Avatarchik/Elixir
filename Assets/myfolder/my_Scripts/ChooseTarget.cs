@@ -54,7 +54,7 @@ public class ChooseTarget : MonoBehaviour {
 
         if (targetType == "Ally")
         {
-            HealAlly();
+            TargetAlly();
         }
         if (targetType == "Enemy" && targetRange == "Single")//When target is Single
         {
@@ -191,11 +191,14 @@ public class ChooseTarget : MonoBehaviour {
             //DotDamage
             if(currentSelectedCard.GetComponent<InfoCard>().Card.Card_DebuffName == "DoteDamage")
             {
-                int debuffTurn = currentSelectedCard.GetComponent<InfoCard>().Card.Card_DebuffTurn;
-                int debuffDamage = currentSelectedCard.GetComponent<InfoCard>().Card.Card_DotDamage;
-                Debuff debuff = new Debuff(DebuffName.DoteDamage, debuffTurn, debuffDamage);
-                selectedEnemy[i].GetComponent<Monster>().SetDamage(debuffDamage);//Inflict damage immediately in this turn
-                selectedEnemy[i].GetComponent<Monster>().AddDebuff(debuff);//Add debuff to monster
+                int DotDamageTurn = currentSelectedCard.GetComponent<InfoCard>().Card.Card_DotDamageTurn;
+                int DotDamage = currentSelectedCard.GetComponent<InfoCard>().Card.Card_DotDamage;
+                Debuff debuff = new Debuff(DebuffName.DoteDamage, DotDamageTurn, DotDamage);
+                selectedEnemy[i].GetComponent<Monster>().SetDamage(DotDamage);//Inflict damage immediately in this turn
+                //selectedEnemy[i].GetComponent<Monster>().AddDebuff(debuff);//Add debuff to monster
+                selectedEnemy[i].GetComponent<Monster>().AddDotDamage(debuff);//Add debuff to monster
+
+                //selectedEnemy[i].transform.Find("dotDamageIcon").gameObject.SetActive(true);//Activate dotDamageIcon
             }
             //Stun
 			if(currentSelectedCard.GetComponent<InfoCard>().Card.Card_DebuffName=="Stun")
@@ -206,23 +209,29 @@ public class ChooseTarget : MonoBehaviour {
                     stunRate += 10f;
                 }
                 int chance = rand.Next(1, 101);
+                //int chance = 20;
                 Debug.Log("Stun Rate: " + stunRate + ", chance: " + chance);
                 if(chance <= stunRate)
                 {
                     Debug.Log("Stun Success");
-                    selectedEnemy[i].GetComponent<Monster>().AddDebuff (new Debuff(EnumsAndClasses.DebuffName.Stun,currentSelectedCard.GetComponent<InfoCard>().Card.Card_DebuffTurn));
+                    Debuff debuff = new Debuff(DebuffName.DoteDamage, currentSelectedCard.GetComponent<InfoCard>().Card.Card_DebuffTurn);
+                    selectedEnemy[i].GetComponent<Monster>().AddStun(debuff);
+                    //selectedEnemy[i].transform.Find("stun").gameObject.SetActive(true);
+                    //selectedEnemy[i].GetComponent<Monster>().AddDebuff (new Debuff(EnumsAndClasses.DebuffName.Stun,currentSelectedCard.GetComponent<InfoCard>().Card.Card_DebuffTurn));
                 }
 			}
 
             //Check if Enemy's hp = 0
             //If so, KILL IT!
-            if (selectedEnemy[i].GetComponent<Monster>().hp == 0)
-            {
-                Destroy(selectedEnemy[i]);
-            }
+            
+            //if (selectedEnemy[i].GetComponent<Monster>().hp == 0)
+            //{
+            //    Destroy(selectedEnemy[i]);
+            //}
+            
         }
     }
-    void HealAlly()
+    void TargetAlly()
     {
         float criticalRate;
         GameObject Ally = GameObject.Find("Player(Clone)");
@@ -239,6 +248,17 @@ public class ChooseTarget : MonoBehaviour {
         {
             criticalRate = 1f;
         }
-        selectedAlly.GetComponent<BaseCharacter>().SetHeal((int)(currentSelectedCard.GetComponent<InfoCard>().Card.Card_Heal * criticalRate));
+
+        if(currentSelectedCard.GetComponent<InfoCard>().Card.Card_BuffName == "Dodge")
+        {
+            Buff buff = new Buff(BuffName.Dodge, currentSelectedCard.GetComponent<InfoCard>().Card.Card_BuffTurn - 1);
+            selectedAlly.GetComponent<BaseCharacter>().dodgeRate = (int)currentSelectedCard.GetComponent<InfoCard>().Card.Card_BuffRate;
+            selectedAlly.GetComponent<BaseCharacter>().AddBuff(buff);
+        }
+        if(currentSelectedCard.GetComponent<InfoCard>().Card.Card_Heal > 0)
+        {
+            selectedAlly.GetComponent<BaseCharacter>().SetHeal((int)(currentSelectedCard.GetComponent<InfoCard>().Card.Card_Heal * criticalRate));
+        }
+        
     }
 }

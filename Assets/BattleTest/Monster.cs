@@ -9,7 +9,7 @@ public class Monster : MonoBehaviour {
     public int maxHp;
     public int hp;
     public int attackDamage;
-    public MonsterType type;
+    public string type;
     public bool stunned;
 
     public ChemicalStates currentChemicalState;
@@ -17,9 +17,15 @@ public class Monster : MonoBehaviour {
     public int solidStateValue;
     public int liquidStateValue;
     public int gasStateValue;
+    public ChemicalStates criticalTarget;
+
+	public baseMonster monsterInfo;
 
     List<Buff> buffs = new List<Buff>();
     List<Debuff> debuffs = new List<Debuff>();
+
+    List<Debuff> stunList = new List<Debuff>();
+    List<Debuff> dotDamageList = new List<Debuff>();
     
 	void Update(){
 
@@ -31,16 +37,17 @@ public class Monster : MonoBehaviour {
     // Apply default stats.
     public void SetStat ()
     {
-        this.maxHp = 20;
-        this.hp = maxHp;
-        this.attackDamage = 5;
-        this.type = MonsterType.None;
+        this.maxHp = this.GetComponent<InfoMonster>().MonsterInfo.Mon_HP;
+        this.hp = this.gameObject.GetComponent<InfoMonster>().MonsterInfo.Mon_HP;
+        this.attackDamage = (int)this.gameObject.GetComponent<InfoMonster>().MonsterInfo.Mon_AttackDamage;
+        this.type = this.gameObject.GetComponent<InfoMonster>().MonsterInfo.Mon_Type;
         this.stunned = false;
-        this.currentChemicalState = ChemicalStates.LIQUID;
+        this.currentChemicalState = this.gameObject.GetComponent<InfoMonster>().MonsterInfo.Mon_RoomTempStatus;
         this.currentChemicalStateValue = 1;
-        this.solidStateValue = 1;
-        this.liquidStateValue = 2;
-        this.gasStateValue = 3;
+        this.solidStateValue = this.gameObject.GetComponent<InfoMonster>().MonsterInfo.Mon_SolidGauge;
+        this.liquidStateValue = this.gameObject.GetComponent<InfoMonster>().MonsterInfo.Mon_LiquidGauge;
+        this.gasStateValue = this.gameObject.GetComponent<InfoMonster>().MonsterInfo.Mon_GasGauge;
+        this.criticalTarget = this.gameObject.GetComponent<InfoMonster>().MonsterInfo.Mon_CriticalTarget;
     }
     
     // Only apply image.
@@ -51,14 +58,14 @@ public class Monster : MonoBehaviour {
     }
     
     // Default image.
-    public void SetStat (int hp, int attackDamage, MonsterType type, int boilingPoint, int meltingPoint)
+    public void SetStat (int hp, int attackDamage, string type, int boilingPoint, int meltingPoint)
     {
         this.maxHp = hp;
         this.hp = maxHp;
         this.attackDamage = attackDamage;
         this.type = type;
     }
-    public void SetStat (string imagePath, int hp, int attackDamage, MonsterType type, int boilingPoint, int meltingPoint)
+    public void SetStat (string imagePath, int hp, int attackDamage, string type, int boilingPoint, int meltingPoint)
     {
         this.renderer.sprite = Resources.Load(imagePath, typeof(Sprite)) as Sprite;
         SetStat(hp, attackDamage, type, boilingPoint, meltingPoint);
@@ -139,86 +146,222 @@ public class Monster : MonoBehaviour {
         }
     }
 
-    public void AddBuff(Buff buff)
+    // Stun Implementation
+    public void AddStun(Debuff stun)
     {
-        buffs.Add(buff);
-        Debug.Log("Add buff to monster");
-        //PrintAllBuffAndDebuff();
+        this.transform.Find("stun").gameObject.SetActive(true);
+        stunned = true;
+        stunList.Add(stun);
     }
-    
-    public void AddDebuff(Debuff debuff)
+    public void ReduceStunTurn()
     {
-        debuffs.Add(debuff);
-        Debug.Log("Add debuff to monster");
-        //PrintAllBuffAndDebuff();
-    }
-
-    public void ReduceDebuffTurn()
-    {
-        foreach(Debuff debuff in debuffs)
-        {
-            debuff.RemainTurn--;
-            Debug.Log("Debuff turn remaining: " + debuff.RemainTurn);
-        }
-    }
-
-    public void ActivateDebuff()
-    {
-        foreach (Debuff debuff in debuffs)
-        {
-
-            if(debuff.GetDebuffname().Equals(DebuffName.DoteDamage))//Activate Dot Damage
-            {
-                Debug.Log("This Debuff is Dot Damage");
-                SetDamage(debuff.DebuffDamage);
-            }
-
-            if (debuff.GetDebuffname().Equals(DebuffName.Stun))
-            {
-                //Stun Enemy
-                stunned = true;
-            }
-
-        }
-    }
-    
-    public void RemoveBuff()
-    {
-        //NotImplemented
-    }
-    
-    public void RemoveAllBuff()
-    {
-        buffs = new List<Buff>();
-        Debug.Log("All buffs are removed");
-    }
-
-    public void RemoveDebuff()
-    {
-        // FIXME : Not implemented.
         List<Debuff> debuffsToDestroy = new List<Debuff>();
-        foreach (Debuff debuff in debuffs)
+        foreach (Debuff stun in stunList)
         {
-            if (debuff.RemainTurn == 0)
+            stun.RemainTurn--;
+            if (stun.RemainTurn <= 0)
             {
-                debuffsToDestroy.Add(debuff);
+                debuffsToDestroy.Add(stun);
             }
         }
         foreach (Debuff debuffToDestroy in debuffsToDestroy)
         {
-            debuffs.Remove(debuffToDestroy);
+            stunList.Remove(debuffToDestroy);
         }
         debuffsToDestroy.Clear();
+        if (stunList.Count >= 1)
+        {
+            this.transform.Find("stun").gameObject.SetActive(true);
+        }
+        else
+        {
+            this.transform.Find("stun").gameObject.SetActive(false);
+        }
     }
-    
-    public void RemoveAllDebuff()
+    public void ActivateStun()
     {
-        debuffs = new List<Debuff>();
-        Debug.Log("All debuffs are removed");
+        if(stunList.Count >= 1)
+        {
+            stunned = true;
+        }
+        else
+        {
+            stunned = false;
+        }
+    }
+    public void RemoveStun()
+    {
+        stunList.Clear();
     }
 
-    // using test.
-    void PrintAllBuffAndDebuff()
+    // DotDamage Implementation
+    public void AddDotDamage(Debuff dotDamage)
+    {
+        this.transform.Find("dotDamageIcon").gameObject.SetActive(true);
+        dotDamageList.Add(dotDamage);
+    }
+    public void ReduceDotDamageTurn()
+    {
+        List<Debuff> debuffsToDestroy = new List<Debuff>();
+        foreach (Debuff dotDamage in dotDamageList)
+        {
+            dotDamage.RemainTurn--;
+            if (dotDamage.RemainTurn <= 0)
+            {
+                debuffsToDestroy.Add(dotDamage);
+            }
+        }
+        foreach (Debuff debuffToDestroy in debuffsToDestroy)
+        {
+            dotDamageList.Remove(debuffToDestroy);
+        }
+        debuffsToDestroy.Clear();
+        if (dotDamageList.Count >= 1)
+        {
+            this.transform.Find("dotDamageIcon").gameObject.SetActive(true);
+        }
+        else
+        {
+            this.transform.Find("dotDamageIcon").gameObject.SetActive(false);
+        }
+    }
+    public void ActivateDotDamage()
+    {
+        foreach(Debuff dotDamage in dotDamageList)
+        {
+            SetDamage(dotDamage.DebuffDamage);
+            if(hp <= 0)
+            {
+                Dead();
+                break;
+            }
+        }
+    }
+    public void RemoveDotDamage()
+    {
+        stunList.Clear();
+    }
+
+    public void AddBuff(Buff buff)
+    { }
+    public void AddDebuff(Debuff debuff)
+    { }
+    public void ReduceBuffTurn()
+    { }
+    public void ReduceDebuffTurn()
+    { }
+    public void ActivateBuff()
+    { }
+    public void ActivateDebuff()
+    { }
+    public void RemoveBuff()
+    { }
+    public void RemoveDebuff()
+    { }
+        /*
+        public void AddBuff(Buff buff)
+        {
+            buffs.Add(buff);
+            Debug.Log("Add buff to monster");
+            //PrintAllBuffAndDebuff();
+        }
+
+        public void AddDebuff(Debuff debuff)
+        {
+            debuffs.Add(debuff);
+            Debug.Log("Add debuff to monster");
+            //PrintAllBuffAndDebuff();
+        }
+
+        public void ReduceDebuffTurn()
+        {
+            foreach(Debuff debuff in debuffs)
+            {
+                debuff.RemainTurn--;
+                Debug.Log("Debuff turn remaining: " + debuff.RemainTurn);
+            }
+        }
+
+        public void ActivateDebuff()
+        {
+            bool tempStun= false;
+            bool tempDotDamage = false;
+            foreach (Debuff debuff in debuffs)
+            {
+
+                if(debuff.GetDebuffname().Equals(DebuffName.DoteDamage))//Activate Dot Damage
+                {
+                    Debug.Log("This Debuff is Dot Damage");
+                    SetDamage(debuff.DebuffDamage);
+                    tempDotDamage = true;
+                    if(hp <= 0)
+                    {
+                        Destroy(this.gameObject);
+                    }
+                }
+
+                if (debuff.GetDebuffname().Equals(DebuffName.Stun))
+                {
+                    //Stun Enemy
+                    tempStun = true;
+                }
+            }
+            if (tempStun)
+            {
+                this.transform.Find("stun").gameObject.SetActive(true);
+                stunned = true;
+            }
+            else
+            {
+                this.transform.Find("stun").gameObject.SetActive(false);
+                stunned = false;
+            }
+            if (tempDotDamage)
+            {
+                this.transform.Find("dotDamageIcon").gameObject.SetActive(true);
+            }
+            else
+            {
+                this.transform.Find("dotDamageIcon").gameObject.SetActive(false);
+            }
+        }
+
+        public void RemoveBuff()
+        {
+            //NotImplemented
+        }
+
+        public void RemoveAllBuff()
+        {
+            buffs = new List<Buff>();
+            Debug.Log("All buffs are removed");
+        }
+
+        public void RemoveDebuff()
+        {
+            List<Debuff> debuffsToDestroy = new List<Debuff>();
+            foreach (Debuff debuff in debuffs)
+            {
+                if (debuff.RemainTurn == 0)
+                {
+                    debuffsToDestroy.Add(debuff);
+                }
+            }
+            foreach (Debuff debuffToDestroy in debuffsToDestroy)
+            {
+                debuffs.Remove(debuffToDestroy);
+            }
+            debuffsToDestroy.Clear();
+        }
+
+        public void RemoveAllDebuff()
+        {
+            debuffs = new List<Debuff>();
+            Debug.Log("All debuffs are removed");
+        }
+        */
+        // using test.
+        void PrintAllBuffAndDebuff()
     {
         string buffList = "Buff : ";
         foreach (var buff in buffs)
@@ -238,7 +381,8 @@ public class Monster : MonoBehaviour {
     }
 
 	public void Dead(){
-		Destroy (this);
+        GameObject.Find("GameManager").GetComponent<TurnBasedCombatStateMachine>().dustCount += this.gameObject.GetComponent<InfoMonster>().MonsterInfo.Mon_GoldRate;
+		Destroy (this.gameObject);
 		Debug.Log (this + " is Dead.");
 	}
 	// Use this for initialization

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using EnumsAndClasses;
 
 public class baseMonster {
     private int mon_ID;
@@ -17,8 +18,8 @@ public class baseMonster {
     private double mon_Skill1_Rate;
     private string mon_Skill2_Name;
     private double mon_Skill2_Rate;
-    private string mon_CriticalTarget;
-    private string mon_RoomTempStatus;
+    private ChemicalStates mon_CriticalTarget;
+    private ChemicalStates mon_RoomTempStatus;
     private int mon_SolidGauge;
     private int mon_LiquidGauge;
     private int mon_GasGauge;
@@ -55,31 +56,15 @@ public class baseMonster {
         }
     }
 
-    public string Mon_Name
-    {
-        get
-        {
-            return mon_Name;
-        }
+    public string Mon_Name {
+		get {
+			return mon_Name;
+		}
 
-        set
-        {
-            mon_Name = value;
-        }
-    }
-
-    public string Mon_Group
-    {
-        get
-        {
-            return mon_Group;
-        }
-
-        set
-        {
-            mon_Group = value;
-        }
-    }
+		set {
+			mon_Name = value;
+		}
+	}
 
     public string Mon_ChemicalSeries
     {
@@ -224,32 +209,6 @@ public class baseMonster {
         }
     }
 
-    public string Mon_CriticalTarget
-    {
-        get
-        {
-            return mon_CriticalTarget;
-        }
-
-        set
-        {
-            mon_CriticalTarget = value;
-        }
-    }
-
-    public string Mon_RoomTempStatus
-    {
-        get
-        {
-            return mon_RoomTempStatus;
-        }
-
-        set
-        {
-            mon_RoomTempStatus = value;
-        }
-    }
-
     public int Mon_SolidGauge
     {
         get
@@ -364,6 +323,32 @@ public class baseMonster {
         set
         {
             mon_MonCard2GainRate = value;
+        }
+    }
+
+    public ChemicalStates Mon_CriticalTarget
+    {
+        get
+        {
+            return mon_CriticalTarget;
+        }
+
+        set
+        {
+            mon_CriticalTarget = value;
+        }
+    }
+
+    public ChemicalStates Mon_RoomTempStatus
+    {
+        get
+        {
+            return mon_RoomTempStatus;
+        }
+
+        set
+        {
+            mon_RoomTempStatus = value;
         }
     }
 }

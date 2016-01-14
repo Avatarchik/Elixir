@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using EnumsAndClasses;
+using System.Collections.Generic;
 
 public class BaseCharacter : MonoBehaviour {
 
@@ -15,8 +16,11 @@ public class BaseCharacter : MonoBehaviour {
     public int solidStateValue;
     public int liquidStateValue;
     public int gasStateValue;
+    public int dodgeRate;
 
-	void Start(){
+    List<Buff> buffs = new List<Buff>();
+
+    void Start(){
 		HP = 50;
         //Temporary inputs
         this.criticalTarget = ChemicalStates.LIQUID;
@@ -25,6 +29,8 @@ public class BaseCharacter : MonoBehaviour {
         this.solidStateValue = 1;
         this.liquidStateValue = 2;
         this.gasStateValue = 3;
+        this.dodgeRate = 0;
+
     }
 
     //Chemical State
@@ -94,6 +100,58 @@ public class BaseCharacter : MonoBehaviour {
         }
     }
 
+    public void AddBuff(Buff buff)
+    {
+        buffs.Add(buff);
+    }
+    public void ReduceBuffTurn()
+    {
+        foreach (Buff buff in buffs)
+        {
+            buff.RemainTurn--;
+            Debug.Log("Player Buff turn remaining: " + buff.RemainTurn);
+        }
+    }
+    public void ActivateBuff()
+    {
+        bool isExistDodgeBuff = false;
+        foreach (Buff buff in buffs)
+        {
+            if (buff.GetBuffname().Equals(BuffName.Dodge))//Activate Dot Damage
+            {
+                Debug.Log("This Buff is DodgeRateIncrease");
+                isExistDodgeBuff = true;
+            }
+        }
+        if (isExistDodgeBuff)
+        {
+            dodgeRate = 30;
+            Debug.Log("Player's Dodge Rate: " + dodgeRate);
+        }
+        else
+        {
+            dodgeRate = 0;
+            Debug.Log("Player's Dodge Rate: " + dodgeRate);
+        }
+    }
+    public void RemoveBuff()
+    {
+        List<Buff> buffsToDestroy = new List<Buff>();
+        foreach (Buff buff in buffs)
+        {
+            if (buff.RemainTurn == 0)
+            {
+                buffsToDestroy.Add(buff);
+            }
+        }
+        foreach (Buff debuffToDestroy in buffsToDestroy)
+        {
+            buffs.Remove(debuffToDestroy);
+        }
+        buffsToDestroy.Clear();
+    }
+
+
     void dead(){
 		if (HP <= 0) {
 			gameObject.SetActive (false);
@@ -109,7 +167,7 @@ public class BaseCharacter : MonoBehaviour {
 	}
 	public void SetDamage(int damage){
 		HP -= damage;
-		GameObject.Find ("GameManager").GetComponent<DamagePopup>().CreateDamagePopup (this.transform,damage);
+		GameObject.Find ("GameManager").GetComponent<PopupManager>().CreateDamagePopup (this.transform,damage);
 		if (HP < 0) {
 			HP = 0;
 		}

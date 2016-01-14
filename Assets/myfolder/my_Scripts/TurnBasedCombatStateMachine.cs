@@ -5,6 +5,9 @@ using EnumsAndClasses;
 public class TurnBasedCombatStateMachine : MonoBehaviour {
 
 	GameObject card1;
+    public BattleStates currentState;
+    private int turnCount = 0;
+    public int dustCount = 0;
 
 	public enum BattleStates{
 		START,
@@ -20,10 +23,9 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
 		get{ return currentState; }
 		set{ value = currentState; }
 	}
+	
 
-	public BattleStates currentState;
 
-    private int turnCount = 0;
     public void incrementTurn()
     {
         turnCount++;
@@ -36,7 +38,6 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
     {
         return (turnCount >= 2);
     }
-
 
 	void Start () {
 		currentState = BattleStates.START;
@@ -54,12 +55,37 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
 			    currentState=BattleStates.PLAYERCHOICE;
 			    break;
 		    case (BattleStates.PLAYERCHOICE):
+                //Reduce enemy stun counter after EnemyTurn
+                GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
+                foreach (GameObject monster in monsters)
+                {
+                    monster.GetComponent<Monster>().ReduceStunTurn();
+                    monster.GetComponent<Monster>().ActivateStun();
+                    monster.GetComponent<Monster>().ReduceDotDamageTurn();
+                }
+
+                GameObject.Find("Player(Clone)").GetComponent<BaseCharacter>().ActivateBuff();
+                GameObject.Find("Player(Clone)").GetComponent<BaseCharacter>().ReduceBuffTurn();
+                GameObject.Find("Player(Clone)").GetComponent<BaseCharacter>().RemoveBuff();
+
                 GameObject.Find ("Hands").GetComponent<HandSet>().CardSet();
                 currentState = BattleStates.IDLE;
                 break;
 		    case (BattleStates.ENEMYCHOICE):
                 Debug.Log("Enemy Turn Reached");
 
+                //Functions that delete all cards in hand (temporary)
+                GameObject chCount = GameObject.Find("Canvas").transform.FindChild("Hands").gameObject;
+                for(int i = 0; i < chCount.transform.childCount; i++)
+                {
+                    Destroy(chCount.transform.GetChild(i).gameObject);
+                }
+                GameObject[] monsters2 = GameObject.FindGameObjectsWithTag("Monster");
+                foreach (GameObject monster in monsters2)
+                {
+                    monster.GetComponent<Monster>().ActivateDotDamage();
+                }
+                /*
                 //Inflict Debuff(dot damage) in the beginning of Enemy turn
                 GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
                 foreach(GameObject monster in monsters)
@@ -70,15 +96,9 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
                     monster.GetComponent<Monster>().ReduceDebuffTurn();//ReduceTurn after inflicting Dot Damage
                     monster.GetComponent<Monster>().RemoveDebuff();
                 }
-
-			    StartCoroutine(GameObject.Find ("MonsterManager").GetComponent<EnemyAI>().EnemyActChoice(GameObject.Find("MonsterManager").GetComponent<MonsterManager>().Monsters));
-                //Functions that delete all cards in hand (temporary)
-                // GameObject chCount = GameObject.Find("Canvas").transform.FindChild("Hands").gameObject;
-                // for(int i = 0; i < chCount.transform.childCount; i++)
-                // {
-                //     Destroy(chCount.transform.GetChild(i).gameObject);
-                // }
-                currentState = BattleStates.PLAYERCHOICE;
+                */
+                StartCoroutine(GameObject.Find ("MonsterManager").GetComponent<EnemyAI>().EnemyActChoice(GameObject.FindGameObjectsWithTag("Monster")));
+                // currentState = BattleStates.PLAYERCHOICE;
                 break;
             case (BattleStates.IDLE):
                 break;
@@ -91,6 +111,7 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
 	}
 	void OnGUI(){
         GUI.Label(new Rect(10, 40, 100, 20), "" + (2 - turnCount));//Display attack turn count
+        GUI.Label(new Rect(10, 60, 100, 20), "빛가루: " + dustCount);
         if (GUILayout.Button ("NEXT STATE")){
 
 			if(currentState==BattleStates.IDLE){
