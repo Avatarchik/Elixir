@@ -9,7 +9,7 @@ public class PopupManager : MonoBehaviour {
 
 
 	void Start(){
-		sortinglayerID=SortingLayer.GetLayerValueFromName("Default");
+		// sortinglayerID=SortingLayer.GetLayerValueFromName("Default");
 	}
 
 	public void CreateDamagePopup(Transform damageTransform, int damage){

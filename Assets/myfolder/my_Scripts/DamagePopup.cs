@@ -8,8 +8,7 @@ public class DamagePopup : MonoBehaviour {
 	Animator animator;
 	int damagepopupHash;
 	
-	void Start(){
-		
+	void Start(){		
 		animator = GetComponent<Animator> ();
 		damagepopupHash = Animator.StringToHash ("DamagePopup");
 		animator.Play (damagepopupHash);
