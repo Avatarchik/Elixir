@@ -53,7 +53,7 @@ public class CardChoice : MonoBehaviour{//, IPointerDownHandler{
             //Increment counter
             //Check if all turns are exhausted
             //If exhausted, change the state of TurnBasedCombatStateMachine
-            turnBasedCombatStateMachine.incrementTurn();
+            turnBasedCombatStateMachine.decrementTurn();
    
             if (turnBasedCombatStateMachine.isTurnExhausted())
             {
