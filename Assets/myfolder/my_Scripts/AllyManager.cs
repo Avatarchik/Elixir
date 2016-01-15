@@ -4,7 +4,7 @@ using System.Collections;
 public class AllyManager : MonoBehaviour {
 
 	public GameObject PlayerPrefab;
-	Vector3 PlayerPosition = new Vector3 (-4.44f, 0.83f, 0f);
+	Vector3 PlayerPosition = new Vector3 (-4.36f, 1.35f, 0);
 	void Start () {
 		GeneratePlayer ();
 	}

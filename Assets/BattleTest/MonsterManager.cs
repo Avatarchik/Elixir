@@ -9,10 +9,10 @@ public class MonsterManager : MonoBehaviour {
     public GameObject monsterPrefab;
 
     List<Vector3> positions;
-    Vector3 firstPosition = new Vector3(1.9f, 0.8f, -2);
-    Vector3 secondPosition = new Vector3(3.4f, -1.0f, -4);
-    Vector3 thirdPosition = new Vector3(3.4f, 2.0f, -1);
-    Vector3 fourthPosition = new Vector3(4.9f, 0.3f, -3);
+    Vector3 firstPosition = new Vector3(1.3f, 0.7f, -2); // left
+    Vector3 secondPosition = new Vector3(3.4f, -0.5f, -4); // down
+    Vector3 thirdPosition = new Vector3(3.3f, 2.4f, -1); // up
+    Vector3 fourthPosition = new Vector3(5.4f, 1.2f, -3); // right
     
     List<Monster> monsters;
 	public List<Monster> Monsters {
