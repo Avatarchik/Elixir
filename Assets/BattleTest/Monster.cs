@@ -37,25 +37,30 @@ public class Monster : MonoBehaviour {
     // Apply default stats.
     public void SetStat ()
     {
-        this.maxHp = this.GetComponent<InfoMonster>().MonsterInfo.Mon_HP;
-        this.hp = this.gameObject.GetComponent<InfoMonster>().MonsterInfo.Mon_HP;
-        this.attackDamage = (int)this.gameObject.GetComponent<InfoMonster>().MonsterInfo.Mon_AttackDamage;
-        this.type = this.gameObject.GetComponent<InfoMonster>().MonsterInfo.Mon_Type;
+        baseMonster monsterInfo = this.GetComponent<InfoMonster>().MonsterInfo;
+        string imagePath = "MonsterImage/" + monsterInfo.Mon_Name;
+        Debug.Log("image : " + imagePath);
+        this.renderer.sprite = Resources.Load(imagePath, typeof(Sprite)) as Sprite;
+        
+        this.maxHp = monsterInfo.Mon_HP;
+        this.hp = monsterInfo.Mon_HP;
+        this.attackDamage = (int)monsterInfo.Mon_AttackDamage;
+        this.type = monsterInfo.Mon_Type;
         this.stunned = false;
-        this.currentChemicalState = this.gameObject.GetComponent<InfoMonster>().MonsterInfo.Mon_RoomTempStatus;
+        this.currentChemicalState = monsterInfo.Mon_RoomTempStatus;
         this.currentChemicalStateValue = 1;
-        this.solidStateValue = this.gameObject.GetComponent<InfoMonster>().MonsterInfo.Mon_SolidGauge;
-        this.liquidStateValue = this.gameObject.GetComponent<InfoMonster>().MonsterInfo.Mon_LiquidGauge;
-        this.gasStateValue = this.gameObject.GetComponent<InfoMonster>().MonsterInfo.Mon_GasGauge;
-        this.criticalTarget = this.gameObject.GetComponent<InfoMonster>().MonsterInfo.Mon_CriticalTarget;
+        this.solidStateValue = monsterInfo.Mon_SolidGauge;
+        this.liquidStateValue = monsterInfo.Mon_LiquidGauge;
+        this.gasStateValue = monsterInfo.Mon_GasGauge;
+        this.criticalTarget = monsterInfo.Mon_CriticalTarget;
     }
     
     // Only apply image.
-    public void SetStat (string imagePath)
-    {
-        this.renderer.sprite = Resources.Load(imagePath, typeof(Sprite)) as Sprite;
-        SetStat();
-    }
+    // public void SetStat (string imagePath)
+    // {
+    //     this.renderer.sprite = Resources.Load(imagePath, typeof(Sprite)) as Sprite;
+    //     SetStat();
+    // }
     
     // Default image.
     public void SetStat (int hp, int attackDamage, string type, int boilingPoint, int meltingPoint)

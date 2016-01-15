@@ -45,26 +45,38 @@ public class MonsterManager : MonoBehaviour {
             Debug.Log("Generate too many monsters. Input num : " + num);
             num = 4;
         }
+        
+        List<baseMonster> monsterList = GetComponent<MonsterLoad>().monsterList;
+        int currentMonsterListLength = monsterList.Count;
+        int[] monsterIndexCounter = new int[currentMonsterListLength];
+        List<int> respawnMonsterIndexes = new List<int>();
+        for (int i = 0; i < monsterIndexCounter.Length; i++)
+        {
+            monsterIndexCounter[i] = 0;
+        }
+        
+        for (int i = 0; i < num; i++)
+        {
+            int monsterIndex = Random.Range(0, currentMonsterListLength); //뽑고 
+            Debug.Log("Pick " + monsterIndex + "th monster.");
+            while (monsterIndexCounter[monsterIndex] == monsterList[monsterIndex].Mon_MaxCount) // 꽉 찼으면 
+            {
+                monsterIndex = Random.Range(0, currentMonsterListLength); //다시 뽑고
+                Debug.Log("Re-pick " + monsterIndex + "th monster.");
+            }
+            monsterIndexCounter[monsterIndex] += 1; //카운터 올리고    
+            respawnMonsterIndexes.Add(monsterIndex);          
+        }
 
         for (int i = 0; i < num; i++)
         {
             GameObject monster = Instantiate(monsterPrefab) as GameObject;
             monster.transform.position = positions[i];
-            if (i%2 == 0)
-            {
-                monster.GetComponent<InfoMonster>().MonsterInfo=GetComponent<MonsterLoad>().monsterList[0];
-                monster.GetComponent<Monster>().SetStat("MonsterImage/newWhite");
-				
-                Debug.Log("Respawn white enemy");
-            }
-            else
-            {
-                monster.GetComponent<InfoMonster>().MonsterInfo=GetComponent<MonsterLoad>().monsterList[1];
-                monster.GetComponent<Monster>().SetStat();
-				
-				Debug.Log("Respawn red enemy");
-            }
             
+            int monsterIndex = respawnMonsterIndexes[i];
+            monster.GetComponent<InfoMonster>().MonsterInfo = GetComponent<MonsterLoad>().monsterList[monsterIndex];
+            monster.GetComponent<Monster>().SetStat();
+				            
             monsters.Add(monster.GetComponent<Monster>());
         }
     }
