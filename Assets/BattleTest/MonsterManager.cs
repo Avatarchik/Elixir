@@ -58,11 +58,11 @@ public class MonsterManager : MonoBehaviour {
         for (int i = 0; i < num; i++)
         {
             int monsterIndex = Random.Range(0, currentMonsterListLength); //뽑고 
-            Debug.Log("Pick " + monsterIndex + "th monster.");
+            // Debug.Log("Pick " + monsterIndex + "th monster.");
             while (monsterIndexCounter[monsterIndex] == monsterList[monsterIndex].Mon_MaxCount) // 꽉 찼으면 
             {
                 monsterIndex = Random.Range(0, currentMonsterListLength); //다시 뽑고
-                Debug.Log("Re-pick " + monsterIndex + "th monster.");
+                // Debug.Log("Re-pick " + monsterIndex + "th monster.");
             }
             monsterIndexCounter[monsterIndex] += 1; //카운터 올리고    
             respawnMonsterIndexes.Add(monsterIndex);          
