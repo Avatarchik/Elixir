@@ -23,8 +23,8 @@ public class EnemyAI : MonoBehaviour {
             else
             {
                 yield return new WaitForSeconds(EnemyBehaviourBeforeDelay);
-                //SelectAct(monster);
-                UseAttack(monster);
+                SelectAct(monster);
+                //UseAttack(monster);
 			    yield return new WaitForSeconds(EnemyBehaviourAfterDelay);
             }
 			
