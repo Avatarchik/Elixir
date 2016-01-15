@@ -5,11 +5,25 @@ using EnumsAndClasses;
 
 public class MonsterSkillLoad:MonoBehaviour
 {
+
 	public TextAsset file;
-	
+
 	void Awake(){
 		Load (file);
 	}
+
+	public void SetConditionList(string SkillName, List<string> Condition1List, List<string> Condition2List, List<string> Condition3List){
+
+		Debug.Log (Find_MonsterSkillID (SkillName).UseCondition1_1);
+		Condition1List.Add ((Find_MonsterSkillID (SkillName).UseCondition1_2));
+		Condition1List.Add ((Find_MonsterSkillID (SkillName).UseCondition1_2));
+		Condition2List.Add ((Find_MonsterSkillID (SkillName).UseCondition2_1));
+		Condition2List.Add ((Find_MonsterSkillID (SkillName).UseCondition2_2));
+		Condition3List.Add ((Find_MonsterSkillID (SkillName).UseCondition3_1));
+		Condition3List.Add ((Find_MonsterSkillID (SkillName).UseCondition3_2));
+
+	}
+
 
 	
 	List<MonsterSkillRow> rowList = new List<MonsterSkillRow>();
