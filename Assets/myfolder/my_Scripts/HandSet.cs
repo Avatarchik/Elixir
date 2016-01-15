@@ -45,7 +45,7 @@ public class HandSet : MonoBehaviour {
     void ApplyCardInfo(GameObject card, int cardIndex)
     {
         card.GetComponent<InfoCard> ().Card = GetComponent<CardLoad> ().cardDeck [cardIndex];
-        card.transform.FindChild ("CardName").GetComponent<Text> ().text = GetComponent<CardLoad> ().cardDeck [cardIndex].Card_ExtName;
+        card.transform.FindChild ("CardName").GetComponent<Text> ().text = GetComponent<CardLoad> ().cardDeck [cardIndex].Card_ExtName + " / " + GetComponent<CardLoad>().cardDeck[cardIndex].Card_CriticalTarget;
 		card.transform.FindChild ("CardStatement").GetComponent<Text> ().text = GetComponent<CardLoad> ().cardDeck [cardIndex].Card_Description;
     }
     
