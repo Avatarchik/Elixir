@@ -71,41 +71,53 @@ public class EnemyAI : MonoBehaviour {
 	//not implemented
 	bool SkillCondition(string SkillName, int SkillNum)
 	{
-		string ConditionName1_1;
-		string ConditionName1_2;
-		string ConditionName2_1;
-		string ConditionName2_2;
-		string ConditionName3_1;
-		string ConditionName3_2;
+		List<string> Condition1List=new List<string>();
+		List<string> Condition2List=new List<string>();
+		List<string> Condition3List=new List<string>();
 
-		ConditionName1_1 = GetComponent<MonsterSkillLoad> ().Find_MonsterSkillID(SkillName).UseCondition1_1;
-		ConditionName1_2 = GetComponent<MonsterSkillLoad> ().Find_MonsterSkillID(SkillName).UseCondition1_2;
+		GetComponent<MonsterSkillLoad> ().SetConditionList (SkillName, Condition1List, Condition2List, Condition3List);
 
-		if (IdentifyCondition (ConditionName1_1) && IdentifyCondition (ConditionName1_2))
+
+
+		if (IdentifyConditionList(Condition1List))
 			return true;
 
-		ConditionName2_1 = GetComponent<MonsterSkillLoad> ().Find_MonsterSkillID(SkillName).UseCondition2_1;
-		ConditionName2_2 = GetComponent<MonsterSkillLoad> ().Find_MonsterSkillID(SkillName).UseCondition2_2;
 
-		Debug.Log (!((ConditionName2_1 == "N/A") && (ConditionName2_2 == "N/A")));
-
-		if ((!((ConditionName2_1=="N/A")&&(ConditionName2_2=="N/A")))&&IdentifyCondition (ConditionName2_1) && IdentifyCondition (ConditionName2_2))
+		if (IdentifyConditionList(Condition2List))
 			return true;
 
-		ConditionName3_1 = GetComponent<MonsterSkillLoad> ().Find_MonsterSkillID(SkillName).UseCondition3_1;
-		ConditionName3_2 = GetComponent<MonsterSkillLoad> ().Find_MonsterSkillID(SkillName).UseCondition3_2;
 
-		if ((!((ConditionName3_1=="N/A")&&(ConditionName3_2=="N/A")))&&IdentifyCondition (ConditionName3_1) && IdentifyCondition (ConditionName3_2)) 
+		if (IdentifyConditionList(Condition3List)) 
 			return true;
 		return false;
 	
 	}
 
+     bool IdentifyConditionList(List<string> Conditionlist){
+		if (Conditionlist [0] == "N/A"||Conditionlist[0]=="Always")
+			return true;
+
+		int falseCount = 0;
+
+		foreach (string ConditionName in Conditionlist) {
+
+
+
+			if (IdentifyCondition (ConditionName))
+				falseCount++;
+
+
+		}
+		return (falseCount == 0);
+	}
+
+
+
 	bool IdentifyCondition(string ConditionName){
 		Debug.Log (ConditionName);
 
-		if (ConditionName == "Always"||ConditionName=="N/A")
-			return true;
+		if (ConditionName=="N/A")
+			return false;
 
 
 
