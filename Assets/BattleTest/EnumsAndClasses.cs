@@ -106,9 +106,9 @@ namespace EnumsAndClasses
 		public string MonsterSkillName;
 		public string Target;
 		public string Range;
-		public string DamageFactor;
-		public string Heal;
-		public string TargetTempChange;
+		public int DamageFactor;
+		public int Heal;
+		public int TargetTempChange;
 		public string UseCondition1_1;
 		public string UseCondition1_2;
 		public string UseCondition2_1;
@@ -117,14 +117,14 @@ namespace EnumsAndClasses
 		public string UseCondition3_2;
 		public string TargetStateChange;
 		public string DebuffName;
-		public string DebuffRate;
-		public string DebuffTurn;
+		public int DebuffRate;
+		public int DebuffTurn;
 		public string DebuffEffect;
-		public string DotDamage;
-		public string DotDamageTurn;
+		public int DotDamage;
+		public int DotDamageTurn;
 		public string BuffName;
-		public string BuffRate;
-		public string BuffTurn;
+		public int BuffRate;
+		public int BuffTurn;
 		public string BuffEffect;
 		
 	}
