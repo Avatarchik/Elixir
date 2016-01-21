@@ -55,16 +55,16 @@ public class EnemyAI : MonoBehaviour {
 		if (Random.Range (1, 100) <= Skill1Rate && SkillCondition (Monsterdata.Mon_Skill1_Name, 1)) {
 
 			koreanSkillName=GetComponent<MonsterSkillLoad>().Find_MonsterSkillID(Monsterdata.Mon_Skill1_Name).MonsterSkillName;
-			UseSkill(monster,Monsterdata.Mon_Skill1_Name,koreanSkillName);
+			GetComponent<EnemySkill>().UseSkill(monster,Monsterdata.Mon_Skill1_Name,koreanSkillName);
 
 
 		} else if (Random.Range (1, 100) <= Skill2Rate && SkillCondition (Monsterdata.Mon_Skill2_Name, 2)) {
 			koreanSkillName=GetComponent<MonsterSkillLoad>().Find_MonsterSkillID(Monsterdata.Mon_Skill2_Name).MonsterSkillName;
-			UseSkill(monster,Monsterdata.Mon_Skill2_Name,koreanSkillName);
+			GetComponent<EnemySkill>().UseSkill(monster,Monsterdata.Mon_Skill2_Name,koreanSkillName);
 
 		} else {
 
-			UseAttack (monster);
+			GetComponent<EnemySkill>().UseAttack (monster);
 		}
 	}
 

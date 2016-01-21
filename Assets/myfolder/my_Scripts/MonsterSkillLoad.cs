@@ -51,9 +51,12 @@ public class MonsterSkillLoad:MonoBehaviour
 			row.MonsterSkillName = grid[i][2];
 			row.Target = grid[i][3];
 			row.Range = grid[i][4];
-			row.DamageFactor = grid[i][5];
-			row.Heal = grid[i][6];
-			row.TargetTempChange = grid[i][7];
+			if(grid[i][5]!="N/A")
+			row.DamageFactor = System.Convert.ToInt32 (grid[i][5]);
+			if(grid[i][6]!="N/A")
+			row.Heal = System.Convert.ToInt32(grid[i][6]);
+			if(grid[i][7]!="N/A")
+			row.TargetTempChange = System.Convert.ToInt32 (grid[i][7]);
 			row.UseCondition1_1 = grid[i][8];
 			row.UseCondition1_2 = grid[i][9];
 			row.UseCondition2_1 = grid[i][10];
@@ -62,14 +65,20 @@ public class MonsterSkillLoad:MonoBehaviour
 			row.UseCondition3_2 = grid[i][13];
 			row.TargetStateChange = grid[i][14];
 			row.DebuffName = grid[i][15];
-			row.DebuffRate = grid[i][16];
-			row.DebuffTurn = grid[i][17];
+			if(grid[i][16]!="N/A")
+			row.DebuffRate = System.Convert.ToInt32(grid[i][16]);
+			if(grid[i][17]!="N/A")
+			row.DebuffTurn = System.Convert.ToInt32(grid[i][17]);
 			row.DebuffEffect = grid[i][18];
-			row.DotDamage = grid[i][19];
-			row.DotDamageTurn = grid[i][20];
+			if(grid[i][19]!="N/A")
+			row.DotDamage = System.Convert.ToInt32(grid[i][19]);
+			if(grid[i][20]!="N/A")
+			row.DotDamageTurn = System.Convert.ToInt32(grid[i][20]);
 			row.BuffName = grid[i][21];
-			row.BuffRate = grid[i][22];
-			row.BuffTurn = grid[i][23];
+			if(grid[i][22]!="N/A")
+			row.BuffRate = System.Convert.ToInt32(grid[i][22]);
+			if(grid[i][23]!="N/A")
+			row.BuffTurn = System.Convert.ToInt32 (grid[i][23]);
 			row.BuffEffect = grid[i][24];
 			
 			rowList.Add(row);
@@ -128,30 +137,6 @@ public class MonsterSkillLoad:MonoBehaviour
 	public List<MonsterSkillRow> FindAll_Range(string find)
 	{
 		return rowList.FindAll(x => x.Range == find);
-	}
-	public MonsterSkillRow Find_DamageFactor(string find)
-	{
-		return rowList.Find(x => x.DamageFactor == find);
-	}
-	public List<MonsterSkillRow> FindAll_DamageFactor(string find)
-	{
-		return rowList.FindAll(x => x.DamageFactor == find);
-	}
-	public MonsterSkillRow Find_Heal(string find)
-	{
-		return rowList.Find(x => x.Heal == find);
-	}
-	public List<MonsterSkillRow> FindAll_Heal(string find)
-	{
-		return rowList.FindAll(x => x.Heal == find);
-	}
-	public MonsterSkillRow Find_TargetTempChange(string find)
-	{
-		return rowList.Find(x => x.TargetTempChange == find);
-	}
-	public List<MonsterSkillRow> FindAll_TargetTempChange(string find)
-	{
-		return rowList.FindAll(x => x.TargetTempChange == find);
 	}
 	public MonsterSkillRow Find_UseCondition1_1(string find)
 	{
@@ -217,22 +202,7 @@ public class MonsterSkillLoad:MonoBehaviour
 	{
 		return rowList.FindAll(x => x.DebuffName == find);
 	}
-	public MonsterSkillRow Find_DebuffRate(string find)
-	{
-		return rowList.Find(x => x.DebuffRate == find);
-	}
-	public List<MonsterSkillRow> FindAll_DebuffRate(string find)
-	{
-		return rowList.FindAll(x => x.DebuffRate == find);
-	}
-	public MonsterSkillRow Find_DebuffTurn(string find)
-	{
-		return rowList.Find(x => x.DebuffTurn == find);
-	}
-	public List<MonsterSkillRow> FindAll_DebuffTurn(string find)
-	{
-		return rowList.FindAll(x => x.DebuffTurn == find);
-	}
+
 	public MonsterSkillRow Find_DebuffEffect(string find)
 	{
 		return rowList.Find(x => x.DebuffEffect == find);
@@ -241,22 +211,7 @@ public class MonsterSkillLoad:MonoBehaviour
 	{
 		return rowList.FindAll(x => x.DebuffEffect == find);
 	}
-	public MonsterSkillRow Find_DotDamage(string find)
-	{
-		return rowList.Find(x => x.DotDamage == find);
-	}
-	public List<MonsterSkillRow> FindAll_DotDamage(string find)
-	{
-		return rowList.FindAll(x => x.DotDamage == find);
-	}
-	public MonsterSkillRow Find_DotDamageTurn(string find)
-	{
-		return rowList.Find(x => x.DotDamageTurn == find);
-	}
-	public List<MonsterSkillRow> FindAll_DotDamageTurn(string find)
-	{
-		return rowList.FindAll(x => x.DotDamageTurn == find);
-	}
+
 	public MonsterSkillRow Find_BuffName(string find)
 	{
 		return rowList.Find(x => x.BuffName == find);
@@ -265,22 +220,7 @@ public class MonsterSkillLoad:MonoBehaviour
 	{
 		return rowList.FindAll(x => x.BuffName == find);
 	}
-	public MonsterSkillRow Find_BuffRate(string find)
-	{
-		return rowList.Find(x => x.BuffRate == find);
-	}
-	public List<MonsterSkillRow> FindAll_BuffRate(string find)
-	{
-		return rowList.FindAll(x => x.BuffRate == find);
-	}
-	public MonsterSkillRow Find_BuffTurn(string find)
-	{
-		return rowList.Find(x => x.BuffTurn == find);
-	}
-	public List<MonsterSkillRow> FindAll_BuffTurn(string find)
-	{
-		return rowList.FindAll(x => x.BuffTurn == find);
-	}
+	
 	public MonsterSkillRow Find_BuffEffect(string find)
 	{
 		return rowList.Find(x => x.BuffEffect == find);
