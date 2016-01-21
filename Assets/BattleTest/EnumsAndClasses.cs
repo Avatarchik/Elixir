@@ -107,6 +107,7 @@ namespace EnumsAndClasses
 		public string Target;
 		public string Range;
 		public int DamageFactor;
+		public int SelfDamage;
 		public int Heal;
 		public int TargetTempChange;
 		public string UseCondition1_1;
