@@ -51,7 +51,6 @@ public class EnemySkill : MonoBehaviour {
 			list.Add (GameObject.Find ("Player"));
 			GameObject[] monsters=GameObject.FindGameObjectsWithTag("Monster");
 			foreach(GameObject monster in monsters){
-				Debug.Log (monster);
 				list.Add (monster);
 			}
 			break;
@@ -62,7 +61,6 @@ public class EnemySkill : MonoBehaviour {
 		case "Monster":
 			GameObject[] Targetmonster=GameObject.FindGameObjectsWithTag("Monster");
 			foreach(GameObject monster in Targetmonster){
-				Debug.Log (monster);
 				list.Add (monster);
 			}
 			break;
