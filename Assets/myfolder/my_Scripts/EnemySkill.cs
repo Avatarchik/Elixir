@@ -20,26 +20,33 @@ public class EnemySkill : MonoBehaviour {
 		foreach (GameObject target in Targetlist) {
 			Debug.Log (target.name);
 		}
+
+		//스킬 구현 
 		if (skillrow.DamageFactor != 0) {
+			// 스킬 공격력 계수(%)
 			foreach (GameObject target in Targetlist) {
 				int monsterdamage=monster.GetComponent<Monster>().attackDamage;
 				target.GetComponent<BaseCharacter>().SetDamage(monsterdamage*skillrow.DamageFactor/100);
 			}
 		}
 		if (skillrow.Heal != 0) {
+			//힐 
 			foreach (GameObject target in Targetlist) {
 				target.GetComponent<Monster>().SetHeal(skillrow.Heal);
 			}
 		}
 		if (skillrow.TargetTempChange != 0) {
+			// 온도 변화 
 
 		}
 		if (skillrow.TargetStateChange != "N/A") {
+			// 상태 변화 
 		}
 		if (skillrow.DebuffName != "N/A" && skillrow.DebuffRate >= Random.Range (1, 100)) {
-		
+			// 디버프 
 		}
 		if (skillrow.BuffName != "N/A" && skillrow.BuffRate >= Random.Range (1, 100)) {
+			//버프 
 		}
 
 
@@ -47,6 +54,7 @@ public class EnemySkill : MonoBehaviour {
 
 	}
 	public void UseAttack(GameObject monster){
+		//평타 구현 
 		Animator animator=monster.GetComponent<Animator>();
 		if (GameObject.Find ("Player(Clone)") != null) {
 			Debug.Log ("Monster Attack");
@@ -56,22 +64,23 @@ public class EnemySkill : MonoBehaviour {
 	}
 	List<GameObject> SelectTarget(string SkillName){
 
-		//make a list of target 
+		//타겟 리스트 만들기 
 		List<GameObject> list=new List<GameObject>();
 		switch(GetComponent<MonsterSkillLoad>().Find_MonsterSkillID (SkillName).Target){
 		case "All":
-			list.Add (GameObject.Find ("Player(Clone)"));
+			// All의 경우
+			list.Add (GameObject.Find ("Player(Clone)"));//플레이어 먼저 포함
 			GameObject[] monsters=GameObject.FindGameObjectsWithTag("Monster");
-			foreach(GameObject monster in monsters){
+			foreach(GameObject monster in monsters){//몬스터들 포함 
 				list.Add (monster);
 			}
 			break;
 		case "Player":
-			list.Add (GameObject.Find ("Player(Clone)"));
+			list.Add (GameObject.Find ("Player(Clone)"));//플레이어 포함 
 			break;
 		case "Monster":
 			GameObject[] Targetmonster=GameObject.FindGameObjectsWithTag("Monster");
-			foreach(GameObject monster in Targetmonster){
+			foreach(GameObject monster in Targetmonster){//몬스터들 포함 
 				list.Add (monster);
 			}
 			break;
