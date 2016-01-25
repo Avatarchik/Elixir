@@ -50,6 +50,7 @@ public class CardChoice : MonoBehaviour, IPointerEnterHandler{
             //Increment counter
             //Check if all turns are exhausted
             //If exhausted, change the state of TurnBasedCombatStateMachine
+            Debug.Log("Decrement Turn");
             turnBasedCombatStateMachine.decrementTurn();
    
             if (turnBasedCombatStateMachine.isTurnExhausted())
