@@ -120,6 +120,7 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
 
 			if(currentState==BattleStates.IDLE){
 				currentState=BattleStates.ENEMYCHOICE;
+                resetTurn();
 			}
 		}
 	}
