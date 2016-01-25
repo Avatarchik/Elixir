@@ -8,7 +8,7 @@ public class BaseCharacter : MonoBehaviour {
 	private string CharacterName;
 
 	//stats
-	public float MAX_HP=100.0f;
+	public float MAX_HP=200.0f;
 	public float HP;
     public ChemicalStates criticalTarget;
     public ChemicalStates currentChemicalState;
@@ -21,7 +21,7 @@ public class BaseCharacter : MonoBehaviour {
     List<Buff> buffs = new List<Buff>();
 
     void Start(){
-		HP = 50;
+		HP = 200;
         //Temporary inputs
         this.criticalTarget = ChemicalStates.LIQUID;
         this.currentChemicalState = ChemicalStates.LIQUID;
