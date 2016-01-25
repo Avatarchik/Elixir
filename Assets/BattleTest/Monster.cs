@@ -76,6 +76,14 @@ public class Monster : MonoBehaviour {
         SetStat(hp, attackDamage, type, boilingPoint, meltingPoint);
     }
     
+	public void SetHeal(int heal){
+		hp += heal;
+		if (hp > maxHp) {
+			hp = maxHp;
+		}
+	}
+
+
     public void SetDamage(int damage)
     {
         hp -= damage;

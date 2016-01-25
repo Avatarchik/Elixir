@@ -40,14 +40,17 @@ public class MonsterSkillConditionLoad:MonoBehaviour{
 			row.Description = grid[i][2];
 			row.TargetState = grid[i][3];
 			if(grid[i][4]!="N/A")
-			row.HpBelowN = System.Convert.ToInt32(grid[i][4]);
+			row.TargetHpBelowN = System.Convert.ToInt32(grid[i][4]);
 			if(grid[i][5]!="N/A")
-			row.HpMoreN = System.Convert.ToInt32(grid[i][5]);
-			row.Actionlimit = grid[i][6];
-			if(grid[i][7]!="N/A")
-			row.TargetNumber = System.Convert.ToInt32(grid[i][7]);
+			row.TargetHpMoreN = System.Convert.ToInt32(grid[i][5]);
+			if(grid[i][6]!="N/A")
+			row.SelfHpBelowN = System.Convert.ToInt32(grid[i][6]);
+			row.Actionlimit = grid[i][7];
 			if(grid[i][8]!="N/A")
-			row.RandomRate = System.Convert.ToInt32(grid[i][8]);
+			row.TargetNumber = System.Convert.ToInt32(grid[i][8]);
+			if(grid[i][9]!="N/A")
+			row.RandomRate = System.Convert.ToInt32(grid[i][9]);
+			//row.TargetAffectedEffect = grid[i][10];
 			
 			rowList.Add(row);
 		}

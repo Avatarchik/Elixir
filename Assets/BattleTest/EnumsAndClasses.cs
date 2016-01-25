@@ -135,11 +135,12 @@ namespace EnumsAndClasses
 		public string UseCondition;
 		public string Description;
 		public string TargetState;
-		public int HpBelowN;
-		public int HpMoreN;
+		public int TargetHpBelowN;
+		public int TargetHpMoreN;
+		public int SelfHpBelowN;
 		public string Actionlimit;
 		public int TargetNumber;
 		public int RandomRate;
-		
+		public string TargetAffectedEffect;
 	}
 }
