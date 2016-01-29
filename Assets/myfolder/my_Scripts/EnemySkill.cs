@@ -5,7 +5,8 @@ using System.Collections.Generic;
 
 public class EnemySkill : MonoBehaviour {
 
-	public void UseSkill(GameObject monster,string SkillName, string KoreanSkillName){
+
+	public void UseSkill(GameObject monster,string SkillName, string KoreanSkillName, List<GameObject> TargetList){
 		Debug.Log (monster + " use " + SkillName);
 		//Create Skill popup
 		GameObject.Find ("GameManager").GetComponent<PopupManager>().CreateMonsterSkillPopup (monster.transform,KoreanSkillName);
@@ -13,25 +14,22 @@ public class EnemySkill : MonoBehaviour {
 		//set skill info
 		MonsterSkillRow skillrow = GetComponent<MonsterSkillLoad> ().Find_MonsterSkillID (SkillName);
 
-		List<GameObject> Targetlist;
-
 		//make a targetlist
-		Targetlist = SelectTarget (SkillName);
-		foreach (GameObject target in Targetlist) {
+		foreach (GameObject target in TargetList) {
 			Debug.Log (target.name);
 		}
 
 		//스킬 구현 
 		if (skillrow.DamageFactor != 0) {
 			// 스킬 공격력 계수(%)
-			foreach (GameObject target in Targetlist) {
+			foreach (GameObject target in TargetList) {
 				int monsterdamage=monster.GetComponent<Monster>().attackDamage;
 				target.GetComponent<BaseCharacter>().SetDamage(monsterdamage*skillrow.DamageFactor/100);
 			}
 		}
 		if (skillrow.Heal != 0) {
 			//힐 
-			foreach (GameObject target in Targetlist) {
+			foreach (GameObject target in TargetList) {
 				target.GetComponent<Monster>().SetHeal(skillrow.Heal);
 			}
 		}
@@ -62,6 +60,7 @@ public class EnemySkill : MonoBehaviour {
 			animator.SetTrigger ("Attack");
 		}
 	}
+	/*
 	List<GameObject> SelectTarget(string SkillName){
 
 		//타겟 리스트 만들기 
@@ -86,5 +85,5 @@ public class EnemySkill : MonoBehaviour {
 			break;
 		}
 		return list;
-	}
+	}*/
 }

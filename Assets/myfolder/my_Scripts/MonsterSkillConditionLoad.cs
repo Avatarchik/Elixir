@@ -50,7 +50,7 @@ public class MonsterSkillConditionLoad:MonoBehaviour{
 			row.TargetNumber = System.Convert.ToInt32(grid[i][8]);
 			if(grid[i][9]!="N/A")
 			row.RandomRate = System.Convert.ToInt32(grid[i][9]);
-			//row.TargetAffectedEffect = grid[i][10];
+			row.TargetAffectedEffect = grid[i][10];
 			
 			rowList.Add(row);
 		}

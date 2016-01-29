@@ -28,7 +28,6 @@ public class Monster : MonoBehaviour {
     List<Debuff> dotDamageList = new List<Debuff>();
     
 	void Update(){
-
 		if (hp <= 0) {
 			Dead();
 		}
