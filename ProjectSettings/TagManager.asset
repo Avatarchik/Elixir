@@ -8,6 +8,7 @@ TagManager:
   - selectable
   - Ally
   - ChemistSkill
+  - DescriptPanel
   layers:
   - Default
   - TransparentFX
