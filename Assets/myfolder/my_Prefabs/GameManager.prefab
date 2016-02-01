@@ -11,7 +11,7 @@ GameObject:
   - 114: {fileID: 11472698}
   - 114: {fileID: 11400056}
   - 114: {fileID: 11456732}
-  - 114: {fileID: 11445036}
+  - 114: {fileID: 11456738}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -31,19 +31,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerPrefab: {fileID: 178922, guid: 1a4b2daf01621e64c836fb6222ddb153, type: 2}
---- !u!114 &11445036
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 128152}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d965e3407ec3898449bbc1a6f5882a6d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damagePrefab: {fileID: 189256, guid: 64709f2b3c2192447a76c5e03bdca000, type: 2}
-  sortinglayerID: 0
 --- !u!114 &11456732
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -58,6 +45,21 @@ MonoBehaviour:
   AttackMode: 0
   SelectedCard: {fileID: 0}
   SelectedChemistSkill: {fileID: 0}
+--- !u!114 &11456738
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 128152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b1c86870adef33409e6e29a44e31d64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DamagePopupPrefab: {fileID: 189256, guid: 64709f2b3c2192447a76c5e03bdca000, type: 2}
+  MonsterSkillPopupPrefab: {fileID: 180658, guid: 26a88d1aca40d794496919874d1a26a9,
+    type: 2}
+  sortinglayerID: 0
 --- !u!114 &11472698
 MonoBehaviour:
   m_ObjectHideFlags: 1

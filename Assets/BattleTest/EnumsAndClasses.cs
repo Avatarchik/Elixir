@@ -40,6 +40,13 @@ namespace EnumsAndClasses
         SOLID
     }
 
+    public enum ChemistSkills
+    {
+        Cool,
+        Heat,
+        Analyze
+    }
+
     public class Buff
     {
         BuffName name;

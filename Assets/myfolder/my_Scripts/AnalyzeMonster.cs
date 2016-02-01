@@ -2,15 +2,14 @@
 using System.Collections;
 using EnumsAndClasses;
 
-public class ChooseTargetByChemist : MonoBehaviour {
+public class AnalyzeMonster : MonoBehaviour
+{
     GameObject selectedEnemy;
     ChemistSkills currentChemistSkill;
     bool cardChanged = false;
-    bool isTargetEnemy;
 
     public IEnumerator SelectTarget()
     {
-        Debug.Log("SelectTarget");
         currentChemistSkill = GameObject.Find("GameManager").GetComponent<ChoosingManager>().SelectedChemistSkill;
         Highlight();
         yield return StartCoroutine(WaitForTargetSelect());
@@ -20,32 +19,21 @@ public class ChooseTargetByChemist : MonoBehaviour {
             cardChanged = false;
             yield break;
         }
-        if (isTargetEnemy)
-        {
-            AttackEnemy();
-        }
-        else
-        {
-            AttackAlly();
-        }
-        
+
+        AnalyzeEnemy();
     }
     void Highlight()
     {
         Debug.Log("Highlight");
         GameObject[] Monsters = GameObject.FindGameObjectsWithTag("Monster");
-        GameObject Ally = GameObject.Find("Player(Clone)");
 
         //Reset first
-        Ally.transform.Find("selectable").gameObject.SetActive(false);
-        Ally.transform.Find("selected").gameObject.SetActive(false);
         foreach (GameObject Monster in Monsters)
         {
             Monster.transform.Find("selectable").gameObject.SetActive(false);
             Monster.transform.Find("selected").gameObject.SetActive(false);
         }
         //Highlight
-        Ally.transform.Find("selectable").gameObject.SetActive(true);
         foreach (GameObject Monster in Monsters)
         {
             if (Monster.GetComponent<Monster>().hp > 0)//If the monster is dead, do not activate selectable
@@ -54,7 +42,6 @@ public class ChooseTargetByChemist : MonoBehaviour {
     }
     IEnumerator WaitForTargetSelect()
     {
-        Debug.Log("WaitForTargetSelect");
         bool bRepeat = true;
         while (bRepeat)
         {
@@ -72,62 +59,22 @@ public class ChooseTargetByChemist : MonoBehaviour {
                     hit.collider.gameObject.transform.Find("selectable").gameObject.SetActive(false);
                     hit.collider.gameObject.transform.Find("selected").gameObject.SetActive(true);
                     bRepeat = false;
-                    isTargetEnemy = true;
-                }
-                if (hit.collider != null && hit.collider.gameObject.tag == "Ally") //When the skill targets Ally
-                {
-                    GameObject Ally = GameObject.Find("Player(Clone)");
-                    Ally.transform.Find("selectable").gameObject.SetActive(false);
-                    Ally.transform.Find("selected").gameObject.SetActive(false);
-
-                    bRepeat = false;
-                    isTargetEnemy = false;
                 }
             }
 
             if (GameObject.Find("GameManager").GetComponent<ChoosingManager>().AttackMode != AttackMode.Chemist ||
                 GameObject.Find("GameManager").GetComponent<ChoosingManager>().SelectedChemistSkill != currentChemistSkill) //Other card is selected / PROBLEM!!
             {
-                Debug.Log("(Chemist)Coroutine stop");
+                Debug.Log("Coroutine stop");
                 cardChanged = true;
                 yield break;
             }
             yield return null;
-        }
+        } 
     }
-    void AttackEnemy()
-    {
-        GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");//Unactivate all selectable/selected logos
-        foreach (GameObject monster in monsters)
-        {
-            monster.transform.Find("selectable").gameObject.SetActive(false);
-            monster.transform.Find("selected").gameObject.SetActive(false);
-        }
-        //Increase or Decrease enemy ChemicalStateValue
-        if (currentChemistSkill == ChemistSkills.Cool)
-        {
-            selectedEnemy.GetComponent<Monster>().DecrementCSVal();
-        }
-        else if(currentChemistSkill == ChemistSkills.Heat)
-        {
-            selectedEnemy.GetComponent<Monster>().IncrementCSVal();
-        }
-        
-    }
-    void AttackAlly()
-    {
-        GameObject Ally = GameObject.Find("Player(Clone)");
-        Ally.transform.Find("selectable").gameObject.SetActive(false);
-        Ally.transform.Find("selected").gameObject.SetActive(false);
 
-        //Increase or Decrease enemy ChemicalStateValue
-        if (currentChemistSkill == ChemistSkills.Cool)
-        {
-            Ally.GetComponent<BaseCharacter>().DecrementCSVal();
-        }
-        else if (currentChemistSkill == ChemistSkills.Heat)
-        {
-            Ally.GetComponent<BaseCharacter>().IncrementCSVal();
-        }
+    void AnalyzeEnemy()
+    {
+        Debug.Log("Analyze Enemy");
     }
 }
