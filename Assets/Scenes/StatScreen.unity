@@ -1620,6 +1620,7 @@ GameObject:
   - 114: {fileID: 744358463}
   - 114: {fileID: 744358464}
   - 114: {fileID: 744358465}
+  - 114: {fileID: 744358466}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1689,6 +1690,19 @@ MonoBehaviour:
   selectedElementID: 0
   equipMode: 0
   unequipMode: 0
+--- !u!114 &744358466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 744358461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e4980141e5d1b5498cf68fc92971180, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  file: {fileID: 4900000, guid: 974e5191b25ba1047b5ebf729dffc524, type: 3}
+  cardDeck: []
 --- !u!1 &761470205
 GameObject:
   m_ObjectHideFlags: 0
@@ -2205,7 +2219,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1131905671
 MonoBehaviour:
   m_ObjectHideFlags: 0

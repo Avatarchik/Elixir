@@ -85,7 +85,6 @@ public class CardLoad:MonoBehaviour {
 	}
 
 	//여기까지 덱만들기
-
 		public class Row
 		{
         public string ID;

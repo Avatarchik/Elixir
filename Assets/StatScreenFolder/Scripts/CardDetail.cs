@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class CardDetail : MonoBehaviour {
     public Text CardName;
@@ -12,7 +13,10 @@ public class CardDetail : MonoBehaviour {
     {
         int elementID = GameObject.Find("GameManager").GetComponent<Inventory>().SelectedElement;
         Element element = GameObject.Find("GameManager").GetComponent<Inventory>().inventory[elementID];
+        List<baseCard> cardDatabase = GameObject.Find("GameManager").GetComponent<CardLoad>().cardDeck;
 
+        baseCard card = cardDatabase.Find(x => x.Card_Name == element.elementCard1);
+        Debug.Log(card.Card_ExtName);
         //CardName.text = 
         //ChemState.text = 
         //CardEffect.text = 

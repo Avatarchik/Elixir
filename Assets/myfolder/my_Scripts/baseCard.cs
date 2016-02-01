@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using EnumsAndClasses;
+
+[System.Serializable]
 public class baseCard
 {
 
