@@ -60,30 +60,5 @@ public class EnemySkill : MonoBehaviour {
 			animator.SetTrigger ("Attack");
 		}
 	}
-	/*
-	List<GameObject> SelectTarget(string SkillName){
 
-		//타겟 리스트 만들기 
-		List<GameObject> list=new List<GameObject>();
-		switch(GetComponent<MonsterSkillLoad>().Find_MonsterSkillID (SkillName).Target){
-		case "All":
-			// All의 경우
-			list.Add (GameObject.Find ("Player(Clone)"));//플레이어 먼저 포함
-			GameObject[] monsters=GameObject.FindGameObjectsWithTag("Monster");
-			foreach(GameObject monster in monsters){//몬스터들 포함 
-				list.Add (monster);
-			}
-			break;
-		case "Player":
-			list.Add (GameObject.Find ("Player(Clone)"));//플레이어 포함 
-			break;
-		case "Monster":
-			GameObject[] Targetmonster=GameObject.FindGameObjectsWithTag("Monster");
-			foreach(GameObject monster in Targetmonster){//몬스터들 포함 
-				list.Add (monster);
-			}
-			break;
-		}
-		return list;
-	}*/
 }

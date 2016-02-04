@@ -157,6 +157,12 @@ public class Monster : MonoBehaviour {
                 break;
         }
     }
+	public int DebuffListCount(){
+		return debuffs.Count;
+	}
+	public int BuffListCount(){
+		return buffs.Count;
+	}
 
     // Stun Implementation
     public void AddStun(Debuff stun)

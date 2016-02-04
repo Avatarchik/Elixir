@@ -83,9 +83,12 @@ public class EnemyAI : MonoBehaviour {
 
 
 	bool IdentifyConditionList(GameObject monster, List<string> Conditionlist , string Target_string){
+
 		if (Conditionlist[0] == "N/A")//N/A일 경우는 false
 			return false;
+
 		if (Conditionlist [0] == "Always") {//Always 일 경우는 리스트 만들고 바로 true
+
 			TargetList=new List<GameObject>();
 			switch (Target_string) {
 			case "All":
@@ -253,8 +256,13 @@ public class EnemyAI : MonoBehaviour {
 			foreach(GameObject target in TargetList){
 				string actionlimit = GetComponent<MonsterSkillConditionLoad> ().Find_UseCondition (ConditionName).Actionlimit;
 				if (actionlimit == "N") {
+
+
+
 					
 				} else if (actionlimit == "Y") {
+
+
 					
 					
 				}
@@ -276,7 +284,15 @@ public class EnemyAI : MonoBehaviour {
 
 			switch(targetaffectedeffect){
 			case "Debuff":
+					if(target.tag=="Monster"){
+						return(target.GetComponent<Monster>().DebuffListCount()>0);
+					}
+					break;
 			case "Buff":
+					if(target.tag=="Monster"){
+						return(target.GetComponent<Monster>().BuffListCount()>0);
+					}
+					break;
 			case "DotDamage":
 			case "NoShield":
 			break;

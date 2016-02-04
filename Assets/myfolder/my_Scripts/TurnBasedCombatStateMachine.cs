@@ -52,6 +52,9 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
         {
             currentState = BattleStates.WIN;
         }
+		if (GameObject.Find ("Player(Clone)").GetComponent<BaseCharacter>().HP == 0) {
+			currentState = BattleStates.LOSE;
+		}
 		switch (currentState) {
 		    case (BattleStates.START):
                 //Start
@@ -107,6 +110,7 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
             case (BattleStates.IDLE):
                 break;
 		    case (BattleStates.LOSE):
+
 			    break;
 		    case (BattleStates.WIN):
                 Debug.Log("Battle Won!");
