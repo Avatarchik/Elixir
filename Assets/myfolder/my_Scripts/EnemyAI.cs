@@ -280,20 +280,26 @@ public class EnemyAI : MonoBehaviour {
 			//TargetAffectedEffect 확인,
 			string targetaffectedeffect = GetComponent<MonsterSkillConditionLoad>().Find_UseCondition (ConditionName).TargetAffectedEffect;
 
-			foreach(GameObject target in TargetList){
-
+			for(int i=0;i<TargetList.Count;i++){
+				GameObject target =TargetList[i];
 			switch(targetaffectedeffect){
 			case "Debuff":
-					if(target.tag=="Monster"){
-						return(target.GetComponent<Monster>().DebuffListCount()>0);
+					if(target.tag=="Monster"&&target.GetComponent<Monster>().DebuffListCount()==0)
+						TargetList.Remove(target);
+					if(target.tag=="Ally"){
 					}
 					break;
 			case "Buff":
-					if(target.tag=="Monster"){
-						return(target.GetComponent<Monster>().BuffListCount()>0);
+					if(target.tag=="Monster"&&target.GetComponent<Monster>().BuffListCount()==0)
+						TargetList.Remove(target);
+					if(target.tag=="Ally"&&target.GetComponent<BaseCharacter>().BuffListCount()==0){
+						TargetList.Remove(target);
 					}
 					break;
 			case "DotDamage":
+					if(target.tag=="Monster"&&target.GetComponent<Monster>().DotDamageListCount()==0)
+						TargetList.Remove (target);
+					break;
 			case "NoShield":
 			break;
 				}

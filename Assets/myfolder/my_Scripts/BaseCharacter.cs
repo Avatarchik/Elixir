@@ -173,4 +173,8 @@ public class BaseCharacter : MonoBehaviour {
 		}
 		Debug.Log ("Get " + damage + " damage by monster");
 	}
+	public int BuffListCount(){
+		return buffs.Count;
+
+	}
 }
