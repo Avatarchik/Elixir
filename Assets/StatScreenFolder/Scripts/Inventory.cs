@@ -7,8 +7,10 @@ public class Inventory : MonoBehaviour {
     public RectTransform InventoryPanel;
     public GameObject Panel;
     public Image ElementImage;
+    public Button ButtonElement;
     public List<Element> inventory = new List<Element>();
     public List<Image> elementImage = new List<Image>();
+    public List<Button> elementButton = new List<Button>();
     public List<Element> elementDatabase;
     public Mode mode = Mode.Null;
 
@@ -37,7 +39,11 @@ public class Inventory : MonoBehaviour {
         AddElement(0);
         AddElement(1);
         AddElement(2);
-        
+        AddElement(3);
+        AddElement(0);
+        AddElement(1);
+        AddElement(2);
+
         ShowInventory();
     }
 	
@@ -46,12 +52,13 @@ public class Inventory : MonoBehaviour {
         for(int i = 0; i < inventory.Count; i++)
         {
             GameObject clonePanel = (GameObject)Instantiate(Panel, new Vector3(0, 0, 0), Quaternion.identity);
-            clonePanel.transform.SetParent(InventoryPanel.transform);
-            Image cloneElement = (Image)Instantiate(ElementImage, new Vector3(0, 0, 0), Quaternion.identity);
-            cloneElement.transform.SetParent(clonePanel.transform);
-            cloneElement.rectTransform.sizeDelta = new Vector2(30, 30);
+            clonePanel.transform.SetParent(InventoryPanel.transform,false);
+            //Image cloneElement = (Image)Instantiate(ElementImage);
+            Button cloneElement = (Button)Instantiate(ButtonElement);
+            cloneElement.transform.SetParent(clonePanel.transform,false);
             cloneElement.GetComponent<DragHandler>().id = i;
-            elementImage.Add(cloneElement);
+            //elementImage.Add(cloneElement);
+            elementButton.Add(cloneElement);
         }
     }
 
@@ -69,9 +76,15 @@ public class Inventory : MonoBehaviour {
         }
         else
         {
-            if (!elementImage[selectedElementID].GetComponent<DragHandler>().equipped)
+            if (!elementButton[selectedElementID].GetComponent<DragHandler>().equipped)
             {
                 equipMode = true;
+                //Highlight Slots
+                GameObject[] equipSlots = GameObject.FindGameObjectsWithTag("EquipSlot");
+                foreach(GameObject equipSlot in equipSlots)
+                {
+                    equipSlot.GetComponent<Image>().sprite = Resources.Load("EffectImages/EquipSlot(active)", typeof(Sprite)) as Sprite;
+                }
             }
         }
 
@@ -79,9 +92,9 @@ public class Inventory : MonoBehaviour {
         {
             Debug.Log("Unequip Element");
             GameObject clonePanel = (GameObject)Instantiate(Panel, new Vector3(0, 0, 0), Quaternion.identity);
-            clonePanel.transform.SetParent(InventoryPanel.transform);
-            elementImage[SelectedElement].transform.SetParent(clonePanel.transform);
-            GameObject.Find("SlotPanel").transform.Find("Button").Find("Text").GetComponent<Text>().text = "Equip";
+            clonePanel.transform.SetParent(InventoryPanel.transform, false);
+            elementButton[SelectedElement].transform.SetParent(clonePanel.transform, false);
+            GameObject.Find("DescriptPanel").transform.Find("EquipButton").Find("Text").GetComponent<Text>().text = "장착";
             unequipMode = false;
         }
         
@@ -106,6 +119,6 @@ public class Inventory : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-	
-	}
+        
+    }
 }

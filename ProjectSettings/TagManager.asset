@@ -9,6 +9,9 @@ TagManager:
   - Ally
   - ChemistSkill
   - DescriptPanel
+  - Element
+  - DetailPanel
+  - EquipSlot
   layers:
   - Default
   - TransparentFX

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using EnumsAndClasses;
 [System.Serializable]
 public class Element{
     public string id;
@@ -8,11 +8,11 @@ public class Element{
     public string name;
     public string chemicalSeries;
     public string desription;
-    public string characterRoomTempState;
+    public ChemicalStates characterRoomTempState;
     public int solidGauge;
     public int liquidGauge;
     public int gasGauge;
-    public float roomTempPos;
+    public int roomTempPos;
     public string elementCard1;
     public string elementCard2;
     public string elementCard3;

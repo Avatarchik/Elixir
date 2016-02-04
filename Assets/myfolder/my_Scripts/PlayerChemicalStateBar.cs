@@ -70,6 +70,7 @@ public class PlayerChemicalStateBar : MonoBehaviour {
     }
     private float MapValues(float barWidth, float minXVal, float barState)
     {
+       
         return (barWidth / barGas) * barState + minXVal;
     }
 }
