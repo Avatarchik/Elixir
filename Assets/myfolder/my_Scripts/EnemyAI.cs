@@ -83,9 +83,12 @@ public class EnemyAI : MonoBehaviour {
 
 
 	bool IdentifyConditionList(GameObject monster, List<string> Conditionlist , string Target_string){
+
 		if (Conditionlist[0] == "N/A")//N/A일 경우는 false
 			return false;
+
 		if (Conditionlist [0] == "Always") {//Always 일 경우는 리스트 만들고 바로 true
+
 			TargetList=new List<GameObject>();
 			switch (Target_string) {
 			case "All":
@@ -253,8 +256,13 @@ public class EnemyAI : MonoBehaviour {
 			foreach(GameObject target in TargetList){
 				string actionlimit = GetComponent<MonsterSkillConditionLoad> ().Find_UseCondition (ConditionName).Actionlimit;
 				if (actionlimit == "N") {
+
+
+
 					
 				} else if (actionlimit == "Y") {
+
+
 					
 					
 				}
@@ -272,12 +280,26 @@ public class EnemyAI : MonoBehaviour {
 			//TargetAffectedEffect 확인,
 			string targetaffectedeffect = GetComponent<MonsterSkillConditionLoad>().Find_UseCondition (ConditionName).TargetAffectedEffect;
 
-			foreach(GameObject target in TargetList){
-
+			for(int i=0;i<TargetList.Count;i++){
+				GameObject target =TargetList[i];
 			switch(targetaffectedeffect){
 			case "Debuff":
+					if(target.tag=="Monster"&&target.GetComponent<Monster>().DebuffListCount()==0)
+						TargetList.Remove(target);
+					if(target.tag=="Ally"){
+					}
+					break;
 			case "Buff":
+					if(target.tag=="Monster"&&target.GetComponent<Monster>().BuffListCount()==0)
+						TargetList.Remove(target);
+					if(target.tag=="Ally"&&target.GetComponent<BaseCharacter>().BuffListCount()==0){
+						TargetList.Remove(target);
+					}
+					break;
 			case "DotDamage":
+					if(target.tag=="Monster"&&target.GetComponent<Monster>().DotDamageListCount()==0)
+						TargetList.Remove (target);
+					break;
 			case "NoShield":
 			break;
 				}
