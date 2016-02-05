@@ -24,7 +24,7 @@ public class EnemySkill : MonoBehaviour {
 			// 스킬 공격력 계수(%)
 			foreach (GameObject target in TargetList) {
 				int monsterdamage=monster.GetComponent<Monster>().attackDamage;
-				target.GetComponent<BaseCharacter>().SetDamage(monsterdamage*skillrow.DamageFactor/100);
+                GameObject.Find("GameManager").GetComponent<PlayerPrefs>().player.SetDamage(monsterdamage*skillrow.DamageFactor/100);
 			}
 		}
 		if (skillrow.Heal != 0) {
@@ -56,7 +56,7 @@ public class EnemySkill : MonoBehaviour {
 		Animator animator=monster.GetComponent<Animator>();
 		if (GameObject.Find ("Player(Clone)") != null) {
 			Debug.Log ("Monster Attack");
-			GameObject.Find ("Player(Clone)").GetComponent<BaseCharacter> ().SetDamage (monster.GetComponent<Monster> ().attackDamage);
+            GameObject.Find("GameManager").GetComponent<PlayerPrefs>().player.SetDamage (monster.GetComponent<Monster> ().attackDamage);
 			animator.SetTrigger ("Attack");
 		}
 	}

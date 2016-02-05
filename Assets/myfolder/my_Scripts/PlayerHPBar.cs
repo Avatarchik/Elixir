@@ -26,7 +26,7 @@ public class PlayerHPBar : MonoBehaviour {
     {
         if (GameObject.Find("GameManager").GetComponent<PlayerPrefs>().player.HP != currentHealth)
         {
-            currentHealth = this.GetComponent<BaseCharacter>().HP;
+            currentHealth = GameObject.Find("GameManager").GetComponent<PlayerPrefs>().player.HP;
             HandleHealth();
         }
     }

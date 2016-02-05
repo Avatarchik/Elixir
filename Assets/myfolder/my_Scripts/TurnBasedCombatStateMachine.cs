@@ -67,19 +67,17 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
 			    break;
 		    case (BattleStates.PLAYERCHOICE):
                 //Reduce enemy stun counter after EnemyTurn
-                //GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
-                //foreach (GameObject monster in monsters)
-                //{
-                //    monster.GetComponent<Monster>().ReduceStunTurn();
-                //    monster.GetComponent<Monster>().ActivateStun();
-                //    monster.GetComponent<Monster>().ReduceDotDamageTurn();
-                //}
+                GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
+                foreach (GameObject monster in monsters)
+                {
+                    monster.GetComponent<Monster>().ReduceStunTurn();
+                    monster.GetComponent<Monster>().ActivateStun();
+                    monster.GetComponent<Monster>().ReduceDotDamageTurn();
+                }
 
-                //GameObject.Find("Player(Clone)").GetComponent<BaseCharacter>().ActivateBuff();
-                //GameObject.Find("Player(Clone)").GetComponent<BaseCharacter>().ReduceBuffTurn();
-                //GameObject.Find("Player(Clone)").GetComponent<BaseCharacter>().RemoveBuff();
-
-                //GameObject.Find ("Hands").GetComponent<HandSet>().CardSet(); //DrawsCard from Deck
+                GetComponent<PlayerPrefs>().player.ActivateBuff();
+                GetComponent<PlayerPrefs>().player.ReduceBuffTurn();
+                GetComponent<PlayerPrefs>().player.RemoveBuff();
 
                 GetComponent<PlayerTurn>().GetSkills();
                 currentState = BattleStates.IDLE;
@@ -87,12 +85,6 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
 		    case (BattleStates.ENEMYCHOICE):
                 Debug.Log("Enemy Turn Reached");
 
-                //Functions that delete all cards in hand (temporary)
-                //foreach (var card in FindObjectOfType<HandSet>().cards)
-                //{
-                //    card.SetActive(false);
-                //}
-                //FindObjectOfType<HandSet>().skillTextPanel.SetActive(false);
                 GameObject.Find("SkillPanel").transform.GetChild(0).GetComponent<Button>().interactable = false;
                 GameObject.Find("SkillPanel").transform.GetChild(1).GetComponent<Button>().interactable = false;
                 GameObject.Find("SkillPanel").transform.GetChild(2).GetComponent<Button>().interactable = false;
@@ -104,7 +96,7 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
                     monster.GetComponent<Monster>().ActivateDotDamage();
                 }
                 
-                //StartCoroutine(GameObject.Find ("MonsterManager").GetComponent<EnemyAI>().EnemyActChoice(GameObject.FindGameObjectsWithTag("Monster")));
+                StartCoroutine(GameObject.Find ("MonsterManager").GetComponent<EnemyAI>().EnemyActChoice(GameObject.FindGameObjectsWithTag("Monster")));
                  currentState = BattleStates.PLAYERCHOICE;
                 break;
             case (BattleStates.IDLE):
