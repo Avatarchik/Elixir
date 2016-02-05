@@ -30,7 +30,7 @@ namespace EnumsAndClasses
 
     public enum AttackMode
     {
-        Card,
+        Element,
         Chemist
     }
     public enum ChemicalStates
@@ -46,7 +46,7 @@ namespace EnumsAndClasses
         Heat,
         Analyze
     }
-
+    [System.Serializable]
     public class Buff
     {
         BuffName name;

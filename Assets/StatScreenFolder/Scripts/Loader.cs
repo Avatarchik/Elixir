@@ -8,10 +8,10 @@ public class Loader : MonoBehaviour {
     public List<Element> elementList = new List<Element>();
 	// Use this for initialization
 	void Awake () {
-        Load();
+        //Load();
 	}
 
-    void Load()
+    public void Load()
     {
         string[][] grid = CsvParser2.Parse(database.text);
         for (int i = 1; i < grid.Length; i++)

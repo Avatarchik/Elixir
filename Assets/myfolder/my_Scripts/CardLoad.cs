@@ -8,7 +8,7 @@ public class CardLoad:MonoBehaviour {
 	public TextAsset file;
 	public List<baseCard> cardDeck;
 	
-	void Awake(){
+	public void Initialize(){
 		Load (file);
 		cardDeck = new List<baseCard>();
 		DeckSetting ();

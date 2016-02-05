@@ -21,15 +21,16 @@ public class PlayerChemicalStateBar : MonoBehaviour {
 
     void Start()
     {
-        currentCState = this.GetComponent<BaseCharacter>().currentChemicalState;
-        currentCStateValue = this.GetComponent<BaseCharacter>().currentChemicalStateValue;
+        BaseCharacter player = GameObject.Find("GameManager").GetComponent<PlayerPrefs>().player;
+        currentCState = player.currentChemicalState;
+        currentCStateValue = player.currentChemicalStateValue;
         maxXValue = gasTransform.localPosition.x;
         minXValue = gasTransform.localPosition.x - gasTransform.rect.width;
 
         //temporary inputs
-        valSolid = this.GetComponent<BaseCharacter>().solidStateValue;
-        valLiquid = this.GetComponent<BaseCharacter>().liquidStateValue;
-        valGas = this.GetComponent<BaseCharacter>().gasStateValue;
+        valSolid = player.solidStateValue;
+        valLiquid = player.liquidStateValue;
+        valGas = player.gasStateValue;
         barSolid = valSolid;
         barLiquid = valSolid + valLiquid;
         barGas = valSolid + valLiquid + valGas;
@@ -42,10 +43,10 @@ public class PlayerChemicalStateBar : MonoBehaviour {
 
     void Update()
     {
-        if (this.GetComponent<BaseCharacter>().currentChemicalState != currentCState || this.GetComponent<BaseCharacter>().currentChemicalStateValue != currentCStateValue)
+        if (GameObject.Find("GameManager").GetComponent<PlayerPrefs>().player.currentChemicalState != currentCState || GameObject.Find("GameManager").GetComponent<PlayerPrefs>().player.currentChemicalStateValue != currentCStateValue)
         {
-            currentCState = this.GetComponent<BaseCharacter>().currentChemicalState;
-            currentCStateValue = this.GetComponent<BaseCharacter>().currentChemicalStateValue;
+            currentCState = GameObject.Find("GameManager").GetComponent<PlayerPrefs>().player.currentChemicalState;
+            currentCStateValue = GameObject.Find("GameManager").GetComponent<PlayerPrefs>().player.currentChemicalStateValue;
             MoveArrow();
         }
     }

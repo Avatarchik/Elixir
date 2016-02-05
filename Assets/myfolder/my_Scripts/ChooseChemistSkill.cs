@@ -5,37 +5,38 @@ using EnumsAndClasses;
 public class ChooseChemistSkill : MonoBehaviour {
     ChoosingManager choosingManager;
     TurnBasedCombatStateMachine turnBasedCombatStateMachine;
-    ChemistSkills chemistSkill;
 
     // Use this for initialization
     void Start () {
         choosingManager = GameObject.Find("GameManager").GetComponent<ChoosingManager>();
         turnBasedCombatStateMachine = GameObject.Find("GameManager").GetComponent<TurnBasedCombatStateMachine>();
-        switch (this.gameObject.name)
+    }
+
+    public void BtnClicked(int index)
+    {
+        ChemistSkills chemSkill = ChemistSkills.Cool;
+        switch (index)
         {
-            case "CoolIcon":
-                chemistSkill = ChemistSkills.Cool;
+            case 0:
+                chemSkill = ChemistSkills.Cool;
                 break;
-            case "HeatIcon":
-                chemistSkill = ChemistSkills.Heat;
+            case 1:
+                chemSkill = ChemistSkills.Heat;
                 break;
-            case "AnalyzeIcon":
-                chemistSkill = ChemistSkills.Analyze;
+            case 2:
+                chemSkill = ChemistSkills.Analyze;
                 break;
         }
-    }
 
-    void OnMouseDown()
-    {
         choosingManager.AttackMode = AttackMode.Chemist;
-        choosingManager.SelectedCard = null;
-        choosingManager.SelectedChemistSkill = chemistSkill;
-        StartCoroutine(cardActivated());
+        choosingManager.SelectedChemistSkill = chemSkill;
+        StartCoroutine(SkillActivated(chemSkill));
+
     }
 
-    IEnumerator cardActivated()
+    IEnumerator SkillActivated(ChemistSkills chemSkill)
     {
-        if (chemistSkill == ChemistSkills.Analyze)
+        if (chemSkill == ChemistSkills.Analyze)
         {
             Debug.Log("Use Analyze");
             yield return StartCoroutine(gameObject.GetComponent<AnalyzeMonster>().SelectTarget());
@@ -48,7 +49,7 @@ public class ChooseChemistSkill : MonoBehaviour {
         Debug.Log("Before Coroutine Stopped");
         //If Attack method is changed during the procedure, dismiss all actions
         if (GameObject.Find("GameManager").GetComponent<ChoosingManager>().AttackMode != AttackMode.Chemist ||
-            GameObject.Find("GameManager").GetComponent<ChoosingManager>().SelectedChemistSkill != chemistSkill)
+            GameObject.Find("GameManager").GetComponent<ChoosingManager>().SelectedChemistSkill != chemSkill)
         {
             Debug.Log("Coroutine Stopped(Chemist)");
         }

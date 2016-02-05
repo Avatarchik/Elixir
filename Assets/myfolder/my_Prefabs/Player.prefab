@@ -176,7 +176,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 487888}
   - 212: {fileID: 21217912}
-  - 114: {fileID: 11486648}
   - 61: {fileID: 6100514}
   - 114: {fileID: 11451408}
   - 114: {fileID: 11466540}
@@ -585,26 +584,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &11486648
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 178922}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e4b30b4138d80c479be91abea0b4087, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MAX_HP: 200
-  HP: 0
-  criticalTarget: 0
-  currentChemicalState: 0
-  currentChemicalStateValue: 0
-  solidStateValue: 0
-  liquidStateValue: 0
-  gasStateValue: 0
-  dodgeRate: 0
 --- !u!114 &11486752
 MonoBehaviour:
   m_ObjectHideFlags: 1

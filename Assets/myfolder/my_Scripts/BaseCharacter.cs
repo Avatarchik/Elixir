@@ -3,7 +3,8 @@ using System.Collections;
 using EnumsAndClasses;
 using System.Collections.Generic;
 
-public class BaseCharacter : MonoBehaviour {
+[System.Serializable]
+public class BaseCharacter{
 
 	private string CharacterName;
 
@@ -18,20 +19,20 @@ public class BaseCharacter : MonoBehaviour {
     public int gasStateValue;
     public int dodgeRate;
 
-    List<Buff> buffs = new List<Buff>();
+    public List<Buff> buffs = new List<Buff>();
 
-    void Start(){
-		HP = 200;
-        //Temporary inputs
-        this.criticalTarget = ChemicalStates.LIQUID;
-        this.currentChemicalState = ChemicalStates.LIQUID;
-        this.currentChemicalStateValue = 1;
-        this.solidStateValue = 1;
-        this.liquidStateValue = 2;
-        this.gasStateValue = 3;
-        this.dodgeRate = 0;
+  //  void Start(){
+		//HP = 200;
+  //      //Temporary inputs
+  //      this.criticalTarget = ChemicalStates.LIQUID;
+  //      this.currentChemicalState = ChemicalStates.LIQUID;
+  //      this.currentChemicalStateValue = 1;
+  //      this.solidStateValue = 1;
+  //      this.liquidStateValue = 2;
+  //      this.gasStateValue = 3;
+  //      this.dodgeRate = 0;
 
-    }
+  //  }
 
     //Chemical State
     public void IncrementCSVal()
@@ -152,11 +153,11 @@ public class BaseCharacter : MonoBehaviour {
     }
 
 
-    void dead(){
-		if (HP <= 0) {
-			gameObject.SetActive (false);
-		}
-	}
+ //   void dead(){
+	//	if (HP <= 0) {
+	//		gameObject.SetActive (false);
+	//	}
+	//}
 
 	public void SetHeal(int heal){
 		HP += heal;
@@ -167,7 +168,7 @@ public class BaseCharacter : MonoBehaviour {
 	}
 	public void SetDamage(int damage){
 		HP -= damage;
-		GameObject.Find ("GameManager").GetComponent<PopupManager>().CreateDamagePopup (this.transform,damage);
+		//GameObject.Find ("GameManager").GetComponent<PopupManager>().CreateDamagePopup (this.transform,damage);
 		if (HP < 0) {
 			HP = 0;
 		}

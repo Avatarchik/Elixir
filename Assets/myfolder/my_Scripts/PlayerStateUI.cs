@@ -10,16 +10,16 @@ public class PlayerStateUI : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        currentState = gameObject.GetComponent<BaseCharacter>().currentChemicalState;
+        currentState = GameObject.Find("GameManager").GetComponent<PlayerPrefs>().player.currentChemicalState;
         changeState();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (gameObject.GetComponent<BaseCharacter>().currentChemicalState != currentState)
+        if (GameObject.Find("GameManager").GetComponent<PlayerPrefs>().player.currentChemicalState != currentState)
         {
-            currentState = gameObject.GetComponent<BaseCharacter>().currentChemicalState;
+            currentState = GameObject.Find("GameManager").GetComponent<PlayerPrefs>().player.currentChemicalState;
             changeState();
         }
     }

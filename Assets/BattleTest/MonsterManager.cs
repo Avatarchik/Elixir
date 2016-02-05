@@ -20,6 +20,13 @@ public class MonsterManager : MonoBehaviour {
 		set{ monsters = value;}
 	}
 
+    // Use this for initialization
+    public void Initialize()
+    {
+        MakePositionList();
+        GenerateMonsters(4);
+    }
+
     public Monster GetMonster(int index)
     {
         Assert.IsTrue(index < monsters.Count);
@@ -81,19 +88,7 @@ public class MonsterManager : MonoBehaviour {
         }
     }
 
-	// Use this for initialization
-	void Start () {
-        MakePositionList();
-        GenerateMonsters(4);
 
-        // Damage Test.
-        // GetMonster(1).SetDamage(10);
-        // GetMonster(3).SetDamage(35);
-        
-        // Debuff Test.
-        // Debuff stunDebuff = new Debuff(DebuffName.Stun, 3);
-        // GetMonster(1).AddDebuff(stunDebuff);
-	}
 	
 	// Update is called once per frame
 	void Update () {

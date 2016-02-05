@@ -3,6 +3,8 @@ using System.Collections;
 using EnumsAndClasses;
 
 public class ChooseTargetByChemist : MonoBehaviour {
+    BaseCharacter player;
+    ChoosingManager choosingManager;
     GameObject selectedEnemy;
     ChemistSkills currentChemistSkill;
     bool cardChanged = false;
@@ -11,6 +13,9 @@ public class ChooseTargetByChemist : MonoBehaviour {
     public IEnumerator SelectTarget()
     {
         Debug.Log("SelectTarget");
+        player = GetComponent<PlayerPrefs>().player;
+        choosingManager = GetComponent<ChoosingManager>();
+
         currentChemistSkill = GameObject.Find("GameManager").GetComponent<ChoosingManager>().SelectedChemistSkill;
         Highlight();
         yield return StartCoroutine(WaitForTargetSelect());
@@ -85,8 +90,8 @@ public class ChooseTargetByChemist : MonoBehaviour {
                 }
             }
 
-            if (GameObject.Find("GameManager").GetComponent<ChoosingManager>().AttackMode != AttackMode.Chemist ||
-                GameObject.Find("GameManager").GetComponent<ChoosingManager>().SelectedChemistSkill != currentChemistSkill) //Other card is selected / PROBLEM!!
+            if (choosingManager.AttackMode != AttackMode.Chemist ||
+                choosingManager.SelectedChemistSkill != currentChemistSkill) //Other card is selected / PROBLEM!!
             {
                 Debug.Log("(Chemist)Coroutine stop");
                 cardChanged = true;
@@ -123,11 +128,11 @@ public class ChooseTargetByChemist : MonoBehaviour {
         //Increase or Decrease enemy ChemicalStateValue
         if (currentChemistSkill == ChemistSkills.Cool)
         {
-            Ally.GetComponent<BaseCharacter>().DecrementCSVal();
+            player.DecrementCSVal();
         }
         else if (currentChemistSkill == ChemistSkills.Heat)
         {
-            Ally.GetComponent<BaseCharacter>().IncrementCSVal();
+            player.IncrementCSVal();
         }
     }
 }

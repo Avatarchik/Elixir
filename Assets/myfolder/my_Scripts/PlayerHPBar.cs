@@ -11,8 +11,8 @@ public class PlayerHPBar : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        Debug.Log(this.gameObject);
-        maxHealth = this.GetComponent<BaseCharacter>().MAX_HP;
+
+        maxHealth = GameObject.Find("GameManager").GetComponent<PlayerPrefs>().player.MAX_HP;
 
         maxXValue = healthTransform.localPosition.x;
         minXValue = healthTransform.localPosition.x - healthTransform.rect.width;
@@ -24,7 +24,7 @@ public class PlayerHPBar : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (this.GetComponent<BaseCharacter>().HP != currentHealth)
+        if (GameObject.Find("GameManager").GetComponent<PlayerPrefs>().player.HP != currentHealth)
         {
             currentHealth = this.GetComponent<BaseCharacter>().HP;
             HandleHealth();

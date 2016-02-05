@@ -9,7 +9,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 493844}
   - 212: {fileID: 21250526}
-  - 114: {fileID: 11489032}
   - 61: {fileID: 6116048}
   m_Layer: 0
   m_Name: Follower
@@ -43,26 +42,6 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 12.8000002, y: 9.60000038}
---- !u!114 &11489032
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 194388}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e4b30b4138d80c479be91abea0b4087, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MAX_HP: 100
-  HP: 0
-  criticalTarget: 0
-  currentChemicalState: 0
-  currentChemicalStateValue: 0
-  solidStateValue: 0
-  liquidStateValue: 0
-  gasStateValue: 0
-  dodgeRate: 0
 --- !u!212 &21250526
 SpriteRenderer:
   m_ObjectHideFlags: 1

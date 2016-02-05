@@ -5,7 +5,6 @@ using EnumsAndClasses;
 [System.Serializable]
 public class baseCard
 {
-
     private int card_ID;
     private string card_ExtName;
     private string card_Name;

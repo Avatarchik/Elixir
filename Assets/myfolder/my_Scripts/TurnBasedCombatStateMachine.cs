@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using EnumsAndClasses;
+using UnityEngine.UI;
 
 public class TurnBasedCombatStateMachine : MonoBehaviour {
 
@@ -44,65 +45,67 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
 
 	void Start () {
 		currentState = BattleStates.START;
-	}
+        //Load Databases
+        GetComponent<Loader>().Load();
+        GetComponent<CardLoad>().Initialize();
+        //Initialize Player and Monster
+        GetComponent<PlayerPrefs>().Initialize(); //Set Player's initial stats
+        GetComponent<AllyManager>().GeneratePlayer(); //Summon player into field
+        GameObject.Find("MonsterManager").GetComponent<MonsterManager>().Initialize(); //Summon monsters into field
+    }
 	
 	void Update () {
 		//If there is no monsters in the field, Player wins
-        if(GameObject.FindGameObjectsWithTag("Monster").Length == 0)
-        {
-            currentState = BattleStates.WIN;
-        }
+        //if(GameObject.FindGameObjectsWithTag("Monster").Length == 0)
+        //{
+        //    currentState = BattleStates.WIN;
+        //}
 		switch (currentState) {
 		    case (BattleStates.START):
-                //Start
+
 			    currentState=BattleStates.PLAYERCHOICE;
 			    break;
 		    case (BattleStates.PLAYERCHOICE):
                 //Reduce enemy stun counter after EnemyTurn
-                GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
-                foreach (GameObject monster in monsters)
-                {
-                    monster.GetComponent<Monster>().ReduceStunTurn();
-                    monster.GetComponent<Monster>().ActivateStun();
-                    monster.GetComponent<Monster>().ReduceDotDamageTurn();
-                }
+                //GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
+                //foreach (GameObject monster in monsters)
+                //{
+                //    monster.GetComponent<Monster>().ReduceStunTurn();
+                //    monster.GetComponent<Monster>().ActivateStun();
+                //    monster.GetComponent<Monster>().ReduceDotDamageTurn();
+                //}
 
-                GameObject.Find("Player(Clone)").GetComponent<BaseCharacter>().ActivateBuff();
-                GameObject.Find("Player(Clone)").GetComponent<BaseCharacter>().ReduceBuffTurn();
-                GameObject.Find("Player(Clone)").GetComponent<BaseCharacter>().RemoveBuff();
+                //GameObject.Find("Player(Clone)").GetComponent<BaseCharacter>().ActivateBuff();
+                //GameObject.Find("Player(Clone)").GetComponent<BaseCharacter>().ReduceBuffTurn();
+                //GameObject.Find("Player(Clone)").GetComponent<BaseCharacter>().RemoveBuff();
 
-                GameObject.Find ("Hands").GetComponent<HandSet>().CardSet();
+                //GameObject.Find ("Hands").GetComponent<HandSet>().CardSet(); //DrawsCard from Deck
+
+                GetComponent<PlayerTurn>().GetSkills();
                 currentState = BattleStates.IDLE;
                 break;
 		    case (BattleStates.ENEMYCHOICE):
                 Debug.Log("Enemy Turn Reached");
 
                 //Functions that delete all cards in hand (temporary)
-                foreach (var card in FindObjectOfType<HandSet>().cards)
-                {
-                    card.SetActive(false);
-                }
-                FindObjectOfType<HandSet>().skillTextPanel.SetActive(false);
-                
+                //foreach (var card in FindObjectOfType<HandSet>().cards)
+                //{
+                //    card.SetActive(false);
+                //}
+                //FindObjectOfType<HandSet>().skillTextPanel.SetActive(false);
+                GameObject.Find("SkillPanel").transform.GetChild(0).GetComponent<Button>().interactable = false;
+                GameObject.Find("SkillPanel").transform.GetChild(1).GetComponent<Button>().interactable = false;
+                GameObject.Find("SkillPanel").transform.GetChild(2).GetComponent<Button>().interactable = false;
+
+
                 GameObject[] monsters2 = GameObject.FindGameObjectsWithTag("Monster");
                 foreach (GameObject monster in monsters2)
                 {
                     monster.GetComponent<Monster>().ActivateDotDamage();
                 }
-                /*
-                //Inflict Debuff(dot damage) in the beginning of Enemy turn
-                GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
-                foreach(GameObject monster in monsters)
-                {
-                    //Check Dot Damage
-                    Debug.Log("ReduceDebuffTurn");
-                    monster.GetComponent<Monster>().ActivateDebuff();
-                    monster.GetComponent<Monster>().ReduceDebuffTurn();//ReduceTurn after inflicting Dot Damage
-                    monster.GetComponent<Monster>().RemoveDebuff();
-                }
-                */
-                StartCoroutine(GameObject.Find ("MonsterManager").GetComponent<EnemyAI>().EnemyActChoice(GameObject.FindGameObjectsWithTag("Monster")));
-                // currentState = BattleStates.PLAYERCHOICE;
+                
+                //StartCoroutine(GameObject.Find ("MonsterManager").GetComponent<EnemyAI>().EnemyActChoice(GameObject.FindGameObjectsWithTag("Monster")));
+                 currentState = BattleStates.PLAYERCHOICE;
                 break;
             case (BattleStates.IDLE):
                 break;
