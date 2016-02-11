@@ -17,7 +17,7 @@ public class SkillActivate : MonoBehaviour {
     bool cardChanged = false;
     bool attackedCritical = false;
 
-    public IEnumerator SelectTarget()
+    public IEnumerator SelectTarget(int skillIndex)
     {
         Debug.Log("SelectTarget");
         player = GetComponent<PlayerPrefs>().player;
@@ -26,7 +26,7 @@ public class SkillActivate : MonoBehaviour {
         enemyAlive = GameObject.FindGameObjectsWithTag("Monster").Length;
 
         currentEquipElementIndex = GameObject.Find("GameManager").GetComponent<PlayerPrefs>().currentEquipElementIndex;
-        currentSkillIndex = GameObject.Find("GameManager").GetComponent<ChoosingManager>().SelectedSkill;
+        currentSkillIndex = skillIndex;
         currentSelectedCard = GameObject.Find("GameManager").GetComponent<PlayerPrefs>().skillList[currentEquipElementIndex][currentSkillIndex];
         string targetType = currentSelectedCard.Card_Target; // Distinguish number of attacks
         string targetRange = currentSelectedCard.Card_Range;
@@ -161,9 +161,11 @@ public class SkillActivate : MonoBehaviour {
                     bRepeat = false;
                 }
             }
-
-            if (choosingManager.AttackMode != AttackMode.Element ||
-                choosingManager.SelectedSkill != currentSkillIndex) //Other card is selected / PROBLEM!!
+            Debug.Log("Before Coroutine stop");
+            Debug.Log("CM AM: " + choosingManager.AttackMode + " / current AM: " + AttackMode.Element);
+            Debug.Log("CM SS: " + choosingManager.SelectedSkill + " / current SS: " + currentSkillIndex);
+            if (GameObject.Find("GameManager").GetComponent<ChoosingManager>().AttackMode != AttackMode.Element ||
+                GameObject.Find("GameManager").GetComponent<ChoosingManager>().SelectedSkill != currentSkillIndex) //Other card is selected / PROBLEM!!
             {
                 Debug.Log("Coroutine stop");
                 cardChanged = true;

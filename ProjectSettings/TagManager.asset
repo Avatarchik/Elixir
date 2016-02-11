@@ -12,6 +12,7 @@ TagManager:
   - Element
   - DetailPanel
   - EquipSlot
+  - ChangePanel
   layers:
   - Default
   - TransparentFX

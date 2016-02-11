@@ -26,7 +26,7 @@ public class SkillChoice : MonoBehaviour {
     {
         Button skillBtn = GameObject.Find("SkillPanel").transform.GetChild(skillIndex).GetComponent<Button>();
         //Activate skill
-        yield return StartCoroutine(GetComponent<SkillActivate>().SelectTarget());
+        yield return StartCoroutine(GetComponent<SkillActivate>().SelectTarget(skillIndex));
 
         //Dismiss this Coroutine if player chooses another skill or chemist skill
         if (choosingManager.AttackMode != AttackMode.Element ||

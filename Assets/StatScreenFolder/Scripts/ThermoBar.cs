@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using EnumsAndClasses;
+using System.Collections.Generic;
 
 public class ThermoBar : MonoBehaviour {
     public GameObject ChemicalState;
@@ -22,13 +23,16 @@ public class ThermoBar : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        //maxXValue = gasTransform.localPosition.x;
+        //minXValue = gasTransform.localPosition.x - gasTransform.rect.width;
+
+    }
+	public void GetData(List<Element> elementList, int id)
+    {
         maxXValue = gasTransform.localPosition.x;
         minXValue = gasTransform.localPosition.x - gasTransform.rect.width;
 
-    }
-	public void GetData(int id)
-    {
-        Element element = GameObject.Find("GameManager").GetComponent<Inventory>().inventory[id];
+        Element element = elementList[id];
         currentCState = element.characterRoomTempState;
         currentCStateValue = element.roomTempPos;
         valSolid = element.solidGauge;

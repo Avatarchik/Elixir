@@ -64,7 +64,7 @@ public class DragHandler : MonoBehaviour , IPointerClickHandler{
         Name.text = thisElement.extName;
         Description.text = thisElement.desription;
 
-        GameObject.FindGameObjectWithTag("DescriptPanel").transform.Find("Thermometer").GetComponent<ThermoBar>().GetData(id);
+        GameObject.FindGameObjectWithTag("DescriptPanel").transform.Find("Thermometer").GetComponent<ThermoBar>().GetData(GameObject.Find("GameManager").GetComponent<Inventory>().inventory, id);
 
         string imagePath1 = "SkillIcons/" + card1.Card_Name;
         string imagePath2 = "SkillIcons/" + card2.Card_Name;

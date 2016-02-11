@@ -557,6 +557,16 @@ MonoBehaviour:
   liquidTransform: {fileID: 22429978}
   gasTransform: {fileID: 22494730}
   arrowTransform: {fileID: 22467170}
+  currentCState: 0
+  currentCStateValue: 0
+  valSolid: 0
+  valLiquid: 0
+  valGas: 0
+  arrowVal: 0
+  barSolid: 0
+  barLiquid: 0
+  barGas: 0
+  currentEquipped: 0
 --- !u!114 &11467640
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -865,7 +875,7 @@ RectTransform:
   m_RootOrder: 2
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -2.86999989, y: -.00499959989}
+  m_AnchoredPosition: {x: -.0100003928, y: -.0249999426}
   m_SizeDelta: {x: 4, y: .449999988}
   m_Pivot: {x: .5, y: .5}
 --- !u!224 &22429978
@@ -882,7 +892,7 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -1.51999998, y: 0}
+  m_AnchoredPosition: {x: -2.68220901e-07, y: 0}
   m_SizeDelta: {x: 4, y: .449999988}
   m_Pivot: {x: .5, y: .5}
 --- !u!224 &22439238
@@ -936,7 +946,7 @@ RectTransform:
   m_RootOrder: 3
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 2.29999995, y: -3.23799992}
+  m_AnchoredPosition: {x: .49000001, y: -3.23000002}
   m_SizeDelta: {x: .412, y: .307000011}
   m_Pivot: {x: 8.3810606, y: 8.05640984}
 --- !u!224 &22477492

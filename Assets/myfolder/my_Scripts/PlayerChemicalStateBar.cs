@@ -9,19 +9,28 @@ public class PlayerChemicalStateBar : MonoBehaviour {
     public RectTransform arrowTransform;
     private float minXValue;
     private float maxXValue;
-    private ChemicalStates currentCState;
-    private int currentCStateValue;
-    private int valSolid;
-    private int valLiquid;
-    private int valGas;
-    private float arrowVal;
-    private int barSolid;
-    private int barLiquid;
-    private int barGas;
+    public ChemicalStates currentCState;
+    public int currentCStateValue;
+    public int valSolid;
+    public int valLiquid;
+    public int valGas;
+    public float arrowVal;
+    public int barSolid;
+    public int barLiquid;
+    public int barGas;
+    public int currentEquipped;
+    private PlayerPrefs playerPrefs;
 
     void Start()
     {
-        BaseCharacter player = GameObject.Find("GameManager").GetComponent<PlayerPrefs>().player;
+        playerPrefs = GameObject.Find("GameManager").GetComponent<PlayerPrefs>();
+        Initialize();
+    }
+
+    void Initialize()
+    {
+        BaseCharacter player = playerPrefs.player;
+        currentEquipped = playerPrefs.currentEquipElementIndex;
         currentCState = player.currentChemicalState;
         currentCStateValue = player.currentChemicalStateValue;
         maxXValue = gasTransform.localPosition.x;
@@ -43,10 +52,14 @@ public class PlayerChemicalStateBar : MonoBehaviour {
 
     void Update()
     {
-        if (GameObject.Find("GameManager").GetComponent<PlayerPrefs>().player.currentChemicalState != currentCState || GameObject.Find("GameManager").GetComponent<PlayerPrefs>().player.currentChemicalStateValue != currentCStateValue)
+        if(currentEquipped != playerPrefs.currentEquipElementIndex)
         {
-            currentCState = GameObject.Find("GameManager").GetComponent<PlayerPrefs>().player.currentChemicalState;
-            currentCStateValue = GameObject.Find("GameManager").GetComponent<PlayerPrefs>().player.currentChemicalStateValue;
+            Initialize();
+        }
+        else if (playerPrefs.player.currentChemicalState != currentCState || playerPrefs.player.currentChemicalStateValue != currentCStateValue)
+        {
+            currentCState = playerPrefs.player.currentChemicalState;
+            currentCStateValue = playerPrefs.player.currentChemicalStateValue;
             MoveArrow();
         }
     }
