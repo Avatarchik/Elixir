@@ -6,51 +6,54 @@ using UnityEngine.UI;
 public class SkillChoice : MonoBehaviour {
     private ChoosingManager choosingManager;
     private TurnBasedCombatStateMachine TBSMachine;
+
+    private int skillIndex;
+    public IEnumerator skillInUse;
+    public IEnumerator waitForSelection;
     // Use this for initialization
     void Start () {
         choosingManager = GetComponent<ChoosingManager>();
         TBSMachine = GetComponent<TurnBasedCombatStateMachine>();
+        choosingManager.isSkillInUse = false;
     }
 
-
-    public void SkillChosen(int skillIndex)
+    public void SkillChosen(int index)
     {
+        skillIndex = index;
         Debug.Log("Index: " + skillIndex);
-        choosingManager.AttackMode = AttackMode.Element;
-        choosingManager.SelectedSkill = skillIndex;
 
-        StartCoroutine(SkillActivate(skillIndex));
-    }
-
-    IEnumerator SkillActivate(int skillIndex)
-    {
-        Button skillBtn = GameObject.Find("SkillPanel").transform.GetChild(skillIndex).GetComponent<Button>();
-        //Activate skill
-        yield return StartCoroutine(GetComponent<SkillActivate>().SelectTarget(skillIndex));
-
-        //Dismiss this Coroutine if player chooses another skill or chemist skill
-        if (choosingManager.AttackMode != AttackMode.Element ||
-                    choosingManager.SelectedSkill != skillIndex)
+        if (choosingManager.isSkillInUse)
         {
-            Debug.Log("Coroutine Stopped");
-            yield return null;
+            Debug.Log("Already skill in use");
+            if (skillIndex != choosingManager.SelectedSkill || choosingManager.AttackMode != AttackMode.Element)
+            {
+                Debug.Log("Different Skill: Activate new skill");
+                choosingManager.SelectedSkill = skillIndex;
+                choosingManager.AttackMode = AttackMode.Element;
+                StopCurrentCoroutines();
+
+                skillInUse = GetComponent<SkillActivate>().SelectTarget(skillIndex); //Load new coroutine
+                StartCoroutine(skillInUse);
+            }
+            else
+            {
+                Debug.Log("Same Skill: Do nothing");
+            }
         }
         else
         {
-            //Increment counter
-            //Check if all turns are exhausted
-            //If exhausted, change the state of TurnBasedCombatStateMachine
-            Debug.Log("Decrement Turn");
-            TBSMachine.decrementTurn();
-
-            if (TBSMachine.isTurnExhausted())
-            {
-                TBSMachine.currentState = TurnBasedCombatStateMachine.BattleStates.ENEMYCHOICE;
-                TBSMachine.resetTurn();
-            }
-
-            skillBtn.GetComponent<Button>().interactable = false;
+            Debug.Log("New Skill");
+            choosingManager.isSkillInUse = true;
+            choosingManager.SelectedSkill = skillIndex;
+            choosingManager.AttackMode = AttackMode.Element;
+            skillInUse = GetComponent<SkillActivate>().SelectTarget(skillIndex);
+            StartCoroutine(skillInUse);
         }
-        yield return null;
+    }
+    
+    public void StopCurrentCoroutines()
+    {
+        StopCoroutine(skillInUse);
+        StopCoroutine(waitForSelection);
     }
 }

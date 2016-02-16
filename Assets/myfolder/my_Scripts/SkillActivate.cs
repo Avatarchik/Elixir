@@ -2,25 +2,28 @@
 using System.Collections;
 using EnumsAndClasses;
 using System;
+using UnityEngine.UI;
 
 public class SkillActivate : MonoBehaviour {
     BaseCharacter player;
     ChoosingManager choosingManager;
+    TurnBasedCombatStateMachine TBSMachine;
     GameObject selectedAlly;
     GameObject[] selectedEnemy = new GameObject[4];
+
     int currentEquipElementIndex;
     int currentSkillIndex;
     baseCard currentSelectedCard = new baseCard();
     int countArray = 0;
     int countAttack = 0;
     int enemyAlive;
-    bool cardChanged = false;
     bool attackedCritical = false;
 
     public IEnumerator SelectTarget(int skillIndex)
     {
         Debug.Log("SelectTarget");
         player = GetComponent<PlayerPrefs>().player;
+        TBSMachine = GetComponent<TurnBasedCombatStateMachine>();
         choosingManager = GetComponent<ChoosingManager>();
         
         enemyAlive = GameObject.FindGameObjectsWithTag("Monster").Length;
@@ -39,29 +42,25 @@ public class SkillActivate : MonoBehaviour {
         //----------------------------------------
         if (targetType == "Ally")
         {
-            yield return StartCoroutine(WaitForTargetSelect(targetType));
+            GetComponent<SkillChoice>().waitForSelection = WaitForTargetSelect(targetType);
+            yield return StartCoroutine(GetComponent<SkillChoice>().waitForSelection);
         }
         if (targetType == "Enemy" && targetRange == "Single")//When target is Single
         {
             while (countAttack > 0)
             {
-                yield return StartCoroutine(WaitForTargetSelect(targetType));
+                GetComponent<SkillChoice>().waitForSelection = WaitForTargetSelect(targetType);
+                yield return StartCoroutine(GetComponent<SkillChoice>().waitForSelection);
             }
         }
         if (targetType == "Enemy" && targetRange == "Wide")//When target is Wide
         {
-            yield return StartCoroutine(WaitForTargetSelect(targetType));
+            GetComponent<SkillChoice>().waitForSelection = WaitForTargetSelect(targetType);
+            yield return StartCoroutine(GetComponent<SkillChoice>().waitForSelection);
             selectedEnemy = GameObject.FindGameObjectsWithTag("Monster"); //Add all monsters in the selectedEnemy array
             countArray = enemyAlive;
         }
-        //----------------------------------------
-        if (cardChanged) //Check if the attack mode is changed in the middle of the process
-        {
-            cardChanged = false;
-            countArray = 0;
-            yield break;
-        }
-        //----------------------------------------
+
         if (targetType == "Ally")
         {
             TargetAlly();
@@ -85,6 +84,20 @@ public class SkillActivate : MonoBehaviour {
         }
         //----------------------------------------
         countArray = 0;// Reset the counter
+
+        choosingManager.isSkillInUse = false;
+        Debug.Log("Decrement Turn");
+        TBSMachine.decrementTurn();
+
+        if (TBSMachine.isTurnExhausted())
+        {
+            TBSMachine.currentState = TurnBasedCombatStateMachine.BattleStates.ENEMYCHOICE;
+            TBSMachine.resetTurn();
+        }
+        Button skillBtn = GameObject.Find("SkillPanel").transform.GetChild(skillIndex).GetComponent<Button>();
+        skillBtn.GetComponent<Button>().interactable = false;
+
+
         yield return null;
     }
 
@@ -150,8 +163,6 @@ public class SkillActivate : MonoBehaviour {
                 if (hit.collider != null && (targetType == "Enemy") && hit.collider.gameObject.tag == "Monster") //When the skill targets Enemy, and Enemy is selected
                 {
 
-                    //Need to verify if the selected monster is already in the array
-                    //Do it later
                     selectedEnemy[countArray] = hit.collider.gameObject;//Add the selected monster in the selectedEnemy array
                     countArray++;
 
@@ -160,18 +171,9 @@ public class SkillActivate : MonoBehaviour {
                     countAttack--;
                     bRepeat = false;
                 }
+
             }
-            Debug.Log("Before Coroutine stop");
-            Debug.Log("CM AM: " + choosingManager.AttackMode + " / current AM: " + AttackMode.Element);
-            Debug.Log("CM SS: " + choosingManager.SelectedSkill + " / current SS: " + currentSkillIndex);
-            if (GameObject.Find("GameManager").GetComponent<ChoosingManager>().AttackMode != AttackMode.Element ||
-                GameObject.Find("GameManager").GetComponent<ChoosingManager>().SelectedSkill != currentSkillIndex) //Other card is selected / PROBLEM!!
-            {
-                Debug.Log("Coroutine stop");
-                cardChanged = true;
-                countAttack = 0;
-                yield break;
-            }
+
             yield return null;
         }
     }

@@ -446,13 +446,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1302277333}
-        m_MethodName: BtnClicked
+      - m_Target: {fileID: 1302277336}
+        m_MethodName: SkillChosen
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1979,7 +1979,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1302277330}
+      - m_Target: {fileID: 1302277336}
         m_MethodName: SkillChosen
         m_Mode: 3
         m_Arguments:
@@ -2100,7 +2100,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1302277330}
+      - m_Target: {fileID: 1302277336}
         m_MethodName: SkillChosen
         m_Mode: 3
         m_Arguments:
@@ -5595,6 +5595,8 @@ GameObject:
   - 114: {fileID: 1302277333}
   - 114: {fileID: 1302277332}
   - 114: {fileID: 1302277334}
+  - 114: {fileID: 1302277335}
+  - 114: {fileID: 1302277336}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -5646,6 +5648,7 @@ MonoBehaviour:
   AttackMode: 0
   SelectedSkill: 0
   SelectedChemistSkill: 0
+  isSkillInUse: 0
 --- !u!114 &1302277324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5821,6 +5824,32 @@ MonoBehaviour:
   DetailSkill2: {fileID: 0}
   DetailSkill3: {fileID: 0}
   ElementPanel: []
+--- !u!114 &1302277335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1302277320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6af62a4607debc14fb606d67016de3e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isSkillInUse: 0
+  skillIndex: 0
+--- !u!114 &1302277336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1302277320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aa9847fa3d68e9438aca51ea06e7e97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isSkillInUse: 0
+  skillIndex: 0
 --- !u!1 &1321800820
 GameObject:
   m_ObjectHideFlags: 0
@@ -6696,7 +6725,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1302277330}
+      - m_Target: {fileID: 1302277336}
         m_MethodName: SkillChosen
         m_Mode: 3
         m_Arguments:
@@ -7001,13 +7030,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1302277333}
-        m_MethodName: BtnClicked
+      - m_Target: {fileID: 1302277336}
+        m_MethodName: SkillChosen
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 4
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0

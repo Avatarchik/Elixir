@@ -7,5 +7,6 @@ public class ChoosingManager : MonoBehaviour {
     public AttackMode AttackMode;
 	public int SelectedSkill;
     public ChemistSkills SelectedChemistSkill;
+    public bool isSkillInUse;
 
 }

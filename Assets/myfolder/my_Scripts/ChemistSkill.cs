@@ -11,27 +11,6 @@ public class ChemistSkill : MonoBehaviour {
         isActive = false;
 	}
 
-    // Update is called once per frame
-    //void Update()
-    //{
-    //    if (Input.GetMouseButtonDown(0))
-    //    {
-    //        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-    //        RaycastHit2D hit = Physics2D.GetRayIntersection(ray, Mathf.Infinity);
-
-    //        if (hit.collider != null && hit.collider.gameObject.tag == "ChemistSkill")
-    //        {
-    //            Debug.Log("ChemistSkillActivated");
-    //            GameObject.Find("GameManager").GetComponent<ChoosingManager>().AttackMode = AttackMode.Chemist;
-    //            GameObject.Find("GameManager").GetComponent<ChoosingManager>().SelectedCard = null;
-    //            GameObject.Find("GameManager").GetComponent<ChoosingManager>().SelectedChemistSkill = hit.collider.gameObject;
-    //            currentChemistSkill = hit.collider.gameObject;
-    //            StartCoroutine(cardActivated());
-    //        }
-    //    }
-    //}
-
     void OnMouseDown()
     {
         if (!isActive)
@@ -55,42 +34,5 @@ public class ChemistSkill : MonoBehaviour {
             isActive = false;
         }
     }
-
-    //IEnumerator cardActivated()
-    //{
-    //    if(currentChemistSkill == gameObject.transform.Find("AnalyzeIcon").gameObject)
-    //    {
-    //        Debug.Log("Use Analyze");
-    //        yield return StartCoroutine(gameObject.GetComponent<AnalyzeMonster>().SelectTarget());
-    //    }
-    //    else
-    //    {
-    //        yield return StartCoroutine(gameObject.GetComponent<ChooseTargetByChemist>().SelectTarget());
-    //    }
-
-    //    Debug.Log("Before Coroutine Stopped");
-    //    //If Attack method is changed during the procedure, dismiss all actions
-    //    if (GameObject.Find("GameManager").GetComponent<ChoosingManager>().AttackMode != AttackMode.Chemist ||
-    //        GameObject.Find("GameManager").GetComponent<ChoosingManager>().SelectedChemistSkill != currentChemistSkill)
-    //    {
-    //        Debug.Log("Coroutine Stopped(Chemist)");
-    //    }
-    //    else
-    //    {
-    //        //Increment counter
-    //        //Check if all turns are exhausted
-    //        //If exhausted, change the state of TurnBasedCombatStateMachine
-    //        GameObject.Find("GameManager").GetComponent<TurnBasedCombatStateMachine>().decrementTurn();
-
-    //        if (GameObject.Find("GameManager").GetComponent<TurnBasedCombatStateMachine>().isTurnExhausted())
-    //        {
-    //            GameObject.Find("GameManager").GetComponent<TurnBasedCombatStateMachine>().currentState = TurnBasedCombatStateMachine.BattleStates.ENEMYCHOICE;
-    //            GameObject.Find("GameManager").GetComponent<TurnBasedCombatStateMachine>().resetTurn();
-    //        }
-
-    //    }
-
-
-
-    //}
+    
 }

@@ -4,27 +4,25 @@ using EnumsAndClasses;
 
 public class ChooseTargetByChemist : MonoBehaviour {
     BaseCharacter player;
+    TurnBasedCombatStateMachine TBSMachine;
     ChoosingManager choosingManager;
     GameObject selectedEnemy;
     ChemistSkills currentChemistSkill;
-    bool cardChanged = false;
+
     bool isTargetEnemy;
 
     public IEnumerator SelectTarget()
     {
         Debug.Log("SelectTarget");
         player = GetComponent<PlayerPrefs>().player;
+        TBSMachine = GetComponent<TurnBasedCombatStateMachine>();
         choosingManager = GetComponent<ChoosingManager>();
 
         currentChemistSkill = GameObject.Find("GameManager").GetComponent<ChoosingManager>().SelectedChemistSkill;
         Highlight();
-        yield return StartCoroutine(WaitForTargetSelect());
+        GetComponent<SkillChoice>().waitForSelection = WaitForTargetSelect();
+        yield return StartCoroutine(GetComponent<SkillChoice>().waitForSelection);
 
-        if (cardChanged) //Check if the attack mode is changed in the middle of the process
-        {
-            cardChanged = false;
-            yield break;
-        }
         if (isTargetEnemy)
         {
             AttackEnemy();
@@ -33,7 +31,16 @@ public class ChooseTargetByChemist : MonoBehaviour {
         {
             AttackAlly();
         }
-        
+
+        choosingManager.isSkillInUse = false;
+        Debug.Log("Decrement Turn");
+        TBSMachine.decrementTurn();
+
+        if (TBSMachine.isTurnExhausted())
+        {
+            TBSMachine.currentState = TurnBasedCombatStateMachine.BattleStates.ENEMYCHOICE;
+            TBSMachine.resetTurn();
+        }
     }
     void Highlight()
     {
@@ -90,13 +97,6 @@ public class ChooseTargetByChemist : MonoBehaviour {
                 }
             }
 
-            if (choosingManager.AttackMode != AttackMode.Chemist ||
-                choosingManager.SelectedChemistSkill != currentChemistSkill) //Other card is selected / PROBLEM!!
-            {
-                Debug.Log("(Chemist)Coroutine stop");
-                cardChanged = true;
-                yield break;
-            }
             yield return null;
         }
     }
