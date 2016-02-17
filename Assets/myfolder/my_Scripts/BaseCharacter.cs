@@ -4,13 +4,15 @@ using EnumsAndClasses;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class BaseCharacter{
+public class baseCharacter{
 
 	private string CharacterName;
 
-	//stats
+    //stats
+    public int level;
 	public float MAX_HP=200.0f;
 	public float HP;
+    public float AttackDamage;
     public ChemicalStates criticalTarget;
     public ChemicalStates currentChemicalState;
     public int currentChemicalStateValue;
@@ -20,19 +22,16 @@ public class BaseCharacter{
     public int dodgeRate;
 
     public List<Buff> buffs = new List<Buff>();
+    public List<Buff> dodgeList = new List<Buff>();
+    public List<Buff> immuneCriticalTargetList = new List<Buff>();
+    public List<Buff> debuffImmuneList = new List<Buff>();
+    public List<Buff> guardStateChangeList = new List<Buff>();
+    public List<Buff> immuneHeatList = new List<Buff>();
+    public List<Buff> damageResistanceList = new List<Buff>();
+    public List<Buff> dotHealList = new List<Buff>();
 
-  //  void Start(){
-		//HP = 200;
-  //      //Temporary inputs
-  //      this.criticalTarget = ChemicalStates.LIQUID;
-  //      this.currentChemicalState = ChemicalStates.LIQUID;
-  //      this.currentChemicalStateValue = 1;
-  //      this.solidStateValue = 1;
-  //      this.liquidStateValue = 2;
-  //      this.gasStateValue = 3;
-  //      this.dodgeRate = 0;
+    public List<Debuff> dotDamage = new List<Debuff>();
 
-  //  }
 
     //Chemical State
     public void IncrementCSVal()
@@ -101,65 +100,54 @@ public class BaseCharacter{
         }
     }
 
-    public void AddBuff(Buff buff)
+    //Dodge
+    public void AddDodge(Buff dodge)
     {
-        buffs.Add(buff);
+        //this.transform.Find("stun").gameObject.SetActive(true);
+        dodgeList.Add(dodge);
     }
-    public void ReduceBuffTurn()
+    public void ReduceDodgeTurn()
     {
-        foreach (Buff buff in buffs)
+        List<Buff> buffsToDestroy = new List<Buff>();
+        foreach (Buff dodge in dodgeList)
         {
-            buff.RemainTurn--;
-            Debug.Log("Player Buff turn remaining: " + buff.RemainTurn);
-        }
-    }
-    public void ActivateBuff()
-    {
-        bool isExistDodgeBuff = false;
-        foreach (Buff buff in buffs)
-        {
-            if (buff.GetBuffname().Equals(BuffName.Dodge))//Activate Dot Damage
+            dodge.RemainTurn--;
+            if (dodge.RemainTurn <= 0)
             {
-                Debug.Log("This Buff is DodgeRateIncrease");
-                isExistDodgeBuff = true;
+                buffsToDestroy.Add(dodge);
             }
         }
-        if (isExistDodgeBuff)
+        foreach (Buff buffToDestroy in buffsToDestroy)
         {
-            dodgeRate = 30;
-            Debug.Log("Player's Dodge Rate: " + dodgeRate);
+            dodgeList.Remove(buffToDestroy);
+        }
+        buffsToDestroy.Clear();
+        if (dodgeList.Count >= 1)
+        {
+            //this.transform.Find("stun").gameObject.SetActive(true);
+        }
+        else
+        {
+            //this.transform.Find("stun").gameObject.SetActive(false);
+        }
+    }
+    public void ActivateDodge()
+    {
+        if (dodgeList.Count >= 1)
+        {
+            
         }
         else
         {
             dodgeRate = 0;
-            Debug.Log("Player's Dodge Rate: " + dodgeRate);
         }
     }
-    public void RemoveBuff()
+    public void RemoveDodge()
     {
-        List<Buff> buffsToDestroy = new List<Buff>();
-        foreach (Buff buff in buffs)
-        {
-            if (buff.RemainTurn == 0)
-            {
-                buffsToDestroy.Add(buff);
-            }
-        }
-        foreach (Buff debuffToDestroy in buffsToDestroy)
-        {
-            buffs.Remove(debuffToDestroy);
-        }
-        buffsToDestroy.Clear();
+        dodgeList.Clear();
     }
 
-
- //   void dead(){
-	//	if (HP <= 0) {
-	//		gameObject.SetActive (false);
-	//	}
-	//}
-
-	public void SetHeal(int heal){
+    public void SetHeal(int heal){
 		HP += heal;
 		if(HP>MAX_HP){
 			HP=MAX_HP;

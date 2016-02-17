@@ -29,7 +29,7 @@ public class PlayerChemicalStateBar : MonoBehaviour {
 
     void Initialize()
     {
-        BaseCharacter player = playerPrefs.player;
+        baseCharacter player = playerPrefs.player;
         currentEquipped = playerPrefs.currentEquipElementIndex;
         currentCState = player.currentChemicalState;
         currentCStateValue = player.currentChemicalStateValue;

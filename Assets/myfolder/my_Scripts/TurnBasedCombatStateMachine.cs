@@ -47,7 +47,7 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
 		currentState = BattleStates.START;
         //Load Databases
         GetComponent<Loader>().Load();
-        GetComponent<CardLoad>().Initialize();
+        GetComponent<SkillLoader>().Load();
         //Initialize Player and Monster
         GetComponent<PlayerPrefs>().Initialize(); //Set Player's initial stats
         GetComponent<AllyManager>().GeneratePlayer(); //Summon player into field
@@ -75,9 +75,9 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
                     monster.GetComponent<Monster>().ReduceDotDamageTurn();
                 }
 
-                GetComponent<PlayerPrefs>().player.ActivateBuff();
-                GetComponent<PlayerPrefs>().player.ReduceBuffTurn();
-                GetComponent<PlayerPrefs>().player.RemoveBuff();
+                GetComponent<PlayerPrefs>().player.ActivateDodge();
+                GetComponent<PlayerPrefs>().player.ReduceDodgeTurn();
+                GetComponent<PlayerPrefs>().player.RemoveDodge();
 
                 GetComponent<PlayerTurn>().GetSkills();
                 currentState = BattleStates.IDLE;
@@ -85,9 +85,13 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
 		    case (BattleStates.ENEMYCHOICE):
                 Debug.Log("Enemy Turn Reached");
 
-                GameObject.Find("SkillPanel").transform.GetChild(0).GetComponent<Button>().interactable = false;
-                GameObject.Find("SkillPanel").transform.GetChild(1).GetComponent<Button>().interactable = false;
-                GameObject.Find("SkillPanel").transform.GetChild(2).GetComponent<Button>().interactable = false;
+                GameObject skillPanel = GameObject.Find("SkillPanel");
+                for (int i = 0; i < skillPanel.transform.childCount; i++)
+                {
+                    skillPanel.transform.GetChild(i).GetComponent<Button>().interactable = false;
+                }
+                GameObject.Find("Button").GetComponent<Button>().interactable = false;
+                GameObject.Find("Button").GetComponent<ChemistSkill>().DisableButtons();
 
 
                 GameObject[] monsters2 = GameObject.FindGameObjectsWithTag("Monster");
@@ -97,7 +101,7 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
                 }
                 
                 StartCoroutine(GameObject.Find ("MonsterManager").GetComponent<EnemyAI>().EnemyActChoice(GameObject.FindGameObjectsWithTag("Monster")));
-                 currentState = BattleStates.PLAYERCHOICE;
+                 currentState = BattleStates.IDLE;
                 break;
             case (BattleStates.IDLE):
                 break;

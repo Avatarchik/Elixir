@@ -14,9 +14,9 @@ public class DragHandler : MonoBehaviour , IPointerClickHandler{
     public Image Skill3;
     public GameObject DetailPanel;
 
-    baseCard card1;
-    baseCard card2;
-    baseCard card3;
+    baseSkill skill1;
+    baseSkill skill2;
+    baseSkill skill3;
 
     public int id;
     public bool equipped = false;
@@ -66,9 +66,9 @@ public class DragHandler : MonoBehaviour , IPointerClickHandler{
 
         GameObject.FindGameObjectWithTag("DescriptPanel").transform.Find("Thermometer").GetComponent<ThermoBar>().GetData(GameObject.Find("GameManager").GetComponent<Inventory>().inventory, id);
 
-        string imagePath1 = "SkillIcons/" + card1.Card_Name;
-        string imagePath2 = "SkillIcons/" + card2.Card_Name;
-        string imagePath3 = "SkillIcons/" + card3.Card_Name;
+        string imagePath1 = "SkillIcons/" + skill1.Skill_Name;
+        string imagePath2 = "SkillIcons/" + skill2.Skill_Name;
+        string imagePath3 = "SkillIcons/" + skill3.Skill_Name;
 
         Skill1.sprite = Resources.Load(imagePath1, typeof(Sprite)) as Sprite;
         Skill2.sprite = Resources.Load(imagePath2, typeof(Sprite)) as Sprite;
@@ -81,11 +81,11 @@ public class DragHandler : MonoBehaviour , IPointerClickHandler{
     // Use this for initialization
     void Start () {
         Element element = GameObject.Find("GameManager").GetComponent<Inventory>().inventory[id];
-        List<baseCard> cardDatabase = GameObject.Find("GameManager").GetComponent<CardLoad>().cardDeck;
+        List<baseSkill> cardDatabase = GameObject.Find("GameManager").GetComponent<SkillLoader>().skillList;
 
-        card1 = cardDatabase.Find(x => x.Card_Name == element.elementCard1);
-        card2 = cardDatabase.Find(x => x.Card_Name == element.elementCard2);
-        card3 = cardDatabase.Find(x => x.Card_Name == element.elementCard3);
+        skill1 = cardDatabase.Find(x => x.Skill_Name == element.elementCard1);
+        skill2 = cardDatabase.Find(x => x.Skill_Name == element.elementCard2);
+        skill3 = cardDatabase.Find(x => x.Skill_Name == element.elementCard3);
 
         Name = GameObject.FindGameObjectWithTag("DescriptPanel").transform.GetChild(0).GetComponent<Text>();
         Description = GameObject.FindGameObjectWithTag("DescriptPanel").transform.GetChild(1).GetComponent<Text>();

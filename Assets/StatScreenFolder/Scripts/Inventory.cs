@@ -26,7 +26,7 @@ public class Inventory : MonoBehaviour {
 	void Start () {
         //Initialize Loaders
         GetComponent<Loader>().Load();
-        GetComponent<CardLoad>().Initialize();
+        GetComponent<SkillLoader>().Load();
 
         selectedElementID = -1;
         elementDatabase = GetComponent<Loader>().elementList;

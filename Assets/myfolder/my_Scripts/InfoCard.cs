@@ -3,11 +3,11 @@ using System.Collections;
 
 public class InfoCard : MonoBehaviour {
 	
-	private baseCard card;
+	private baseSkill skill;
 	
-	public baseCard Card
+	public baseSkill Skill
 	{
-		get{ return card; }
-		set{card = value;}
+		get{ return skill; }
+		set{skill = value;}
 	}
 }

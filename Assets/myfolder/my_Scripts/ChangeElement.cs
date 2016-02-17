@@ -81,6 +81,8 @@ public class ChangeElement : MonoBehaviour {
         GameObject.Find("GameManager").GetComponent<PlayerTurn>().GetSkills();
 
         TurnBasedCombatStateMachine TBSMachine = GameObject.Find("GameManager").GetComponent<TurnBasedCombatStateMachine>();
+
+        GameObject.Find("Button").GetComponent<ChemistSkill>().DisableButtons();
         TBSMachine.decrementTurn();
         if (TBSMachine.isTurnExhausted())
         {
@@ -93,29 +95,29 @@ public class ChangeElement : MonoBehaviour {
     {
         DetailPanel.SetActive(true);
 
-        List<baseCard> cardDatabase = GameObject.Find("GameManager").GetComponent<CardLoad>().cardDeck;
+        List<baseSkill> cardDatabase = GameObject.Find("GameManager").GetComponent<SkillLoader>().skillList;
 
-        baseCard card1 = cardDatabase.Find(x => x.Card_Name == playerPrefs.party[arrangeList[index]].elementCard1);
-        baseCard card2 = cardDatabase.Find(x => x.Card_Name == playerPrefs.party[arrangeList[index]].elementCard2);
-        baseCard card3 = cardDatabase.Find(x => x.Card_Name == playerPrefs.party[arrangeList[index]].elementCard3);
+        baseSkill skill1 = cardDatabase.Find(x => x.Skill_Name == playerPrefs.party[arrangeList[index]].elementCard1);
+        baseSkill skill2 = cardDatabase.Find(x => x.Skill_Name == playerPrefs.party[arrangeList[index]].elementCard2);
+        baseSkill skill3 = cardDatabase.Find(x => x.Skill_Name == playerPrefs.party[arrangeList[index]].elementCard3);
 
         DetailLabel.text = playerPrefs.party[arrangeList[index]].extName + " 스킬 정보";
 
-        string imagePath1 = "SkillIcons/" + card1.Card_Name;
-        string imagePath2 = "SkillIcons/" + card2.Card_Name;
-        string imagePath3 = "SkillIcons/" + card3.Card_Name;
+        string imagePath1 = "SkillIcons/" + skill1.Skill_Name;
+        string imagePath2 = "SkillIcons/" + skill2.Skill_Name;
+        string imagePath3 = "SkillIcons/" + skill3.Skill_Name;
 
         DetailSkill1.transform.FindChild("SkillImage").GetComponent<Image>().sprite = Resources.Load(imagePath1, typeof(Sprite)) as Sprite;
-        DetailSkill1.transform.FindChild("Name").GetComponent<Text>().text = card1.Card_ExtName;
-        DetailSkill1.transform.FindChild("Description").GetComponent<Text>().text = card1.Card_Description;
+        DetailSkill1.transform.FindChild("Name").GetComponent<Text>().text = skill1.Skill_ExtName;
+        DetailSkill1.transform.FindChild("Description").GetComponent<Text>().text = skill1.Skill_Description;
 
         DetailSkill2.transform.FindChild("SkillImage").GetComponent<Image>().sprite = Resources.Load(imagePath2, typeof(Sprite)) as Sprite;
-        DetailSkill2.transform.FindChild("Name").GetComponent<Text>().text = card2.Card_ExtName;
-        DetailSkill2.transform.FindChild("Description").GetComponent<Text>().text = card2.Card_Description;
+        DetailSkill2.transform.FindChild("Name").GetComponent<Text>().text = skill2.Skill_ExtName;
+        DetailSkill2.transform.FindChild("Description").GetComponent<Text>().text = skill2.Skill_Description;
 
         DetailSkill3.transform.FindChild("SkillImage").GetComponent<Image>().sprite = Resources.Load(imagePath3, typeof(Sprite)) as Sprite;
-        DetailSkill3.transform.FindChild("Name").GetComponent<Text>().text = card3.Card_ExtName;
-        DetailSkill3.transform.FindChild("Description").GetComponent<Text>().text = card3.Card_Description;
+        DetailSkill3.transform.FindChild("Name").GetComponent<Text>().text = skill3.Skill_ExtName;
+        DetailSkill3.transform.FindChild("Description").GetComponent<Text>().text = skill3.Skill_Description;
 
     }
 

@@ -11,6 +11,8 @@ public class Monster : MonoBehaviour {
     public int attackDamage;
     public string type;
     public bool stunned;
+    public bool silenced;
+    public bool blinded;
 
     public ChemicalStates currentChemicalState;
     public int currentChemicalStateValue;
@@ -26,8 +28,10 @@ public class Monster : MonoBehaviour {
 
     List<Debuff> stunList = new List<Debuff>();
     List<Debuff> dotDamageList = new List<Debuff>();
-    
-	void Update(){
+    List<Debuff> silentList = new List<Debuff>();
+    List<Debuff> blindList = new List<Debuff>();
+
+    void Update(){
 		if (hp <= 0) {
 			Dead();
 		}
@@ -262,6 +266,103 @@ public class Monster : MonoBehaviour {
     {
         stunList.Clear();
     }
+
+    //Silent
+    public void AddSilent(Debuff silent)
+    {
+        //this.transform.Find("stun").gameObject.SetActive(true);
+        silenced = true;
+        silentList.Add(silent);
+    }
+    public void ReduceSilentTurn()
+    {
+        List<Debuff> debuffsToDestroy = new List<Debuff>();
+        foreach (Debuff silent in silentList)
+        {
+            silent.RemainTurn--;
+            if (silent.RemainTurn <= 0)
+            {
+                debuffsToDestroy.Add(silent);
+            }
+        }
+        foreach (Debuff debuffToDestroy in debuffsToDestroy)
+        {
+            silentList.Remove(debuffToDestroy);
+        }
+        debuffsToDestroy.Clear();
+        if (silentList.Count >= 1)
+        {
+            //this.transform.Find("stun").gameObject.SetActive(true);
+        }
+        else
+        {
+            //this.transform.Find("stun").gameObject.SetActive(false);
+        }
+    }
+    public void ActivateSilent()
+    {
+        if (silentList.Count >= 1)
+        {
+            silenced = true;
+        }
+        else
+        {
+            silenced = false;
+        }
+    }
+    public void RemoveSilent()
+    {
+        silentList.Clear();
+    }
+
+    //Blind
+    public void AddBlind(Debuff silent)
+    {
+        //this.transform.Find("stun").gameObject.SetActive(true);
+        blinded = true;
+        blindList.Add(silent);
+    }
+    public void ReduceBlindTurn()
+    {
+        List<Debuff> debuffsToDestroy = new List<Debuff>();
+        foreach (Debuff blind in blindList)
+        {
+            blind.RemainTurn--;
+            if (blind.RemainTurn <= 0)
+            {
+                debuffsToDestroy.Add(blind);
+            }
+        }
+        foreach (Debuff debuffToDestroy in debuffsToDestroy)
+        {
+            blindList.Remove(debuffToDestroy);
+        }
+        debuffsToDestroy.Clear();
+        if (blindList.Count >= 1)
+        {
+            //this.transform.Find("stun").gameObject.SetActive(true);
+        }
+        else
+        {
+            //this.transform.Find("stun").gameObject.SetActive(false);
+        }
+    }
+    public void ActivateBlind()
+    {
+        if (blindList.Count >= 1)
+        {
+            blinded = true;
+        }
+        else
+        {
+            blinded = false;
+        }
+    }
+    public void RemoveBlind()
+    {
+        blindList.Clear();
+    }
+
 
     public void AddBuff(Buff buff)
     { }

@@ -163,7 +163,7 @@ public class EnemyAI : MonoBehaviour {
 			ChemicalStates currentState = ChemicalStates.LIQUID;//초기화 
 				Debug.Log (target);
 			if(target.tag=="Ally")//플레이어인 경우 
-			currentState = target.GetComponent<BaseCharacter> ().currentChemicalState;
+			currentState = target.GetComponent<baseCharacter> ().currentChemicalState;
 			else if(target.tag=="Monster")//몬스터들의 경우 
 			currentState = target.GetComponent<Monster> ().currentChemicalState;
 			
@@ -206,8 +206,8 @@ public class EnemyAI : MonoBehaviour {
 			float TargetMaxHp=0 ;
 			
 			if(target.tag=="Ally"){
-					TargetHp = target.GetComponent<BaseCharacter> ().HP;
-					TargetMaxHp = target.GetComponent<BaseCharacter> ().MAX_HP;
+					TargetHp = target.GetComponent<baseCharacter> ().HP;
+					TargetMaxHp = target.GetComponent<baseCharacter> ().MAX_HP;
 			}else if(target.tag =="Monster"){
 					TargetHp = target.GetComponent<Monster>().hp;
 					TargetMaxHp = target.GetComponent<Monster> ().maxHp;
@@ -228,8 +228,8 @@ public class EnemyAI : MonoBehaviour {
 				float TargetMaxHp=0 ;
 				
 				if(target.tag=="Ally"){
-					TargetHp = target.GetComponent<BaseCharacter> ().HP;
-					TargetMaxHp = target.GetComponent<BaseCharacter> ().MAX_HP;
+					TargetHp = target.GetComponent<baseCharacter> ().HP;
+					TargetMaxHp = target.GetComponent<baseCharacter> ().MAX_HP;
 				}else if(target.tag =="Monster"){
 					TargetHp = target.GetComponent<Monster>().hp;
 					TargetMaxHp = target.GetComponent<Monster> ().maxHp;
@@ -292,7 +292,7 @@ public class EnemyAI : MonoBehaviour {
 			case "Buff":
 					if(target.tag=="Monster"&&target.GetComponent<Monster>().BuffListCount()==0)
 						TargetList.Remove(target);
-					if(target.tag=="Ally"&&target.GetComponent<BaseCharacter>().BuffListCount()==0){
+					if(target.tag=="Ally"&&target.GetComponent<baseCharacter>().BuffListCount()==0){
 						TargetList.Remove(target);
 					}
 					break;

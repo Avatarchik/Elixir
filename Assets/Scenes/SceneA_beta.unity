@@ -389,7 +389,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &116892651
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1790,7 +1790,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &467276102
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3874,7 +3874,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &892090149
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5123,23 +5123,10 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 9587076, guid: 5caf50cb49f62524c9580d8f4f442363, type: 2}
+    - {fileID: 11404920, guid: 5caf50cb49f62524c9580d8f4f442363, type: 2}
+    - {fileID: 11499466, guid: 5caf50cb49f62524c9580d8f4f442363, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 5caf50cb49f62524c9580d8f4f442363, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1253451745 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 143588, guid: 5caf50cb49f62524c9580d8f4f442363, type: 2}
-  m_PrefabInternal: {fileID: 1253451744}
---- !u!114 &1253451746
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1253451745}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79bad3498391e9942809cd45bf70a740, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1257582961 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 104764, guid: 5caf50cb49f62524c9580d8f4f442363, type: 2}
@@ -5155,6 +5142,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15972c6b36644384aa665e7e865ead65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  choosingManager: {fileID: 0}
+  turnBasedCombatStateMachine: {fileID: 0}
+  chemSkill: 0
 --- !u!114 &1257582966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5177,6 +5167,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26ccb07ddc69baf4c9e2d8b636105220, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player:
+    CharacterName: 
+    MAX_HP: 200
+    HP: 0
+    criticalTarget: 0
+    currentChemicalState: 0
+    currentChemicalStateValue: 0
+    solidStateValue: 0
+    liquidStateValue: 0
+    gasStateValue: 0
+    dodgeRate: 0
+    buffs: []
+  TBSMachine: {fileID: 0}
+  choosingManager: {fileID: 0}
+  selectedEnemy: {fileID: 0}
+  currentChemistSkill: 0
+  isTargetEnemy: 0
 --- !u!1 &1263785951
 GameObject:
   m_ObjectHideFlags: 0
@@ -5472,6 +5479,7 @@ GameObject:
   - 222: {fileID: 1291933999}
   - 114: {fileID: 1291933998}
   - 114: {fileID: 1291933997}
+  - 114: {fileID: 1291934000}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -5538,7 +5546,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1291933998}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1291934000}
+        m_MethodName: Clicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1291933998
@@ -5574,6 +5593,17 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1291933995}
+--- !u!114 &1291934000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1291933995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31517ff8e0943d1458758c291a1cf3be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1302277320
 GameObject:
   m_ObjectHideFlags: 0
@@ -5588,15 +5618,12 @@ GameObject:
   - 114: {fileID: 1302277322}
   - 114: {fileID: 1302277327}
   - 114: {fileID: 1302277321}
-  - 114: {fileID: 1302277328}
   - 114: {fileID: 1302277329}
   - 114: {fileID: 1302277330}
-  - 114: {fileID: 1302277331}
-  - 114: {fileID: 1302277333}
   - 114: {fileID: 1302277332}
   - 114: {fileID: 1302277334}
-  - 114: {fileID: 1302277335}
   - 114: {fileID: 1302277336}
+  - 114: {fileID: 1302277328}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -5725,8 +5752,10 @@ MonoBehaviour:
     chemSeriesCard: 
   currentEquipElementIndex: 0
   player:
+    level: 0
     MAX_HP: 200
     HP: 0
+    AttackDamage: 0
     criticalTarget: 0
     currentChemicalState: 0
     currentChemicalStateValue: 0
@@ -5735,6 +5764,13 @@ MonoBehaviour:
     gasStateValue: 0
     dodgeRate: 0
     buffs: []
+    dodgeList: []
+    immuneCriticalTargetList: []
+    debuffImmuneList: []
+    guardStateChangeList: []
+    immuneHeatList: []
+    damageResistanceList: []
+    dotHealList: []
 --- !u!114 &1302277328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5743,11 +5779,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1302277320}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e4980141e5d1b5498cf68fc92971180, type: 3}
+  m_Script: {fileID: 11500000, guid: b74bef428a157e940ac0420435754ccd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  file: {fileID: 4900000, guid: 974e5191b25ba1047b5ebf729dffc524, type: 3}
-  cardDeck: []
+  file: {fileID: 4900000, guid: 72edc86dbb486a34ead31ff3e2295281, type: 3}
+  skillList: []
 --- !u!114 &1302277329
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5774,17 +5810,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff5104303aa99874992a2abbeb14b2a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1302277331
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1302277320}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f65075c1b35f0894e8d48dbcf7540b1b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  choosingManager: {fileID: 0}
+  TBSMachine: {fileID: 0}
+  skillIndex: 0
 --- !u!114 &1302277332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5796,17 +5824,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26ccb07ddc69baf4c9e2d8b636105220, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1302277333
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1302277320}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15972c6b36644384aa665e7e865ead65, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  player:
+    CharacterName: 
+    MAX_HP: 200
+    HP: 0
+    criticalTarget: 0
+    currentChemicalState: 0
+    currentChemicalStateValue: 0
+    solidStateValue: 0
+    liquidStateValue: 0
+    gasStateValue: 0
+    dodgeRate: 0
+    buffs: []
+  TBSMachine: {fileID: 0}
+  choosingManager: {fileID: 0}
+  selectedEnemy: {fileID: 0}
+  currentChemistSkill: 0
+  isTargetEnemy: 0
 --- !u!114 &1302277334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5824,19 +5858,6 @@ MonoBehaviour:
   DetailSkill2: {fileID: 0}
   DetailSkill3: {fileID: 0}
   ElementPanel: []
---- !u!114 &1302277335
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1302277320}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6af62a4607debc14fb606d67016de3e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isSkillInUse: 0
-  skillIndex: 0
 --- !u!114 &1302277336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6867,6 +6888,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15972c6b36644384aa665e7e865ead65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  choosingManager: {fileID: 0}
+  turnBasedCombatStateMachine: {fileID: 0}
+  chemSkill: 0
 --- !u!114 &1462220319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6889,6 +6913,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26ccb07ddc69baf4c9e2d8b636105220, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player:
+    CharacterName: 
+    MAX_HP: 200
+    HP: 0
+    criticalTarget: 0
+    currentChemicalState: 0
+    currentChemicalStateValue: 0
+    solidStateValue: 0
+    liquidStateValue: 0
+    gasStateValue: 0
+    dodgeRate: 0
+    buffs: []
+  TBSMachine: {fileID: 0}
+  choosingManager: {fileID: 0}
+  selectedEnemy: {fileID: 0}
+  currentChemistSkill: 0
+  isTargetEnemy: 0
 --- !u!1 &1467847997
 GameObject:
   m_ObjectHideFlags: 0
@@ -6973,7 +7014,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1486729030
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8459,6 +8500,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15972c6b36644384aa665e7e865ead65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  choosingManager: {fileID: 0}
+  turnBasedCombatStateMachine: {fileID: 0}
+  chemSkill: 0
 --- !u!114 &2031193699
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8481,6 +8525,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26ccb07ddc69baf4c9e2d8b636105220, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player:
+    CharacterName: 
+    MAX_HP: 200
+    HP: 0
+    criticalTarget: 0
+    currentChemicalState: 0
+    currentChemicalStateValue: 0
+    solidStateValue: 0
+    liquidStateValue: 0
+    gasStateValue: 0
+    dodgeRate: 0
+    buffs: []
+  TBSMachine: {fileID: 0}
+  choosingManager: {fileID: 0}
+  selectedEnemy: {fileID: 0}
+  currentChemistSkill: 0
+  isTargetEnemy: 0
 --- !u!1 &2054033268
 GameObject:
   m_ObjectHideFlags: 0

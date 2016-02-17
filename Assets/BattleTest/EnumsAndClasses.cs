@@ -11,14 +11,17 @@ namespace EnumsAndClasses
     public enum BuffName
     {
         None,
-        Dodge
+        Dodge,
+
     }
 
     public enum DebuffName
     {
         None,
         Stun,
-        DoteDamage
+        DoteDamage,
+        Silent,
+        Blind
     }
 
     public enum Phase

@@ -6,8 +6,8 @@ public class PlayerPrefs : MonoBehaviour {
     public List<Element> party = new List<Element>();
     public Element currentEquipElement;
     public int currentEquipElementIndex;
-    public List<List<baseCard>> skillList = new List<List<baseCard>>();
-    public BaseCharacter player = new BaseCharacter();
+    public List<List<baseSkill>> skillList = new List<List<baseSkill>>();
+    public baseCharacter player = new baseCharacter();
 
 	// Use this for initialization
 	public void Initialize () {
@@ -20,16 +20,16 @@ public class PlayerPrefs : MonoBehaviour {
         party.Add(elementList[1]);
 
         //Create list of skills of each element in party
-        List<baseCard> cardList = GetComponent<CardLoad>().cardDeck;
+        List<baseSkill> cardList = GetComponent<SkillLoader>().skillList;
         for (int i = 0; i < party.Count; i++)
         {
-            List<baseCard> elementSkill = new List<baseCard>();
+            List<baseSkill> elementSkill = new List<baseSkill>();
             for(int j = 0; j < 3; j++)
             {
                 
-                elementSkill.Add(cardList.Find(x => x.Card_Name == party[i].elementCard1));
-                elementSkill.Add(cardList.Find(x => x.Card_Name == party[i].elementCard2));
-                elementSkill.Add(cardList.Find(x => x.Card_Name == party[i].elementCard3));
+                elementSkill.Add(cardList.Find(x => x.Skill_Name == party[i].elementCard1));
+                elementSkill.Add(cardList.Find(x => x.Skill_Name == party[i].elementCard2));
+                elementSkill.Add(cardList.Find(x => x.Skill_Name == party[i].elementCard3));
             }
             skillList.Add(elementSkill);
         }
@@ -41,6 +41,8 @@ public class PlayerPrefs : MonoBehaviour {
         //Initialize Player info
         player.HP = player.MAX_HP;
         player.dodgeRate = 0;
+        player.level = 7;
+        player.AttackDamage = 10;
 
         SetPlayerInfo();
     }

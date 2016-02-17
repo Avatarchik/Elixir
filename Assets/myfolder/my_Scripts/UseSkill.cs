@@ -2,6 +2,8 @@
 using System.Collections;
 using EnumsAndClasses;
 using System;
+using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class UseSkill : MonoBehaviour {
     //private ChoosingManager choosingManager;
@@ -14,15 +16,16 @@ public class UseSkill : MonoBehaviour {
     public IEnumerator waitForSelection;
 
     //----Shared Variables
-    BaseCharacter player;
-    GameObject[] selectedEnemy = new GameObject[4];
+    baseCharacter player;
+    GameObject selectedEnemy;
+    List<GameObject> enemyList = new List<GameObject>();
     GameObject selectedAlly;
     //----ChemistSkill Variables
     private bool isTargetEnemy;
     //----ElementSkill Variables
     int currentEquipElementIndex;
     int currentSkillIndex;
-    baseCard currentSelectedCard = new baseCard();
+    baseSkill currentSelectedSkill = new baseSkill();
     bool attackedCritical = false;
 
     // Use this for initialization
@@ -85,12 +88,14 @@ public class UseSkill : MonoBehaviour {
     IEnumerator ElementSkill()
     {
         Debug.Log("Use Element Skill");
-
+        attackedCritical = false;
         currentEquipElementIndex = GameObject.Find("GameManager").GetComponent<PlayerPrefs>().currentEquipElementIndex;
         currentSkillIndex = skillIndex;
-        currentSelectedCard = GameObject.Find("GameManager").GetComponent<PlayerPrefs>().skillList[currentEquipElementIndex][currentSkillIndex];
-        string targetType = currentSelectedCard.Card_Target; // Distinguish number of attacks
-        string targetRange = currentSelectedCard.Card_Range;
+        currentSelectedSkill = GameObject.Find("GameManager").GetComponent<PlayerPrefs>().skillList[currentEquipElementIndex][currentSkillIndex];
+        string targetType = currentSelectedSkill.Skill_Target; // Distinguish number of attacks
+        string targetRange = currentSelectedSkill.Skill_Range;
+
+        Debug.Log("TargetType: " + targetType + " TargetRange: " + targetRange);
 
         //----------
         Highlight(targetType, targetRange);
@@ -100,13 +105,22 @@ public class UseSkill : MonoBehaviour {
             Debug.Log("ElementSkill Wide");
             waitForSelection = WaitForSelection(targetType);
             yield return StartCoroutine(waitForSelection);
-            selectedEnemy = GameObject.FindGameObjectsWithTag("Monster"); //Add all monsters in the selectedEnemy array
+
+            enemyList.Add(selectedEnemy);
+            foreach (GameObject monster in GameObject.FindGameObjectsWithTag("Monster"))//Add all monsters in the selectedEnemy array
+            {
+                if(monster != selectedEnemy)
+                {
+                    enemyList.Add(monster);
+                }
+            }
         }
         else
         {
             Debug.Log("ElementSkill Else");
             waitForSelection = WaitForSelection(targetType);
             yield return StartCoroutine(waitForSelection);
+            enemyList.Add(selectedEnemy);
         }
 
         //---------
@@ -114,30 +128,31 @@ public class UseSkill : MonoBehaviour {
         UnHighlight();
 
         //---------
-        if (targetType == "Ally")
+        if (targetType == "Player")
         {
             ElementSkillToAlly();
         }
-        else if (targetType == "Enemy")
+        else if (targetType == "Monster")
         {
             if(targetRange == "Single")
             {
                 ElementSkillToEnemy(1);
             }else if(targetRange == "Wide")
             {
-                ElementSkillToEnemy(4);
+                ElementSkillToEnemy(enemyList.Count);
             }
         }
         else if (targetType == "All")
         {
             ElementSkillToAlly();
+
             if (targetRange == "Single")
             {
                 ElementSkillToEnemy(1);
             }
             else if (targetRange == "Wide")
             {
-                ElementSkillToEnemy(4);
+                ElementSkillToEnemy(enemyList.Count);
             }
         }
 
@@ -152,6 +167,7 @@ public class UseSkill : MonoBehaviour {
         }
 
         //----------
+
         Debug.Log("Decrement Turn");
         TBSMachine.decrementTurn();
 
@@ -161,6 +177,10 @@ public class UseSkill : MonoBehaviour {
             TBSMachine.resetTurn();
         }
 
+        //---------
+        Button skillBtn = GameObject.Find("SkillPanel").transform.GetChild(skillIndex).GetComponent<Button>();
+        skillBtn.GetComponent<Button>().interactable = false;
+        GameObject.Find("Button").GetComponent<ChemistSkill>().DisableButtons();
         isSkillInUse = false;
         yield return null;
     }
@@ -196,10 +216,12 @@ public class UseSkill : MonoBehaviour {
         {
             TBSMachine.currentState = TurnBasedCombatStateMachine.BattleStates.ENEMYCHOICE;
             TBSMachine.resetTurn();
+
         }
 
 
         Debug.Log("End Skill");
+        GameObject.Find("Button").GetComponent<ChemistSkill>().DisableButtons();
         isSkillInUse = false;
         yield return null;
     }
@@ -219,18 +241,18 @@ public class UseSkill : MonoBehaviour {
             Monster.transform.Find("selected").gameObject.SetActive(false);
         }
         //Highlight
-        if (targetType == "Ally")//Skill targets Ally(ex: heal)
+        if (targetType == "Player")//Skill targets Ally(ex: heal)
         {
             Ally.transform.Find("selectable").gameObject.SetActive(true);
         }
-        else if (targetType == "Enemy" && targetRange == "Single")// Skill is Enemy Single attack
+        else if (targetType == "Monster" && targetRange == "Single")// Skill is Enemy Single attack
         {
             foreach (GameObject Monster in Monsters)
             {
                 Monster.transform.Find("selectable").gameObject.SetActive(true);
             }
         }
-        else if (targetType == "Enemy" && targetRange == "Wide")// Skill is Enemy Wide attack
+        else if (targetType == "Monster" && targetRange == "Wide")// Skill is Enemy Wide attack
         {
             foreach (GameObject Monster in Monsters)
             {
@@ -280,7 +302,7 @@ public class UseSkill : MonoBehaviour {
                 RaycastHit2D hit = Physics2D.GetRayIntersection(ray, Mathf.Infinity);
 
                 if(hit.collider != null && 
-                    targetType == "Ally" &&
+                    targetType == "Player" &&
                     hit.collider.gameObject.tag == "Ally")
                 {
                     Debug.Log("Ally selected");
@@ -290,11 +312,11 @@ public class UseSkill : MonoBehaviour {
                     yield break;
                 }
                 else if (hit.collider != null &&
-                    targetType == "Enemy" &&
+                    targetType == "Monster" &&
                     hit.collider.gameObject.tag == "Monster")
                 {
                     Debug.Log("Enemy selected");
-                    //selectedEnemy[countArray] = hit.collider.gameObject;//Add the selected monster in the selectedEnemy array
+                    selectedEnemy = hit.collider.gameObject;//Add the selected monster in the selectedEnemy array
                     //selectedEnemy[countArray].transform.Find("selectable").gameObject.SetActive(false);
                     //selectedEnemy[countArray].transform.Find("selected").gameObject.SetActive(true);
                     yield break;
@@ -304,7 +326,7 @@ public class UseSkill : MonoBehaviour {
                     hit.collider.gameObject.tag == "Ally")
                 {
                     Debug.Log("Ally selected (All)");
-                    //selectedAlly = hit.collider.gameObject;
+                    selectedAlly = hit.collider.gameObject;
                     //selectedAlly.transform.Find("selectable").gameObject.SetActive(false);
                     //selectedAlly.transform.Find("selected").gameObject.SetActive(true);
                     isTargetEnemy = false;
@@ -315,7 +337,7 @@ public class UseSkill : MonoBehaviour {
                     hit.collider.gameObject.tag == "Monster")
                 {
                     Debug.Log("Enemy selected (All)");
-                    //selectedEnemy[countArray] = hit.collider.gameObject;//Add the selected monster in the selectedEnemy array
+                    selectedEnemy = hit.collider.gameObject;//Add the selected monster in the selectedEnemy array
                     //selectedEnemy[countArray].transform.Find("selectable").gameObject.SetActive(false);
                     //selectedEnemy[countArray].transform.Find("selected").gameObject.SetActive(true);
                     isTargetEnemy = true;
@@ -330,14 +352,16 @@ public class UseSkill : MonoBehaviour {
     {
         Debug.Log("ElementSkillToEnemy");
         GameObject Ally = GameObject.Find("Player(Clone)");
-        ChemicalStates criticalTarget = currentSelectedCard.Card_CriticalTarget;
+        ChemicalStates criticalTarget = GetComponent<PlayerPrefs>().currentEquipElement.characterRoomTempState;
         System.Random rand = new System.Random();
-        double criticalRate;
-        double stunRate;
+        float criticalRate;
+        float stunRate;
+        float silentRate;
+        float blindRate;
 
         for (int i = 0; i < countArray; i++) //Repeat procedure for every selected enemies listed in selectedEnemy array
         {
-            if (selectedEnemy[i].GetComponent<Monster>().currentChemicalState == criticalTarget)
+            if (enemyList[i].GetComponent<Monster>().currentChemicalState == criticalTarget)
             {
                 criticalRate = 1.5f;
                 attackedCritical = true;
@@ -348,25 +372,27 @@ public class UseSkill : MonoBehaviour {
             }
 
             //Normal damage
-            if (currentSelectedCard.Card_AttackDamage > 0)
+            if (currentSelectedSkill.Skill_AttackDamage > 0)
             {
-                selectedEnemy[i].GetComponent<Monster>().SetDamage((int)(currentSelectedCard.Card_AttackDamage * criticalRate));
+                Debug.Log("Player AD: " + player.AttackDamage + " 계수: " + currentSelectedSkill.Skill_AttackDamage);
+                enemyList[i].GetComponent<Monster>().SetDamage((int)((player.AttackDamage * currentSelectedSkill.Skill_AttackDamage /100) * criticalRate));
             }
-            //DotDamage
-            if (currentSelectedCard.Card_DebuffName == "DoteDamage")
-            {
-                int DotDamageTurn = currentSelectedCard.Card_DotDamageTurn;
-                int DotDamage = currentSelectedCard.Card_DotDamage;
-                Debuff debuff = new Debuff(DebuffName.DoteDamage, DotDamageTurn, DotDamage);
-                selectedEnemy[i].GetComponent<Monster>().SetDamage(DotDamage);//Inflict damage immediately in this turn                                                                              
-                selectedEnemy[i].GetComponent<Monster>().AddDotDamage(debuff);//Add debuff to monster
 
-            }
-            //Stun
-            if (currentSelectedCard.Card_DebuffName == "Stun")
+            //DotDamage
+            if (currentSelectedSkill.Skill_DotDamage > 0)
             {
-                stunRate = currentSelectedCard.Card_DebuffRate;
-                if (selectedEnemy[i].GetComponent<Monster>().currentChemicalState == criticalTarget)
+                int DotDamageTurn = currentSelectedSkill.Skill_DotDamageTurn;
+                float DotDamage = currentSelectedSkill.Skill_DotDamage;
+                Debuff debuff = new Debuff(DebuffName.DoteDamage, DotDamageTurn, (int)(player.AttackDamage * DotDamage /100));
+                enemyList[i].GetComponent<Monster>().SetDamage((int)(player.AttackDamage * DotDamage / 100));//Inflict damage immediately in this turn                                                                              
+                enemyList[i].GetComponent<Monster>().AddDotDamage(debuff);//Add debuff to monster
+            }
+
+            //Stun
+            if (currentSelectedSkill.Skill_DebuffName == "Stun")
+            {
+                stunRate = currentSelectedSkill.Skill_DebuffRate;
+                if (enemyList[i].GetComponent<Monster>().currentChemicalState == criticalTarget)
                 {
                     stunRate += 10f;
                 }
@@ -376,11 +402,46 @@ public class UseSkill : MonoBehaviour {
                 if (chance <= stunRate)
                 {
                     Debug.Log("Stun Success");
-                    Debuff debuff = new Debuff(DebuffName.Stun, currentSelectedCard.Card_DebuffTurn);
-                    selectedEnemy[i].GetComponent<Monster>().AddStun(debuff);
+                    Debuff debuff = new Debuff(DebuffName.Stun, currentSelectedSkill.Skill_DebuffTurn);
+                    enemyList[i].GetComponent<Monster>().AddStun(debuff);
                 }
             }
 
+            if (currentSelectedSkill.Skill_DebuffName == "Silent")
+            {
+                silentRate = currentSelectedSkill.Skill_DebuffRate;
+                if (enemyList[i].GetComponent<Monster>().currentChemicalState == criticalTarget)
+                {
+                    silentRate += 10f;
+                }
+                int chance = rand.Next(1, 101);
+                //int chance = 20;
+                Debug.Log("Silent Rate: " + silentRate + ", chance: " + chance);
+                if (chance <= silentRate)
+                {
+                    Debug.Log("Silent Success");
+                    Debuff debuff = new Debuff(DebuffName.Silent, currentSelectedSkill.Skill_DebuffTurn);
+                    enemyList[i].GetComponent<Monster>().AddSilent(debuff);
+                }
+            }
+
+            if (currentSelectedSkill.Skill_DebuffName == "Blind")
+            {
+                blindRate = currentSelectedSkill.Skill_DebuffRate;
+                if (enemyList[i].GetComponent<Monster>().currentChemicalState == criticalTarget)
+                {
+                    blindRate += 10f;
+                }
+                int chance = rand.Next(1, 101);
+                //int chance = 20;
+                Debug.Log("Silent Rate: " + blindRate + ", chance: " + chance);
+                if (chance <= blindRate)
+                {
+                    Debug.Log("Silent Success");
+                    Debuff debuff = new Debuff(DebuffName.Blind, currentSelectedSkill.Skill_DebuffTurn);
+                    enemyList[i].GetComponent<Monster>().AddBlind(debuff);
+                }
+            }
 
         }
     }
@@ -390,7 +451,7 @@ public class UseSkill : MonoBehaviour {
         Debug.Log("ElementSkillToAlly");
 
         float criticalRate;
-        ChemicalStates criticalTarget = currentSelectedCard.Card_CriticalTarget;
+        ChemicalStates criticalTarget = GetComponent<PlayerPrefs>().currentEquipElement.characterRoomTempState;
 
         if (player.currentChemicalState == criticalTarget)
         {
@@ -402,15 +463,15 @@ public class UseSkill : MonoBehaviour {
             criticalRate = 1f;
         }
 
-        if (currentSelectedCard.Card_BuffName == "Dodge")
+        if (currentSelectedSkill.Skill_BuffName == "Dodge")
         {
-            Buff buff = new Buff(BuffName.Dodge, currentSelectedCard.Card_BuffTurn - 1);
-            player.dodgeRate = (int)currentSelectedCard.Card_BuffRate;
-            player.AddBuff(buff);
+            Buff buff = new Buff(BuffName.Dodge, currentSelectedSkill.Skill_BuffTurn - 1);
+            player.dodgeRate = (int)currentSelectedSkill.Skill_BuffRate;
+            player.AddDodge(buff);
         }
-        if (currentSelectedCard.Card_Heal > 0)
+        if (currentSelectedSkill.Skill_Heal > 0)
         {
-            player.SetHeal((int)(currentSelectedCard.Card_Heal * criticalRate));
+            player.SetHeal((int)(currentSelectedSkill.Skill_Heal * criticalRate));
         }
     }
 
@@ -421,11 +482,11 @@ public class UseSkill : MonoBehaviour {
         //Increase or Decrease enemy ChemicalStateValue
         if (skillIndex == 3)
         {
-            selectedEnemy[0].GetComponent<Monster>().DecrementCSVal();
+            enemyList[0].GetComponent<Monster>().DecrementCSVal();
         }
         else if (skillIndex == 4)
         {
-            selectedEnemy[0].GetComponent<Monster>().IncrementCSVal();
+            enemyList[0].GetComponent<Monster>().IncrementCSVal();
         }
 
     }
@@ -447,13 +508,14 @@ public class UseSkill : MonoBehaviour {
 
     public void ResetVariables()
     {
-        Array.Clear(selectedEnemy, 0, selectedEnemy.Length);
+        enemyList.Clear();
+
         selectedAlly = null;
     //----ChemistSkill Variables
         isTargetEnemy = false;
     //----ElementSkill Variables
         currentSkillIndex = skillIndex;
-        currentSelectedCard = null;
+        currentSelectedSkill = null;
         attackedCritical = false;
 }
 
