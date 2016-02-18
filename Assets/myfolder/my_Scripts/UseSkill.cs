@@ -467,7 +467,6 @@ public class UseSkill : MonoBehaviour {
         if (player.currentChemicalState == criticalTarget)
         {
             criticalRate = 1.5f;
-            attackedCritical = true;
         }
         else
         {

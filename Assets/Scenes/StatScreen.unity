@@ -1292,8 +1292,8 @@ GameObject:
   - 4: {fileID: 744358462}
   - 114: {fileID: 744358464}
   - 114: {fileID: 744358465}
-  - 114: {fileID: 744358466}
   - 58: {fileID: 744358463}
+  - 114: {fileID: 744358466}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1370,11 +1370,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 744358461}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e4980141e5d1b5498cf68fc92971180, type: 3}
+  m_Script: {fileID: 11500000, guid: b74bef428a157e940ac0420435754ccd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  file: {fileID: 4900000, guid: 974e5191b25ba1047b5ebf729dffc524, type: 3}
-  cardDeck: []
+  file: {fileID: 4900000, guid: 72edc86dbb486a34ead31ff3e2295281, type: 3}
+  skillList: []
 --- !u!1 &747988676
 GameObject:
   m_ObjectHideFlags: 0
