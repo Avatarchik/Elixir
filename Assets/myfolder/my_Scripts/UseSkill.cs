@@ -140,7 +140,6 @@ public class UseSkill : MonoBehaviour {
         //----------
         if (attackedCritical)
         {
-            
             Debug.Log("Turn incremented");
             TBSMachine.incrementTurn();
             GameObject.Find("AddTurn").transform.Find("1More").gameObject.SetActive(true);
@@ -148,7 +147,6 @@ public class UseSkill : MonoBehaviour {
         }
 
         //----------
-
         Debug.Log("Decrement Turn");
         TBSMachine.decrementTurn();
 
@@ -156,6 +154,12 @@ public class UseSkill : MonoBehaviour {
         {
             TBSMachine.currentState = TurnBasedCombatStateMachine.BattleStates.ENEMYCHOICE;
             TBSMachine.resetTurn();
+
+            foreach (GameObject enemy in enemyList)
+            {
+                enemy.GetComponent<Monster>().guarded = false;
+                enemy.transform.Find("guardIcon").gameObject.SetActive(false);
+            }
         }
 
         //---------
@@ -199,6 +203,11 @@ public class UseSkill : MonoBehaviour {
             TBSMachine.currentState = TurnBasedCombatStateMachine.BattleStates.ENEMYCHOICE;
             TBSMachine.resetTurn();
 
+            foreach (GameObject monster in GameObject.FindGameObjectsWithTag("Monster"))//Add all monsters in the selectedEnemy array
+            {
+                monster.GetComponent<Monster>().guarded = false;
+                monster.transform.Find("guardIcon").gameObject.SetActive(false);
+            }
         }
 
 
@@ -360,7 +369,13 @@ public class UseSkill : MonoBehaviour {
             if (enemyList[i].GetComponent<Monster>().currentChemicalState == criticalTarget)
             {
                 criticalRate = 1.5f;
-                attackedCritical = true;
+                
+                if (!enemyList[i].GetComponent<Monster>().guarded)
+                {
+                    attackedCritical = true;
+                    enemyList[i].GetComponent<Monster>().guarded = true;
+                    enemyList[i].transform.Find("guardIcon").gameObject.SetActive(true);
+                }
             }
             else
             {

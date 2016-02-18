@@ -10,6 +10,7 @@ public class Monster : MonoBehaviour {
     public int hp;
     public int attackDamage;
     public string type;
+    public bool guarded;
     public bool stunned;
     public bool silenced;
     public bool blinded;
@@ -45,11 +46,16 @@ public class Monster : MonoBehaviour {
         Debug.Log("image : " + imagePath);
         this.renderer.sprite = Resources.Load(imagePath, typeof(Sprite)) as Sprite;
         
-        this.maxHp = monsterInfo.Mon_HP;
-        this.hp = monsterInfo.Mon_HP;
+        //this.maxHp = monsterInfo.Mon_HP;
+        //this.hp = monsterInfo.Mon_HP;
+        this.maxHp = 100;
+        this.hp = 100;
         this.attackDamage = (int)monsterInfo.Mon_AttackDamage;
         this.type = monsterInfo.Mon_Type;
+        this.guarded = false;
         this.stunned = false;
+        this.silenced = false;
+        this.blinded = false;
         this.currentChemicalState = monsterInfo.Mon_RoomTempStatus;
         this.currentChemicalStateValue = 1;
         this.solidStateValue = monsterInfo.Mon_SolidGauge;
@@ -58,14 +64,6 @@ public class Monster : MonoBehaviour {
         this.criticalTarget = monsterInfo.Mon_CriticalTarget;
     }
     
-    // Only apply image.
-    // public void SetStat (string imagePath)
-    // {
-    //     this.renderer.sprite = Resources.Load(imagePath, typeof(Sprite)) as Sprite;
-    //     SetStat();
-    // }
-    
-    // Default image.
     public void SetStat (int hp, int attackDamage, string type, int boilingPoint, int meltingPoint)
     {
         this.maxHp = hp;
