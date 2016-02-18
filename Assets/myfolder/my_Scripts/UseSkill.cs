@@ -100,28 +100,9 @@ public class UseSkill : MonoBehaviour {
         //----------
         Highlight(targetType, targetRange);
         //----------
-        if (targetRange == "Wide")//When target is Wide
-        {
-            Debug.Log("ElementSkill Wide");
-            waitForSelection = WaitForSelection(targetType);
-            yield return StartCoroutine(waitForSelection);
-
-            enemyList.Add(selectedEnemy);
-            foreach (GameObject monster in GameObject.FindGameObjectsWithTag("Monster"))//Add all monsters in the selectedEnemy array
-            {
-                if(monster != selectedEnemy)
-                {
-                    enemyList.Add(monster);
-                }
-            }
-        }
-        else
-        {
-            Debug.Log("ElementSkill Else");
-            waitForSelection = WaitForSelection(targetType);
-            yield return StartCoroutine(waitForSelection);
-            enemyList.Add(selectedEnemy);
-        }
+        Debug.Log("ElementSkill Wide");
+        waitForSelection = WaitForSelection(targetType);
+        yield return StartCoroutine(waitForSelection);
 
         //---------
         Debug.Log("Unhighlight");
@@ -178,6 +159,7 @@ public class UseSkill : MonoBehaviour {
         }
 
         //---------
+        ResetVariables();
         Button skillBtn = GameObject.Find("SkillPanel").transform.GetChild(skillIndex).GetComponent<Button>();
         skillBtn.GetComponent<Button>().interactable = false;
         GameObject.Find("Button").GetComponent<ChemistSkill>().DisableButtons();
@@ -221,6 +203,7 @@ public class UseSkill : MonoBehaviour {
 
 
         Debug.Log("End Skill");
+        ResetVariables();
         GameObject.Find("Button").GetComponent<ChemistSkill>().DisableButtons();
         isSkillInUse = false;
         yield return null;
@@ -306,9 +289,7 @@ public class UseSkill : MonoBehaviour {
                     hit.collider.gameObject.tag == "Ally")
                 {
                     Debug.Log("Ally selected");
-                    //selectedAlly = hit.collider.gameObject;
-                    //selectedAlly.transform.Find("selectable").gameObject.SetActive(false);
-                    //selectedAlly.transform.Find("selected").gameObject.SetActive(true);
+                    selectedAlly = hit.collider.gameObject;
                     yield break;
                 }
                 else if (hit.collider != null &&
@@ -317,8 +298,14 @@ public class UseSkill : MonoBehaviour {
                 {
                     Debug.Log("Enemy selected");
                     selectedEnemy = hit.collider.gameObject;//Add the selected monster in the selectedEnemy array
-                    //selectedEnemy[countArray].transform.Find("selectable").gameObject.SetActive(false);
-                    //selectedEnemy[countArray].transform.Find("selected").gameObject.SetActive(true);
+                    enemyList.Add(selectedEnemy);
+                    foreach (GameObject monster in GameObject.FindGameObjectsWithTag("Monster"))//Add all monsters in the selectedEnemy array
+                    {
+                        if (monster != selectedEnemy)
+                        {
+                            enemyList.Add(monster);
+                        }
+                    }
                     yield break;
                 }
                 else if (hit.collider != null &&
@@ -327,8 +314,10 @@ public class UseSkill : MonoBehaviour {
                 {
                     Debug.Log("Ally selected (All)");
                     selectedAlly = hit.collider.gameObject;
-                    //selectedAlly.transform.Find("selectable").gameObject.SetActive(false);
-                    //selectedAlly.transform.Find("selected").gameObject.SetActive(true);
+                    foreach (GameObject monster in GameObject.FindGameObjectsWithTag("Monster"))//Add all monsters in the selectedEnemy array
+                    {
+                        enemyList.Add(monster);
+                    }
                     isTargetEnemy = false;
                     yield break;
                 }
@@ -337,9 +326,16 @@ public class UseSkill : MonoBehaviour {
                     hit.collider.gameObject.tag == "Monster")
                 {
                     Debug.Log("Enemy selected (All)");
+                    selectedAlly = GameObject.FindGameObjectWithTag("Ally");
                     selectedEnemy = hit.collider.gameObject;//Add the selected monster in the selectedEnemy array
-                    //selectedEnemy[countArray].transform.Find("selectable").gameObject.SetActive(false);
-                    //selectedEnemy[countArray].transform.Find("selected").gameObject.SetActive(true);
+                    enemyList.Add(selectedEnemy);
+                    foreach (GameObject monster in GameObject.FindGameObjectsWithTag("Monster"))//Add all monsters in the selectedEnemy array
+                    {
+                        if (monster != selectedEnemy)
+                        {
+                            enemyList.Add(monster);
+                        }
+                    }
                     isTargetEnemy = true;
                     yield break;
                 }

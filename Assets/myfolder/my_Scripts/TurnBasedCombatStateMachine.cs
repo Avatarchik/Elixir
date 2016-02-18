@@ -101,7 +101,7 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
                 }
                 
                 StartCoroutine(GameObject.Find ("MonsterManager").GetComponent<EnemyAI>().EnemyActChoice(GameObject.FindGameObjectsWithTag("Monster")));
-                 currentState = BattleStates.IDLE;
+                currentState = BattleStates.IDLE;
                 break;
             case (BattleStates.IDLE):
                 break;

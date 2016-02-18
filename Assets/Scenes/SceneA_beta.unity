@@ -5142,9 +5142,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15972c6b36644384aa665e7e865ead65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  choosingManager: {fileID: 0}
-  turnBasedCombatStateMachine: {fileID: 0}
-  chemSkill: 0
 --- !u!114 &1257582966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5167,23 +5164,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26ccb07ddc69baf4c9e2d8b636105220, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player:
-    CharacterName: 
-    MAX_HP: 200
-    HP: 0
-    criticalTarget: 0
-    currentChemicalState: 0
-    currentChemicalStateValue: 0
-    solidStateValue: 0
-    liquidStateValue: 0
-    gasStateValue: 0
-    dodgeRate: 0
-    buffs: []
-  TBSMachine: {fileID: 0}
-  choosingManager: {fileID: 0}
-  selectedEnemy: {fileID: 0}
-  currentChemistSkill: 0
-  isTargetEnemy: 0
 --- !u!1 &1263785951
 GameObject:
   m_ObjectHideFlags: 0
@@ -5810,9 +5790,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff5104303aa99874992a2abbeb14b2a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  choosingManager: {fileID: 0}
-  TBSMachine: {fileID: 0}
-  skillIndex: 0
 --- !u!114 &1302277332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5824,23 +5801,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26ccb07ddc69baf4c9e2d8b636105220, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player:
-    CharacterName: 
-    MAX_HP: 200
-    HP: 0
-    criticalTarget: 0
-    currentChemicalState: 0
-    currentChemicalStateValue: 0
-    solidStateValue: 0
-    liquidStateValue: 0
-    gasStateValue: 0
-    dodgeRate: 0
-    buffs: []
-  TBSMachine: {fileID: 0}
-  choosingManager: {fileID: 0}
-  selectedEnemy: {fileID: 0}
-  currentChemistSkill: 0
-  isTargetEnemy: 0
 --- !u!114 &1302277334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6888,9 +6848,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15972c6b36644384aa665e7e865ead65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  choosingManager: {fileID: 0}
-  turnBasedCombatStateMachine: {fileID: 0}
-  chemSkill: 0
 --- !u!114 &1462220319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6913,23 +6870,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26ccb07ddc69baf4c9e2d8b636105220, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player:
-    CharacterName: 
-    MAX_HP: 200
-    HP: 0
-    criticalTarget: 0
-    currentChemicalState: 0
-    currentChemicalStateValue: 0
-    solidStateValue: 0
-    liquidStateValue: 0
-    gasStateValue: 0
-    dodgeRate: 0
-    buffs: []
-  TBSMachine: {fileID: 0}
-  choosingManager: {fileID: 0}
-  selectedEnemy: {fileID: 0}
-  currentChemistSkill: 0
-  isTargetEnemy: 0
 --- !u!1 &1467847997
 GameObject:
   m_ObjectHideFlags: 0
@@ -8500,9 +8440,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15972c6b36644384aa665e7e865ead65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  choosingManager: {fileID: 0}
-  turnBasedCombatStateMachine: {fileID: 0}
-  chemSkill: 0
 --- !u!114 &2031193699
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8525,23 +8462,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26ccb07ddc69baf4c9e2d8b636105220, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player:
-    CharacterName: 
-    MAX_HP: 200
-    HP: 0
-    criticalTarget: 0
-    currentChemicalState: 0
-    currentChemicalStateValue: 0
-    solidStateValue: 0
-    liquidStateValue: 0
-    gasStateValue: 0
-    dodgeRate: 0
-    buffs: []
-  TBSMachine: {fileID: 0}
-  choosingManager: {fileID: 0}
-  selectedEnemy: {fileID: 0}
-  currentChemistSkill: 0
-  isTargetEnemy: 0
 --- !u!1 &2054033268
 GameObject:
   m_ObjectHideFlags: 0

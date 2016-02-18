@@ -12,7 +12,7 @@ public class EnemyAI : MonoBehaviour {
 	public IEnumerator EnemyActChoice(GameObject[] monsters)
 	{
         Debug.Log("Enemy count: " + monsters.Length);
-		GameObject.Find ("GameManager").GetComponent<TurnBasedCombatStateMachine> ().currentState=TurnBasedCombatStateMachine.BattleStates.IDLE;
+		//GameObject.Find ("GameManager").GetComponent<TurnBasedCombatStateMachine> ().currentState=TurnBasedCombatStateMachine.BattleStates.IDLE;
 		Debug.Log ("Coroutine is started");
 		foreach (GameObject monster in monsters)
 		{
@@ -24,7 +24,8 @@ public class EnemyAI : MonoBehaviour {
             else
             {
                 yield return new WaitForSeconds(EnemyBehaviourBeforeDelay);
-                SelectAct(monster);
+                //SelectAct(monster);
+                Debug.Log("Enemy Attack");
 			    yield return new WaitForSeconds(EnemyBehaviourAfterDelay);
             }
 			
