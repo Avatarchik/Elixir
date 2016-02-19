@@ -88,6 +88,12 @@ public class ChangeElement : MonoBehaviour {
         {
             TBSMachine.currentState = TurnBasedCombatStateMachine.BattleStates.ENEMYCHOICE;
             TBSMachine.resetTurn();
+
+            foreach (GameObject monster in GameObject.FindGameObjectsWithTag("Monster"))
+            {
+                monster.GetComponent<Monster>().guarded = false;
+                monster.transform.Find("guardIcon").gameObject.SetActive(false);
+            }
         }
     }
 

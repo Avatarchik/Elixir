@@ -87,11 +87,5 @@ public class MonsterManager : MonoBehaviour {
             monsters.Add(monster.GetComponent<Monster>());
         }
     }
-
-
-	
-	// Update is called once per frame
-	void Update () {
-
-	}
+    
 }

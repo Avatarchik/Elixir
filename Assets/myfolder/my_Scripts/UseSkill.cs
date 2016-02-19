@@ -155,10 +155,10 @@ public class UseSkill : MonoBehaviour {
             TBSMachine.currentState = TurnBasedCombatStateMachine.BattleStates.ENEMYCHOICE;
             TBSMachine.resetTurn();
 
-            foreach (GameObject enemy in enemyList)
+            foreach (GameObject monster in GameObject.FindGameObjectsWithTag("Monster"))//Add all monsters in the selectedEnemy array
             {
-                enemy.GetComponent<Monster>().guarded = false;
-                enemy.transform.Find("guardIcon").gameObject.SetActive(false);
+                monster.GetComponent<Monster>().guarded = false;
+                monster.transform.Find("guardIcon").gameObject.SetActive(false);
             }
         }
 
