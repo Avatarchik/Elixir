@@ -34,7 +34,7 @@ public class UseSkill : MonoBehaviour {
         //choosingManager = GetComponent<ChoosingManager>();
         TBSMachine = GetComponent<TurnBasedCombatStateMachine>();
         player = GetComponent<PlayerPrefs>().player;
-        monsterPrefs = monsterPrefs = GameObject.Find("MonsterManager").GetComponent<MonsterPrefs>();
+        monsterPrefs = GameObject.Find("MonsterManager").GetComponent<MonsterPrefs>();
         isSkillInUse = false;
     }
 
