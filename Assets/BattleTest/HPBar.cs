@@ -7,22 +7,22 @@ public class HPBar : MonoBehaviour {
     private float maxXValue;
     private int currentHealth;
     private int maxHealth;
-    //private float currentXValue;
-	// Use this for initialization
-	void Start () {
-        maxHealth = this.GetComponent<Monster>().maxHp;
+
+    private Monster monsterPref;
+    void Start () {
+        monsterPref = GameObject.Find("MonsterManager").GetComponent<MonsterPrefs>().monsterList[GetComponent<MonsterIndex>().MonsterID];
+
+        maxHealth = monsterPref.maxHp;
         maxXValue = healthTransform.localPosition.x;
         minXValue = healthTransform.localPosition.x - healthTransform.rect.width;
         currentHealth = maxHealth;
-        //healthTransform.localPosition = new Vector2(minXValue, healthTransform.localPosition.y);
-        
     }
 	
 	// Update is called once per frame
 	void Update () {
-        if(this.GetComponent<Monster>().hp != currentHealth)
+        if(monsterPref.hp != currentHealth)
         {
-            currentHealth = this.GetComponent<Monster>().hp;
+            currentHealth = monsterPref.hp;
             HandleHealth();
         }
     }

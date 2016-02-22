@@ -56,8 +56,17 @@ public class EnemySkill : MonoBehaviour {
 		Animator animator=monster.GetComponent<Animator>();
 		if (GameObject.Find ("Player(Clone)") != null) {
 			Debug.Log ("Monster Attack");
-            GameObject.Find("GameManager").GetComponent<PlayerPrefs>().player.SetDamage (monster.GetComponent<Monster> ().attackDamage);
-			animator.SetTrigger ("Attack");
+            if (monster.GetComponent<Monster>().blinded)
+            {
+                animator.SetTrigger("Attack");
+                //Miss effect
+            }
+            else
+            {
+                GameObject.Find("GameManager").GetComponent<PlayerPrefs>().player.SetDamage (monster.GetComponent<Monster> ().attackDamage);
+			    animator.SetTrigger ("Attack");
+            }
+            
 		}
 	}
 

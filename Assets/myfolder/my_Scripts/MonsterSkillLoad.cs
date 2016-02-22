@@ -8,7 +8,7 @@ public class MonsterSkillLoad:MonoBehaviour
 
 	public TextAsset file;
 
-	void Awake(){
+	public void Initialize(){
 		Load (file);
 	}
 

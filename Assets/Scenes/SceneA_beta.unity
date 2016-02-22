@@ -826,7 +826,7 @@ Transform:
   m_LocalScale: {x: 2.5, y: 2.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
 --- !u!1001 &238953843
 Prefab:
   m_ObjectHideFlags: 0
@@ -1164,7 +1164,8 @@ Prefab:
       propertyPath: m_RootOrder
       value: 10
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11452020, guid: 0f1016d0b6c584698ad5efd818770f07, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 0f1016d0b6c584698ad5efd818770f07, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &316790477
@@ -5466,8 +5467,6 @@ GameObject:
   m_Component:
   - 224: {fileID: 1302277326}
   - 114: {fileID: 1302277325}
-  - 114: {fileID: 1302277324}
-  - 114: {fileID: 1302277323}
   - 114: {fileID: 1302277322}
   - 114: {fileID: 1302277327}
   - 114: {fileID: 1302277321}
@@ -5513,35 +5512,6 @@ MonoBehaviour:
   MonsterSkillPopupPrefab: {fileID: 180658, guid: 26a88d1aca40d794496919874d1a26a9,
     type: 2}
   sortinglayerID: 0
---- !u!114 &1302277323
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11456732, guid: d5d07b18bbf444fce92f4bacb4c346f3,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1302277320}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4cdb2c81baa53c4986c32472065f63e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AttackMode: 0
-  SelectedSkill: 0
-  SelectedChemistSkill: 0
-  isSkillInUse: 0
---- !u!114 &1302277324
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400056, guid: d5d07b18bbf444fce92f4bacb4c346f3,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1302277320}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b455cf37a08fc80488faac6efeaca236, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerPrefab: {fileID: 178922, guid: 1a4b2daf01621e64c836fb6222ddb153, type: 2}
 --- !u!114 &1302277325
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5554,6 +5524,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c744f0965e798f04fbbb1fe924134f58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  monsterPrefs: {fileID: 0}
+  playerPrefs: {fileID: 0}
   currentState: 0
   dustCount: 0
 --- !u!224 &1302277326
@@ -5585,6 +5557,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ab62701bdbba134ba3c5d6ce2e4c332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerPrefab: {fileID: 178922, guid: 1a4b2daf01621e64c836fb6222ddb153, type: 2}
   party: []
   currentEquipElement:
     id: 
@@ -5702,6 +5675,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0aa9847fa3d68e9438aca51ea06e7e97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  monsterPrefs: {fileID: 0}
   isSkillInUse: 0
   skillIndex: 0
 --- !u!1001 &1315539959
@@ -5711,44 +5685,44 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 405420, guid: e273f5987edec4bf8bd2b432129c12b1, type: 2}
+    - target: {fileID: 491112, guid: af2944e6bc14f2f44ae9fccf3bea8adb, type: 2}
       propertyPath: m_LocalPosition.x
       value: -3.60462666
       objectReference: {fileID: 0}
-    - target: {fileID: 405420, guid: e273f5987edec4bf8bd2b432129c12b1, type: 2}
+    - target: {fileID: 491112, guid: af2944e6bc14f2f44ae9fccf3bea8adb, type: 2}
       propertyPath: m_LocalPosition.y
       value: -.215162277
       objectReference: {fileID: 0}
-    - target: {fileID: 405420, guid: e273f5987edec4bf8bd2b432129c12b1, type: 2}
+    - target: {fileID: 491112, guid: af2944e6bc14f2f44ae9fccf3bea8adb, type: 2}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 405420, guid: e273f5987edec4bf8bd2b432129c12b1, type: 2}
+    - target: {fileID: 491112, guid: af2944e6bc14f2f44ae9fccf3bea8adb, type: 2}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 405420, guid: e273f5987edec4bf8bd2b432129c12b1, type: 2}
+    - target: {fileID: 491112, guid: af2944e6bc14f2f44ae9fccf3bea8adb, type: 2}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 405420, guid: e273f5987edec4bf8bd2b432129c12b1, type: 2}
+    - target: {fileID: 491112, guid: af2944e6bc14f2f44ae9fccf3bea8adb, type: 2}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 405420, guid: e273f5987edec4bf8bd2b432129c12b1, type: 2}
+    - target: {fileID: 491112, guid: af2944e6bc14f2f44ae9fccf3bea8adb, type: 2}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 405420, guid: e273f5987edec4bf8bd2b432129c12b1, type: 2}
+    - target: {fileID: 491112, guid: af2944e6bc14f2f44ae9fccf3bea8adb, type: 2}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 121880, guid: e273f5987edec4bf8bd2b432129c12b1, type: 2}
+    - target: {fileID: 117692, guid: af2944e6bc14f2f44ae9fccf3bea8adb, type: 2}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: e273f5987edec4bf8bd2b432129c12b1, type: 2}
+  m_ParentPrefab: {fileID: 100100000, guid: af2944e6bc14f2f44ae9fccf3bea8adb, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1321800820
 GameObject:
@@ -8764,6 +8738,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   file: {fileID: 4900000, guid: ebebbb8fb74c85e4c9288f1f0a648a64, type: 3}
+  monsterList: []
 --- !u!114 &2082784465
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8799,6 +8774,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1d023ae568ab3f41b42f681d55f0f30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2082784468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2082784460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fa26666c461a144ab03fe0c9a0dc737, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monsterPrefab: {fileID: 117692, guid: af2944e6bc14f2f44ae9fccf3bea8adb, type: 2}
+  monsterList: []
+  monsterObjectList: []
+  monsterDatabase: []
 --- !u!1 &2083048356 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 193612, guid: 689dd978bf288eb4bbc76c7daf98c767, type: 2}

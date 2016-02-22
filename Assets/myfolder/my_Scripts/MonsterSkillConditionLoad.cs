@@ -7,13 +7,10 @@ public class MonsterSkillConditionLoad:MonoBehaviour{
 
 	public TextAsset file;
 	
-	void Awake(){
+	public void Initialize(){
 		Load (file);
-
 	}
 
-
-	
 	List<MonsterSkillConditionRow> rowList = new List<MonsterSkillConditionRow>();
 	bool isLoaded = false;
 	

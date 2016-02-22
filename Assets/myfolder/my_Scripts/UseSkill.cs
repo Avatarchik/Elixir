@@ -6,9 +6,8 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 
 public class UseSkill : MonoBehaviour {
-    //private ChoosingManager choosingManager;
     private TurnBasedCombatStateMachine TBSMachine;
-
+    public MonsterPrefs monsterPrefs;
     //----SkillChosen Variables
     public bool isSkillInUse;
     public int skillIndex;
@@ -17,8 +16,10 @@ public class UseSkill : MonoBehaviour {
 
     //----Shared Variables
     baseCharacter player;
-    GameObject selectedEnemy;
-    List<GameObject> enemyList = new List<GameObject>();
+    //GameObject selectedEnemy;
+    //List<GameObject> enemyList = new List<GameObject>();
+    int selectedEnemyIndex;
+    List<int> enemyIndexList = new List<int>();
     GameObject selectedAlly;
     //----ChemistSkill Variables
     private bool isTargetEnemy;
@@ -33,6 +34,7 @@ public class UseSkill : MonoBehaviour {
         //choosingManager = GetComponent<ChoosingManager>();
         TBSMachine = GetComponent<TurnBasedCombatStateMachine>();
         player = GetComponent<PlayerPrefs>().player;
+        monsterPrefs = monsterPrefs = GameObject.Find("MonsterManager").GetComponent<MonsterPrefs>();
         isSkillInUse = false;
     }
 
@@ -120,7 +122,8 @@ public class UseSkill : MonoBehaviour {
                 ElementSkillToEnemy(1);
             }else if(targetRange == "Wide")
             {
-                ElementSkillToEnemy(enemyList.Count);
+                //ElementSkillToEnemy(enemyList.Count);
+                ElementSkillToEnemy(enemyIndexList.Count);
             }
         }
         else if (targetType == "All")
@@ -133,7 +136,8 @@ public class UseSkill : MonoBehaviour {
             }
             else if (targetRange == "Wide")
             {
-                ElementSkillToEnemy(enemyList.Count);
+                //ElementSkillToEnemy(enemyList.Count);
+                ElementSkillToEnemy(enemyIndexList.Count);
             }
         }
 
@@ -146,28 +150,11 @@ public class UseSkill : MonoBehaviour {
             attackedCritical = false;
         }
 
-        //----------
-        Debug.Log("Decrement Turn");
-        TBSMachine.decrementTurn();
-
-        if (TBSMachine.isTurnExhausted())
-        {
-            TBSMachine.currentState = TurnBasedCombatStateMachine.BattleStates.ENEMYCHOICE;
-            TBSMachine.resetTurn();
-
-            foreach (GameObject monster in GameObject.FindGameObjectsWithTag("Monster"))//Add all monsters in the selectedEnemy array
-            {
-                monster.GetComponent<Monster>().guarded = false;
-                monster.transform.Find("guardIcon").gameObject.SetActive(false);
-            }
-        }
-
         //---------
         ResetVariables();
         Button skillBtn = GameObject.Find("SkillPanel").transform.GetChild(skillIndex).GetComponent<Button>();
         skillBtn.GetComponent<Button>().interactable = false;
-        GameObject.Find("Button").GetComponent<ChemistSkill>().DisableButtons();
-        isSkillInUse = false;
+
         yield return null;
     }
 
@@ -195,26 +182,9 @@ public class UseSkill : MonoBehaviour {
             ChemistSkillToAlly();
         }
 
-        Debug.Log("Decrement Turn");
-        TBSMachine.decrementTurn();
-        
-        if (TBSMachine.isTurnExhausted())
-        {
-            TBSMachine.currentState = TurnBasedCombatStateMachine.BattleStates.ENEMYCHOICE;
-            TBSMachine.resetTurn();
-
-            foreach (GameObject monster in GameObject.FindGameObjectsWithTag("Monster"))//Add all monsters in the selectedEnemy array
-            {
-                monster.GetComponent<Monster>().guarded = false;
-                monster.transform.Find("guardIcon").gameObject.SetActive(false);
-            }
-        }
-
-
         Debug.Log("End Skill");
         ResetVariables();
-        GameObject.Find("Button").GetComponent<ChemistSkill>().DisableButtons();
-        isSkillInUse = false;
+        
         yield return null;
     }
 
@@ -293,7 +263,7 @@ public class UseSkill : MonoBehaviour {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit2D hit = Physics2D.GetRayIntersection(ray, Mathf.Infinity);
 
-                if(hit.collider != null && 
+                if (hit.collider != null &&
                     targetType == "Player" &&
                     hit.collider.gameObject.tag == "Ally")
                 {
@@ -306,15 +276,25 @@ public class UseSkill : MonoBehaviour {
                     hit.collider.gameObject.tag == "Monster")
                 {
                     Debug.Log("Enemy selected");
-                    selectedEnemy = hit.collider.gameObject;//Add the selected monster in the selectedEnemy array
-                    enemyList.Add(selectedEnemy);
+                    selectedEnemyIndex = hit.collider.gameObject.GetComponent<MonsterIndex>().MonsterID;
+                    enemyIndexList.Add(selectedEnemyIndex);
                     foreach (GameObject monster in GameObject.FindGameObjectsWithTag("Monster"))//Add all monsters in the selectedEnemy array
                     {
-                        if (monster != selectedEnemy)
+                        if (monster != hit.collider.gameObject)
                         {
-                            enemyList.Add(monster);
+                            enemyIndexList.Add(monster.GetComponent<MonsterIndex>().MonsterID);
                         }
                     }
+
+                    //selectedEnemy = hit.collider.gameObject;//Add the selected monster in the selectedEnemy array
+                    //enemyList.Add(selectedEnemy);
+                    //foreach (GameObject monster in GameObject.FindGameObjectsWithTag("Monster"))//Add all monsters in the selectedEnemy array
+                    //{
+                    //    if (monster != selectedEnemy)
+                    //    {
+                    //        enemyList.Add(monster);
+                    //    }
+                    //}
                     yield break;
                 }
                 else if (hit.collider != null &&
@@ -325,8 +305,12 @@ public class UseSkill : MonoBehaviour {
                     selectedAlly = hit.collider.gameObject;
                     foreach (GameObject monster in GameObject.FindGameObjectsWithTag("Monster"))//Add all monsters in the selectedEnemy array
                     {
-                        enemyList.Add(monster);
+                        enemyIndexList.Add(monster.GetComponent<MonsterIndex>().MonsterID);
                     }
+                    //foreach (GameObject monster in GameObject.FindGameObjectsWithTag("Monster"))//Add all monsters in the selectedEnemy array
+                    //{
+                    //    enemyList.Add(monster);
+                    //}
                     isTargetEnemy = false;
                     yield break;
                 }
@@ -336,15 +320,25 @@ public class UseSkill : MonoBehaviour {
                 {
                     Debug.Log("Enemy selected (All)");
                     selectedAlly = GameObject.FindGameObjectWithTag("Ally");
-                    selectedEnemy = hit.collider.gameObject;//Add the selected monster in the selectedEnemy array
-                    enemyList.Add(selectedEnemy);
+
+                    selectedEnemyIndex = hit.collider.gameObject.GetComponent<MonsterIndex>().MonsterID;
+                    enemyIndexList.Add(selectedEnemyIndex);
                     foreach (GameObject monster in GameObject.FindGameObjectsWithTag("Monster"))//Add all monsters in the selectedEnemy array
                     {
-                        if (monster != selectedEnemy)
+                        if (monster != hit.collider.gameObject)
                         {
-                            enemyList.Add(monster);
+                            enemyIndexList.Add(monster.GetComponent<MonsterIndex>().MonsterID);
                         }
                     }
+                    //selectedEnemy = hit.collider.gameObject;//Add the selected monster in the selectedEnemy array
+                    //enemyList.Add(selectedEnemy);
+                    //foreach (GameObject monster in GameObject.FindGameObjectsWithTag("Monster"))//Add all monsters in the selectedEnemy array
+                    //{
+                    //    if (monster != selectedEnemy)
+                    //    {
+                    //        enemyList.Add(monster);
+                    //    }
+                    //}
                     isTargetEnemy = true;
                     yield break;
                 }
@@ -366,15 +360,16 @@ public class UseSkill : MonoBehaviour {
 
         for (int i = 0; i < countArray; i++) //Repeat procedure for every selected enemies listed in selectedEnemy array
         {
-            if (enemyList[i].GetComponent<Monster>().currentChemicalState == criticalTarget)
+            Debug.Log(monsterPrefs.monsterList[enemyIndexList[i]].currentChemicalState);
+            if (monsterPrefs.monsterList[enemyIndexList[i]].currentChemicalState == criticalTarget)
             {
                 criticalRate = 1.5f;
                 
-                if (!enemyList[i].GetComponent<Monster>().guarded)
+                if (!monsterPrefs.monsterList[enemyIndexList[i]].guarded)
                 {
                     attackedCritical = true;
-                    enemyList[i].GetComponent<Monster>().guarded = true;
-                    enemyList[i].transform.Find("guardIcon").gameObject.SetActive(true);
+                    monsterPrefs.monsterList[enemyIndexList[i]].guarded = true;
+                    monsterPrefs.monsterObjectList[enemyIndexList[i]].transform.Find("guardIcon").gameObject.SetActive(true);
                 }
             }
             else
@@ -386,7 +381,7 @@ public class UseSkill : MonoBehaviour {
             if (currentSelectedSkill.Skill_AttackDamage > 0)
             {
                 Debug.Log("Player AD: " + player.AttackDamage + " 계수: " + currentSelectedSkill.Skill_AttackDamage);
-                enemyList[i].GetComponent<Monster>().SetDamage((int)((player.AttackDamage * currentSelectedSkill.Skill_AttackDamage /100) * criticalRate));
+                monsterPrefs.monsterList[enemyIndexList[i]].SetDamage((int)((player.AttackDamage * currentSelectedSkill.Skill_AttackDamage /100) * criticalRate));
             }
 
             //DotDamage
@@ -395,15 +390,15 @@ public class UseSkill : MonoBehaviour {
                 int DotDamageTurn = currentSelectedSkill.Skill_DotDamageTurn;
                 float DotDamage = currentSelectedSkill.Skill_DotDamage;
                 Debuff debuff = new Debuff(DebuffName.DoteDamage, DotDamageTurn, (int)(player.AttackDamage * DotDamage /100));
-                enemyList[i].GetComponent<Monster>().SetDamage((int)(player.AttackDamage * DotDamage / 100));//Inflict damage immediately in this turn                                                                              
-                enemyList[i].GetComponent<Monster>().AddDotDamage(debuff);//Add debuff to monster
+                monsterPrefs.monsterList[enemyIndexList[i]].SetDamage((int)(player.AttackDamage * DotDamage / 100));//Inflict damage immediately in this turn                                                                              
+                monsterPrefs.monsterList[enemyIndexList[i]].AddDotDamage(debuff);//Add debuff to monster
             }
 
             //Stun
             if (currentSelectedSkill.Skill_DebuffName == "Stun")
             {
                 stunRate = currentSelectedSkill.Skill_DebuffRate;
-                if (enemyList[i].GetComponent<Monster>().currentChemicalState == criticalTarget)
+                if (monsterPrefs.monsterList[enemyIndexList[i]].currentChemicalState == criticalTarget)
                 {
                     stunRate += 10f;
                 }
@@ -414,14 +409,14 @@ public class UseSkill : MonoBehaviour {
                 {
                     Debug.Log("Stun Success");
                     Debuff debuff = new Debuff(DebuffName.Stun, currentSelectedSkill.Skill_DebuffTurn);
-                    enemyList[i].GetComponent<Monster>().AddStun(debuff);
+                    monsterPrefs.monsterList[enemyIndexList[i]].AddStun(debuff);
                 }
             }
 
             if (currentSelectedSkill.Skill_DebuffName == "Silent")
             {
                 silentRate = currentSelectedSkill.Skill_DebuffRate;
-                if (enemyList[i].GetComponent<Monster>().currentChemicalState == criticalTarget)
+                if (monsterPrefs.monsterList[enemyIndexList[i]].currentChemicalState == criticalTarget)
                 {
                     silentRate += 10f;
                 }
@@ -432,14 +427,14 @@ public class UseSkill : MonoBehaviour {
                 {
                     Debug.Log("Silent Success");
                     Debuff debuff = new Debuff(DebuffName.Silent, currentSelectedSkill.Skill_DebuffTurn);
-                    enemyList[i].GetComponent<Monster>().AddSilent(debuff);
+                    monsterPrefs.monsterList[enemyIndexList[i]].AddSilent(debuff);
                 }
             }
 
             if (currentSelectedSkill.Skill_DebuffName == "Blind")
             {
                 blindRate = currentSelectedSkill.Skill_DebuffRate;
-                if (enemyList[i].GetComponent<Monster>().currentChemicalState == criticalTarget)
+                if (monsterPrefs.monsterList[enemyIndexList[i]].currentChemicalState == criticalTarget)
                 {
                     blindRate += 10f;
                 }
@@ -450,7 +445,7 @@ public class UseSkill : MonoBehaviour {
                 {
                     Debug.Log("Silent Success");
                     Debuff debuff = new Debuff(DebuffName.Blind, currentSelectedSkill.Skill_DebuffTurn);
-                    enemyList[i].GetComponent<Monster>().AddBlind(debuff);
+                    monsterPrefs.monsterList[enemyIndexList[i]].AddBlind(debuff);
                 }
             }
 
@@ -492,11 +487,11 @@ public class UseSkill : MonoBehaviour {
         //Increase or Decrease enemy ChemicalStateValue
         if (skillIndex == 3)
         {
-            enemyList[0].GetComponent<Monster>().DecrementCSVal();
+            monsterPrefs.monsterList[enemyIndexList[0]].DecrementCSVal();
         }
         else if (skillIndex == 4)
         {
-            enemyList[0].GetComponent<Monster>().IncrementCSVal();
+            monsterPrefs.monsterList[enemyIndexList[0]].IncrementCSVal();
         }
 
     }
@@ -518,7 +513,8 @@ public class UseSkill : MonoBehaviour {
 
     public void ResetVariables()
     {
-        enemyList.Clear();
+        //enemyList.Clear();
+        enemyIndexList.Clear();
 
         selectedAlly = null;
     //----ChemistSkill Variables
@@ -527,7 +523,31 @@ public class UseSkill : MonoBehaviour {
         currentSkillIndex = skillIndex;
         currentSelectedSkill = null;
         attackedCritical = false;
-}
+
+        //Decrement Turn
+        TBSMachine.decrementTurn();
+
+        if (TBSMachine.isTurnExhausted())
+        {
+            TBSMachine.currentState = TurnBasedCombatStateMachine.BattleStates.ENEMYCHOICE;
+            TBSMachine.resetTurn();
+
+            for(int i = 0; i < monsterPrefs.monsterList.Count; i++)
+            {
+                monsterPrefs.monsterList[i].guarded = false;
+                monsterPrefs.monsterObjectList[i].transform.Find("guardIcon").gameObject.SetActive(false);
+            }
+
+            //foreach (GameObject monster in GameObject.FindGameObjectsWithTag("Monster"))//Add all monsters in the selectedEnemy array
+            //{
+            //    monster.GetComponent<Monster>().guarded = false;
+            //    monster.transform.Find("guardIcon").gameObject.SetActive(false);
+            //}
+        }
+
+        GameObject.Find("Button").GetComponent<ChemistSkill>().DisableButtons();
+        isSkillInUse = false;
+    }
 
     public void StopCurrentCoroutines()
     {

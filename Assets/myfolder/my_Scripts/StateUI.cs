@@ -7,17 +7,20 @@ public class StateUI : MonoBehaviour {
     public GameObject Solid;
     public GameObject Liquid;
     public GameObject Gas;
+
+    private Monster monsterPref;
     // Use this for initialization
     void Start () {
-        currentState = gameObject.GetComponent<Monster>().currentChemicalState;
+        monsterPref = GameObject.Find("MonsterManager").GetComponent<MonsterPrefs>().monsterList[GetComponent<MonsterIndex>().MonsterID];
+        currentState = monsterPref.currentChemicalState;
         changeState();
     }
 	
 	// Update is called once per frame
 	void Update () {
-	if(gameObject.GetComponent<Monster>().currentChemicalState != currentState)
+	if(monsterPref.currentChemicalState != currentState)
         {
-            currentState = gameObject.GetComponent<Monster>().currentChemicalState;
+            currentState = monsterPref.currentChemicalState;
             changeState();
         }
 	}

@@ -4,8 +4,7 @@ using System.Collections.Generic;
 using EnumsAndClasses;
 
 public class Monster : MonoBehaviour {
-
-    public new SpriteRenderer renderer;
+    public int monsterID;
     public int maxHp;
     public int hp;
     public int attackDamage;
@@ -14,6 +13,7 @@ public class Monster : MonoBehaviour {
     public bool stunned;
     public bool silenced;
     public bool blinded;
+    public bool isDead;
 
     public ChemicalStates currentChemicalState;
     public int currentChemicalStateValue;
@@ -22,61 +22,31 @@ public class Monster : MonoBehaviour {
     public int gasStateValue;
     public ChemicalStates criticalTarget;
 
+    public MonsterPrefs monsterPrefs;
 	public baseMonster monsterInfo;
 
-    List<Buff> buffs = new List<Buff>();
-    List<Debuff> debuffs = new List<Debuff>();
+    List<Debuff> stunList;
+    List<Debuff> dotDamageList;
+    List<Debuff> silentList;
+    List<Debuff> blindList;
 
-    List<Debuff> stunList = new List<Debuff>();
-    List<Debuff> dotDamageList = new List<Debuff>();
-    List<Debuff> silentList = new List<Debuff>();
-    List<Debuff> blindList = new List<Debuff>();
-
-    void Update(){
-		if (hp <= 0) {
-			Dead();
-		}
-	}
-
-    // Apply default stats.
-    public void SetStat ()
+    public void Initialize()
     {
-        baseMonster monsterInfo = this.GetComponent<InfoMonster>().MonsterInfo;
-        string imagePath = "MonsterImage/" + monsterInfo.Mon_Name;
-        Debug.Log("image : " + imagePath);
-        this.renderer.sprite = Resources.Load(imagePath, typeof(Sprite)) as Sprite;
-        
-        //this.maxHp = monsterInfo.Mon_HP;
-        //this.hp = monsterInfo.Mon_HP;
-        this.maxHp = 100;
-        this.hp = 100;
-        this.attackDamage = (int)monsterInfo.Mon_AttackDamage;
-        this.type = monsterInfo.Mon_Type;
+        monsterPrefs = GameObject.Find("MonsterManager").GetComponent<MonsterPrefs>();
+        monsterInfo = monsterPrefs.monsterDatabase[monsterID];
+
         this.guarded = false;
         this.stunned = false;
         this.silenced = false;
         this.blinded = false;
-        this.currentChemicalState = monsterInfo.Mon_RoomTempStatus;
-        this.currentChemicalStateValue = 1;
-        this.solidStateValue = monsterInfo.Mon_SolidGauge;
-        this.liquidStateValue = monsterInfo.Mon_LiquidGauge;
-        this.gasStateValue = monsterInfo.Mon_GasGauge;
-        this.criticalTarget = monsterInfo.Mon_CriticalTarget;
+        this.isDead = false;
+
+        stunList = new List<Debuff>();
+        dotDamageList = new List<Debuff>();
+        silentList = new List<Debuff>();
+        blindList = new List<Debuff>();
     }
-    
-    public void SetStat (int hp, int attackDamage, string type, int boilingPoint, int meltingPoint)
-    {
-        this.maxHp = hp;
-        this.hp = maxHp;
-        this.attackDamage = attackDamage;
-        this.type = type;
-    }
-    public void SetStat (string imagePath, int hp, int attackDamage, string type, int boilingPoint, int meltingPoint)
-    {
-        this.renderer.sprite = Resources.Load(imagePath, typeof(Sprite)) as Sprite;
-        SetStat(hp, attackDamage, type, boilingPoint, meltingPoint);
-    }
-    
+
 	public void SetHeal(int heal){
 		hp += heal;
 		if (hp > maxHp) {
@@ -88,8 +58,12 @@ public class Monster : MonoBehaviour {
     public void SetDamage(int damage)
     {
         hp -= damage;
-        if (hp < 0)
+        if (hp <= 0) {
             hp = 0;
+            isDead = true;
+            Dead();
+        }
+            
         Debug.Log("Get " + damage + " damage by player");
     }
 
@@ -159,20 +133,11 @@ public class Monster : MonoBehaviour {
                 break;
         }
     }
-	public int DebuffListCount(){
-		return debuffs.Count;
-	}
-	public int BuffListCount(){
-		return buffs.Count;
-	}
-	public int DotDamageListCount(){
-		return dotDamageList.Count;
-	}
 
     // Stun Implementation
     public void AddStun(Debuff stun)
     {
-        this.transform.Find("stun").gameObject.SetActive(true);
+        monsterPrefs.monsterObjectList[monsterID].transform.Find("stun").gameObject.SetActive(true);
         stunned = true;
         stunList.Add(stun);
     }
@@ -194,11 +159,11 @@ public class Monster : MonoBehaviour {
         debuffsToDestroy.Clear();
         if (stunList.Count >= 1)
         {
-            this.transform.Find("stun").gameObject.SetActive(true);
+            monsterPrefs.monsterObjectList[monsterID].transform.Find("stun").gameObject.SetActive(true);
         }
         else
         {
-            this.transform.Find("stun").gameObject.SetActive(false);
+            monsterPrefs.monsterObjectList[monsterID].transform.Find("stun").gameObject.SetActive(false);
         }
     }
     public void ActivateStun()
@@ -220,7 +185,7 @@ public class Monster : MonoBehaviour {
     // DotDamage Implementation
     public void AddDotDamage(Debuff dotDamage)
     {
-        this.transform.Find("dotDamageIcon").gameObject.SetActive(true);
+        monsterPrefs.monsterObjectList[monsterID].transform.Find("dotDamageIcon").gameObject.SetActive(true);
         dotDamageList.Add(dotDamage);
     }
     public void ReduceDotDamageTurn()
@@ -241,11 +206,11 @@ public class Monster : MonoBehaviour {
         debuffsToDestroy.Clear();
         if (dotDamageList.Count >= 1)
         {
-            this.transform.Find("dotDamageIcon").gameObject.SetActive(true);
+            monsterPrefs.monsterObjectList[monsterID].transform.Find("dotDamageIcon").gameObject.SetActive(true);
         }
         else
         {
-            this.transform.Find("dotDamageIcon").gameObject.SetActive(false);
+            monsterPrefs.monsterObjectList[monsterID].transform.Find("dotDamageIcon").gameObject.SetActive(false);
         }
     }
     public void ActivateDotDamage()
@@ -268,7 +233,7 @@ public class Monster : MonoBehaviour {
     //Silent
     public void AddSilent(Debuff silent)
     {
-        //this.transform.Find("stun").gameObject.SetActive(true);
+        //monsterPrefs.monsterObjectList[monsterID].transform.Find("stun").gameObject.SetActive(true);
         silenced = true;
         silentList.Add(silent);
     }
@@ -290,11 +255,11 @@ public class Monster : MonoBehaviour {
         debuffsToDestroy.Clear();
         if (silentList.Count >= 1)
         {
-            //this.transform.Find("stun").gameObject.SetActive(true);
+            //monsterPrefs.monsterObjectList[monsterID].transform.Find("stun").gameObject.SetActive(true);
         }
         else
         {
-            //this.transform.Find("stun").gameObject.SetActive(false);
+            //monsterPrefs.monsterObjectList[monsterID].transform.Find("stun").gameObject.SetActive(false);
         }
     }
     public void ActivateSilent()
@@ -316,7 +281,7 @@ public class Monster : MonoBehaviour {
     //Blind
     public void AddBlind(Debuff silent)
     {
-        //this.transform.Find("stun").gameObject.SetActive(true);
+        //monsterPrefs.monsterObjectList[monsterID].transform.Find("stun").gameObject.SetActive(true);
         blinded = true;
         blindList.Add(silent);
     }
@@ -338,11 +303,11 @@ public class Monster : MonoBehaviour {
         debuffsToDestroy.Clear();
         if (blindList.Count >= 1)
         {
-            //this.transform.Find("stun").gameObject.SetActive(true);
+            //monsterPrefs.monsterObjectList[monsterID].transform.Find("stun").gameObject.SetActive(true);
         }
         else
         {
-            //this.transform.Find("stun").gameObject.SetActive(false);
+            //monsterPrefs.monsterObjectList[monsterID].transform.Find("stun").gameObject.SetActive(false);
         }
     }
     public void ActivateBlind()
@@ -361,149 +326,12 @@ public class Monster : MonoBehaviour {
         blindList.Clear();
     }
 
-
-    public void AddBuff(Buff buff)
-    { }
-    public void AddDebuff(Debuff debuff)
-    { }
-    public void ReduceBuffTurn()
-    { }
-    public void ReduceDebuffTurn()
-    { }
-    public void ActivateBuff()
-    { }
-    public void ActivateDebuff()
-    { }
-    public void RemoveBuff()
-    { }
-    public void RemoveDebuff()
-    { }
-        /*
-        public void AddBuff(Buff buff)
-        {
-            buffs.Add(buff);
-            Debug.Log("Add buff to monster");
-            //PrintAllBuffAndDebuff();
-        }
-
-        public void AddDebuff(Debuff debuff)
-        {
-            debuffs.Add(debuff);
-            Debug.Log("Add debuff to monster");
-            //PrintAllBuffAndDebuff();
-        }
-
-        public void ReduceDebuffTurn()
-        {
-            foreach(Debuff debuff in debuffs)
-            {
-                debuff.RemainTurn--;
-                Debug.Log("Debuff turn remaining: " + debuff.RemainTurn);
-            }
-        }
-
-        public void ActivateDebuff()
-        {
-            bool tempStun= false;
-            bool tempDotDamage = false;
-            foreach (Debuff debuff in debuffs)
-            {
-
-                if(debuff.GetDebuffname().Equals(DebuffName.DoteDamage))//Activate Dot Damage
-                {
-                    Debug.Log("This Debuff is Dot Damage");
-                    SetDamage(debuff.DebuffDamage);
-                    tempDotDamage = true;
-                    if(hp <= 0)
-                    {
-                        Destroy(this.gameObject);
-                    }
-                }
-
-                if (debuff.GetDebuffname().Equals(DebuffName.Stun))
-                {
-                    //Stun Enemy
-                    tempStun = true;
-                }
-            }
-            if (tempStun)
-            {
-                this.transform.Find("stun").gameObject.SetActive(true);
-                stunned = true;
-            }
-            else
-            {
-                this.transform.Find("stun").gameObject.SetActive(false);
-                stunned = false;
-            }
-            if (tempDotDamage)
-            {
-                this.transform.Find("dotDamageIcon").gameObject.SetActive(true);
-            }
-            else
-            {
-                this.transform.Find("dotDamageIcon").gameObject.SetActive(false);
-            }
-        }
-
-        public void RemoveBuff()
-        {
-            //NotImplemented
-        }
-
-        public void RemoveAllBuff()
-        {
-            buffs = new List<Buff>();
-            Debug.Log("All buffs are removed");
-        }
-
-        public void RemoveDebuff()
-        {
-            List<Debuff> debuffsToDestroy = new List<Debuff>();
-            foreach (Debuff debuff in debuffs)
-            {
-                if (debuff.RemainTurn == 0)
-                {
-                    debuffsToDestroy.Add(debuff);
-                }
-            }
-            foreach (Debuff debuffToDestroy in debuffsToDestroy)
-            {
-                debuffs.Remove(debuffToDestroy);
-            }
-            debuffsToDestroy.Clear();
-        }
-
-        public void RemoveAllDebuff()
-        {
-            debuffs = new List<Debuff>();
-            Debug.Log("All debuffs are removed");
-        }
-        */
-        // using test.
-        void PrintAllBuffAndDebuff()
-    {
-        string buffList = "Buff : ";
-        foreach (var buff in buffs)
-        {
-            buffList += buff.GetBuffname().ToString();
-            buffList += ", ";
-        }
-        Debug.Log(buffList);
-        
-        string debuffList = "Debuff : ";
-        foreach (var debuff in debuffs)
-        {
-            debuffList += debuff.GetDebuffname().ToString();
-            debuffList += ", ";
-        }
-        Debug.Log(debuffList);
-    }
-
 	public void Dead(){
-        GameObject.Find("GameManager").GetComponent<TurnBasedCombatStateMachine>().dustCount += this.gameObject.GetComponent<InfoMonster>().MonsterInfo.Mon_GoldRate;
-		Destroy (this.gameObject);
-		Debug.Log (this + " is Dead.");
+        Debug.Log(monsterInfo.Mon_GoldRate);
+        GameObject.Find("GameManager").GetComponent<TurnBasedCombatStateMachine>().dustCount += monsterInfo.Mon_GoldRate;
+        //Destroy (this.gameObject);
+        monsterPrefs.monsterObjectList[monsterID].SetActive(false);
+        Debug.Log (this + " is Dead.");
 	}
 	// Use this for initialization
 	void Start () {

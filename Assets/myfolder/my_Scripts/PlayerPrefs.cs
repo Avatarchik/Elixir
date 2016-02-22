@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class PlayerPrefs : MonoBehaviour {
+    public GameObject PlayerPrefab;
+
     public List<Element> party = new List<Element>();
     public Element currentEquipElement;
     public int currentEquipElementIndex;
@@ -45,8 +47,17 @@ public class PlayerPrefs : MonoBehaviour {
         player.AttackDamage = 10;
 
         SetPlayerInfo();
+
+        GeneratePlayer();
     }
-	
+
+    public void GeneratePlayer()
+    {
+        Vector3 PlayerPosition = new Vector3(-4.36f, 1.35f, 0);
+        GameObject Player = Instantiate(PlayerPrefab);
+        Player.transform.position = PlayerPosition;
+    }
+
     public void SetPlayerInfo()
     {
         //Change player's stats according to current element

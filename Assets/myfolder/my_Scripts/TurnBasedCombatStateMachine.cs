@@ -2,8 +2,12 @@
 using System.Collections;
 using EnumsAndClasses;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class TurnBasedCombatStateMachine : MonoBehaviour {
+
+    public MonsterPrefs monsterPrefs;
+    public PlayerPrefs playerPrefs;
 
 	GameObject card1;
     public BattleStates currentState;
@@ -44,14 +48,21 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
     }
 
 	void Start () {
-		currentState = BattleStates.START;
+        monsterPrefs = GameObject.Find("MonsterManager").GetComponent<MonsterPrefs>();
+        playerPrefs = GetComponent<PlayerPrefs>();
+
+        currentState = BattleStates.START;
         //Load Databases
         GetComponent<Loader>().Load();
         GetComponent<SkillLoader>().Load();
         //Initialize Player and Monster
         GetComponent<PlayerPrefs>().Initialize(); //Set Player's initial stats
-        GetComponent<AllyManager>().GeneratePlayer(); //Summon player into field
-        GameObject.Find("MonsterManager").GetComponent<MonsterManager>().Initialize(); //Summon monsters into field
+        //GetComponent<AllyManager>().GeneratePlayer(); //Summon player into field
+        GameObject.Find("MonsterManager").GetComponent<MonsterSkillLoad>().Initialize();
+        GameObject.Find("MonsterManager").GetComponent<MonsterSkillConditionLoad>().Initialize();
+        GameObject.Find("MonsterManager").GetComponent<MonsterLoad>().Initialize();
+        GameObject.Find("MonsterManager").GetComponent<MonsterPrefs>().Initialize();
+        //GameObject.Find("MonsterManager").GetComponent<MonsterManager>().Initialize(); //Summon monsters into field
     }
 	
 	void Update () {
@@ -67,20 +78,20 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
 			    break;
 		    case (BattleStates.PLAYERCHOICE):
                 //Reduce enemy stun counter after EnemyTurn
-                GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
-                foreach (GameObject monster in monsters)
+                foreach(Monster monster in monsterPrefs.monsterList)
                 {
-                    monster.GetComponent<Monster>().ReduceStunTurn();
-                    monster.GetComponent<Monster>().ActivateStun();
-                    monster.GetComponent<Monster>().ReduceDotDamageTurn();
+                    monster.ReduceStunTurn();
+                    monster.ActivateStun();
+                    monster.ReduceDotDamageTurn();
                 }
 
-                GetComponent<PlayerPrefs>().player.ActivateDodge();
-                GetComponent<PlayerPrefs>().player.ReduceDodgeTurn();
-                GetComponent<PlayerPrefs>().player.RemoveDodge();
+                playerPrefs.player.ActivateDodge();
+                playerPrefs.player.ReduceDodgeTurn();
+                playerPrefs.player.RemoveDodge();
 
-                GetComponent<PlayerTurn>().GetSkills();
                 currentState = BattleStates.IDLE;
+                GetComponent<PlayerTurn>().GetSkills();
+                
                 break;
 		    case (BattleStates.ENEMYCHOICE):
                 Debug.Log("Enemy Turn Reached");
@@ -93,15 +104,15 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
                 GameObject.Find("Button").GetComponent<Button>().interactable = false;
                 GameObject.Find("Button").GetComponent<ChemistSkill>().DisableButtons();
 
-
-                GameObject[] monsters2 = GameObject.FindGameObjectsWithTag("Monster");
-                foreach (GameObject monster in monsters2)
+                foreach (Monster monster in monsterPrefs.monsterList)
                 {
-                    monster.GetComponent<Monster>().ActivateDotDamage();
+                    monster.ActivateDotDamage();
                 }
-                
-                StartCoroutine(GameObject.Find ("MonsterManager").GetComponent<EnemyAI>().EnemyActChoice(GameObject.FindGameObjectsWithTag("Monster")));
+
+                //StartCoroutine(GameObject.Find ("MonsterManager").GetComponent<EnemyAI>().EnemyActChoice(GameObject.FindGameObjectsWithTag("Monster")));
                 currentState = BattleStates.IDLE;
+                StartCoroutine(GameObject.Find("MonsterManager").GetComponent<EnemyAI>().EnemyActChoice());
+                
                 break;
             case (BattleStates.IDLE):
                 break;

@@ -6,12 +6,12 @@ using EnumsAndClasses;
 public class MonsterLoad:MonoBehaviour
 {
 	public TextAsset file;
-	public List<baseMonster> monsterList = new List<baseMonster>();
+	public List<baseMonster> monsterList;
 
-	void Awake()
+	public void Initialize()
 	{
+        monsterList = new List<baseMonster>();
 		Load(file);
-		monsterList = new List<baseMonster>();
 		ListSetting();
 		
 	}
