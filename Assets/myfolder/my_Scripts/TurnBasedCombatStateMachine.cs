@@ -11,7 +11,7 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
 
 	GameObject card1;
     public BattleStates currentState;
-    private int turnCount = 2;
+    public int turnCount = 2;
     public int dustCount = 0;
 
 	public enum BattleStates{
@@ -73,21 +73,32 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
         //}
 		switch (currentState) {
 		    case (BattleStates.START):
-
 			    currentState=BattleStates.PLAYERCHOICE;
 			    break;
 		    case (BattleStates.PLAYERCHOICE):
-                //Reduce enemy stun counter after EnemyTurn
-                foreach(Monster monster in monsterPrefs.monsterList)
-                {
-                    monster.ReduceStunTurn();
-                    monster.ActivateStun();
-                    monster.ReduceDotDamageTurn();
-                }
-
-                playerPrefs.player.ActivateDodge();
+                //Reduce player buff
                 playerPrefs.player.ReduceDodgeTurn();
-                playerPrefs.player.RemoveDodge();
+                playerPrefs.player.ReduceImmuneCriticalTargetTurn();
+                playerPrefs.player.ReduceDebuffImmuneTurn();
+                playerPrefs.player.ReduceGuardStateChangeTurn();
+                playerPrefs.player.ReduceImmuneHeatTurn();
+                playerPrefs.player.ReduceDamageResistanceTurn();
+                playerPrefs.player.ReduceDotHealTurn();
+
+                playerPrefs.player.ActivateDotHeal();
+
+                //Activate player debuff
+                playerPrefs.player.ActivateDotDamage();
+                playerPrefs.player.ActivateActionLimit();
+
+                //Reduce enemy debuff
+                for(int i = 0; i < monsterPrefs.monsterList.Count; i++)
+                {
+                    monsterPrefs.monsterList[i].ReduceDotDamageTurn();
+                    monsterPrefs.monsterList[i].ReduceStunTurn();
+                    monsterPrefs.monsterList[i].ReduceBlindTurn();
+                    monsterPrefs.monsterList[i].ReduceSilentTurn();
+                }
 
                 currentState = BattleStates.IDLE;
                 GetComponent<PlayerTurn>().GetSkills();
@@ -96,6 +107,7 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
 		    case (BattleStates.ENEMYCHOICE):
                 Debug.Log("Enemy Turn Reached");
 
+                //Deactivate player UI
                 GameObject skillPanel = GameObject.Find("SkillPanel");
                 for (int i = 0; i < skillPanel.transform.childCount; i++)
                 {
@@ -104,12 +116,25 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
                 GameObject.Find("Button").GetComponent<Button>().interactable = false;
                 GameObject.Find("Button").GetComponent<ChemistSkill>().DisableButtons();
 
-                foreach (Monster monster in monsterPrefs.monsterList)
+                //Reduce enemy buff
+                for (int i = 0; i < monsterPrefs.monsterList.Count; i++)
                 {
-                    monster.ActivateDotDamage();
+                    monsterPrefs.monsterList[i].ReduceShieldTurn();
                 }
 
-                //StartCoroutine(GameObject.Find ("MonsterManager").GetComponent<EnemyAI>().EnemyActChoice(GameObject.FindGameObjectsWithTag("Monster")));
+                //Activate enemy debuff
+                for (int i = 0; i < monsterPrefs.monsterList.Count; i++)
+                {
+                    monsterPrefs.monsterList[i].ActivateDotDamage();
+                }
+
+                //Reduce Player debuff
+                playerPrefs.player.ReduceDotDamageTurn();
+                playerPrefs.player.ReduceActionLimitTurn();
+
+                
+
+
                 currentState = BattleStates.IDLE;
                 StartCoroutine(GameObject.Find("MonsterManager").GetComponent<EnemyAI>().EnemyActChoice());
                 

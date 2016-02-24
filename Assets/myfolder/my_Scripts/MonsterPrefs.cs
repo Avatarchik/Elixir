@@ -8,6 +8,7 @@ public class MonsterPrefs : MonoBehaviour {
     public List<Monster> monsterList;
     public List<GameObject> monsterObjectList;
     public List<baseMonster> monsterDatabase;
+
     public void Initialize()
     {
         monsterList = new List<Monster>();
@@ -18,6 +19,7 @@ public class MonsterPrefs : MonoBehaviour {
         monsterList.Add(SetStats(1));
         monsterList.Add(SetStats(2));
         monsterList.Add(SetStats(3));
+
         Debug.Log(monsterList[0].maxHp);
         //Summon Monsters into field
         GenerateMonsters();

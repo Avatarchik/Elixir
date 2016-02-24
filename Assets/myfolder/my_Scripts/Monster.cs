@@ -2,17 +2,22 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using EnumsAndClasses;
+[System.Serializable]
 
-public class Monster : MonoBehaviour {
+public class Monster{
     public int monsterID;
     public int maxHp;
     public int hp;
     public int attackDamage;
     public string type;
     public bool guarded;
+    //Buff
+    public bool shielded;
+    //Debuff
     public bool stunned;
     public bool silenced;
     public bool blinded;
+    
     public bool isDead;
 
     public ChemicalStates currentChemicalState;
@@ -25,10 +30,13 @@ public class Monster : MonoBehaviour {
     public MonsterPrefs monsterPrefs;
 	public baseMonster monsterInfo;
 
-    List<Debuff> stunList;
-    List<Debuff> dotDamageList;
-    List<Debuff> silentList;
-    List<Debuff> blindList;
+    //Buff
+    public Buff shield;
+    //Debuff
+    public Debuff stun;
+    public List<Debuff> dotDamageList;
+    public Debuff silent;
+    public Debuff blind;
 
     public void Initialize()
     {
@@ -41,10 +49,10 @@ public class Monster : MonoBehaviour {
         this.blinded = false;
         this.isDead = false;
 
-        stunList = new List<Debuff>();
+        stun = null;
         dotDamageList = new List<Debuff>();
-        silentList = new List<Debuff>();
-        blindList = new List<Debuff>();
+        silent = null;
+        blind = null;
     }
 
 	public void SetHeal(int heal){
@@ -53,18 +61,121 @@ public class Monster : MonoBehaviour {
 			hp = maxHp;
 		}
 	}
-
-
+    public void SetHeal(int heal, ChemicalStates critical)
+    {
+        if(this.currentChemicalState == critical)
+        {
+            hp += (int)(heal * 1.5f);
+        }
+        else
+        {
+            hp += heal;
+        }
+        
+        if (hp > maxHp)
+        {
+            hp = maxHp;
+        }
+    }
     public void SetDamage(int damage)
     {
-        hp -= damage;
-        if (hp <= 0) {
-            hp = 0;
-            isDead = true;
-            Dead();
+        if (shielded)
+        {
+            Debug.Log("This monster is shielded");
+            RemoveShield();
+            shielded = false;
         }
-            
+        else
+        {
+            hp -= damage;
+            if (hp <= 0) {
+                hp = 0;
+                Dead();
+            }
+        }
+
         Debug.Log("Get " + damage + " damage by player");
+    }
+    public void SetDamage(int damage, ChemicalStates critical)
+    {
+        if (shielded)
+        {
+            Debug.Log("This monster is shielded");
+            RemoveShield();
+            shielded = false;
+        }
+        else
+        {
+            if(this.currentChemicalState == critical)
+            {
+                hp -= (int)(damage * 1.5f);
+            }
+            else
+            {
+                hp -= damage;
+            }
+            if (hp <= 0)
+            {
+                hp = 0;
+                Dead();
+            }
+        }
+        Debug.Log("Get " + damage + " damage by player");
+    }
+
+    public void ChangeState(ChemicalStates chemicalState)
+    {
+        switch (chemicalState)
+        {
+            case ChemicalStates.SOLID:
+                switch (this.currentChemicalState)
+                {
+                    case ChemicalStates.SOLID:
+                        Debug.Log("Do nothing");
+                        break;
+                    case ChemicalStates.LIQUID:
+                        this.currentChemicalState = ChemicalStates.SOLID;
+                        this.currentChemicalStateValue = this.solidStateValue;
+                        break;
+                    case ChemicalStates.GAS:
+                        this.currentChemicalState = ChemicalStates.SOLID;
+                        this.currentChemicalStateValue = this.solidStateValue;
+                        break;
+                }
+                break;
+            case ChemicalStates.LIQUID:
+                switch (this.currentChemicalState)
+                {
+                    case ChemicalStates.SOLID:
+                        this.currentChemicalState = ChemicalStates.LIQUID;
+                        this.currentChemicalStateValue = 1;
+                        break;
+                    case ChemicalStates.LIQUID:
+                        Debug.Log("Do nothing");
+                        break;
+                    case ChemicalStates.GAS:
+                        this.currentChemicalState = ChemicalStates.LIQUID;
+                        this.currentChemicalStateValue = this.liquidStateValue;
+                        break;
+                }
+                break;
+            case ChemicalStates.GAS:
+                switch (this.currentChemicalState)
+                {
+                    case ChemicalStates.SOLID:
+                        this.currentChemicalState = ChemicalStates.GAS;
+                        this.currentChemicalStateValue = 1;
+                        break;
+                    case ChemicalStates.LIQUID:
+                        this.currentChemicalState = ChemicalStates.GAS;
+                        this.currentChemicalStateValue = 1;
+                        break;
+                    case ChemicalStates.GAS:
+                        Debug.Log("Do nothing");
+                        break;
+                }
+                break;
+        }
     }
 
     //Chemical State
@@ -134,43 +245,111 @@ public class Monster : MonoBehaviour {
         }
     }
 
-    // Stun Implementation
-    public void AddStun(Debuff stun)
+    public bool isBuffPresent()
     {
-        monsterPrefs.monsterObjectList[monsterID].transform.Find("stun").gameObject.SetActive(true);
-        stunned = true;
-        stunList.Add(stun);
+        return (shield != null);
     }
-    public void ReduceStunTurn()
+    public bool isDebuffPresent()
     {
-        List<Debuff> debuffsToDestroy = new List<Debuff>();
-        foreach (Debuff stun in stunList)
+        return (stun != null) || (dotDamageList.Count != 0) || (silent != null) || (blind != null);
+    }
+
+    public void AddBuff(Buff buff)
+    {
+        switch (buff.GetBuffname())
         {
-            stun.RemainTurn--;
-            if (stun.RemainTurn <= 0)
-            {
-                debuffsToDestroy.Add(stun);
-            }
+            case BuffName.Shield:
+                shield = buff;
+                shielded = true;
+                break;
+            default:
+                Debug.Log("No corresponding buff");
+                break;
         }
-        foreach (Debuff debuffToDestroy in debuffsToDestroy)
+    }
+
+    public void AddDebuff(Debuff debuff)
+    {
+        switch (debuff.GetDebuffname())
         {
-            stunList.Remove(debuffToDestroy);
+            case DebuffName.Stun:
+                monsterPrefs.monsterObjectList[monsterID].transform.Find("stun").gameObject.SetActive(true);
+                stun = debuff;
+                stunned = true;
+                break;
+            case DebuffName.DoteDamage:
+                monsterPrefs.monsterObjectList[monsterID].transform.Find("dotDamageIcon").gameObject.SetActive(true);
+                dotDamageList.Add(debuff);
+                break;
+            case DebuffName.Blind:
+                blind = debuff;
+                blinded = true;
+                break;
+            case DebuffName.Silent:
+                silent = debuff;
+                silenced = true;
+                break;
+            default:
+                Debug.Log("No corresponding debuff");
+                break;
         }
-        debuffsToDestroy.Clear();
-        if (stunList.Count >= 1)
+    }
+
+    //Shield Implementation
+    public void ReduceShieldTurn()
+    {
+        if (shield == null)
         {
-            monsterPrefs.monsterObjectList[monsterID].transform.Find("stun").gameObject.SetActive(true);
+            return;
+        }
+        if (shield != null)
+        {
+            shield.RemainTurn--;
+        }
+        if (shield.RemainTurn == 0)
+        {
+            shield = null;
+            shielded = false;
+        }
+    }
+    public void ActivateShield()
+    {
+        if (shield != null)
+        {
+
         }
         else
         {
-            monsterPrefs.monsterObjectList[monsterID].transform.Find("stun").gameObject.SetActive(false);
+            shielded = false;
+        }
+    }
+    public void RemoveShield()
+    {
+        shield = null;
+    }
+
+    // Stun Implementation
+    public void ReduceStunTurn()
+    {
+        if(stun == null)
+        {
+            return;
+        }
+        if (stun != null)
+        {
+            stun.RemainTurn--;
+        }
+        if (stun.RemainTurn == 0)
+        {
+            stun = null;
+            stunned = false;
         }
     }
     public void ActivateStun()
     {
-        if(stunList.Count >= 1)
+        if(stun != null)
         {
-            stunned = true;
+
         }
         else
         {
@@ -179,15 +358,10 @@ public class Monster : MonoBehaviour {
     }
     public void RemoveStun()
     {
-        stunList.Clear();
+        stun = null;
     }
 
     // DotDamage Implementation
-    public void AddDotDamage(Debuff dotDamage)
-    {
-        monsterPrefs.monsterObjectList[monsterID].transform.Find("dotDamageIcon").gameObject.SetActive(true);
-        dotDamageList.Add(dotDamage);
-    }
     public void ReduceDotDamageTurn()
     {
         List<Debuff> debuffsToDestroy = new List<Debuff>();
@@ -227,44 +401,29 @@ public class Monster : MonoBehaviour {
     }
     public void RemoveDotDamage()
     {
-        stunList.Clear();
+        dotDamageList.Clear();
     }
 
     //Silent
-    public void AddSilent(Debuff silent)
-    {
-        //monsterPrefs.monsterObjectList[monsterID].transform.Find("stun").gameObject.SetActive(true);
-        silenced = true;
-        silentList.Add(silent);
-    }
     public void ReduceSilentTurn()
     {
-        List<Debuff> debuffsToDestroy = new List<Debuff>();
-        foreach (Debuff silent in silentList)
+        if (silent == null)
+        {
+            return;
+        }
+        if (silent != null)
         {
             silent.RemainTurn--;
-            if (silent.RemainTurn <= 0)
-            {
-                debuffsToDestroy.Add(silent);
-            }
         }
-        foreach (Debuff debuffToDestroy in debuffsToDestroy)
+        if (silent.RemainTurn == 0)
         {
-            silentList.Remove(debuffToDestroy);
-        }
-        debuffsToDestroy.Clear();
-        if (silentList.Count >= 1)
-        {
-            //monsterPrefs.monsterObjectList[monsterID].transform.Find("stun").gameObject.SetActive(true);
-        }
-        else
-        {
-            //monsterPrefs.monsterObjectList[monsterID].transform.Find("stun").gameObject.SetActive(false);
+            silent = null;
+            silenced = false;
         }
     }
     public void ActivateSilent()
     {
-        if (silentList.Count >= 1)
+        if (silent != null)
         {
             silenced = true;
         }
@@ -275,46 +434,31 @@ public class Monster : MonoBehaviour {
     }
     public void RemoveSilent()
     {
-        silentList.Clear();
+        silent = null;
     }
 
     //Blind
-    public void AddBlind(Debuff silent)
-    {
-        //monsterPrefs.monsterObjectList[monsterID].transform.Find("stun").gameObject.SetActive(true);
-        blinded = true;
-        blindList.Add(silent);
-    }
     public void ReduceBlindTurn()
     {
-        List<Debuff> debuffsToDestroy = new List<Debuff>();
-        foreach (Debuff blind in blindList)
+        if (blind == null)
+        {
+            return;
+        }
+        if (blind != null)
         {
             blind.RemainTurn--;
-            if (blind.RemainTurn <= 0)
-            {
-                debuffsToDestroy.Add(blind);
-            }
         }
-        foreach (Debuff debuffToDestroy in debuffsToDestroy)
+        if (blind.RemainTurn == 0)
         {
-            blindList.Remove(debuffToDestroy);
-        }
-        debuffsToDestroy.Clear();
-        if (blindList.Count >= 1)
-        {
-            //monsterPrefs.monsterObjectList[monsterID].transform.Find("stun").gameObject.SetActive(true);
-        }
-        else
-        {
-            //monsterPrefs.monsterObjectList[monsterID].transform.Find("stun").gameObject.SetActive(false);
+            blind = null;
+            blinded = false;
         }
     }
     public void ActivateBlind()
     {
-        if (blindList.Count >= 1)
+        if (blind != null)
         {
-            blinded = true;
+
         }
         else
         {
@@ -323,19 +467,16 @@ public class Monster : MonoBehaviour {
     }
     public void RemoveBlind()
     {
-        blindList.Clear();
+        blind = null;
     }
 
 	public void Dead(){
         Debug.Log(monsterInfo.Mon_GoldRate);
         GameObject.Find("GameManager").GetComponent<TurnBasedCombatStateMachine>().dustCount += monsterInfo.Mon_GoldRate;
         //Destroy (this.gameObject);
+        isDead = true;
         monsterPrefs.monsterObjectList[monsterID].SetActive(false);
         Debug.Log (this + " is Dead.");
-	}
-	// Use this for initialization
-	void Start () {
-	
 	}
 
 }

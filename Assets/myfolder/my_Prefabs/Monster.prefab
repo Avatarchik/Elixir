@@ -96,6 +96,7 @@ GameObject:
   - 114: {fileID: 11498152}
   - 212: {fileID: 21222152}
   - 114: {fileID: 11491236}
+  - 95: {fileID: 9536106}
   m_Layer: 0
   m_Name: Monster
   m_TagString: Monster
@@ -502,6 +503,23 @@ BoxCollider2D:
   m_Offset: {x: -.5, y: 0}
   serializedVersion: 2
   m_Size: {x: 2.5, y: 2.5}
+--- !u!95 &9536106
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 117692}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 77e4033760f42ca43bbee21d287ab3a9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11404690
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1293,6 +1311,10 @@ Prefab:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 77e4033760f42ca43bbee21d287ab3a9, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 117692}

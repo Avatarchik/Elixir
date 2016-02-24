@@ -111,6 +111,12 @@ public class UseSkill : MonoBehaviour {
         UnHighlight();
 
         //---------
+        if(currentSelectedSkill.Skill_UserEffect != null && currentSelectedSkill.Skill_UserEffectTiming == "Before")
+        {
+            UserEffect();
+        }
+
+        //---------
         if (targetType == "Player")
         {
             ElementSkillToAlly();
@@ -139,6 +145,12 @@ public class UseSkill : MonoBehaviour {
                 //ElementSkillToEnemy(enemyList.Count);
                 ElementSkillToEnemy(enemyIndexList.Count);
             }
+        }
+
+        //---------
+        if (currentSelectedSkill.Skill_UserEffect != null && currentSelectedSkill.Skill_UserEffectTiming == "After")
+        {
+            UserEffect();
         }
 
         //----------
@@ -187,6 +199,29 @@ public class UseSkill : MonoBehaviour {
         
         yield return null;
     }
+
+    public void UserEffect()
+    {
+        switch (currentSelectedSkill.Skill_UserEffect)
+        {
+            case "SelfDamage":
+                //Temp damage
+                player.SetDamage(10);
+                break;
+            case "ChangeStateToSolid":
+                if(player.currentChemicalState != ChemicalStates.SOLID)
+                {
+                    player.currentChemicalStateValue = player.solidStateValue;
+                    player.currentChemicalState = ChemicalStates.SOLID;
+                }
+                break;
+
+            default:
+                break;
+        }
+        
+    }
+
 
     void Highlight(string targetType, string targetRange)
     {
@@ -286,15 +321,6 @@ public class UseSkill : MonoBehaviour {
                         }
                     }
 
-                    //selectedEnemy = hit.collider.gameObject;//Add the selected monster in the selectedEnemy array
-                    //enemyList.Add(selectedEnemy);
-                    //foreach (GameObject monster in GameObject.FindGameObjectsWithTag("Monster"))//Add all monsters in the selectedEnemy array
-                    //{
-                    //    if (monster != selectedEnemy)
-                    //    {
-                    //        enemyList.Add(monster);
-                    //    }
-                    //}
                     yield break;
                 }
                 else if (hit.collider != null &&
@@ -307,10 +333,7 @@ public class UseSkill : MonoBehaviour {
                     {
                         enemyIndexList.Add(monster.GetComponent<MonsterIndex>().MonsterID);
                     }
-                    //foreach (GameObject monster in GameObject.FindGameObjectsWithTag("Monster"))//Add all monsters in the selectedEnemy array
-                    //{
-                    //    enemyList.Add(monster);
-                    //}
+
                     isTargetEnemy = false;
                     yield break;
                 }
@@ -330,15 +353,7 @@ public class UseSkill : MonoBehaviour {
                             enemyIndexList.Add(monster.GetComponent<MonsterIndex>().MonsterID);
                         }
                     }
-                    //selectedEnemy = hit.collider.gameObject;//Add the selected monster in the selectedEnemy array
-                    //enemyList.Add(selectedEnemy);
-                    //foreach (GameObject monster in GameObject.FindGameObjectsWithTag("Monster"))//Add all monsters in the selectedEnemy array
-                    //{
-                    //    if (monster != selectedEnemy)
-                    //    {
-                    //        enemyList.Add(monster);
-                    //    }
-                    //}
+
                     isTargetEnemy = true;
                     yield break;
                 }
@@ -391,7 +406,7 @@ public class UseSkill : MonoBehaviour {
                 float DotDamage = currentSelectedSkill.Skill_DotDamage;
                 Debuff debuff = new Debuff(DebuffName.DoteDamage, DotDamageTurn, (int)(player.AttackDamage * DotDamage /100));
                 monsterPrefs.monsterList[enemyIndexList[i]].SetDamage((int)(player.AttackDamage * DotDamage / 100));//Inflict damage immediately in this turn                                                                              
-                monsterPrefs.monsterList[enemyIndexList[i]].AddDotDamage(debuff);//Add debuff to monster
+                monsterPrefs.monsterList[enemyIndexList[i]].AddDebuff(debuff);//Add debuff to monster
             }
 
             //Stun
@@ -409,7 +424,7 @@ public class UseSkill : MonoBehaviour {
                 {
                     Debug.Log("Stun Success");
                     Debuff debuff = new Debuff(DebuffName.Stun, currentSelectedSkill.Skill_DebuffTurn);
-                    monsterPrefs.monsterList[enemyIndexList[i]].AddStun(debuff);
+                    monsterPrefs.monsterList[enemyIndexList[i]].AddDebuff(debuff);
                 }
             }
 
@@ -427,7 +442,7 @@ public class UseSkill : MonoBehaviour {
                 {
                     Debug.Log("Silent Success");
                     Debuff debuff = new Debuff(DebuffName.Silent, currentSelectedSkill.Skill_DebuffTurn);
-                    monsterPrefs.monsterList[enemyIndexList[i]].AddSilent(debuff);
+                    monsterPrefs.monsterList[enemyIndexList[i]].AddDebuff(debuff);
                 }
             }
 
@@ -445,7 +460,7 @@ public class UseSkill : MonoBehaviour {
                 {
                     Debug.Log("Silent Success");
                     Debuff debuff = new Debuff(DebuffName.Blind, currentSelectedSkill.Skill_DebuffTurn);
-                    monsterPrefs.monsterList[enemyIndexList[i]].AddBlind(debuff);
+                    monsterPrefs.monsterList[enemyIndexList[i]].AddDebuff(debuff);
                 }
             }
 
@@ -456,27 +471,14 @@ public class UseSkill : MonoBehaviour {
     {
         Debug.Log("ElementSkillToAlly");
 
-        float criticalRate;
-        ChemicalStates criticalTarget = GetComponent<PlayerPrefs>().currentEquipElement.characterRoomTempState;
-
-        if (player.currentChemicalState == criticalTarget)
-        {
-            criticalRate = 1.5f;
-        }
-        else
-        {
-            criticalRate = 1f;
-        }
-
         if (currentSelectedSkill.Skill_BuffName == "Dodge")
         {
-            Buff buff = new Buff(BuffName.Dodge, currentSelectedSkill.Skill_BuffTurn - 1);
-            player.dodgeRate = (int)currentSelectedSkill.Skill_BuffRate;
-            player.AddDodge(buff);
+            Buff buff = new Buff(BuffName.Dodge, currentSelectedSkill.Skill_BuffTurn - 1, (int)currentSelectedSkill.Skill_BuffRate);
+            player.AddBuff(buff);
         }
         if (currentSelectedSkill.Skill_Heal > 0)
         {
-            player.SetHeal((int)(currentSelectedSkill.Skill_Heal * criticalRate));
+            player.SetHeal((int)currentSelectedSkill.Skill_Heal);
         }
     }
 

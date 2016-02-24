@@ -12,7 +12,13 @@ namespace EnumsAndClasses
     {
         None,
         Dodge,
-
+        Shield,
+        ImmuneCriticalTarget,
+        DebuffImmune,
+        GuardStateChange,
+        ImmuneHeat,
+        DamageResistance,
+        DotHeal
     }
 
     public enum DebuffName
@@ -21,7 +27,8 @@ namespace EnumsAndClasses
         Stun,
         DoteDamage,
         Silent,
-        Blind
+        Blind,
+        ActionLimit
     }
 
     public enum Phase
@@ -54,14 +61,20 @@ namespace EnumsAndClasses
     {
         BuffName name;
         int remainTurn;
-        int damagePerTurn;
+        int effect;
         
         public Buff (BuffName name, int remainTurn)
         {
             this.name = name;
             this.remainTurn = remainTurn;
         }
-        
+        public Buff(BuffName name, int remainTurn, int effect)
+        {
+            this.name = name;
+            this.remainTurn = remainTurn;
+            this.effect = effect;
+        }
+
         public BuffName GetBuffname()
         {
             return name;
@@ -72,8 +85,14 @@ namespace EnumsAndClasses
             get { return remainTurn; }
             set { remainTurn = value; }
         }
-    }
 
+        public int Effect
+        {
+            get { return effect; }
+            set { effect = value; }
+        }
+    }
+    [System.Serializable]
     public class Debuff
     {
         DebuffName name;
