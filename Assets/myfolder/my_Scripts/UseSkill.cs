@@ -463,7 +463,7 @@ public class UseSkill : MonoBehaviour {
                 if (chance <= blindRate)
                 {
                     Debug.Log("Silent Success");
-                    Debuff debuff = new Debuff(DebuffName.Blind, currentSelectedSkill.Skill_DebuffTurn);
+                    Debuff debuff = new Debuff(DebuffName.Blind, currentSelectedSkill.Skill_DebuffTurn, (int)currentSelectedSkill.Skill_DebuffRate);
                     monsterPrefs.monsterList[enemyIndexList[i]].AddDebuff(debuff);
                 }
             }

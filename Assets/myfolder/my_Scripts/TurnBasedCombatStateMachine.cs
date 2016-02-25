@@ -132,9 +132,6 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
                 playerPrefs.player.ReduceDotDamageTurn();
                 playerPrefs.player.ReduceActionLimitTurn();
 
-                
-
-
                 currentState = BattleStates.IDLE;
                 StartCoroutine(GameObject.Find("MonsterManager").GetComponent<EnemyAI>().EnemyActChoice());
                 
