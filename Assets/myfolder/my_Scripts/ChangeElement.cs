@@ -14,6 +14,7 @@ public class ChangeElement : MonoBehaviour {
 
     private List<int> arrangeList;
     private PlayerPrefs playerPrefs;
+    private MonsterPrefs monsterPrefs;
 
     private float timer;
     private bool checkPress = false;
@@ -22,6 +23,7 @@ public class ChangeElement : MonoBehaviour {
     public void Initialize()
     {
         playerPrefs = GameObject.Find("GameManager").GetComponent<PlayerPrefs>();
+        monsterPrefs = GameObject.Find("MonsterManager").GetComponent<MonsterPrefs>();
         int currentEquipped = playerPrefs.currentEquipElementIndex;
         List<Element> elementsInParty = playerPrefs.party;
         arrangeList = new List<int>();
@@ -89,10 +91,10 @@ public class ChangeElement : MonoBehaviour {
             TBSMachine.currentState = TurnBasedCombatStateMachine.BattleStates.ENEMYCHOICE;
             TBSMachine.resetTurn();
 
-            foreach (GameObject monster in GameObject.FindGameObjectsWithTag("Monster"))
+            for(int i = 0; i < monsterPrefs.monsterList.Count; i++)
             {
-                monster.GetComponent<Monster>().guarded = false;
-                monster.transform.Find("guardIcon").gameObject.SetActive(false);
+                monsterPrefs.monsterList[i].guarded = false;
+                monsterPrefs.monsterObjectList[i].transform.Find("guardIcon").gameObject.SetActive(false);
             }
         }
     }

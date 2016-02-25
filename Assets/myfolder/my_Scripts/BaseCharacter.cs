@@ -25,6 +25,7 @@ public class baseCharacter{
     public bool debuffImmuned;
     public bool stateChangeGuarded;
     public bool heatImmuned;
+    public bool skillImmuned;
     public bool damageResisted;
 
     public bool actionLimited;
@@ -35,6 +36,7 @@ public class baseCharacter{
     public Buff debuffImmune;
     public Buff guardStateChange;
     public Buff immuneHeat;
+    public Buff immuneSkill;
     public Buff damageResistance;
     public List<Buff> dotHealList = new List<Buff>();
 
@@ -52,6 +54,8 @@ public class baseCharacter{
         stateChangeGuarded = false;
         immuneHeat = null;
         heatImmuned = false;
+        immuneSkill = null;
+        skillImmuned = false;
         damageResistance = null;
         damageResisted = false;
         this.actionLimit = null;
@@ -306,6 +310,10 @@ public class baseCharacter{
                 immuneHeat = buff;
                 heatImmuned = true;
                 break;
+            case BuffName.ImmuneSkill:
+                immuneSkill = buff;
+                skillImmuned = true;
+                break;
             case BuffName.DamageResistance:
                 damageResistance = buff;
                 damageResisted = true;
@@ -487,6 +495,36 @@ public class baseCharacter{
     {
         immuneHeat = null;
         heatImmuned = false;
+    }
+
+    //ImmuneSkill
+    public void ReduceImmuneSkillTurn()
+    {
+        if (immuneSkill != null)
+        {
+            immuneSkill.RemainTurn--;
+        }
+        if (immuneSkill.RemainTurn == 0)
+        {
+            immuneSkill = null;
+            skillImmuned = false;
+        }
+    }
+    public void ActivateImmuneSkill()
+    {
+        if (immuneSkill != null)
+        {
+
+        }
+        else
+        {
+            skillImmuned = false;
+        }
+    }
+    public void RemoveImmuneSkill()
+    {
+        immuneSkill = null;
+        skillImmuned = false;
     }
 
     //DamageResistance

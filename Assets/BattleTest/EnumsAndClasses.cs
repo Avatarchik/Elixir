@@ -18,7 +18,8 @@ namespace EnumsAndClasses
         GuardStateChange,
         ImmuneHeat,
         DamageResistance,
-        DotHeal
+        DotHeal,
+        ImmuneSkill
     }
 
     public enum DebuffName
@@ -59,9 +60,9 @@ namespace EnumsAndClasses
     [System.Serializable]
     public class Buff
     {
-        BuffName name;
-        int remainTurn;
-        int effect;
+        public BuffName name;
+        public int remainTurn;
+        public int effect;
         
         public Buff (BuffName name, int remainTurn)
         {
@@ -95,9 +96,9 @@ namespace EnumsAndClasses
     [System.Serializable]
     public class Debuff
     {
-        DebuffName name;
-        int remainTurn;
-        int damagePerTurn;
+        public DebuffName name;
+        public int remainTurn;
+        public int damagePerTurn;
         
         public Debuff (DebuffName name, int remainTurn)
         {

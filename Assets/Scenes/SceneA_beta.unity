@@ -5321,7 +5321,6 @@ GameObject:
   - 114: {fileID: 1302277327}
   - 114: {fileID: 1302277321}
   - 114: {fileID: 1302277329}
-  - 114: {fileID: 1302277332}
   - 114: {fileID: 1302277334}
   - 114: {fileID: 1302277336}
   - 114: {fileID: 1302277328}
@@ -5443,11 +5442,44 @@ MonoBehaviour:
     debuffImmuned: 0
     stateChangeGuarded: 0
     heatImmuned: 0
+    skillImmuned: 0
     damageResisted: 0
     actionLimited: 0
     isDead: 0
+    dodge:
+      name: 0
+      remainTurn: 0
+      effect: 0
+    immuneCriticalTarget:
+      name: 0
+      remainTurn: 0
+      effect: 0
+    debuffImmune:
+      name: 0
+      remainTurn: 0
+      effect: 0
+    guardStateChange:
+      name: 0
+      remainTurn: 0
+      effect: 0
+    immuneHeat:
+      name: 0
+      remainTurn: 0
+      effect: 0
+    immuneSkill:
+      name: 0
+      remainTurn: 0
+      effect: 0
+    damageResistance:
+      name: 0
+      remainTurn: 0
+      effect: 0
     dotHealList: []
     dotDamageList: []
+    actionLimit:
+      name: 0
+      remainTurn: 0
+      damagePerTurn: 0
 --- !u!114 &1302277328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5476,17 +5508,6 @@ MonoBehaviour:
   skill2Btn: {fileID: 1453529079}
   skill3Btn: {fileID: 495655027}
   currentEquipElementIndex: 0
---- !u!114 &1302277332
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1302277320}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26ccb07ddc69baf4c9e2d8b636105220, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1302277334
 MonoBehaviour:
   m_ObjectHideFlags: 0

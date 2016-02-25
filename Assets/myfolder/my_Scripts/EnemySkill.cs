@@ -14,37 +14,52 @@ public class EnemySkill : MonoBehaviour {
         player = playerPrefs.player;
     }
 
-    //public void UseSkill(Monster self, int monsterIndex, string skillName, List<Monster> monstertargetList, bool playerTargeted, bool monsterTargeted)
-    //{
-    //    System.Random rand = new System.Random();
-    //    MonsterSkillRow skill = GetComponent<MonsterSkillLoad>().Find_MonsterSkillID(skillName);
-    //    string targetType = skill.Target;
-    //    string targetRange = skill.Range;
+    public void UseSkill2(Monster self, int monsterIndex, string skillName, List<Monster> monstertargetList, bool playerTargeted, bool monsterTargeted)
+    {
+        System.Random rand = new System.Random();
+        MonsterSkillRow skill = GetComponent<MonsterSkillLoad>().Find_MonsterSkillID(skillName);
+        string targetType = skill.Target;
+        string targetRange = skill.Range;
 
-    //    int targetIndex;
-    //    int randSeed;
+        switch (targetType)
+        {
+            case "Player":
+                SkillToPlayer();
+                break;
+            case "Monster":
+                SkillToMonster(targetRange);
+                break;
+            case "All":
+                if(targetRange == "Single")
+                {
 
-    //    //DamageFactor
-    //    if(skill.DamageFactor > 0)
-    //    {
-    //        player.SetDamage(self.attackDamage * skill.DamageFactor / 100);
-    //    }
+                }
+                else
+                {
+                    SkillToPlayer();
+                    SkillToMonster(targetRange);
+                }
+                break;
+        }
 
-    //    //SelfDamage
+    }
 
-    //    //Heal
+    public void SkillToPlayer()
+    {
 
-    //    //TargetTempChange
+    }
 
-    //    //TargetStateChange
+    public void SkillToMonster(string targetRange)
+    {
+        if(targetRange == "Single")
+        {
 
-    //    //Debuff
+        }
+        else if(targetRange == "Wide")
+        {
 
-    //    //DotDamage
-
-    //    //Buff
-        
-    //}
+        }
+    }
 
     public void UseSkill(Monster self, int monsterIndex, string skillName, List<Monster> monstertargetList, bool playerTargeted, bool monsterTargeted)
     {

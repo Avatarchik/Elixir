@@ -28,6 +28,7 @@ public class UseSkill : MonoBehaviour {
     int currentSkillIndex;
     baseSkill currentSelectedSkill = new baseSkill();
     bool attackedCritical = false;
+    int highestDamage;
 
     // Use this for initialization
     void Start () {
@@ -206,13 +207,13 @@ public class UseSkill : MonoBehaviour {
         {
             case "SelfDamage":
                 //Temp damage
-                player.SetDamage(10);
+                Debug.Log("highest damage: " + highestDamage + ", self damage: " + (int)(highestDamage * currentSelectedSkill.Skill_SelfDamageRate / 100));
+                player.SetDamage((int)(highestDamage * currentSelectedSkill.Skill_SelfDamageRate /100));
                 break;
             case "ChangeStateToSolid":
                 if(player.currentChemicalState != ChemicalStates.SOLID)
                 {
-                    player.currentChemicalStateValue = player.solidStateValue;
-                    player.currentChemicalState = ChemicalStates.SOLID;
+                    player.ChangeState(ChemicalStates.SOLID);
                 }
                 break;
 
@@ -365,7 +366,6 @@ public class UseSkill : MonoBehaviour {
     void ElementSkillToEnemy(int countArray)
     {
         Debug.Log("ElementSkillToEnemy");
-        GameObject Ally = GameObject.Find("Player(Clone)");
         ChemicalStates criticalTarget = GetComponent<PlayerPrefs>().currentEquipElement.characterRoomTempState;
         System.Random rand = new System.Random();
         float criticalRate;
@@ -375,12 +375,10 @@ public class UseSkill : MonoBehaviour {
 
         for (int i = 0; i < countArray; i++) //Repeat procedure for every selected enemies listed in selectedEnemy array
         {
-            Debug.Log(monsterPrefs.monsterList[enemyIndexList[i]].currentChemicalState);
             if (monsterPrefs.monsterList[enemyIndexList[i]].currentChemicalState == criticalTarget)
             {
                 criticalRate = 1.5f;
-                
-                if (!monsterPrefs.monsterList[enemyIndexList[i]].guarded)
+                if (!monsterPrefs.monsterList[enemyIndexList[i]].guarded && !monsterPrefs.monsterList[enemyIndexList[i]].shielded)
                 {
                     attackedCritical = true;
                     monsterPrefs.monsterList[enemyIndexList[i]].guarded = true;
@@ -389,18 +387,26 @@ public class UseSkill : MonoBehaviour {
             }
             else
             {
-                criticalRate = 1f;
+                criticalRate = 1;
             }
 
             //Normal damage
             if (currentSelectedSkill.Skill_AttackDamage > 0)
             {
+                int tempDamage;
                 Debug.Log("Player AD: " + player.AttackDamage + " 계수: " + currentSelectedSkill.Skill_AttackDamage);
-                monsterPrefs.monsterList[enemyIndexList[i]].SetDamage((int)((player.AttackDamage * currentSelectedSkill.Skill_AttackDamage /100) * criticalRate));
+                tempDamage = (int)((player.AttackDamage * currentSelectedSkill.Skill_AttackDamage / 100) * criticalRate);
+
+                monsterPrefs.monsterList[enemyIndexList[i]].SetDamage((int)(player.AttackDamage * currentSelectedSkill.Skill_AttackDamage / 100), player.currentChemicalState);
+
+                if(highestDamage < tempDamage)//Record highest damage dealt
+                {
+                    highestDamage = tempDamage;
+                }
             }
 
             //DotDamage
-            if (currentSelectedSkill.Skill_DotDamage > 0)
+            if (currentSelectedSkill.Skill_DebuffName == "DotDamage")
             {
                 int DotDamageTurn = currentSelectedSkill.Skill_DotDamageTurn;
                 float DotDamage = currentSelectedSkill.Skill_DotDamage;
@@ -427,7 +433,7 @@ public class UseSkill : MonoBehaviour {
                     monsterPrefs.monsterList[enemyIndexList[i]].AddDebuff(debuff);
                 }
             }
-
+            //Silent
             if (currentSelectedSkill.Skill_DebuffName == "Silent")
             {
                 silentRate = currentSelectedSkill.Skill_DebuffRate;
@@ -445,7 +451,7 @@ public class UseSkill : MonoBehaviour {
                     monsterPrefs.monsterList[enemyIndexList[i]].AddDebuff(debuff);
                 }
             }
-
+            //Blind
             if (currentSelectedSkill.Skill_DebuffName == "Blind")
             {
                 blindRate = currentSelectedSkill.Skill_DebuffRate;
@@ -471,14 +477,68 @@ public class UseSkill : MonoBehaviour {
     {
         Debug.Log("ElementSkillToAlly");
 
+        //DotDamage
+        if (currentSelectedSkill.Skill_DebuffName == "DotDamage")
+        {
+            int DotDamageTurn = currentSelectedSkill.Skill_DotDamageTurn;
+            float DotDamage = currentSelectedSkill.Skill_DotDamage;
+            Debuff debuff = new Debuff(DebuffName.DoteDamage, DotDamageTurn, (int)(player.AttackDamage * DotDamage / 100));
+            player.SetDamage((int)(player.AttackDamage * DotDamage / 100));//Inflict damage immediately in this turn                                                                              
+            player.AddDebuff(debuff);//Add debuff to player
+        }
+
+        //Dodge
         if (currentSelectedSkill.Skill_BuffName == "Dodge")
         {
-            Buff buff = new Buff(BuffName.Dodge, currentSelectedSkill.Skill_BuffTurn - 1, (int)currentSelectedSkill.Skill_BuffRate);
+            Buff buff = new Buff(BuffName.Dodge, currentSelectedSkill.Skill_BuffTurn, (int)currentSelectedSkill.Skill_BuffRate);
             player.AddBuff(buff);
         }
+        //Heal
         if (currentSelectedSkill.Skill_Heal > 0)
         {
             player.SetHeal((int)currentSelectedSkill.Skill_Heal);
+        }
+        //DotHeal
+        if(currentSelectedSkill.Skill_BuffName == "DotHeal")
+        {
+            Buff buff = new Buff(BuffName.DotHeal, currentSelectedSkill.Skill_BuffTurn - 1, (int)currentSelectedSkill.Skill_Heal);
+            player.AddBuff(buff);
+        }
+        //ImmuneCriticalTarget
+        if(currentSelectedSkill.Skill_BuffName == "ImmuneCriticalTarget")
+        {
+            Buff buff = new Buff(BuffName.ImmuneCriticalTarget, currentSelectedSkill.Skill_BuffTurn);
+            player.AddBuff(buff);
+        }
+        //DebuffImmune
+        if (currentSelectedSkill.Skill_BuffName == "DebuffImmune")
+        {
+            Buff buff = new Buff(BuffName.DebuffImmune, currentSelectedSkill.Skill_BuffTurn);
+            player.AddBuff(buff);
+        }
+        //GuardStateChange
+        if (currentSelectedSkill.Skill_BuffName == "GuardStateChange")
+        {
+            Buff buff = new Buff(BuffName.GuardStateChange, currentSelectedSkill.Skill_BuffTurn);
+            player.AddBuff(buff);
+        }
+        //ImmuneHeat
+        if (currentSelectedSkill.Skill_BuffName == "ImmuneHeat")
+        {
+            Buff buff = new Buff(BuffName.ImmuneHeat, currentSelectedSkill.Skill_BuffTurn);
+            player.AddBuff(buff);
+        }
+        //ImmuneSkill
+        if (currentSelectedSkill.Skill_BuffName == "ImmuneSkill")
+        {
+            Buff buff = new Buff(BuffName.ImmuneSkill, currentSelectedSkill.Skill_BuffTurn);
+            player.AddBuff(buff);
+        }
+        //DamageResistance
+        if (currentSelectedSkill.Skill_BuffName == "DamageResistance")
+        {
+            Buff buff = new Buff(BuffName.DamageResistance, currentSelectedSkill.Skill_BuffTurn);
+            player.AddBuff(buff);
         }
     }
 
@@ -525,6 +585,7 @@ public class UseSkill : MonoBehaviour {
         currentSkillIndex = skillIndex;
         currentSelectedSkill = null;
         attackedCritical = false;
+        highestDamage = 0;
 
         //Decrement Turn
         TBSMachine.decrementTurn();

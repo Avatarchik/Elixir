@@ -114,7 +114,7 @@ public class EnemyAI : MonoBehaviour {
         }
         //if either one of two conditionlists is met, return true
         //if both conditions are not met, return false
-        else if (CheckCondList(monster, cond1_1, cond1_2, target))
+        else if (CheckCondList(monster, cond2_1, cond2_2, target))
         {
             return true;
         }
