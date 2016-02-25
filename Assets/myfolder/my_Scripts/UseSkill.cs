@@ -129,11 +129,10 @@ public class UseSkill : MonoBehaviour {
                 ElementSkillToEnemy(1);
             }else if(targetRange == "Wide")
             {
-                //ElementSkillToEnemy(enemyList.Count);
                 ElementSkillToEnemy(enemyIndexList.Count);
             }
         }
-        else if (targetType == "All")
+        else if (targetType == "All")//Needs fix (case where All/Single)
         {
             ElementSkillToAlly();
 
@@ -143,7 +142,6 @@ public class UseSkill : MonoBehaviour {
             }
             else if (targetRange == "Wide")
             {
-                //ElementSkillToEnemy(enemyList.Count);
                 ElementSkillToEnemy(enemyIndexList.Count);
             }
         }

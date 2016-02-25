@@ -7,6 +7,10 @@ public class EnemySkill : MonoBehaviour {
     MonsterPrefs monsterPrefs;
     PlayerPrefs playerPrefs;
     baseCharacter player;
+
+    //MonsterSkillRow skill;
+    //Monster attacker;
+
     void Start()
     {
         monsterPrefs = GetComponent<MonsterPrefs>();
@@ -14,59 +18,122 @@ public class EnemySkill : MonoBehaviour {
         player = playerPrefs.player;
     }
 
-    public void UseSkill2(Monster self, int monsterIndex, string skillName, List<Monster> monstertargetList, bool playerTargeted, bool monsterTargeted)
-    {
-        System.Random rand = new System.Random();
-        MonsterSkillRow skill = GetComponent<MonsterSkillLoad>().Find_MonsterSkillID(skillName);
-        string targetType = skill.Target;
-        string targetRange = skill.Range;
+    //public void UseSkill2(Monster self, int monsterIndex, string skillName, List<Monster> monstertargetList, bool playerTargeted, bool monsterTargeted)
+    //{
+    //    System.Random rand = new System.Random();
+    //    skill = GetComponent<MonsterSkillLoad>().Find_MonsterSkillID(skillName);
+    //    attacker = self;
+    //    string targetType = skill.Target;
+    //    string targetRange = skill.Range;
 
-        switch (targetType)
-        {
-            case "Player":
-                SkillToPlayer();
-                break;
-            case "Monster":
-                SkillToMonster(targetRange);
-                break;
-            case "All":
-                if(targetRange == "Single")
-                {
+    //    switch (targetType)
+    //    {
+    //        case "Player":
+    //            SkillToPlayer();
+    //            break;
+    //        case "Monster":
+    //            if(targetRange == "Single")
+    //            {
+    //                int target;
+    //                target = rand.Next(0, monstertargetList.Count);
+    //                SkillToMonster(monstertargetList[target]);
+    //            }else if(targetRange == "Wide")
+    //            {
+    //                foreach (Monster monster in monstertargetList)
+    //                {
+    //                    SkillToMonster(monster);
+    //                }
+    //            }
+    //            break;
+    //        case "All":
+    //            if(targetRange == "Single")
+    //            {
+    //                int target;
+    //                if(playerTargeted && monsterTargeted)
+    //                {
+    //                    target = rand.Next(0, monstertargetList.Count + 1);
+    //                    if(target == monstertargetList.Count)
+    //                    {
+    //                        SkillToPlayer();
+    //                    }
+    //                    else
+    //                    {
+    //                        SkillToMonster(monstertargetList[target]);
+    //                    }
 
-                }
-                else
-                {
-                    SkillToPlayer();
-                    SkillToMonster(targetRange);
-                }
-                break;
-        }
+    //                }else if(!playerTargeted && monsterTargeted)
+    //                {
+    //                    target = rand.Next(0, monstertargetList.Count);
+    //                    SkillToMonster(monstertargetList[target]);
+    //                }
+    //                else if(playerTargeted && !monsterTargeted)
+    //                {
+    //                    SkillToPlayer();
+    //                }
+    //            }
+    //            else
+    //            {
+    //                SkillToPlayer();
+    //                foreach(Monster monster in monstertargetList)
+    //                {
+    //                    SkillToMonster(monster);
+    //                }
+    //            }
+    //            break;
+    //    }
 
-    }
+    //}
 
-    public void SkillToPlayer()
-    {
+    //public void SkillToPlayer()
+    //{
+    //    System.Random rand = new System.Random();
+    //    //DamageFactor
+    //    if (skill.DamageFactor > 0)
+    //    {
+    //        player.SetDamage((int)(attacker.attackDamage * skill.DamageFactor / 100), attacker.currentChemicalState);
+    //    }
+    //    //Action Limit
+    //    if(skill.DebuffName == "ActionLimit")
+    //    {
+    //        Debuff actionLimit = new Debuff(DebuffName.ActionLimit, skill.DebuffTurn);
+    //        if (rand.Next(1, 101) <= skill.DebuffRate)
+    //        {
+    //            player.AddDebuff(actionLimit);
+    //        }
+    //    }
+    //    //Remove Buff
+    //    if(skill.DebuffName == "RemoveBuff")
+    //    {
+    //        player.RemoveDodge();
+    //        player.RemoveImmuneCriticalTarget();
+    //        player.RemoveDebuffImmune();
+    //        player.RemoveGuardStateChange();
+    //        player.RemoveImmuneHeat();
+    //        player.RemoveDamageResistance();
+    //        player.RemoveDotHeal();
+    //    }
+    //    if(skill.TargetTempChange )
+    //}
 
-    }
+    //public void SkillToMonster(Monster monster)
+    //{
 
-    public void SkillToMonster(string targetRange)
-    {
-        if(targetRange == "Single")
-        {
-
-        }
-        else if(targetRange == "Wide")
-        {
-
-        }
-    }
+    //}
 
     public void UseSkill(Monster self, int monsterIndex, string skillName, List<Monster> monstertargetList, bool playerTargeted, bool monsterTargeted)
     {
         System.Random rand = new System.Random();
+        Animator animator = monsterPrefs.monsterObjectList[monsterIndex].GetComponent<Animator>();
         MonsterSkillRow skill = GetComponent<MonsterSkillLoad>().Find_MonsterSkillID(skillName);
         int targetIndex;
         int randSeed;
+
+        animator.SetTrigger("Attack");
+        if (self.blinded)
+        {
+            Debug.Log("This monster is blinded. Attack failed");
+            return;
+        }
         switch (skillName)
         {
             case "SingleAttack":

@@ -75,6 +75,17 @@ public class ChangeElement : MonoBehaviour {
         checkPress = false;
     }
 
+    public void UnHighlight()
+    {
+        GameObject.FindGameObjectWithTag("Ally").transform.Find("selectable").gameObject.SetActive(false);
+        GameObject.FindGameObjectWithTag("Ally").transform.Find("selected").gameObject.SetActive(false);
+        foreach(GameObject monster in monsterPrefs.monsterObjectList)
+        {
+            monster.transform.Find("selectable").gameObject.SetActive(false);
+            monster.transform.Find("selected").gameObject.SetActive(false);
+        }
+    }
+
     public void ElementChanged(int index)
     {
         playerPrefs.currentEquipElementIndex = arrangeList[index];

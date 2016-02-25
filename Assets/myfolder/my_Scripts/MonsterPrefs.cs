@@ -44,7 +44,7 @@ public class MonsterPrefs : MonoBehaviour {
             monsterObjectList.Add(monster);
 
             string imagePath = "MonsterImage/" + monsterDatabase[monsterList[i].monsterID].Mon_Name;
-            monster.GetComponent<SpriteRenderer>().sprite = Resources.Load(imagePath, typeof(Sprite)) as Sprite;
+            monster.transform.Find("MonsterSprite").GetComponent<SpriteRenderer>().sprite = Resources.Load(imagePath, typeof(Sprite)) as Sprite;
             monster.GetComponent<MonsterIndex>().MonsterID = monsterList[i].monsterID;
             monster.transform.position = positionList[i];
         }
