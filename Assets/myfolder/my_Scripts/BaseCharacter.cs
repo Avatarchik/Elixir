@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 [System.Serializable]
 public class baseCharacter{
-
+    private PlayerPrefs playerPrefs;
 	private string CharacterName;
 
     //stats
@@ -21,6 +21,7 @@ public class baseCharacter{
     public int gasStateValue;
     public int dodgeRate;
 
+    public bool dodged;
     public bool criticalTargetImmuned;
     public bool debuffImmuned;
     public bool stateChangeGuarded;
@@ -43,9 +44,11 @@ public class baseCharacter{
     public List<Debuff> dotDamageList = new List<Debuff>();
     public Debuff actionLimit;
 
-    void Start()
+    public void Initialize()
     {
+        playerPrefs = GameObject.Find("GameManager").GetComponent<PlayerPrefs>();
         dodge = null;
+        dodged = false;
         immuneCriticalTarget = null;
         criticalTargetImmuned = false;
         debuffImmune = null;
@@ -154,46 +157,58 @@ public class baseCharacter{
         }
         switch(chemicalState){
             case ChemicalStates.SOLID:
-                switch(this.currentChemicalState){
+                switch(currentChemicalState){
                     case ChemicalStates.SOLID:
                         Debug.Log("Do nothing");
                         break;
                     case ChemicalStates.LIQUID:
-                        this.currentChemicalState = ChemicalStates.SOLID;
-                        this.currentChemicalStateValue = this.solidStateValue;
+                        playerPrefs.party[playerPrefs.currentEquipElementIndex].characterRoomTempState = ChemicalStates.SOLID;
+                        playerPrefs.party[playerPrefs.currentEquipElementIndex].roomTempPos = solidStateValue;
+                        currentChemicalState = ChemicalStates.SOLID;
+                        currentChemicalStateValue = solidStateValue;
                         break;
                     case ChemicalStates.GAS:
-                        this.currentChemicalState = ChemicalStates.SOLID;
-                        this.currentChemicalStateValue = this.solidStateValue;
+                        playerPrefs.party[playerPrefs.currentEquipElementIndex].characterRoomTempState = ChemicalStates.SOLID;
+                        playerPrefs.party[playerPrefs.currentEquipElementIndex].roomTempPos = solidStateValue;
+                        currentChemicalState = ChemicalStates.SOLID;
+                        currentChemicalStateValue = solidStateValue;
                         break;
                 }
                 break;
             case ChemicalStates.LIQUID:
-                switch (this.currentChemicalState)
+                switch (currentChemicalState)
                 {
                     case ChemicalStates.SOLID:
-                        this.currentChemicalState = ChemicalStates.LIQUID;
-                        this.currentChemicalStateValue = 1;
+                        playerPrefs.party[playerPrefs.currentEquipElementIndex].characterRoomTempState = ChemicalStates.LIQUID;
+                        playerPrefs.party[playerPrefs.currentEquipElementIndex].roomTempPos = 1;
+                        currentChemicalState = ChemicalStates.LIQUID;
+                        currentChemicalStateValue = 1;
                         break;
                     case ChemicalStates.LIQUID:
                         Debug.Log("Do nothing");
                         break;
                     case ChemicalStates.GAS:
-                        this.currentChemicalState = ChemicalStates.LIQUID;
-                        this.currentChemicalStateValue = this.liquidStateValue;
+                        playerPrefs.party[playerPrefs.currentEquipElementIndex].characterRoomTempState = ChemicalStates.LIQUID;
+                        playerPrefs.party[playerPrefs.currentEquipElementIndex].roomTempPos = liquidStateValue;
+                        currentChemicalState = ChemicalStates.LIQUID;
+                        currentChemicalStateValue = liquidStateValue;
                         break;
                 }
                 break;
             case ChemicalStates.GAS:
-                switch (this.currentChemicalState)
+                switch (currentChemicalState)
                 {
                     case ChemicalStates.SOLID:
-                        this.currentChemicalState = ChemicalStates.GAS;
-                        this.currentChemicalStateValue = 1;
+                        playerPrefs.party[playerPrefs.currentEquipElementIndex].characterRoomTempState = ChemicalStates.GAS;
+                        playerPrefs.party[playerPrefs.currentEquipElementIndex].roomTempPos = 1;
+                        currentChemicalState = ChemicalStates.GAS;
+                        currentChemicalStateValue = 1;
                         break;
                     case ChemicalStates.LIQUID:
-                        this.currentChemicalState = ChemicalStates.GAS;
-                        this.currentChemicalStateValue = 1;
+                        playerPrefs.party[playerPrefs.currentEquipElementIndex].characterRoomTempState = ChemicalStates.GAS;
+                        playerPrefs.party[playerPrefs.currentEquipElementIndex].roomTempPos = 1;
+                        currentChemicalState = ChemicalStates.GAS;
+                        currentChemicalStateValue = 1;
                         break;
                     case ChemicalStates.GAS:
                         Debug.Log("Do nothing");
@@ -214,17 +229,23 @@ public class baseCharacter{
         switch (currentChemicalState)
         {
             case ChemicalStates.SOLID:
+                playerPrefs.party[playerPrefs.currentEquipElementIndex].roomTempPos++;
                 currentChemicalStateValue++;
                 if (currentChemicalStateValue > solidStateValue)
                 {
+                    playerPrefs.party[playerPrefs.currentEquipElementIndex].characterRoomTempState = ChemicalStates.LIQUID;
+                    playerPrefs.party[playerPrefs.currentEquipElementIndex].roomTempPos = 1;
                     currentChemicalState = ChemicalStates.LIQUID;
                     currentChemicalStateValue = 1;
                 }
                 break;
             case ChemicalStates.LIQUID:
+                playerPrefs.party[playerPrefs.currentEquipElementIndex].roomTempPos++;
                 currentChemicalStateValue++;
                 if (currentChemicalStateValue > liquidStateValue)
                 {
+                    playerPrefs.party[playerPrefs.currentEquipElementIndex].characterRoomTempState = ChemicalStates.GAS;
+                    playerPrefs.party[playerPrefs.currentEquipElementIndex].roomTempPos = 1;
                     currentChemicalState = ChemicalStates.GAS;
                     currentChemicalStateValue = 1;
                 }
@@ -236,6 +257,7 @@ public class baseCharacter{
                 }
                 else
                 {
+                    playerPrefs.party[playerPrefs.currentEquipElementIndex].roomTempPos++;
                     currentChemicalStateValue++;
                 }
 
@@ -253,21 +275,28 @@ public class baseCharacter{
                 }
                 else
                 {
+                    playerPrefs.party[playerPrefs.currentEquipElementIndex].roomTempPos--;
                     currentChemicalStateValue--;
                 }
                 break;
             case ChemicalStates.LIQUID:
+                playerPrefs.party[playerPrefs.currentEquipElementIndex].roomTempPos--;
                 currentChemicalStateValue--;
                 if (currentChemicalStateValue <= 0)
                 {
+                    playerPrefs.party[playerPrefs.currentEquipElementIndex].characterRoomTempState = ChemicalStates.SOLID;
+                    playerPrefs.party[playerPrefs.currentEquipElementIndex].roomTempPos = solidStateValue;
                     currentChemicalState = ChemicalStates.SOLID;
                     currentChemicalStateValue = solidStateValue;
                 }
                 break;
             case ChemicalStates.GAS:
+                playerPrefs.party[playerPrefs.currentEquipElementIndex].roomTempPos--;
                 currentChemicalStateValue--;
                 if (currentChemicalStateValue <= 0)
                 {
+                    playerPrefs.party[playerPrefs.currentEquipElementIndex].characterRoomTempState = ChemicalStates.LIQUID;
+                    playerPrefs.party[playerPrefs.currentEquipElementIndex].roomTempPos = liquidStateValue;
                     currentChemicalState = ChemicalStates.LIQUID;
                     currentChemicalStateValue = liquidStateValue;
                 }
@@ -350,19 +379,19 @@ public class baseCharacter{
     //Dodge
     public void ReduceDodgeTurn()
     {
-        if(dodge != null)
+        if(dodged)
         {
             dodge.RemainTurn--;
-        }
-        if(dodge.RemainTurn == 0)
-        {
-            dodge = null;
-            dodgeRate = 0;
-        }
+            if(dodge.RemainTurn == 0)
+            {
+                dodge = null;
+                dodgeRate = 0;
+            }
+        }    
     }
     public void ActivateDodge()
     {
-        if (dodge != null)
+        if (dodged)
         {
             Debug.Log("Maintain current dodge rate:" + this.dodgeRate);
         }
@@ -380,19 +409,19 @@ public class baseCharacter{
     //ImmuneCriticalTarget
     public void ReduceImmuneCriticalTargetTurn()
     {
-        if (immuneCriticalTarget != null)
+        if (criticalTargetImmuned)
         {
             immuneCriticalTarget.RemainTurn--;
-        }
-        if (immuneCriticalTarget.RemainTurn == 0)
-        {
-            immuneCriticalTarget = null;
-            criticalTargetImmuned = false;
+            if (immuneCriticalTarget.RemainTurn == 0)
+            {
+                immuneCriticalTarget = null;
+                criticalTargetImmuned = false;
+            }
         }
     }
     public void ActivateImmuneCriticalTarget()
     {
-        if (immuneCriticalTarget != null)
+        if (criticalTargetImmuned)
         {
 
         }
@@ -410,19 +439,19 @@ public class baseCharacter{
     //DebuffImmune
     public void ReduceDebuffImmuneTurn()
     {
-        if (debuffImmune != null)
+        if (debuffImmuned)
         {
             debuffImmune.RemainTurn--;
-        }
-        if (debuffImmune.RemainTurn == 0)
-        {
-            debuffImmune = null;
-            debuffImmuned = false;
+            if (debuffImmune.RemainTurn == 0)
+            {
+                debuffImmune = null;
+                debuffImmuned = false;
+            }
         }
     }
     public void ActivateDebuffImmune()
     {
-        if (debuffImmune != null)
+        if (debuffImmuned)
         {
 
         }
@@ -440,19 +469,19 @@ public class baseCharacter{
     //GuardStateChange
     public void ReduceGuardStateChangeTurn()
     {
-        if (guardStateChange != null)
+        if (stateChangeGuarded)
         {
             guardStateChange.RemainTurn--;
-        }
-        if (guardStateChange.RemainTurn == 0)
-        {
-            guardStateChange = null;
-            stateChangeGuarded = false;
+            if (guardStateChange.RemainTurn == 0)
+            {
+                guardStateChange = null;
+                stateChangeGuarded = false;
+            }
         }
     }
     public void ActivateGuardStateChange()
     {
-        if (guardStateChange != null)
+        if (stateChangeGuarded)
         {
 
         }
@@ -470,19 +499,19 @@ public class baseCharacter{
     //ImmuneHeat
     public void ReduceImmuneHeatTurn()
     {
-        if (immuneHeat != null)
+        if (heatImmuned)
         {
             immuneHeat.RemainTurn--;
-        }
-        if (immuneHeat.RemainTurn == 0)
-        {
-            immuneHeat = null;
-            heatImmuned = false;
+            if (immuneHeat.RemainTurn == 0)
+            {
+                immuneHeat = null;
+                heatImmuned = false;
+            }
         }
     }
     public void ActivateImmuneHeat()
     {
-        if (immuneHeat != null)
+        if (heatImmuned)
         {
 
         }
@@ -500,19 +529,19 @@ public class baseCharacter{
     //ImmuneSkill
     public void ReduceImmuneSkillTurn()
     {
-        if (immuneSkill != null)
+        if (skillImmuned)
         {
             immuneSkill.RemainTurn--;
-        }
-        if (immuneSkill.RemainTurn == 0)
-        {
-            immuneSkill = null;
-            skillImmuned = false;
+            if (immuneSkill.RemainTurn == 0)
+            {
+                immuneSkill = null;
+                skillImmuned = false;
+            }
         }
     }
     public void ActivateImmuneSkill()
     {
-        if (immuneSkill != null)
+        if (skillImmuned)
         {
 
         }
@@ -530,19 +559,19 @@ public class baseCharacter{
     //DamageResistance
     public void ReduceDamageResistanceTurn()
     {
-        if (damageResistance != null)
+        if (damageResisted)
         {
             damageResistance.RemainTurn--;
-        }
-        if (damageResistance.RemainTurn == 0)
-        {
-            damageResistance = null;
-            damageResisted = false;
+            if (damageResistance.RemainTurn == 0)
+            {
+                damageResistance = null;
+                damageResisted = false;
+            }
         }
     }
     public void ActivateDamageResistance()
     {
-        if (immuneHeat != null)
+        if (damageResisted)
         {
 
         }
@@ -641,14 +670,14 @@ public class baseCharacter{
     // ActionLimit Implementation
     public void ReduceActionLimitTurn()
     {
-        if (actionLimit != null)
+        if (actionLimited)
         {
             actionLimit.RemainTurn--;
-        }
-        if (actionLimit.RemainTurn == 0)
-        {
-            actionLimit = null;
-            actionLimited = false;
+            if (actionLimit.RemainTurn == 0)
+            {
+                actionLimit = null;
+                actionLimited = false;
+            }
         }
     }
     public void ActivateActionLimit()

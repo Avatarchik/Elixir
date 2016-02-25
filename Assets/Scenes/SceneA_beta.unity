@@ -5436,24 +5436,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerPrefab: {fileID: 178922, guid: 1a4b2daf01621e64c836fb6222ddb153, type: 2}
   party: []
-  currentEquipElement:
-    id: 
-    extName: 
-    name: 
-    chemicalSeries: 
-    desription: 
-    characterRoomTempState: 0
-    solidGauge: 0
-    liquidGauge: 0
-    gasGauge: 0
-    roomTempPos: 0
-    elementCard1: 
-    elementCard2: 
-    elementCard3: 
-    enableChemSeriesCard: 
-    enableCardType: 
-    chemSeriesCard: 
-  currentEquipElementIndex: 0
   player:
     level: 0
     MAX_HP: 200
@@ -5466,6 +5448,7 @@ MonoBehaviour:
     liquidStateValue: 0
     gasStateValue: 0
     dodgeRate: 0
+    dodged: 0
     criticalTargetImmuned: 0
     debuffImmuned: 0
     stateChangeGuarded: 0
@@ -5508,6 +5491,24 @@ MonoBehaviour:
       name: 0
       remainTurn: 0
       damagePerTurn: 0
+  currentEquipElement:
+    id: 
+    extName: 
+    name: 
+    chemicalSeries: 
+    desription: 
+    characterRoomTempState: 0
+    solidGauge: 0
+    liquidGauge: 0
+    gasGauge: 0
+    roomTempPos: 0
+    elementCard1: 
+    elementCard2: 
+    elementCard3: 
+    enableChemSeriesCard: 
+    enableCardType: 
+    chemSeriesCard: 
+  currentEquipElementIndex: 0
 --- !u!114 &1302277328
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -6,20 +6,21 @@ public class PlayerPrefs : MonoBehaviour {
     public GameObject PlayerPrefab;
 
     public List<Element> party = new List<Element>();
+    public baseCharacter player = new baseCharacter();
     public Element currentEquipElement;
     public int currentEquipElementIndex;
     public List<List<baseSkill>> skillList = new List<List<baseSkill>>();
-    public baseCharacter player = new baseCharacter();
+    
 
 	// Use this for initialization
 	public void Initialize () {
         List<Element> elementList = GetComponent<Loader>().elementList;
-
+ 
         //Temporarily choose equipped elements
-        party.Add(elementList[0]);
-        party.Add(elementList[0]);
-        party.Add(elementList[1]);
-        party.Add(elementList[1]);
+        party.Add(CloneElement(elementList[0]));
+        party.Add(CloneElement(elementList[0]));
+        party.Add(CloneElement(elementList[1]));
+        party.Add(CloneElement(elementList[1]));
 
         //Create list of skills of each element in party
         List<baseSkill> cardList = GetComponent<SkillLoader>().skillList;
@@ -41,6 +42,7 @@ public class PlayerPrefs : MonoBehaviour {
         currentEquipElement = party[currentEquipElementIndex];
 
         //Initialize Player info
+        player.Initialize();
         player.HP = player.MAX_HP;
         player.dodgeRate = 0;
         player.level = 7;
@@ -50,6 +52,30 @@ public class PlayerPrefs : MonoBehaviour {
 
         GeneratePlayer();
     }
+
+    public Element CloneElement(Element original)
+    {
+        Element temp = new Element();
+        temp.id = original.id;
+        temp.extName = original.extName;
+        temp.name = original.name;
+        temp.chemicalSeries = original.chemicalSeries;
+        temp.desription = original.desription;
+        temp.characterRoomTempState = original.characterRoomTempState;
+        temp.solidGauge = original.solidGauge;
+        temp.liquidGauge = original.liquidGauge;
+        temp.gasGauge = original.gasGauge;
+        temp.roomTempPos = original.roomTempPos;
+        temp.elementCard1 = original.elementCard1;
+        temp.elementCard2 = original.elementCard2;
+        temp.elementCard3 = original.elementCard3;
+        temp.enableChemSeriesCard = original.enableChemSeriesCard;
+        temp.enableCardType = original.enableCardType;
+
+        temp.chemSeriesCard = original.chemSeriesCard;
+
+        return temp;
+}
 
     public void GeneratePlayer()
     {
