@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-public class CardDetail : MonoBehaviour {
+public class SkillDetail : MonoBehaviour {
     public Text Label;
     public Text Skill1Name;
     public Text Skill2Name;
@@ -15,18 +15,22 @@ public class CardDetail : MonoBehaviour {
     public Text Skill2Descript;
     public Text Skill3Descript;
 
+    private PlayerPrefs playerPrefs;
+    
     public void DisplayInfo()
     {
-        int elementID = GameObject.Find("GameManager").GetComponent<Inventory>().SelectedElement;
-        Element element = GameObject.Find("GameManager").GetComponent<Inventory>().inventory[elementID];
-        List<baseSkill> cardDatabase = GameObject.Find("GameManager").GetComponent<SkillLoader>().skillList;
 
-        baseSkill skill1 = cardDatabase.Find(x => x.Skill_Name == element.elementCard1);
-        baseSkill skill2 = cardDatabase.Find(x => x.Skill_Name == element.elementCard2);
-        baseSkill skill3 = cardDatabase.Find(x => x.Skill_Name == element.elementCard3);
+        playerPrefs = GameObject.Find("GameManager").GetComponent<PlayerPrefs>();
+
+        int elementID = playerPrefs.currentEquipElementIndex;
+        Element element = playerPrefs.currentEquipElement;
+
+        baseSkill skill1 = playerPrefs.skillList[elementID][0];
+        baseSkill skill2 = playerPrefs.skillList[elementID][1];
+        baseSkill skill3 = playerPrefs.skillList[elementID][2];
 
         Label.text = element.extName + "의 스킬 정보";
-
+        Debug.Log(skill1.Skill_ExtName);
         Skill1Name.text = skill1.Skill_ExtName;
         Skill2Name.text = skill2.Skill_ExtName;
         Skill3Name.text = skill3.Skill_ExtName;
@@ -44,14 +48,4 @@ public class CardDetail : MonoBehaviour {
 
     }
 
-
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }
