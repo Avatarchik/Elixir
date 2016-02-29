@@ -109,10 +109,10 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
 
                 //Deactivate player UI
                 GameObject skillPanel = GameObject.Find("SkillPanel");
-                for (int i = 0; i < skillPanel.transform.childCount; i++)
-                {
-                    skillPanel.transform.GetChild(i).GetComponent<Button>().interactable = false;
-                }
+                skillPanel.transform.Find("Skill1").GetComponent<Button>().interactable = false;
+                skillPanel.transform.Find("Skill2").GetComponent<Button>().interactable = false;
+                skillPanel.transform.Find("Skill3").GetComponent<Button>().interactable = false;
+
                 GameObject.Find("Button").GetComponent<Button>().interactable = false;
                 GameObject.Find("Button").GetComponent<ChemistSkill>().DisableButtons();
 

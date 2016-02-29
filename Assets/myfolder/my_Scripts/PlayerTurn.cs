@@ -14,9 +14,9 @@ public class PlayerTurn : MonoBehaviour {
     {
 
         Debug.Log("GetSkill");
-        GameObject.Find("SkillPanel").transform.GetChild(0).GetComponent<Button>().interactable = true;
-        GameObject.Find("SkillPanel").transform.GetChild(1).GetComponent<Button>().interactable = true;
-        GameObject.Find("SkillPanel").transform.GetChild(2).GetComponent<Button>().interactable = true;
+        GameObject.Find("SkillPanel").transform.Find("Skill1").GetComponent<Button>().interactable = true;
+        GameObject.Find("SkillPanel").transform.Find("Skill1").GetComponent<Button>().interactable = true;
+        GameObject.Find("SkillPanel").transform.Find("Skill1").GetComponent<Button>().interactable = true;
         GameObject.Find("Button").GetComponent<Button>().interactable = true;
 
         currentEquipElementIndex = GetComponent<PlayerPrefs>().currentEquipElementIndex;
