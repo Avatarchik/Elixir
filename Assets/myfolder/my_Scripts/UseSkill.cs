@@ -381,6 +381,7 @@ public class UseSkill : MonoBehaviour {
                     attackedCritical = true;
                     monsterPrefs.monsterList[enemyIndexList[i]].guarded = true;
                     monsterPrefs.monsterObjectList[enemyIndexList[i]].transform.Find("guardIcon").gameObject.SetActive(true);
+					monsterPrefs.monsterObjectList[enemyIndexList[i]].transform.Find("criticalEffect").gameObject.SetActive(true);
                 }
             }
             else

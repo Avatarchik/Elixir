@@ -146,14 +146,14 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
 		}
 	}
 	void OnGUI(){
-        GUI.Label(new Rect(10, 40, 100, 20), "" + turnCount);//Display attack turn count
-        GUI.Label(new Rect(10, 60, 100, 20), "빛가루: " + dustCount);
-        if (GUILayout.Button ("NEXT STATE")){
-
-			if(currentState==BattleStates.IDLE){
-				currentState=BattleStates.ENEMYCHOICE;
-                resetTurn();
-			}
-		}
+        //GUI.Label(new Rect(10, 40, 100, 20), "" + turnCount);//Display attack turn count
+        //GUI.Label(new Rect(10, 60, 100, 20), "빛가루: " + dustCount);
+        //if (GUILayout.Button ("NEXT STATE")){
+		//
+		//	if(currentState==BattleStates.IDLE){
+		//		currentState=BattleStates.ENEMYCHOICE;
+        //        resetTurn();
+		//	}
+		//}
 	}
 }
