@@ -157,7 +157,7 @@ public class UseSkill : MonoBehaviour {
         {
             Debug.Log("Turn incremented");
             TBSMachine.incrementTurn();
-            GameObject.Find("AddTurn").transform.Find("1More").gameObject.SetActive(true);
+			GameObject.Find ("TurnUI").transform.Find("AddTurn").gameObject.SetActive(true);
             attackedCritical = false;
         }
 

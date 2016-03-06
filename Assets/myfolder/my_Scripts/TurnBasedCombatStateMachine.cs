@@ -8,6 +8,7 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
 
     public MonsterPrefs monsterPrefs;
     public PlayerPrefs playerPrefs;
+	public GameObject turnUI;
 
 	GameObject card1;
     public BattleStates currentState;
@@ -50,6 +51,7 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
 	void Start () {
         monsterPrefs = GameObject.Find("MonsterManager").GetComponent<MonsterPrefs>();
         playerPrefs = GetComponent<PlayerPrefs>();
+		turnUI = GameObject.Find ("TurnUI");
 
         currentState = BattleStates.START;
         //Load Databases
@@ -71,6 +73,9 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
         //{
         //    currentState = BattleStates.WIN;
         //}
+		turnUI.transform.Find("RemainingTurn").GetComponent<Text>().text = "남은 턴: " + turnCount;
+		turnUI.transform.Find("DustCount").GetComponent<Text>().text = "빛가루: " + dustCount;
+
 		switch (currentState) {
 		    case (BattleStates.START):
 			    currentState=BattleStates.PLAYERCHOICE;
@@ -144,16 +149,5 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
                 Debug.Log("Battle Won!");
                 break;
 		}
-	}
-	void OnGUI(){
-        //GUI.Label(new Rect(10, 40, 100, 20), "" + turnCount);//Display attack turn count
-        //GUI.Label(new Rect(10, 60, 100, 20), "빛가루: " + dustCount);
-        //if (GUILayout.Button ("NEXT STATE")){
-		//
-		//	if(currentState==BattleStates.IDLE){
-		//		currentState=BattleStates.ENEMYCHOICE;
-        //        resetTurn();
-		//	}
-		//}
 	}
 }
