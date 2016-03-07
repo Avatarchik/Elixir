@@ -73,7 +73,7 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
         //{
         //    currentState = BattleStates.WIN;
         //}
-		turnUI.transform.Find("RemainingTurn").GetComponent<Text>().text = "남은 공격기회: " + turnCount;
+		turnUI.transform.Find("RemainingTurn").GetComponent<Text>().text = "공격기회: " + turnCount;
 		turnUI.transform.Find("DustCount").GetComponent<Text>().text = "빛가루: " + dustCount;
 
 		switch (currentState) {
