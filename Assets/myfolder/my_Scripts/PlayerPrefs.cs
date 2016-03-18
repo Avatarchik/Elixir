@@ -79,7 +79,7 @@ public class PlayerPrefs : MonoBehaviour {
 
     public void GeneratePlayer()
     {
-		Vector3 PlayerPosition = new Vector3(-3.84f, 0.72f, 0);
+		Vector3 PlayerPosition = new Vector3(-3.34f, 1f, 0);
         GameObject Player = Instantiate(PlayerPrefab);
         Player.transform.position = PlayerPosition;
     }
