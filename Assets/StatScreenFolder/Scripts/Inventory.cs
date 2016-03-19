@@ -35,14 +35,14 @@ public class Inventory : MonoBehaviour {
         AddElement(1);
         AddElement(2);
         AddElement(3);
+        AddElement(4);
+        AddElement(5);
         AddElement(0);
         AddElement(1);
         AddElement(2);
         AddElement(3);
-        AddElement(0);
-        AddElement(1);
-        AddElement(2);
-        AddElement(3);
+        AddElement(4);
+        AddElement(5);
         AddElement(0);
         AddElement(1);
         AddElement(2);

@@ -15,8 +15,12 @@ public class baseCharacter{
     public float AttackDamage;
     public ChemicalStates criticalTarget;
     public ChemicalStates currentChemicalState;
-    public int currentChemicalStateValue;
-    public int solidStateValue;
+    
+	//2016-03-19 Changed int -> float
+	public float currentChemicalStateValue;
+    //
+
+	public int solidStateValue;
     public int liquidStateValue;
     public int gasStateValue;
     public int dodgeRate;

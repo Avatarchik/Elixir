@@ -14,12 +14,17 @@ public class ThermoBar : MonoBehaviour {
     public int valSolid;
     public int valLiquid;
     public int valGas;
-    public int pointerVal;
+
+	//2016-03-19 Changed int -> float
+    public float pointerVal;
+	//
     public int barSolid;
     public int barLiquid;
     public int barGas;
     public ChemicalStates currentCState;
-    public int currentCStateValue;
+    
+	//2016-03-19 Changed int -> float
+	public float currentCStateValue;
 
     // Use this for initialization
     void Start () {

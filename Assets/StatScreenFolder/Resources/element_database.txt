@@ -1,5 +1,7 @@
-﻿ID,ExtName,Name,ChemicalSeries,Description,characterRoomTemperatureState,SolidGauge,LiquidGauge,GasGauge,RoomTemperaturePosition,ElementCard1,ElementCard2,ElementCard3,EnableChemicalSeriesCard,EnableCardType
-101,수소,H,H,"우주에서 가장 많은 원소로 지구에서는 대부분 물 분자 속에 포함되어 있다. 수소는 DNA의 핵심 구성 요소이면서, 새로운 에너지원이기도 하다.",Gas,1,2,4,3,SkillH101,SkillH102,SkillH103,H,H
-102,리튬,Li,AlkaliMetal,가장 밀도가 낮은 고체 원소로 반응성이 강한 금속 주우 하나다. 주로 노트북 컴퓨터의 전지로 사용된다.,Solid,4,1,2,3,SkillLi101,SkillLi102,SkillLi103,AlkaliMetal,Li
-103,칼슘,Ca,AlkaliEarthMetal,반응성이 커서 자연계에 순수하게 존재하지 않고 탄산염 등의 화합물로 분포한다. 특히 인체의 뼈나 이에 함유되어 있고 각종 생리작용에 참여한다.,Solid,3,1,3,2,SkillCa101,SkillCa102,SkillCa103,AlkaliEarthMetal,Ca
-104,염소,Cl,Halogen,"자극성 냄새가 나는 황록색 기체로 표백제·소독제로 쓰며, 독성이 강해 2차대전 때 독가스로 살포되기도 했다.",Gas,2,1,4,3,SkillCl101,SkillCl102,SkillCl103,Halogen,Cl
+﻿ID,ExtName,Name,ChemicalSeries,ElementNumber,ProperLevel,Description,MeltingPoint,BoilingPoint,characterRoomTemperatureState,SolidGauge,LiquidGauge,GasGauge,RoomTemperaturePosition,ElementSkill1,ElementSkill2,ElementSkill3
+101,수소,H,-,1,1,"우주에서 가장 많은 원소로 지구에서는 대부분 물 분자 속에 포함되어 있다. 수소는 DNA의 핵심 구성 요소이면서, 새로운 에너지원이기도 하다.",-259.14,-252.87,Gas,1,1,5,5.5,SkillH101,SkillH102,SkillH103
+102,헬륨,He,NobleGas,2,1,"비행선이나 기구, 풍선 등에 쓰인다.",-272.2,-268.934,Gas,1,1,5,5.5,SkillHe101,SkillHe102,SkillHe103
+103,리튬,Li,AlkaliMetal,3,1,가장 밀도가 낮은 고체 원소로 반응성이 강한 금속 주우 하나다. 주로 노트북 컴퓨터의 전지로 사용된다.,180.54,1347,Solid,2,2,3,1.5,SkillLi101,SkillLi102,SkillLi103
+104,베릴륨,Be,AlkalineEarthMetal,4,1,합금은 강력한 용수철의 재료가 된다,1282,2970,Solid,3,2,2,1.5,SkillBe101,SkillBe102,SkillBe103
+105,붕소,B,Metalloid,5,1,내열성 유리의 재료로 사용된다.,2300,3658,Solid,4,2,1,2.5,SkillB101,SkillB102,SkillB103
+106,탄소,C,PolyatomicNonmetal,6,1,유기물의 골격 원자이다.,3550,4800,Solid,5,1,1,2.5,SkillC101,SkillC102,SkillC103
