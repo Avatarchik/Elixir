@@ -60,7 +60,11 @@ public class PlayerPrefs : MonoBehaviour {
         temp.extName = original.extName;
         temp.name = original.name;
         temp.chemicalSeries = original.chemicalSeries;
+		temp.elementNumber = original.elementNumber;
+		temp.properLevel = original.properLevel;
         temp.desription = original.desription;
+		temp.meltingPoint = original.meltingPoint;
+		temp.boilingPoint = original.boilingPoint;
         temp.characterRoomTempState = original.characterRoomTempState;
         temp.solidGauge = original.solidGauge;
         temp.liquidGauge = original.liquidGauge;
@@ -69,11 +73,6 @@ public class PlayerPrefs : MonoBehaviour {
         temp.elementCard1 = original.elementCard1;
         temp.elementCard2 = original.elementCard2;
         temp.elementCard3 = original.elementCard3;
-        temp.enableChemSeriesCard = original.enableChemSeriesCard;
-        temp.enableCardType = original.enableCardType;
-
-        temp.chemSeriesCard = original.chemSeriesCard;
-
         return temp;
 }
 

@@ -10,8 +10,10 @@ public class PlayerChemicalStateBar : MonoBehaviour {
     private float minXValue;
     private float maxXValue;
     public ChemicalStates currentCState;
-    public int currentCStateValue;
-    public int valSolid;
+	//2016-03-19 Changed int -> float
+    public float currentCStateValue;
+    //
+	public int valSolid;
     public int valLiquid;
     public int valGas;
     public float arrowVal;
