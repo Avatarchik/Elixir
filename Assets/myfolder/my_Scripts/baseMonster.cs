@@ -20,7 +20,7 @@ public class baseMonster {
     private double mon_Skill1_Rate;
     private string mon_Skill2_Name;
     private double mon_Skill2_Rate;
-    private ChemicalStates mon_CriticalTarget;
+    private ChemicalStates mon_WeakPoint;
     private ChemicalStates mon_RoomTempStatus;
     private int mon_SolidGauge;
     private int mon_LiquidGauge;
@@ -328,16 +328,16 @@ public class baseMonster {
         }
     }
 
-    public ChemicalStates Mon_CriticalTarget
+    public ChemicalStates Mon_WeakPoint
     {
         get
         {
-            return mon_CriticalTarget;
+			return mon_WeakPoint;
         }
 
         set
         {
-            mon_CriticalTarget = value;
+			mon_WeakPoint = value;
         }
     }
 

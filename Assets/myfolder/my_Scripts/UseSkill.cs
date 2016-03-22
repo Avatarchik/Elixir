@@ -373,7 +373,7 @@ public class UseSkill : MonoBehaviour {
 
         for (int i = 0; i < countArray; i++) //Repeat procedure for every selected enemies listed in selectedEnemy array
         {
-            if (monsterPrefs.monsterList[enemyIndexList[i]].currentChemicalState == criticalTarget)
+            if (monsterPrefs.monsterList[enemyIndexList[i]].weakPoint == criticalTarget)
             {
                 criticalRate = 1.5f;
                 if (!monsterPrefs.monsterList[enemyIndexList[i]].guarded && !monsterPrefs.monsterList[enemyIndexList[i]].shielded)
@@ -418,7 +418,7 @@ public class UseSkill : MonoBehaviour {
             if (currentSelectedSkill.Skill_DebuffName == "Stun")
             {
                 stunRate = currentSelectedSkill.Skill_DebuffRate;
-                if (monsterPrefs.monsterList[enemyIndexList[i]].currentChemicalState == criticalTarget)
+				if (monsterPrefs.monsterList[enemyIndexList[i]].weakPoint == criticalTarget)
                 {
                     stunRate += 10f;
                 }
@@ -436,7 +436,7 @@ public class UseSkill : MonoBehaviour {
             if (currentSelectedSkill.Skill_DebuffName == "Silent")
             {
                 silentRate = currentSelectedSkill.Skill_DebuffRate;
-                if (monsterPrefs.monsterList[enemyIndexList[i]].currentChemicalState == criticalTarget)
+				if (monsterPrefs.monsterList[enemyIndexList[i]].weakPoint == criticalTarget)
                 {
                     silentRate += 10f;
                 }
@@ -454,7 +454,7 @@ public class UseSkill : MonoBehaviour {
             if (currentSelectedSkill.Skill_DebuffName == "Blind")
             {
                 blindRate = currentSelectedSkill.Skill_DebuffRate;
-                if (monsterPrefs.monsterList[enemyIndexList[i]].currentChemicalState == criticalTarget)
+				if (monsterPrefs.monsterList[enemyIndexList[i]].weakPoint == criticalTarget)
                 {
                     blindRate += 10f;
                 }

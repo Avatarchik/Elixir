@@ -35,16 +35,16 @@ public class MonsterLoad:MonoBehaviour
 			monster.Mon_Skill1_Rate = System.Convert.ToDouble(rowList[i].MonsterSkill1Rate);
 			monster.Mon_Skill2_Name = rowList[i].MonsterSkill2Name;
 			monster.Mon_Skill2_Rate = System.Convert.ToDouble(rowList[i].MonsterSkill2Rate);
-            switch (rowList[i].CriticalTarget)
+			switch (rowList[i].WeakPoint)
             {
                 case "Solid":
-                    monster.Mon_CriticalTarget = ChemicalStates.SOLID;
+					monster.Mon_WeakPoint = ChemicalStates.SOLID;
                     break;
                 case "Liquid":
-                    monster.Mon_CriticalTarget = ChemicalStates.LIQUID;
+					monster.Mon_WeakPoint= ChemicalStates.LIQUID;
                     break;
                 case "Gas":
-                    monster.Mon_CriticalTarget = ChemicalStates.GAS;
+					monster.Mon_WeakPoint = ChemicalStates.GAS;
                     break;
             }
             switch (rowList[i].RoomTemperatureStatus)
@@ -68,7 +68,7 @@ public class MonsterLoad:MonoBehaviour
 			monster.Mon_GoldRate = System.Convert.ToInt32(rowList[i].GoldRate);
 			monster.Mon_MonCard1GainRate = System.Convert.ToInt32(rowList[i].MonsterCard1GainRate);
 			monster.Mon_MonCard2GainRate = System.Convert.ToInt32(rowList[i].MonsterCard2GainRate);
-			
+			//Debug.Log ("Monster Weakness : " + monster.Mon_WeakPoint);
 			monsterList.Add(monster);
 		}
 		
@@ -90,7 +90,7 @@ public class MonsterLoad:MonoBehaviour
 		public string MonsterSkill1Rate;
 		public string MonsterSkill2Name;
 		public string MonsterSkill2Rate;
-		public string CriticalTarget;
+		public string WeakPoint;
 		public string RoomTemperatureStatus;
 		public string SolidGauge;
 		public string LiquidGauge;
@@ -138,7 +138,7 @@ public class MonsterLoad:MonoBehaviour
 			row.MonsterSkill1Rate = grid[i][11];
 			row.MonsterSkill2Name = grid[i][12];
 			row.MonsterSkill2Rate = grid[i][13];
-			row.CriticalTarget = grid[i][14];
+			row.WeakPoint = grid[i][14];
 			row.RoomTemperatureStatus = grid[i][15];
 			row.SolidGauge = grid[i][16];
 			row.LiquidGauge = grid[i][17];
@@ -279,13 +279,13 @@ public class MonsterLoad:MonoBehaviour
 	{
 		return rowList.FindAll(x => x.MonsterSkill2Rate == find);
 	}
-	public Row Find_CriticalTarget(string find)
+	public Row Find_WeakPoint(string find)
 	{
-		return rowList.Find(x => x.CriticalTarget == find);
+		return rowList.Find(x => x.WeakPoint == find);
 	}
-	public List<Row> FindAll_CriticalTarget(string find)
+	public List<Row> FindAll_WeakPoint(string find)
 	{
-		return rowList.FindAll(x => x.CriticalTarget == find);
+		return rowList.FindAll(x => x.WeakPoint == find);
 	}
 	public Row Find_RoomTemperatureStatus(string find)
 	{

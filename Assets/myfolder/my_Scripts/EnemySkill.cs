@@ -295,7 +295,7 @@ public class EnemySkill : MonoBehaviour {
             }
             else
             {
-                playerPrefs.player.SetDamage(self.attackDamage);
+				playerPrefs.player.SetDamage(self.attackDamage, self.currentChemicalState);
                 animator.SetTrigger("Attack");
             }
 

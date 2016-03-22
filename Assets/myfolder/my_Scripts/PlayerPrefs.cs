@@ -18,6 +18,7 @@ public class PlayerPrefs : MonoBehaviour {
  
         //Temporarily choose equipped elements
         party.Add(CloneElement(elementList[0]));
+		//Debug.Log ("Clone Elemental Weakness  " + elementList[0].weakPoint);
         party.Add(CloneElement(elementList[0]));
         party.Add(CloneElement(elementList[1]));
         party.Add(CloneElement(elementList[1]));
@@ -73,6 +74,7 @@ public class PlayerPrefs : MonoBehaviour {
         temp.elementCard1 = original.elementCard1;
         temp.elementCard2 = original.elementCard2;
         temp.elementCard3 = original.elementCard3;
+		temp.weakPoint = original.weakPoint;
         return temp;
 }
 
@@ -86,6 +88,7 @@ public class PlayerPrefs : MonoBehaviour {
     public void SetPlayerInfo()
     {
         //Change player's stats according to current element
+		player.weakPoint = currentEquipElement.weakPoint;
         player.currentChemicalState = currentEquipElement.characterRoomTempState;
         player.currentChemicalStateValue = currentEquipElement.roomTempPos;
 

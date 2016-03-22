@@ -66,7 +66,7 @@ public class MonsterPrefs : MonoBehaviour {
         newMonster.solidStateValue = baseMon.Mon_SolidGauge;
         newMonster.liquidStateValue = baseMon.Mon_LiquidGauge;
         newMonster.gasStateValue = baseMon.Mon_GasGauge;
-        newMonster.criticalTarget = baseMon.Mon_CriticalTarget;
+		newMonster.weakPoint = baseMon.Mon_WeakPoint;
 
         newMonster.Initialize();
         return newMonster;
