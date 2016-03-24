@@ -1,0 +1,177 @@
+fileFormatVersion: 2
+guid: b2b434d3d91d7ae4488d962e7d2e96bd
+timeCreated: 1458635374
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: heroin1
+    21300002: heroin2
+    21300004: heroin_2
+    21300006: heroin_3
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings:
+  - buildTarget: Android
+    maxTextureSize: 512
+    textureFormat: -3
+    compressionQuality: 50
+    allowsAlphaSplitting: 0
+  spriteSheet:
+    sprites:
+    - name: heroin1
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 17
+        width: 172
+        height: 305
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 24.428574, y: -97.6756}
+        - {x: 24.428574, y: -108.6756}
+        - {x: 27.428574, y: -111.6756}
+        - {x: 30.428574, y: -112.6756}
+        - {x: 55.428574, y: -94.6756}
+        - {x: 76.42857, y: -8.675598}
+        - {x: 76.42857, y: 115.3244}
+        - {x: 43.428574, y: 134.3244}
+        - {x: -67.57143, y: 134.3244}
+        - {x: -74.57143, y: 126.3244}
+        - {x: -74.57143, y: -84.6756}
+        - {x: -56.571426, y: -132.6756}
+        - {x: 43.428574, y: -132.6756}
+        - {x: 45.428574, y: -131.6756}
+        - {x: 24.428574, y: -111.6756}
+      - - {x: -54.571426, y: -99.6756}
+        - {x: -55.571426, y: -102.6756}
+        - {x: -55.571426, y: -104.6756}
+        - {x: -53.571426, y: -106.6756}
+        - {x: -49.571426, y: -106.6756}
+        - {x: -48.571426, y: -104.6756}
+        - {x: -48.571426, y: -100.6756}
+        - {x: -50.571426, y: -99.6756}
+      - - {x: -32.571426, y: -68.6756}
+        - {x: -29.571426, y: -67.6756}
+        - {x: -29.571426, y: -64.6756}
+        - {x: -32.571426, y: -63.6756}
+        - {x: -34.571426, y: -65.6756}
+    - name: heroin2
+      rect:
+        serializedVersion: 2
+        x: 199
+        y: 17
+        width: 170
+        height: 303
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 38.032745, y: 133.8244}
+        - {x: -40.967255, y: 133.8244}
+        - {x: -71.967255, y: 123.8244}
+        - {x: -73.967255, y: 110.8244}
+        - {x: -73.967255, y: 6.824402}
+        - {x: -51.967255, y: -131.1756}
+        - {x: -50.967255, y: -132.1756}
+        - {x: 53.032745, y: -132.1756}
+        - {x: 75.032745, y: -34.1756}
+        - {x: 75.032745, y: 89.8244}
+      - - {x: -57.967255, y: -101.1756}
+        - {x: -57.967255, y: -104.1756}
+        - {x: -55.967255, y: -106.1756}
+        - {x: -51.967255, y: -106.1756}
+        - {x: -49.967255, y: -104.1756}
+        - {x: -49.967255, y: -102.1756}
+        - {x: -52.967255, y: -99.1756}
+      - - {x: -33.967255, y: -71.1756}
+        - {x: -30.967255, y: -70.1756}
+        - {x: -30.967255, y: -67.1756}
+        - {x: -33.967255, y: -66.1756}
+        - {x: -35.967255, y: -68.1756}
+      - - {x: 63.032745, y: 129.8244}
+        - {x: 66.032745, y: 130.8244}
+        - {x: 66.032745, y: 133.8244}
+        - {x: 60.032745, y: 133.8244}
+        - {x: 60.032745, y: 132.8244}
+    - name: heroin_2
+      rect:
+        serializedVersion: 2
+        x: 351
+        y: 319
+        width: 5
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: heroin_3
+      rect:
+        serializedVersion: 2
+        x: 413
+        y: 181
+        width: 148
+        height: 155
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -64.85416, y: 68.83632}
+        - {x: -64.85416, y: -24.163681}
+        - {x: -50.854156, y: -57.16368}
+        - {x: -14.8541565, y: -67.16368}
+        - {x: 28.145844, y: -67.16368}
+        - {x: 65.14584, y: -41.16368}
+        - {x: 65.14584, y: 68.83632}
+      - - {x: -55.854156, y: -39.16368}
+        - {x: -52.854156, y: -38.16368}
+        - {x: -52.854156, y: -35.16368}
+        - {x: -55.854156, y: -34.16368}
+        - {x: -57.854156, y: -36.16368}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
