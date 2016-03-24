@@ -7,6 +7,7 @@ using EnumsAndClasses;
 public class Monster{
     public int monsterID;
     public int maxHp;
+	public string monsterExtName;
     public int hp;
     public int attackDamage;
     public string type;
@@ -121,7 +122,7 @@ public class Monster{
             }
         }
 		if(this.weakPoint == critical)
-			Debug.Log("Critical!! Get " + (damage + damage / 2) + " damage by player");
+			Debug.Log("Critical!!" + this.monsterExtName + "Get " + (damage + damage / 2) + " damage by player");
 		else
 			Debug.Log("Get " + damage + " damage by player");
     }
