@@ -13,7 +13,7 @@ public class baseCharacter{
 	public float MAX_HP=200.0f;
 	public float HP;
     public float AttackDamage;
-    public ChemicalStates criticalTarget;
+	public ChemicalStates weakPoint;
     public ChemicalStates currentChemicalState;
     
 	//2016-03-19 Changed int -> float
@@ -80,7 +80,7 @@ public class baseCharacter{
     }
     public void SetHeal(int heal, ChemicalStates critical)
     {
-        if (this.currentChemicalState == critical)
+		if (this.weakPoint == critical)
         {
             HP += (int)(heal * 1.5f);
         }
@@ -116,40 +116,35 @@ public class baseCharacter{
     }
     public void SetDamage(int damage, ChemicalStates critical)
     {
-        int finalDamage = 0;
-        if (this.currentChemicalState == critical)
-        {
-            if (criticalTargetImmuned)
-            {
-                Debug.Log("Critical Target Immuned");
-                finalDamage = damage;
-            }
-            else
-            {
-                finalDamage = (int)(damage * 1.5f);
-            }
-        }
-        else
-        {
-            finalDamage = damage;
-        }
+        int finalDamage = damage;
+		Debug.Log ("Character WeakPoint " + this.weakPoint);
+		Debug.Log ("Enemy CurrentState" + critical);
+		if (criticalTargetImmuned || this.weakPoint != critical)
+			finalDamage = damage;
+		else if (!criticalTargetImmuned && this.weakPoint == critical)
+			finalDamage = damage + (damage / 2);
 
-        if (damageResisted)
-        {
-            finalDamage -= (finalDamage * damageResistance.Effect) /100;
-            HP -= finalDamage;
-        }
-        else
-        {
-            HP -= finalDamage;
-        }
+		if (damageResisted)
+		{
+			finalDamage -= (finalDamage * damageResistance.Effect) /100;
+			HP -= finalDamage;
+			Debug.Log("Resisted! " + damageResistance.Effect);
+		}
+		else
+		{
+			HP -= finalDamage;
+		}
 
-        if (HP < 0)
-        {
-            HP = 0;
-            isDead = true;
-        }
-        Debug.Log("Get " + finalDamage + " damage by monster");
+		if (HP < 0)
+		{
+			HP = 0;
+			isDead = true;
+		}
+			
+		if(this.weakPoint == critical)
+        	Debug.Log("Critical!! Get " + finalDamage + " damage by monster");
+		else
+			Debug.Log("Get " + damage + " -> " + finalDamage + " damage by monster");
     }
 
     public void ChangeState(ChemicalStates chemicalState)

@@ -46,6 +46,20 @@ public class Loader : MonoBehaviour {
             element.elementCard1 = grid[i][14];
             element.elementCard2 = grid[i][15];
             element.elementCard3 = grid[i][16];
+			//element.weakPoint = grid [i] [17];
+			switch (grid[i][17])
+			{
+			case "Gas":
+				element.weakPoint = ChemicalStates.GAS;
+				break;
+			case "Liquid":
+				element.weakPoint = ChemicalStates.LIQUID;
+				break;
+			case "Solid":
+				element.weakPoint = ChemicalStates.SOLID;
+				break;
+			}
+			Debug.Log ("Element WeakPoint " + element.weakPoint);
             //element.enableChemSeriesCard = grid[i][13];
             //element.enableCardType = grid[i][14];
             

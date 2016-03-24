@@ -7,6 +7,7 @@ using EnumsAndClasses;
 public class Monster{
     public int monsterID;
     public int maxHp;
+	public string monsterExtName;
     public int hp;
     public int attackDamage;
     public string type;
@@ -25,7 +26,7 @@ public class Monster{
     public int solidStateValue;
     public int liquidStateValue;
     public int gasStateValue;
-    public ChemicalStates criticalTarget;
+    public ChemicalStates weakPoint;
 
     public MonsterPrefs monsterPrefs;
 	public baseMonster monsterInfo;
@@ -106,9 +107,9 @@ public class Monster{
         }
         else
         {
-            if(this.currentChemicalState == critical)
+			if(this.weakPoint == critical)
             {
-                hp -= (int)(damage * 1.5f);
+				hp -= (damage + damage / 2);
             }
             else
             {
@@ -120,7 +121,10 @@ public class Monster{
                 Dead();
             }
         }
-        Debug.Log("Get " + damage + " damage by player");
+		if(this.weakPoint == critical)
+			Debug.Log("Critical!!" + this.monsterExtName + "Get " + (damage + damage / 2) + " damage by player");
+		else
+			Debug.Log("Get " + damage + " damage by player");
     }
 
     public void ChangeState(ChemicalStates chemicalState)

@@ -127,13 +127,21 @@ public class EnemySkill : MonoBehaviour {
         MonsterSkillRow skill = GetComponent<MonsterSkillLoad>().Find_MonsterSkillID(skillName);
         int targetIndex;
         int randSeed;
+		int debuffSkillRate;
+		int criticalDeBuffRate = 0;
 
-        animator.SetTrigger("Attack");
+		if (player.weakPoint == self.currentChemicalState)
+			criticalDeBuffRate = 1;
+
+		debuffSkillRate = skill.DebuffRate + (skill.DebuffRate * criticalDeBuffRate / 10);
+        
+		animator.SetTrigger("Attack");
         if (self.blinded)
         {
             Debug.Log("This monster is blinded. Attack failed");
             return;
         }
+		Debug.Log ("EnemySkillClass -> Player Weakness : " + player.weakPoint + " Enemy Attack : " + self.currentChemicalState);
         switch (skillName)
         {
             case "SingleAttack":
@@ -148,7 +156,7 @@ public class EnemySkill : MonoBehaviour {
                 Debug.Log("AttackNActionlimit");
                 player.SetDamage(self.attackDamage * skill.DamageFactor / 100, self.currentChemicalState);
                 Debuff actionLimit = new Debuff(DebuffName.ActionLimit, skill.DebuffTurn);
-                if (rand.Next(1, 101) <= skill.DebuffRate)
+			if (rand.Next(1, 101) <= debuffSkillRate)
                 {
                     player.AddDebuff(actionLimit);
                 }
@@ -295,7 +303,7 @@ public class EnemySkill : MonoBehaviour {
             }
             else
             {
-                playerPrefs.player.SetDamage(self.attackDamage);
+				playerPrefs.player.SetDamage(self.attackDamage, self.currentChemicalState);
                 animator.SetTrigger("Attack");
             }
 

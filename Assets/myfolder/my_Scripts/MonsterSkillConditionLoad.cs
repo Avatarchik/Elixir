@@ -48,7 +48,7 @@ public class MonsterSkillConditionLoad:MonoBehaviour{
 			if(grid[i][9]!="N/A")
 			row.RandomRate = System.Convert.ToInt32(grid[i][9]);
 			row.TargetAffectedEffect = grid[i][10];
-			
+			//Debug.Log ("Monster skill cond : " + );
 			rowList.Add(row);
 		}
 		isLoaded = true;

@@ -20,4 +20,5 @@ public class Element{
     public string elementCard1;
     public string elementCard2;
     public string elementCard3;
+	public ChemicalStates weakPoint;
 }
