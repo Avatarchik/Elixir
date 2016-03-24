@@ -18,10 +18,18 @@ public class PlayerPrefs : MonoBehaviour {
  
         //Temporarily choose equipped elements
         party.Add(CloneElement(elementList[0]));
+/*
+<<<<<<< HEAD
 		//Debug.Log ("Clone Elemental Weakness  " + elementList[0].weakPoint);
         party.Add(CloneElement(elementList[0]));
         party.Add(CloneElement(elementList[1]));
+=======
+>>>>>>> master
+
+*/
         party.Add(CloneElement(elementList[1]));
+        party.Add(CloneElement(elementList[2]));
+        party.Add(CloneElement(elementList[4]));
 
         //Create list of skills of each element in party
         List<baseSkill> cardList = GetComponent<SkillLoader>().skillList;
