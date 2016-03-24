@@ -68,8 +68,7 @@ public class MonsterLoad:MonoBehaviour
 			monster.Mon_GoldRate = System.Convert.ToInt32(rowList[i].GoldRate);
 			monster.Mon_MonCard1GainRate = System.Convert.ToInt32(rowList[i].MonsterCard1GainRate);
 			monster.Mon_MonCard2GainRate = System.Convert.ToInt32(rowList[i].MonsterCard2GainRate);
-			Debug.Log ("Monster : " + monster.Mon_ExtName +" Weakness : " + monster.Mon_WeakPoint);
-			//Debug.Log("Monster Loader" + monster.Mon_ExtName);
+			//Debug.Log ("Monster Weakness : " + monster.Mon_WeakPoint);
 			monsterList.Add(monster);
 		}
 		

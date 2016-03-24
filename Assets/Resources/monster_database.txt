@@ -3,4 +3,4 @@
 30002,로봇 강아지,RobotPuppy,NonMetal,C,1,1,1,20,6,Heal,80,StrongAttack,50,Liquid,Solid,4,2,1,2,2,N/A,4,3,2
 30003,헬륨 비행선,Airship,NobleGas,He,1,1,1,30,8,DotDamageSingle,50,EnemyTransGas,50,Gas,Gas,1,1,5,4,2,N/A,4,3,2
 30004,벤젠 모형,Benzene,N/A,C,1,1,1,20,8,Freeze,80,Heal,50,Solid,Solid,3,1,3,1.5,2,N/A,4,3,2
-30005,스트론튬 폭죽,strontium,AlkaliEarthMetal,Sr,1,1,1,15,5,AttackNActionlimit,70,Heat,80,Gas,Liquid,4,1,2,4.5,2,N/A,3,3,2
+30005,스트론튬 폭죽,Firecracker,AlkaliEarthMetal,Sr,1,1,1,15,5,AttackNActionlimit,70,Heat,80,Gas,Liquid,4,1,2,4.5,2,N/A,3,3,2

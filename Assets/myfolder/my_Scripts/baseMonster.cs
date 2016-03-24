@@ -8,7 +8,7 @@ public class baseMonster {
     private int mon_ID;
     private string mon_ExtName;
     private string mon_Name;
-    //private string mon_Group;
+    private string mon_Group;
     private string mon_ChemicalSeries;
     private string mon_Type;
     private int mon_Grade;

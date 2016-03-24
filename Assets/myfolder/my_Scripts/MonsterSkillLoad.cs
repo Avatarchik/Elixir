@@ -82,7 +82,7 @@ public class MonsterSkillLoad:MonoBehaviour
 			if(grid[i][24]!="N/A")
 			row.BuffTurn = System.Convert.ToInt32 (grid[i][24]);
 			row.BuffEffect = grid[i][25];
-			//Debug.Log (row.DebuffName + " Debuff Rate : " + row.DebuffRate);
+			Debug.Log (row.DebuffName + " Debuff Rate : " + row.DebuffRate);
 			rowList.Add(row);
 		}
 		isLoaded = true;
