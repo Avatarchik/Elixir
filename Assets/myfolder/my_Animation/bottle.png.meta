@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: 51c9847fcfc0c954c82024fe2453a7b0
-timeCreated: 1458625004
+guid: 2ea76bd63295a8d4abbf60b408d3a0ed
+timeCreated: 1459078959
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName: {}
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 0
+    enableMipMap: 1
     linearTexture: 0
     correctGamma: 0
     fadeOut: 0
@@ -51,7 +51,7 @@ TextureImporter:
   - buildTarget: Android
     maxTextureSize: 512
     textureFormat: -1
-    compressionQuality: 50
+    compressionQuality: 100
     allowsAlphaSplitting: 0
   spriteSheet:
     sprites: []

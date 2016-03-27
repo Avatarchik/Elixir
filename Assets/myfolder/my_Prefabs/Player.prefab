@@ -1,5 +1,21 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &105950
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 433584}
+  - 212: {fileID: 21233514}
+  m_Layer: 0
+  m_Name: bottle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &121444
 GameObject:
   m_ObjectHideFlags: 1
@@ -166,22 +182,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!1 &168808
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 418076}
-  - 212: {fileID: 21239370}
-  m_Layer: 0
-  m_Name: heroin_3
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &178458
 GameObject:
   m_ObjectHideFlags: 1
@@ -287,18 +287,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &418076
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 168808}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.6520288, y: 0.26310474, z: 0}
-  m_LocalScale: {x: 0.8989838, y: 0.8989838, z: 0.8989838}
-  m_Children: []
-  m_Father: {fileID: 487888}
-  m_RootOrder: 4
 --- !u!4 &420492
 Transform:
   m_ObjectHideFlags: 1
@@ -326,6 +314,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 487888}
   m_RootOrder: 1
+--- !u!4 &433584
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 105950}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.68, y: 0.19, z: 0}
+  m_LocalScale: {x: 0.8989838, y: 0.8989838, z: 0.8989838}
+  m_Children: []
+  m_Father: {fileID: 487888}
+  m_RootOrder: 4
 --- !u!4 &438634
 Transform:
   m_ObjectHideFlags: 1
@@ -393,14 +393,14 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 178922}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.7592115, y: 0.58158755, z: 0}
+  m_LocalPosition: {x: -2.43, y: 0.64, z: 0}
   m_LocalScale: {x: 1.1123672, y: 1.1123672, z: 1.1123672}
   m_Children:
   - {fileID: 446870}
   - {fileID: 420678}
   - {fileID: 22459182}
   - {fileID: 443080}
-  - {fileID: 418076}
+  - {fileID: 433584}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!61 &6100514
@@ -805,12 +805,12 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
---- !u!212 &21239370
+--- !u!212 &21233514
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 168808}
+  m_GameObject: {fileID: 105950}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -830,8 +830,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 2
-  m_Sprite: {fileID: 21300006, guid: b2b434d3d91d7ae4488d962e7d2e96bd, type: 3}
+  m_SortingOrder: 3
+  m_Sprite: {fileID: 21300000, guid: 2ea76bd63295a8d4abbf60b408d3a0ed, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

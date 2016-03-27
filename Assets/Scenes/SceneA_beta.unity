@@ -5298,7 +5298,7 @@ MonoBehaviour:
     MAX_HP: 200
     HP: 0
     AttackDamage: 0
-    criticalTarget: 0
+    weakPoint: 0
     currentChemicalState: 0
     currentChemicalStateValue: 0
     solidStateValue: 0
@@ -5366,6 +5366,7 @@ MonoBehaviour:
     elementCard1: 
     elementCard2: 
     elementCard3: 
+    weakPoint: 0
   currentEquipElementIndex: 0
 --- !u!114 &1302277328
 MonoBehaviour:
