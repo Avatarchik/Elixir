@@ -17,15 +17,8 @@ public class PlayerPrefs : MonoBehaviour {
         List<Element> elementList = GetComponent<Loader>().elementList;
  
         //Temporarily choose equipped elements
+
         party.Add(CloneElement(elementList[0]));
-		/*
-<<<<<<< HEAD
-		//Debug.Log ("Clone Elemental Weakness  " + elementList[0].weakPoint);
-        party.Add(CloneElement(elementList[0]));
-        party.Add(CloneElement(elementList[1]));
-=======
->>>>>>> master
-*/
         party.Add(CloneElement(elementList[1]));
         party.Add(CloneElement(elementList[2]));
         party.Add(CloneElement(elementList[4]));
