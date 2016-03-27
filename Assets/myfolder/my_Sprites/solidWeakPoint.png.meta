@@ -1,13 +1,9 @@
 fileFormatVersion: 2
-guid: b2b434d3d91d7ae4488d962e7d2e96bd
-timeCreated: 1458751804
+guid: 917651f9195d1d54aa139ec2f53bfd2a
+timeCreated: 1459081018
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: heroin1
-    21300002: heroin2
-    21300004: heroin_2
-    21300006: heroin_3
+  fileIDToRecycleName: {}
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -21,7 +17,7 @@ TextureImporter:
   bumpmap:
     convertToNormalMap: 0
     externalNormalMap: 0
-    heightScale: .25
+    heightScale: 0.25
     normalMapFilter: 0
   isReadable: 0
   grayScaleToAlpha: 0
@@ -33,7 +29,7 @@ TextureImporter:
   textureFormat: -1
   maxTextureSize: 2048
   textureSettings:
-    filterMode: 1
+    filterMode: -1
     aniso: 16
     mipBias: -1
     wrapMode: 1
@@ -41,52 +37,25 @@ TextureImporter:
   lightmap: 0
   rGBM: 0
   compressionQuality: 50
-  spriteMode: 2
+  allowsAlphaSplitting: 0
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
-  spritePivot: {x: .5, y: .5}
+  spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
   alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings:
   - buildTarget: Android
-    maxTextureSize: 1024
-    textureFormat: -3
+    maxTextureSize: 512
+    textureFormat: -1
     compressionQuality: 50
+    allowsAlphaSplitting: 0
   spriteSheet:
-    sprites:
-    - name: heroin1
-      rect:
-        serializedVersion: 2
-        x: 24
-        y: 17
-        width: 172
-        height: 305
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: heroin2
-      rect:
-        serializedVersion: 2
-        x: 199
-        y: 17
-        width: 170
-        height: 303
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: heroin_3
-      rect:
-        serializedVersion: 2
-        x: 413
-        y: 181
-        width: 148
-        height: 155
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+    sprites: []
+    outline: []
   spritePackingTag: 
   userData: 
   assetBundleName: 
