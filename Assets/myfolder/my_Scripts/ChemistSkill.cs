@@ -2,7 +2,7 @@
 using System.Collections;
 using EnumsAndClasses;
 using System;
-
+using UnityEngine.UI;
 public class ChemistSkill : MonoBehaviour{
     private bool isActive;
 
@@ -28,7 +28,13 @@ public class ChemistSkill : MonoBehaviour{
         gameObject.transform.Find("Change").gameObject.SetActive(false);
         isActive = false;
     }
-
+	public void InteractAllButton()
+	{
+		GameObject.Find("Button").transform.Find("CoolIcon").GetComponent<Button>().interactable = true;
+		GameObject.Find("Button").transform.Find("HeatIcon").GetComponent<Button>().interactable = true;
+		GameObject.Find("Button").transform.Find("AnalyzeIcon").GetComponent<Button>().interactable = true;
+		GameObject.Find("Button").transform.Find("Change").GetComponent<Button>().interactable = true;
+	}
     public void Clicked()
     {
         if (!isActive)
