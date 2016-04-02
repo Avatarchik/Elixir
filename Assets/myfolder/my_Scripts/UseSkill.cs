@@ -587,12 +587,28 @@ public class UseSkill : MonoBehaviour {
         highestDamage = 0;
 
         //Decrement Turn
-        TBSMachine.decrementTurn();
+		if (currentSkillIndex >= 0 && currentSkillIndex <= 2)
+			TBSMachine.decrementTurn ();
+		else
+		{
+			if (TBSMachine.GetChemicalSkillCount () == 0)
+				TBSMachine.decrementTurn ();
+			else
+			{
+				TBSMachine.decrementChemistSkillCount ();
+
+				if(currentSkillIndex == 3)
+					GameObject.Find ("Button").transform.Find("CoolIcon").GetComponent<Button> ().interactable = false;
+				else if(currentSkillIndex == 4)
+					GameObject.Find ("Button").transform.Find("HeatIcon").GetComponent<Button> ().interactable = false;
+			}
+		}
 
         if (TBSMachine.isTurnExhausted())
         {
             TBSMachine.currentState = TurnBasedCombatStateMachine.BattleStates.ENEMYCHOICE;
             TBSMachine.resetTurn();
+			TBSMachine.resetChemistSkillCount ();
 
             for(int i = 0; i < monsterPrefs.monsterList.Count; i++)
             {

@@ -96,12 +96,20 @@ public class ChangeElement : MonoBehaviour {
         TurnBasedCombatStateMachine TBSMachine = GameObject.Find("GameManager").GetComponent<TurnBasedCombatStateMachine>();
 
         GameObject.Find("Button").GetComponent<ChemistSkill>().DisableButtons();
-        TBSMachine.decrementTurn();
+
+		if (TBSMachine.GetChemicalSkillCount () == 0)
+			TBSMachine.decrementTurn ();
+		else 
+		{
+			TBSMachine.decrementChemistSkillCount ();
+			GameObject.Find ("Button").transform.Find ("Change").GetComponent<Button> ().interactable = false;
+		}
+
         if (TBSMachine.isTurnExhausted())
         {
             TBSMachine.currentState = TurnBasedCombatStateMachine.BattleStates.ENEMYCHOICE;
             TBSMachine.resetTurn();
-
+			TBSMachine.resetChemistSkillCount ();
             for(int i = 0; i < monsterPrefs.monsterList.Count; i++)
             {
                 monsterPrefs.monsterList[i].guarded = false;

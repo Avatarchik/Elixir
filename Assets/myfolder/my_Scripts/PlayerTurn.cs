@@ -18,7 +18,7 @@ public class PlayerTurn : MonoBehaviour {
         GameObject.Find("SkillPanel").transform.Find("Skill2").GetComponent<Button>().interactable = true;
         GameObject.Find("SkillPanel").transform.Find("Skill3").GetComponent<Button>().interactable = true;
         GameObject.Find("Button").GetComponent<Button>().interactable = true;
-
+		GameObject.Find ("Button").GetComponent<ChemistSkill>().InteractAllButton();
         currentEquipElementIndex = GetComponent<PlayerPrefs>().currentEquipElementIndex;
 
         baseSkill skill1 = GetComponent<PlayerPrefs>().skillList[currentEquipElementIndex][0];

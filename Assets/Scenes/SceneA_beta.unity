@@ -2607,7 +2607,6 @@ Canvas:
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
-  m_SortingBucketNormalizedSize: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -5260,8 +5259,9 @@ MonoBehaviour:
   playerPrefs: {fileID: 0}
   turnUI: {fileID: 0}
   currentState: 0
-  turnCount: 2
+  turnCount: 1
   dustCount: 0
+  nChemistSkillCount: 1
 --- !u!224 &1302277326
 RectTransform:
   m_ObjectHideFlags: 0

@@ -12,9 +12,9 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
 
 	GameObject card1;
     public BattleStates currentState;
-    public int turnCount = 2;
+    public int turnCount = 1;
     public int dustCount = 0;
-
+	public int nChemistSkillCount = 1;
 	public enum BattleStates{
 		START,
 		PLAYERCHOICE,
@@ -39,10 +39,22 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
     {
         turnCount--;
     }
+	public void decrementChemistSkillCount()
+	{
+		nChemistSkillCount--;
+	}
     public void resetTurn()
     {
-        turnCount = 2;
+        turnCount = 1;
     }
+	public int GetChemicalSkillCount()
+	{
+		return nChemistSkillCount;
+	}
+	public void resetChemistSkillCount()
+	{
+		nChemistSkillCount = 1;
+	}
     public bool isTurnExhausted()
     {
         return (turnCount == 0);
@@ -95,7 +107,7 @@ public class TurnBasedCombatStateMachine : MonoBehaviour {
                 //Activate player debuff
                 playerPrefs.player.ActivateDotDamage();
                 playerPrefs.player.ActivateActionLimit();
-
+				
                 //Reduce enemy debuff
                 for(int i = 0; i < monsterPrefs.monsterList.Count; i++)
                 {
