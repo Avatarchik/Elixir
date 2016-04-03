@@ -709,7 +709,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e71cdf1b3417f324398430ca33666435, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 64f130de8097f4fc5a5695fbe8a4c7bd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!4 &235244502
 Transform:
@@ -1083,7 +1083,7 @@ RectTransform:
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: 0, y: -2.87599846e-06}
-  m_SizeDelta: {x: 175, y: 174}
+  m_SizeDelta: {x: 140, y: 140}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &349681946
 MonoBehaviour:
@@ -1489,8 +1489,8 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -166, y: 0}
-  m_SizeDelta: {x: 130, y: 130}
+  m_AnchoredPosition: {x: -145, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &482404158
 MonoBehaviour:
@@ -1653,8 +1653,8 @@ RectTransform:
   m_RootOrder: 2
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 171, y: -7.62939453e-06}
-  m_SizeDelta: {x: 130, y: 130}
+  m_AnchoredPosition: {x: 145, y: -7.62939453e-06}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &495655027
 MonoBehaviour:
@@ -2135,7 +2135,7 @@ RectTransform:
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: -1.8119812e-05, y: 0}
-  m_SizeDelta: {x: 175, y: 174}
+  m_SizeDelta: {x: 140, y: 140}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &623430703
 MonoBehaviour:
@@ -2485,7 +2485,7 @@ RectTransform:
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: -4.57763672e-05, y: -2.87599846e-06}
-  m_SizeDelta: {x: 175, y: 174}
+  m_SizeDelta: {x: 140, y: 140}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &710251020
 MonoBehaviour:
@@ -2633,8 +2633,8 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -2.86102295e-06, y: 49.7620087}
-  m_SizeDelta: {x: -30, y: -122.519997}
+  m_AnchoredPosition: {x: -2.86102295e-06, y: 46.8700027}
+  m_SizeDelta: {x: -30, y: -120.259995}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &716040781
 MonoBehaviour:
@@ -2730,8 +2730,8 @@ RectTransform:
   m_RootOrder: 3
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -501, y: -8}
-  m_SizeDelta: {x: -66, y: -29}
+  m_AnchoredPosition: {x: -499.5, y: -1.25}
+  m_SizeDelta: {x: 19, y: -42.5}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &716556132
 MonoBehaviour:
@@ -4199,8 +4199,8 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 242.952545, y: -20.1696587}
-  m_SizeDelta: {x: 161.968353, y: 40.3393173}
+  m_AnchoredPosition: {x: 183.829803, y: -14.6200027}
+  m_SizeDelta: {x: 122.5532, y: 29.2400055}
   m_Pivot: {x: .50000006, y: .5}
 --- !u!114 &1148107365
 MonoBehaviour:
@@ -4217,7 +4217,7 @@ MonoBehaviour:
   m_Color: {r: .352010429, g: .321150512, b: .727941155, a: 1}
   m_FontData:
     m_Font: {fileID: 12800000, guid: 00a9e6d0596429441b5961e6823d4626, type: 3}
-    m_FontSize: 32
+    m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 3
@@ -4697,7 +4697,7 @@ RectTransform:
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: -523, y: -245}
-  m_SizeDelta: {x: 203, y: 203}
+  m_SizeDelta: {x: 180, y: 180}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1291933997
 MonoBehaviour:
@@ -5070,8 +5070,8 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: -20.1696587}
-  m_SizeDelta: {x: 161.968353, y: 40.3393173}
+  m_AnchoredPosition: {x: 0, y: -14.6200027}
+  m_SizeDelta: {x: 122.5532, y: 29.2400055}
   m_Pivot: {x: 1.1920929e-07, y: .5}
 --- !u!114 &1319041735
 MonoBehaviour:
@@ -5088,7 +5088,7 @@ MonoBehaviour:
   m_Color: {r: .196078435, g: .196078435, b: .196078435, a: 1}
   m_FontData:
     m_Font: {fileID: 12800000, guid: 00a9e6d0596429441b5961e6823d4626, type: 3}
-    m_FontSize: 32
+    m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 3
@@ -5636,7 +5636,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22427892, guid: 182921d658c8dc240814dc9c3d3e4c3a, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22427892, guid: 182921d658c8dc240814dc9c3d3e4c3a, type: 2}
       propertyPath: m_LocalRotation.x
@@ -5940,7 +5940,7 @@ RectTransform:
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: -4.57763672e-05, y: -7.62939453e-06}
-  m_SizeDelta: {x: 130, y: 130}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1453529079
 MonoBehaviour:
@@ -6808,8 +6808,8 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 374, y: -264}
-  m_SizeDelta: {x: -747, y: -528}
+  m_AnchoredPosition: {x: 395.25, y: -264}
+  m_SizeDelta: {x: -789.5, y: -528}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1794481599
 MonoBehaviour:
@@ -7117,7 +7117,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 3.5999999
+  orthographic size: 2.4000001
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -7361,8 +7361,8 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 0, y: -17}
-  m_SizeDelta: {x: 437, y: 92}
+  m_AnchoredPosition: {x: 0, y: -20}
+  m_SizeDelta: {x: 470, y: 90}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &2060310453
 MonoBehaviour:
@@ -7379,7 +7379,7 @@ MonoBehaviour:
   m_Color: {r: .196078435, g: .196078435, b: .196078435, a: 1}
   m_FontData:
     m_Font: {fileID: 12800000, guid: 00a9e6d0596429441b5961e6823d4626, type: 3}
-    m_FontSize: 29
+    m_FontSize: 27
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -7388,7 +7388,7 @@ MonoBehaviour:
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
-    m_LineSpacing: 1
+    m_LineSpacing: 1.07000005
   m_Text: "\uC774\uAC74 \uC2DC\uD5D8\uC6A9 \uBC29\uC1A1\uC774\uB2E4 \uC774\uAC83\uC740
     \uC2DC\uD5D8\uC6A9 \uBC29\uC1A1\uC785\uB2C8\uB2E4."
 --- !u!222 &2060310454
