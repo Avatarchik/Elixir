@@ -48,10 +48,10 @@ public class MonsterPrefs : MonoBehaviour {
 
 	public void GenerateMonsters(int[] arMonsterData)
     {
-		Vector3 firstPosition = new Vector3(0.73f, 0.8f, -2); // left
-		Vector3 secondPosition = new Vector3(3f, -0.19f, -4); // down
-		Vector3 thirdPosition = new Vector3(3f, 2.68f, -1); // up
-		Vector3 fourthPosition = new Vector3(5.4f, 0.8f, -3); // right
+		Vector3 firstPosition = new Vector3(0.5f, 0.7f, -2); // left
+		Vector3 secondPosition = new Vector3(1.8f, -0.19f, -4); // down
+		Vector3 thirdPosition = new Vector3(2.2f, 1.5f, -1); // up
+		Vector3 fourthPosition = new Vector3(3.5f, 0.6f, -3); // right
 
         List<Vector3> positionList = new List<Vector3>();
         positionList.Add(firstPosition);
