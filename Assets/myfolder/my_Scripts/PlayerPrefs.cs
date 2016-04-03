@@ -21,7 +21,7 @@ public class PlayerPrefs : MonoBehaviour {
         party.Add(CloneElement(elementList[0]));
         party.Add(CloneElement(elementList[1]));
         party.Add(CloneElement(elementList[2]));
-        party.Add(CloneElement(elementList[4]));
+        party.Add(CloneElement(elementList[3]));
 
         //Create list of skills of each element in party
         List<baseSkill> cardList = GetComponent<SkillLoader>().skillList;
