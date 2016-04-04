@@ -596,11 +596,7 @@ public class UseSkill : MonoBehaviour {
 			else
 			{
 				TBSMachine.decrementChemistSkillCount ();
-
-				if(currentSkillIndex == 3)
-					GameObject.Find ("Button").transform.Find("CoolIcon").GetComponent<Button> ().interactable = false;
-				else if(currentSkillIndex == 4)
-					GameObject.Find ("Button").transform.Find("HeatIcon").GetComponent<Button> ().interactable = false;
+				GameObject.Find ("Button").GetComponent<ChemistSkill>().InteractOffAllButton();
 			}
 		}
 
