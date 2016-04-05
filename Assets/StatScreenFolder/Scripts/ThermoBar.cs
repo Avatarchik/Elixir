@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 public class ThermoBar : MonoBehaviour {
     public GameObject ChemicalState;
+	//public GameObject WeakPoint;
     public RectTransform solidTransform;
     public RectTransform liquidTransform;
     public RectTransform gasTransform;
@@ -22,7 +23,7 @@ public class ThermoBar : MonoBehaviour {
     public int barLiquid;
     public int barGas;
     public ChemicalStates currentCState;
-    
+	public ChemicalStates currentWeakPoint;
 	//2016-03-19 Changed int -> float
 	public float currentCStateValue;
 
@@ -48,7 +49,8 @@ public class ThermoBar : MonoBehaviour {
         barGas = valSolid + valLiquid + valGas;
         solidTransform.localPosition = new Vector2(MapValues(gasTransform.rect.width, minXValue, barSolid), gasTransform.localPosition.y);
         liquidTransform.localPosition = new Vector2(MapValues(gasTransform.rect.width, minXValue, barLiquid), gasTransform.localPosition.y);
-
+		currentWeakPoint = element.weakPoint;
+		Debug.Log("ThermoBar 약점 : " + currentWeakPoint);
         MovePointer();
 
         switch (currentCState)
@@ -69,6 +71,25 @@ public class ThermoBar : MonoBehaviour {
                 ChemicalState.transform.Find("Solid").gameObject.SetActive(true);
                 break;
         }
+		/*
+		switch (currentWeakPoint)
+		{
+		case ChemicalStates.GAS:
+			WeakPoint.transform.Find ("WeakPointGas").gameObject.SetActive (true);
+			WeakPoint.transform.Find ("WeakPointLiquid").gameObject.SetActive (false);
+			WeakPoint.transform.Find ("WeakPointSolid").gameObject.SetActive (false);
+			break;
+		case ChemicalStates.LIQUID:
+			WeakPoint.transform.Find ("WeakPointGas").gameObject.SetActive (false);
+			WeakPoint.transform.Find ("WeakPointLiquid").gameObject.SetActive (true);
+			WeakPoint.transform.Find ("WeakPointSolid").gameObject.SetActive (false);
+			break;
+		case ChemicalStates.SOLID:
+			WeakPoint.transform.Find ("WeakPointGas").gameObject.SetActive (false);
+			WeakPoint.transform.Find ("WeakPointLiquid").gameObject.SetActive (false);
+			WeakPoint.transform.Find ("WeakPointSolid").gameObject.SetActive (true);
+			break;
+		}*/
     }
 
     private void MovePointer()

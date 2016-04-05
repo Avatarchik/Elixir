@@ -116,7 +116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: .970588207, g: .49179092, b: .0570934191, a: 1}
+  m_Color: {r: 0.9705882, g: 0.49179092, b: 0.05709342, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -197,7 +197,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: .39199999}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -224,7 +224,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: .0570934191, g: .970588207, b: .17679286, a: 1}
+  m_Color: {r: 0.05709342, g: 0.9705882, b: 0.17679286, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -287,7 +287,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: .20199272, g: .0570934191, b: .970588207, a: 1}
+  m_Color: {r: 0.20199272, g: 0.05709342, b: 0.9705882, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -350,11 +350,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 22494560}
   m_RootOrder: 0
-  m_AnchorMin: {x: .5, y: .5}
-  m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -101.300003, y: 0}
-  m_SizeDelta: {x: 13.6999998, y: 25}
-  m_Pivot: {x: .5, y: .5}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -101.3, y: 0}
+  m_SizeDelta: {x: 13.7, y: 25}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22428576
 RectTransform:
   m_ObjectHideFlags: 1
@@ -367,11 +367,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 22435336}
   m_RootOrder: 0
-  m_AnchorMin: {x: .5, y: .5}
-  m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -.099981308, y: 1}
-  m_SizeDelta: {x: 216.699997, y: 25}
-  m_Pivot: {x: .5, y: .5}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.09998131, y: 1}
+  m_SizeDelta: {x: 216.7, y: 25}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22435336
 RectTransform:
   m_ObjectHideFlags: 1
@@ -388,11 +388,11 @@ RectTransform:
   - {fileID: 22494560}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_AnchorMin: {x: .5, y: .5}
-  m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 24, y: 118.760002}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 28, y: -20.5}
   m_SizeDelta: {x: 216.5, y: 25}
-  m_Pivot: {x: .5, y: .5}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22460394
 RectTransform:
   m_ObjectHideFlags: 1
@@ -405,11 +405,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 22435336}
   m_RootOrder: 1
-  m_AnchorMin: {x: .5, y: .5}
-  m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -.124988556, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.124988556, y: 1}
   m_SizeDelta: {x: 216.75, y: 25}
-  m_Pivot: {x: .5, y: .5}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22475818
 RectTransform:
   m_ObjectHideFlags: 1
@@ -422,11 +422,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 22435336}
   m_RootOrder: 2
-  m_AnchorMin: {x: .5, y: .5}
-  m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -.124983311, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.12498331, y: 1}
   m_SizeDelta: {x: 216.75, y: 25}
-  m_Pivot: {x: .5, y: .5}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22494560
 RectTransform:
   m_ObjectHideFlags: 1
@@ -440,11 +440,11 @@ RectTransform:
   - {fileID: 22414624}
   m_Father: {fileID: 22435336}
   m_RootOrder: 3
-  m_AnchorMin: {x: .5, y: .5}
-  m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: .12500608, y: 1.00001478}
-  m_SizeDelta: {x: 216.25, y: 25}
-  m_Pivot: {x: .5, y: .5}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.125, y: 0.9999895}
+  m_SizeDelta: {x: 216.75, y: 25}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

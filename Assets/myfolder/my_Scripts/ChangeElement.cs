@@ -41,11 +41,13 @@ public class ChangeElement : MonoBehaviour {
         //1st panel displays currnetly equipped element
         ElementPanel[0].transform.GetChild(0).GetComponent<Text>().text = elementsInParty[currentEquipped].extName;
         ElementPanel[0].transform.GetChild(1).GetComponent<ThermoBar>().GetData(elementsInParty, currentEquipped);
-        
+		//Debug.Log (ElementPanel[1].transform.childCount);
+		ElementPanel[0].transform.GetChild (3).GetComponent<EquippedElementWeakPointLoad> ().SetWeakPoint(elementsInParty, currentEquipped);
         for(int j = 0; j < 3; j++)
         {
             ElementPanel[j+1].transform.GetChild(0).GetComponent<Text>().text = elementsInParty[arrangeList[j]].extName;
             ElementPanel[j+1].transform.GetChild(1).GetComponent<ThermoBar>().GetData(elementsInParty, arrangeList[j]);
+			ElementPanel[j+1].transform.GetChild (3).GetComponent<EquippedElementWeakPointLoad> ().SetWeakPoint(elementsInParty, arrangeList[j]);
         }
 
     }
@@ -102,7 +104,7 @@ public class ChangeElement : MonoBehaviour {
 		else 
 		{
 			TBSMachine.decrementChemistSkillCount ();
-			GameObject.Find ("Button").transform.Find ("Change").GetComponent<Button> ().interactable = false;
+			GameObject.Find ("Button").GetComponent<ChemistSkill> ().InteractOffAllButton ();
 		}
 
         if (TBSMachine.isTurnExhausted())
