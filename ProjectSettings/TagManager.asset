@@ -50,3 +50,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: skyobject
+    uniqueID: 94337905
+    locked: 0
+  - name: gound
+    uniqueID: 2023086247
+    locked: 0
+  - name: player
+    uniqueID: 2452605309
+    locked: 0
