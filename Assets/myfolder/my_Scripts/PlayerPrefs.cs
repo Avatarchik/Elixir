@@ -21,7 +21,7 @@ public class PlayerPrefs : MonoBehaviour {
         party.Add(CloneElement(elementList[0]));
         party.Add(CloneElement(elementList[1]));
         party.Add(CloneElement(elementList[2]));
-        party.Add(CloneElement(elementList[4]));
+        party.Add(CloneElement(elementList[3]));
 
         //Create list of skills of each element in party
         List<baseSkill> cardList = GetComponent<SkillLoader>().skillList;
@@ -80,7 +80,7 @@ public class PlayerPrefs : MonoBehaviour {
 
     public void GeneratePlayer()
     {
-		Vector3 PlayerPosition = new Vector3(-1.9f, .5f, 0);
+		Vector3 PlayerPosition = new Vector3(-2.7f, .8f, 0);
         GameObject Player = Instantiate(PlayerPrefab);
         Player.transform.position = PlayerPosition;
     }
