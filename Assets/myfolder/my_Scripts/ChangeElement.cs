@@ -93,6 +93,7 @@ public class ChangeElement : MonoBehaviour {
         playerPrefs.currentEquipElementIndex = arrangeList[index];
         playerPrefs.currentEquipElement = playerPrefs.party[playerPrefs.currentEquipElementIndex];
         playerPrefs.SetPlayerInfo();
+		GameObject.Find ("SkillPanel").GetComponent<SkillPanelManager> ().SetSkillPanel (playerPrefs.currentEquipElement);
         GameObject.Find("GameManager").GetComponent<PlayerTurn>().GetSkills();
 
         TurnBasedCombatStateMachine TBSMachine = GameObject.Find("GameManager").GetComponent<TurnBasedCombatStateMachine>();

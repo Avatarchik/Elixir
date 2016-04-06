@@ -22,7 +22,6 @@ public class PlayerPrefs : MonoBehaviour {
         party.Add(CloneElement(elementList[1]));
         party.Add(CloneElement(elementList[2]));
         party.Add(CloneElement(elementList[3]));
-
         //Create list of skills of each element in party
         List<baseSkill> cardList = GetComponent<SkillLoader>().skillList;
         for (int i = 0; i < party.Count; i++)
@@ -41,7 +40,7 @@ public class PlayerPrefs : MonoBehaviour {
         //Initially equipped element
         currentEquipElementIndex = 0;
         currentEquipElement = party[currentEquipElementIndex];
-
+		GameObject.Find ("SkillPanel").GetComponent<SkillPanelManager> ().SetSkillPanel (currentEquipElement);
         //Initialize Player info
         player.Initialize();
         player.HP = player.MAX_HP;
