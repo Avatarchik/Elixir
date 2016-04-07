@@ -47,7 +47,9 @@ public class PlayerPrefs : MonoBehaviour {
         player.dodgeRate = 0;
         player.level = 7;
         player.AttackDamage = 10;
-
+		//Debug.Log ("PlayerPref_ChildCount : " + );
+		//PlayerPrefab.transform.GetChild(5).gameObject.SetActive(true);
+		//PlayerPrefab.transform.GetChild(5).gameObject.SetActive(false);
         SetPlayerInfo();
 
         GeneratePlayer();
