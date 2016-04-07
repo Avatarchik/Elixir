@@ -347,6 +347,7 @@ public class Monster{
         {
             stun = null;
             stunned = false;
+			monsterPrefs.monsterObjectList[monsterID].transform.Find("stun").gameObject.SetActive(false);
         }
     }
     public void ActivateStun()
