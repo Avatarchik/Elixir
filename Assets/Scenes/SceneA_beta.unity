@@ -850,7 +850,7 @@ Transform:
   m_LocalScale: {x: 0.99844044, y: 0.99844044, z: 0.3993762}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
 --- !u!1001 &238953843
 Prefab:
   m_ObjectHideFlags: 0
@@ -2059,12 +2059,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 511684390}
---- !u!114 &515875546 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11414140, guid: af2944e6bc14f2f44ae9fccf3bea8adb,
-    type: 2}
-  m_PrefabInternal: {fileID: 1322791892}
-  m_Script: {fileID: 11500000, guid: d9fd9bd3a41b2c444b3acfbf41253a52, type: 3}
 --- !u!1 &570221424
 GameObject:
   m_ObjectHideFlags: 0
@@ -5691,14 +5685,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 11435082, guid: af2944e6bc14f2f44ae9fccf3bea8adb, type: 2}
-      propertyPath: m_Delegates.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11435082, guid: af2944e6bc14f2f44ae9fccf3bea8adb, type: 2}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 491112, guid: af2944e6bc14f2f44ae9fccf3bea8adb, type: 2}
       propertyPath: m_LocalPosition.x
       value: -0.47210407
@@ -5734,51 +5720,6 @@ Prefab:
     - target: {fileID: 117692, guid: af2944e6bc14f2f44ae9fccf3bea8adb, type: 2}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11435082, guid: af2944e6bc14f2f44ae9fccf3bea8adb, type: 2}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11435082, guid: af2944e6bc14f2f44ae9fccf3bea8adb, type: 2}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 11435082, guid: af2944e6bc14f2f44ae9fccf3bea8adb, type: 2}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 2082784460}
-    - target: {fileID: 11435082, guid: af2944e6bc14f2f44ae9fccf3bea8adb, type: 2}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 515875546}
-    - target: {fileID: 11435082, guid: af2944e6bc14f2f44ae9fccf3bea8adb, type: 2}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetAnalyzePanel
-      objectReference: {fileID: 0}
-    - target: {fileID: 11435082, guid: af2944e6bc14f2f44ae9fccf3bea8adb, type: 2}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 11435082, guid: af2944e6bc14f2f44ae9fccf3bea8adb, type: 2}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11435082, guid: af2944e6bc14f2f44ae9fccf3bea8adb, type: 2}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 11435082, guid: af2944e6bc14f2f44ae9fccf3bea8adb, type: 2}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11435082, guid: af2944e6bc14f2f44ae9fccf3bea8adb, type: 2}
-      propertyPath: m_Delegates.Array.data[0].eventID
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 11435082, guid: af2944e6bc14f2f44ae9fccf3bea8adb, type: 2}
-      propertyPath: m_Delegates.Array.data[0].callback.m_TypeName
-      value: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI, Version=1.0.0.0,
-        Culture=neutral, PublicKeyToken=null
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: af2944e6bc14f2f44ae9fccf3bea8adb, type: 2}
@@ -7714,9 +7655,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d96bba41f4330a0449b1f4a65d13cd31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillImage1: {fileID: 0}
-  skillImage2: {fileID: 0}
-  skillImage3: {fileID: 0}
 --- !u!1 &1815841958
 GameObject:
   m_ObjectHideFlags: 0
