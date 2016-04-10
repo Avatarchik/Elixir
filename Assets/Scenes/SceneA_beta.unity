@@ -7053,60 +7053,36 @@ Prefab:
     m_TransformParent: {fileID: 541895476}
     m_Modifications:
     - target: {fileID: 413798, guid: 39b527813bcf01e44b411fdb93e2e1e7, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 2.47
+      objectReference: {fileID: 0}
+    - target: {fileID: 413798, guid: 39b527813bcf01e44b411fdb93e2e1e7, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 2.7306776
+      objectReference: {fileID: 0}
+    - target: {fileID: 413798, guid: 39b527813bcf01e44b411fdb93e2e1e7, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 413798, guid: 39b527813bcf01e44b411fdb93e2e1e7, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 413798, guid: 39b527813bcf01e44b411fdb93e2e1e7, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 413798, guid: 39b527813bcf01e44b411fdb93e2e1e7, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 413798, guid: 39b527813bcf01e44b411fdb93e2e1e7, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 413798, guid: 39b527813bcf01e44b411fdb93e2e1e7, type: 2}
       propertyPath: m_RootOrder
       value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 19886644, guid: 39b527813bcf01e44b411fdb93e2e1e7, type: 2}
-      propertyPath: InitialModule.startSpeed.scalar
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 19886644, guid: 39b527813bcf01e44b411fdb93e2e1e7, type: 2}
-      propertyPath: InitialModule.startLifetime.scalar
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 19886644, guid: 39b527813bcf01e44b411fdb93e2e1e7, type: 2}
-      propertyPath: EmissionModule.m_Type
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 19886644, guid: 39b527813bcf01e44b411fdb93e2e1e7, type: 2}
-      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[0].value
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 19886644, guid: 39b527813bcf01e44b411fdb93e2e1e7, type: 2}
-      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[0].time
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 19886644, guid: 39b527813bcf01e44b411fdb93e2e1e7, type: 2}
-      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[1].value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 19886644, guid: 39b527813bcf01e44b411fdb93e2e1e7, type: 2}
-      propertyPath: EmissionModule.rate.scalar
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 19886644, guid: 39b527813bcf01e44b411fdb93e2e1e7, type: 2}
-      propertyPath: ColorModule.gradient.maxGradient.ctime0
-      value: 578
-      objectReference: {fileID: 0}
-    - target: {fileID: 19886644, guid: 39b527813bcf01e44b411fdb93e2e1e7, type: 2}
-      propertyPath: ColorModule.gradient.maxGradient.key1.rgba
-      value: 9890815
-      objectReference: {fileID: 0}
-    - target: {fileID: 19886644, guid: 39b527813bcf01e44b411fdb93e2e1e7, type: 2}
-      propertyPath: ColorModule.gradient.maxGradient.key0.rgba
-      value: 4292458239
-      objectReference: {fileID: 0}
-    - target: {fileID: 19886644, guid: 39b527813bcf01e44b411fdb93e2e1e7, type: 2}
-      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[1].time
-      value: 0.99151343
-      objectReference: {fileID: 0}
-    - target: {fileID: 19886644, guid: 39b527813bcf01e44b411fdb93e2e1e7, type: 2}
-      propertyPath: startDelay.scalar
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 19886644, guid: 39b527813bcf01e44b411fdb93e2e1e7, type: 2}
-      propertyPath: prewarm
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 39b527813bcf01e44b411fdb93e2e1e7, type: 2}
