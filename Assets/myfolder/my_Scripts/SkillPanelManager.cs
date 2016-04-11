@@ -7,13 +7,12 @@ using UnityEngine.UI;
 public class SkillPanelManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
-	
+		
 	}
 	public void SetSkillPanel(Element currentEquippedElement)
 	{
 		Debug.Log (currentEquippedElement.elementCard1 + " " + currentEquippedElement.elementCard2 + " " + currentEquippedElement.elementCard3);
 		Debug.Log ("SkillPanel Child Count : " + GameObject.Find("SkillPanel").transform.childCount);
-
 		string imagePath1 = "SkillIcons/" + currentEquippedElement.elementCard1;
 		string imagePath2 = "SkillIcons/" + currentEquippedElement.elementCard2;
 		string imagePath3 = "SkillIcons/" + currentEquippedElement.elementCard3;

@@ -9,9 +9,15 @@ GameObject:
   m_Component:
   - 224: {fileID: 22465216}
   - 114: {fileID: 11472698}
-  - 114: {fileID: 11400056}
-  - 114: {fileID: 11456732}
   - 114: {fileID: 11456738}
+  - 114: {fileID: 11404854}
+  - 114: {fileID: 11434068}
+  - 114: {fileID: 11409422}
+  - 114: {fileID: 11408880}
+  - 114: {fileID: 11498692}
+  - 114: {fileID: 11427254}
+  - 114: {fileID: 11408466}
+  - 114: {fileID: 11459970}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -19,7 +25,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &11400056
+--- !u!114 &11404854
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -27,11 +33,87 @@ MonoBehaviour:
   m_GameObject: {fileID: 128152}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b455cf37a08fc80488faac6efeaca236, type: 3}
+  m_Script: {fileID: 11500000, guid: 7ab62701bdbba134ba3c5d6ce2e4c332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerPrefab: {fileID: 178922, guid: 1a4b2daf01621e64c836fb6222ddb153, type: 2}
---- !u!114 &11456732
+  party: []
+  player:
+    level: 0
+    MAX_HP: 200
+    HP: 0
+    AttackDamage: 0
+    weakPoint: 0
+    currentChemicalState: 0
+    currentChemicalStateValue: 0
+    solidStateValue: 0
+    liquidStateValue: 0
+    gasStateValue: 0
+    dodgeRate: 0
+    dodged: 0
+    criticalTargetImmuned: 0
+    debuffImmuned: 0
+    stateChangeGuarded: 0
+    heatImmuned: 0
+    skillImmuned: 0
+    damageResisted: 0
+    actionLimited: 0
+    isDead: 0
+    dodge:
+      name: 0
+      remainTurn: 0
+      effect: 0
+    immuneCriticalTarget:
+      name: 0
+      remainTurn: 0
+      effect: 0
+    debuffImmune:
+      name: 0
+      remainTurn: 0
+      effect: 0
+    guardStateChange:
+      name: 0
+      remainTurn: 0
+      effect: 0
+    immuneHeat:
+      name: 0
+      remainTurn: 0
+      effect: 0
+    immuneSkill:
+      name: 0
+      remainTurn: 0
+      effect: 0
+    damageResistance:
+      name: 0
+      remainTurn: 0
+      effect: 0
+    dotHealList: []
+    dotDamageList: []
+    actionLimit:
+      name: 0
+      remainTurn: 0
+      damagePerTurn: 0
+  currentEquipElement:
+    id: 
+    extName: 
+    name: 
+    chemicalSeries: 
+    elementNumber: 0
+    properLevel: 0
+    desription: 
+    meltingPoint: 0
+    boilingPoint: 0
+    characterRoomTempState: 0
+    solidGauge: 0
+    liquidGauge: 0
+    gasGauge: 0
+    roomTempPos: 0
+    elementCard1: 
+    elementCard2: 
+    elementCard3: 
+    weakPoint: 0
+  currentEquipElementIndex: 0
+--- !u!114 &11408466
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -39,12 +121,68 @@ MonoBehaviour:
   m_GameObject: {fileID: 128152}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4cdb2c81baa53c4986c32472065f63e, type: 3}
+  m_Script: {fileID: 11500000, guid: 7908a22f23796b745b8047b361f76f4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttackMode: 0
-  SelectedCard: {fileID: 0}
-  SelectedChemistSkill: {fileID: 0}
+  DetailInfoPanel: {fileID: 0}
+--- !u!114 &11408880
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 128152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 465ce21d88f74954d96be47c294c4092, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DetailPanel: {fileID: 0}
+  DetailLabel: {fileID: 0}
+  DetailSkill1: {fileID: 0}
+  DetailSkill2: {fileID: 0}
+  DetailSkill3: {fileID: 0}
+  ElementPanel: []
+--- !u!114 &11409422
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 128152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9186361470a0e4841b04bbc4bdafefbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill1Btn: {fileID: 0}
+  skill2Btn: {fileID: 0}
+  skill3Btn: {fileID: 0}
+  currentEquipElementIndex: 0
+--- !u!114 &11427254
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 128152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b74bef428a157e940ac0420435754ccd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  file: {fileID: 4900000, guid: 72edc86dbb486a34ead31ff3e2295281, type: 3}
+  skillList: []
+--- !u!114 &11434068
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 128152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27ef45877cd64f343a7fa11c7e37d52f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  database: {fileID: 4900000, guid: 1384dd823bf8e3249af63ac4b9c5b20d, type: 3}
+  elementList: []
 --- !u!114 &11456738
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -60,6 +198,20 @@ MonoBehaviour:
   MonsterSkillPopupPrefab: {fileID: 180658, guid: 26a88d1aca40d794496919874d1a26a9,
     type: 2}
   sortinglayerID: 0
+--- !u!114 &11459970
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 128152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9fd9bd3a41b2c444b3acfbf41253a52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkPress: 0
+  timer: 0
+  AnalyzePanel: {fileID: 0}
 --- !u!114 &11472698
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -71,8 +223,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c744f0965e798f04fbbb1fe924134f58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  monsterPrefs: {fileID: 0}
+  playerPrefs: {fileID: 0}
+  turnUI: {fileID: 0}
   currentState: 0
+  turnCount: 1
   dustCount: 0
+  nChemistSkillCount: 1
+--- !u!114 &11498692
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 128152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aa9847fa3d68e9438aca51ea06e7e97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monsterPrefs: {fileID: 0}
+  isSkillInUse: 0
+  skillIndex: 0
 --- !u!224 &22465216
 RectTransform:
   m_ObjectHideFlags: 1
@@ -87,9 +258,9 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 223.5, y: 64.8000031}
+  m_AnchoredPosition: {x: 223.5, y: 64.8}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: .5, y: .5}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

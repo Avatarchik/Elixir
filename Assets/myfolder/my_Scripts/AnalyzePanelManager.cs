@@ -7,23 +7,28 @@ public class AnalyzePanelManager : MonoBehaviour {
 	public GameObject AnalyzePanel;
 	// Use this for initialization
 	void Start () {
-		Debug.Log("asdasdasd");
-		AnalyzePanel.SetActive (true);
+
 	}
 	public void SetAnalyzePanel()
 	{
 		Debug.Log("asdasdasd");
 		AnalyzePanel.SetActive (true);
 	}
+
+	void Update()
+	{
+		if (checkPress)
+		{
+			timer -= Time.time;
+			if(timer <= 0)
+				checkPress = false;
+		}
+	}
+
 	public void CheckLongPress(int index)
 	{
 		checkPress = true;
-		timer = 1.0f;
-		//elementIndex = index;
+		timer = 2.0f;
 	}
-	// Update is called once per frame
-	/*
-	void Update () {
-	
-	}*/
+
 }
