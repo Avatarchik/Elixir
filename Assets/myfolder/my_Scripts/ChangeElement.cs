@@ -102,7 +102,7 @@ public class ChangeElement : MonoBehaviour {
 		else 
 		{
 			TBSMachine.decrementChemistSkillCount ();
-			GameObject.Find ("Button").transform.Find ("Change").GetComponent<Button> ().interactable = false;
+			GameObject.Find ("Button").GetComponent<ChemistSkill> ().InteractOffAllButton ();
 		}
 
         if (TBSMachine.isTurnExhausted())
