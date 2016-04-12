@@ -92,7 +92,7 @@ public class ChangeElement : MonoBehaviour {
         playerPrefs.currentEquipElement = playerPrefs.party[playerPrefs.currentEquipElementIndex];
         playerPrefs.SetPlayerInfo();
         GameObject.Find("GameManager").GetComponent<PlayerTurn>().GetSkills();
-
+		GameObject.Find ("SkillPanel").GetComponent<SkillPanelManager> ().SetSkillPanel (playerPrefs.currentEquipElement);
         TurnBasedCombatStateMachine TBSMachine = GameObject.Find("GameManager").GetComponent<TurnBasedCombatStateMachine>();
 
         GameObject.Find("Button").GetComponent<ChemistSkill>().DisableButtons();
