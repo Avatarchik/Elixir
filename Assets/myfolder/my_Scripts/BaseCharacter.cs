@@ -141,8 +141,11 @@ public class baseCharacter{
 			isDead = true;
 		}
 			
-		if(this.weakPoint == critical)
-        	Debug.Log("Critical!! Get " + finalDamage + " damage by monster");
+		if (this.weakPoint == critical)
+		{
+			Debug.Log ("Critical!! Get " + finalDamage + " damage by monster");
+			GameObject.FindGameObjectWithTag("Ally").transform.Find ("criticalEffect").gameObject.SetActive (true);
+		}
 		else
 			Debug.Log("Get " + damage + " -> " + finalDamage + " damage by monster");
     }

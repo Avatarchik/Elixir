@@ -124,6 +124,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 168752, guid: 1a4b2daf01621e64c836fb6222ddb153, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 178922, guid: 1a4b2daf01621e64c836fb6222ddb153, type: 2}
       propertyPath: m_IsActive
       value: 0
@@ -953,7 +957,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 449542, guid: 0f1016d0b6c584698ad5efd818770f07, type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11452020, guid: 0f1016d0b6c584698ad5efd818770f07, type: 2}
@@ -2553,7 +2557,6 @@ Canvas:
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
-  m_SortingBucketNormalizedSize: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
