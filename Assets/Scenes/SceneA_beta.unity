@@ -4957,6 +4957,108 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!1001 &1237876552
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 22465216, guid: d5d07b18bbf444fce92f4bacb4c346f3, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22465216, guid: d5d07b18bbf444fce92f4bacb4c346f3, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22465216, guid: d5d07b18bbf444fce92f4bacb4c346f3, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22465216, guid: d5d07b18bbf444fce92f4bacb4c346f3, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22465216, guid: d5d07b18bbf444fce92f4bacb4c346f3, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22465216, guid: d5d07b18bbf444fce92f4bacb4c346f3, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22465216, guid: d5d07b18bbf444fce92f4bacb4c346f3, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 22465216, guid: d5d07b18bbf444fce92f4bacb4c346f3, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 22465216, guid: d5d07b18bbf444fce92f4bacb4c346f3, type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 223.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 22465216, guid: d5d07b18bbf444fce92f4bacb4c346f3, type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 64.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 22465216, guid: d5d07b18bbf444fce92f4bacb4c346f3, type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22465216, guid: d5d07b18bbf444fce92f4bacb4c346f3, type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22465216, guid: d5d07b18bbf444fce92f4bacb4c346f3, type: 2}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22465216, guid: d5d07b18bbf444fce92f4bacb4c346f3, type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 22465216, guid: d5d07b18bbf444fce92f4bacb4c346f3, type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22465216, guid: d5d07b18bbf444fce92f4bacb4c346f3, type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 22465216, guid: d5d07b18bbf444fce92f4bacb4c346f3, type: 2}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 22465216, guid: d5d07b18bbf444fce92f4bacb4c346f3, type: 2}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11480860, guid: d5d07b18bbf444fce92f4bacb4c346f3, type: 2}
+      propertyPath: analyzePanel
+      value: 
+      objectReference: {fileID: 269045613}
+    - target: {fileID: 11455910, guid: d5d07b18bbf444fce92f4bacb4c346f3, type: 2}
+      propertyPath: DetailInfoPanel
+      value: 
+      objectReference: {fileID: 716556130}
+    - target: {fileID: 11468128, guid: d5d07b18bbf444fce92f4bacb4c346f3, type: 2}
+      propertyPath: skill1Btn
+      value: 
+      objectReference: {fileID: 482404158}
+    - target: {fileID: 11468128, guid: d5d07b18bbf444fce92f4bacb4c346f3, type: 2}
+      propertyPath: skill2Btn
+      value: 
+      objectReference: {fileID: 1453529079}
+    - target: {fileID: 11468128, guid: d5d07b18bbf444fce92f4bacb4c346f3, type: 2}
+      propertyPath: skill3Btn
+      value: 
+      objectReference: {fileID: 495655027}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: d5d07b18bbf444fce92f4bacb4c346f3, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1245705136
 GameObject:
   m_ObjectHideFlags: 0
@@ -5451,255 +5553,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31517ff8e0943d1458758c291a1cf3be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1302277320
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 128152, guid: d5d07b18bbf444fce92f4bacb4c346f3, type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 224: {fileID: 1302277326}
-  - 114: {fileID: 1302277325}
-  - 114: {fileID: 1302277322}
-  - 114: {fileID: 1302277327}
-  - 114: {fileID: 1302277321}
-  - 114: {fileID: 1302277329}
-  - 114: {fileID: 1302277334}
-  - 114: {fileID: 1302277336}
-  - 114: {fileID: 1302277328}
-  - 114: {fileID: 1302277323}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1302277321
+--- !u!114 &1302277323 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1302277320}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27ef45877cd64f343a7fa11c7e37d52f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  database: {fileID: 4900000, guid: 1384dd823bf8e3249af63ac4b9c5b20d, type: 3}
-  elementList: []
---- !u!114 &1302277322
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11456738, guid: d5d07b18bbf444fce92f4bacb4c346f3,
+  m_PrefabParentObject: {fileID: 11455910, guid: d5d07b18bbf444fce92f4bacb4c346f3,
     type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1302277320}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b1c86870adef33409e6e29a44e31d64, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DamagePopupPrefab: {fileID: 189256, guid: 64709f2b3c2192447a76c5e03bdca000, type: 2}
-  MonsterSkillPopupPrefab: {fileID: 180658, guid: 26a88d1aca40d794496919874d1a26a9,
-    type: 2}
-  sortinglayerID: 0
---- !u!114 &1302277323
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1302277320}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
+  m_PrefabInternal: {fileID: 1237876552}
   m_Script: {fileID: 11500000, guid: 7908a22f23796b745b8047b361f76f4f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DetailInfoPanel: {fileID: 716556130}
---- !u!114 &1302277325
+--- !u!114 &1302277336 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11472698, guid: d5d07b18bbf444fce92f4bacb4c346f3,
+  m_PrefabParentObject: {fileID: 11416808, guid: d5d07b18bbf444fce92f4bacb4c346f3,
     type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1302277320}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c744f0965e798f04fbbb1fe924134f58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  monsterPrefs: {fileID: 0}
-  playerPrefs: {fileID: 0}
-  turnUI: {fileID: 0}
-  currentState: 0
-  turnCount: 1
-  dustCount: 0
-  nChemistSkillCount: 1
---- !u!224 &1302277326
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 22465216, guid: d5d07b18bbf444fce92f4bacb4c346f3,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1302277320}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 223.5, y: 64.8}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1302277327
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1302277320}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ab62701bdbba134ba3c5d6ce2e4c332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerPrefab: {fileID: 178922, guid: 1a4b2daf01621e64c836fb6222ddb153, type: 2}
-  party: []
-  player:
-    level: 0
-    MAX_HP: 200
-    HP: 0
-    AttackDamage: 0
-    weakPoint: 0
-    currentChemicalState: 0
-    currentChemicalStateValue: 0
-    solidStateValue: 0
-    liquidStateValue: 0
-    gasStateValue: 0
-    dodgeRate: 0
-    dodged: 0
-    criticalTargetImmuned: 0
-    debuffImmuned: 0
-    stateChangeGuarded: 0
-    heatImmuned: 0
-    skillImmuned: 0
-    damageResisted: 0
-    actionLimited: 0
-    isDead: 0
-    dodge:
-      name: 0
-      remainTurn: 0
-      effect: 0
-    immuneCriticalTarget:
-      name: 0
-      remainTurn: 0
-      effect: 0
-    debuffImmune:
-      name: 0
-      remainTurn: 0
-      effect: 0
-    guardStateChange:
-      name: 0
-      remainTurn: 0
-      effect: 0
-    immuneHeat:
-      name: 0
-      remainTurn: 0
-      effect: 0
-    immuneSkill:
-      name: 0
-      remainTurn: 0
-      effect: 0
-    damageResistance:
-      name: 0
-      remainTurn: 0
-      effect: 0
-    dotHealList: []
-    dotDamageList: []
-    actionLimit:
-      name: 0
-      remainTurn: 0
-      damagePerTurn: 0
-  currentEquipElement:
-    id: 
-    extName: 
-    name: 
-    chemicalSeries: 
-    elementNumber: 0
-    properLevel: 0
-    desription: 
-    meltingPoint: 0
-    boilingPoint: 0
-    characterRoomTempState: 0
-    solidGauge: 0
-    liquidGauge: 0
-    gasGauge: 0
-    roomTempPos: 0
-    elementCard1: 
-    elementCard2: 
-    elementCard3: 
-    weakPoint: 0
-  currentEquipElementIndex: 0
---- !u!114 &1302277328
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1302277320}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b74bef428a157e940ac0420435754ccd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  file: {fileID: 4900000, guid: 72edc86dbb486a34ead31ff3e2295281, type: 3}
-  skillList: []
---- !u!114 &1302277329
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1302277320}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9186361470a0e4841b04bbc4bdafefbe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skill1Btn: {fileID: 482404158}
-  skill2Btn: {fileID: 1453529079}
-  skill3Btn: {fileID: 495655027}
-  currentEquipElementIndex: 0
---- !u!114 &1302277334
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1302277320}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 465ce21d88f74954d96be47c294c4092, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DetailPanel: {fileID: 0}
-  DetailLabel: {fileID: 0}
-  DetailSkill1: {fileID: 0}
-  DetailSkill2: {fileID: 0}
-  DetailSkill3: {fileID: 0}
-  ElementPanel: []
---- !u!114 &1302277336
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1302277320}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
+  m_PrefabInternal: {fileID: 1237876552}
   m_Script: {fileID: 11500000, guid: 0aa9847fa3d68e9438aca51ea06e7e97, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  monsterPrefs: {fileID: 0}
-  isSkillInUse: 0
-  skillIndex: 0
 --- !u!1 &1319041733
 GameObject:
   m_ObjectHideFlags: 0

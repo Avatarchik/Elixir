@@ -97,6 +97,7 @@ GameObject:
   - 212: {fileID: 21222152}
   - 114: {fileID: 11491236}
   - 95: {fileID: 9536106}
+  - 114: {fileID: 11444862}
   m_Layer: 0
   m_Name: Monster
   m_TagString: Monster
@@ -683,6 +684,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &11444862
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 117692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec9ecc7c5bdfc9b4bb8427d12a6c5ee2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11445784
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1274,7 +1286,6 @@ Canvas:
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
-  m_SortingBucketNormalizedSize: 0
   m_SortingLayerID: -1842361987
   m_SortingOrder: 0
   m_TargetDisplay: 0
