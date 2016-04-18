@@ -34,9 +34,6 @@ public class ElectronData {
 
 	public int HaveElectron(int posX, int posY)
 	{
-		if (posX == 1 && posY == 1)
-			return -1;
-
 		return electronPosition [posX, posY];
 	}
 
