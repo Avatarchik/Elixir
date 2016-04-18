@@ -451,6 +451,7 @@ GameObject:
   - 4: {fileID: 1975184094}
   - 212: {fileID: 1975184093}
   - 114: {fileID: 1975184095}
+  - 114: {fileID: 1975184096}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -512,3 +513,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   electronDataFile: {fileID: 4900000, guid: e158f0c452e3a8b408af3740812eb175, type: 3}
+--- !u!114 &1975184096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1975184092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5217c7963006d5488ac3ebe8a2dc7c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ionRecipeDataFile: {fileID: 4900000, guid: 07b0bb062631c574794153147fbf93f9, type: 3}

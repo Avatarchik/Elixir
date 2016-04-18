@@ -3,7 +3,15 @@ using System.Collections;
 
 namespace EnumsAndClasses
 {
-    public enum MonsterType
+	public enum INGREDIENT
+	{
+		MATERIAL,
+		TYPE,
+		ELECTRONARR,
+		MAX
+	}
+    
+	public enum MonsterType
     {
         None
     }
