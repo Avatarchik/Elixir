@@ -11,7 +11,7 @@ public class ElectronMapLoader : MonoBehaviour {
 	{
 		electronMap = new List<ElectronData> ();
 		ParsingData(electronDataFile);
-		printData ();
+		//printData ();
 	}
 	
 	private void ParsingData(TextAsset electronDataFile)

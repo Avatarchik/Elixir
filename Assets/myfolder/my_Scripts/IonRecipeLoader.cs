@@ -12,7 +12,7 @@ public class IonRecipeLoader : MonoBehaviour {
 	{
 		ionRecipeList = new List<IonRecipeData> ();
 		ParsingData(ionRecipeDataFile);
-		printData ();
+		//printData ();
 	}
 
 	private void ParsingData(TextAsset ionRecipeDataFile)

@@ -452,6 +452,7 @@ GameObject:
   - 212: {fileID: 1975184093}
   - 114: {fileID: 1975184095}
   - 114: {fileID: 1975184096}
+  - 114: {fileID: 1975184097}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -485,7 +486,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 18a22cb65991a464699a74ac22bde876, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -525,3 +526,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ionRecipeDataFile: {fileID: 4900000, guid: 07b0bb062631c574794153147fbf93f9, type: 3}
+--- !u!114 &1975184097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1975184092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01a6462b425e0a444926f60b62c1ad2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ElectronPanel: {fileID: 190254, guid: 1c4640bb74c8bbf47ba522b8b368bed1, type: 2}
