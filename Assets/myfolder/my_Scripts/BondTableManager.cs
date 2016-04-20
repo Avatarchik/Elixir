@@ -31,7 +31,7 @@ public class BondTableManager : MonoBehaviour {
 	{
 		GameObject obj;
 		obj = (GameObject)Instantiate (ElectronPanel);
-		obj.transform.parent = GameObject.Find ("Canvas").transform.Find("BondPanel").transform;
+		obj.transform.SetParent (GameObject.Find("BondPanel").transform);
 		obj.transform.localScale = Vector3.one;
 		obj.transform.localPosition = new Vector3((100 * j) - 350, (100 * i) - 300, 1);
 		objectMap [i, j] = obj;
