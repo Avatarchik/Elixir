@@ -13,6 +13,7 @@ TagManager:
   - DetailPanel
   - EquipSlot
   - ChangePanel
+  - ElectronPanel
   layers:
   - Default
   - TransparentFX

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TestScript : MonoBehaviour {
+public class BondPanelCtrl : MonoBehaviour {
 	private RaycastHit hit;
 	private BoxCollider2D[] coll = null;
 	private Transform [] trArray = null;
@@ -37,7 +37,7 @@ public class TestScript : MonoBehaviour {
 			}
 		}
 	}
-		
+
 	private bool Hit()
 	{
 		int i = 0;
@@ -45,7 +45,7 @@ public class TestScript : MonoBehaviour {
 		Vector2 clickPos = new Vector2 (Input.mousePosition.x, Input.mousePosition.y);
 		while (i < coll.Length)
 		{
-			
+
 			if (coll [i].OverlapPoint(clickPos)) 
 			{
 				clickedIndex = i;
@@ -55,22 +55,4 @@ public class TestScript : MonoBehaviour {
 		}
 		return false;
 	}
-	/*
-	private void OnGUI () 
-	{      
-		int tSelectionGridIndex = 0;
-		string[] selectionStringArray = new string[]{"Grid 1", "Grid 2", "Grid 3", "Grid 4"};
-		tSelectionGridIndex = GUI.SelectionGrid (new Rect (10, 10, 100, 100), tSelectionGridIndex, selectionStringArray, 2);
-
-		if ( true == GUI.changed )
-		{            
-			Debug.Log ("The toolbar was clicked. The index is " + tSelectionGridIndex + ".");
-		}
-
-	}    
-	private void WindowFunction (int windowID) 
-	{
-		// Draw any Controls inside the window here
-	}
-*/
 }
